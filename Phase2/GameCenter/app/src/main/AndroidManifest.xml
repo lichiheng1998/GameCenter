@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fall2018.csc207project">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name="fall2018.csc207project.Controllers.GlobalActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="fall2018.csc207project.Controllers.SignInActivity" />
+        <activity android:name="fall2018.csc207project.Controllers.SignUpActivity" />
+        <activity android:name="fall2018.csc207project.Controllers.LocalGameCenterActivity" />
+        <activity android:name="fall2018.csc207project.Controllers.GameListActivity" />
+        <activity android:name="fall2018.csc207project.SlidingTile.Controllers.StartingActivity" />
+        <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ComplexityActivity" />
+        <activity android:name="fall2018.csc207project.SlidingTile.Controllers.GameActivity" />
+    </application>
+
+</manifest>
