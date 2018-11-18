@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GameCenter</string>
+    <string name="signIn_button">Sign In</string>
+    <string name="signUp_button">Sign Up</string>
+    <string name="defual_undo_steps">3</string>
+    <string name="current_user"></string>
+    <string name="current_game"></string>
+</resources>
