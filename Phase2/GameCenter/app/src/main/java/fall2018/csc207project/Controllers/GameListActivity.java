@@ -26,7 +26,7 @@ public class GameListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         this.currentUser = sharedData.getString("currentUser", null);
-        userManager = new UserManager(DataStream.getInstance(), currentUser,this);
+        userManager = new UserManager(DataStream.getInstance(), currentUser);
         setContentView(R.layout.game_list);
         prepareGameList();
         addBackButtonListener();
@@ -41,9 +41,9 @@ public class GameListActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 String game = view.getText().toString();
                 if(isChecked){
-                    userManager.addGame(game);
+                    userManager.addGame(game, getApplicationContext());
                 } else {
-                    userManager.removeGame(game);
+                    userManager.removeGame(game, getApplicationContext());
                 }
             }
         };

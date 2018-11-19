@@ -11,28 +11,27 @@ public class SaveManager {
     private String game;
     private Map<String, Map<String, Object>> gameToSaves;
     private Map<String, Map<String, Object>> gameToAutoSaves;
-    private Context context;
     private SaveDataStream dataStream;
 
     public SaveManager(SaveDataStream dataStream, String user, String game, Context context){
         this.user = user;
         this.game = game;
-        this.context = context;
         this.dataStream = dataStream;
         gameToSaves = dataStream.getSaves();
         gameToAutoSaves = dataStream.getAutoSaves();
-        initStructure(gameToSaves);
-        initStructure(gameToAutoSaves);
-        dataStream.saveGlobalData(context);
+        initStructure(gameToSaves, context);
+        initStructure(gameToAutoSaves, context);
+
     }
 
-    private void initStructure(Map<String, Map<String, Object>> struct){
+    private void initStructure(Map<String, Map<String, Object>> struct, Context context){
         if (!struct.containsKey(user)){
             struct.put(user, new HashMap<String, Object>());
+            dataStream.saveGlobalData(context);
         }
     }
 
-    public void saveToSlot(Object save, boolean isAutoSave){
+    public void saveToSlot(Object save, boolean isAutoSave, Context context){
         if (isAutoSave){
             gameToAutoSaves.get(user).put(game, save);
         } else {

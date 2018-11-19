@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-        userManager = new UserManager(DataStream.getInstance(), this);
+        userManager = new UserManager(DataStream.getInstance());
         addSignUpButtonListener();
         addCancelButtonListener();
     }
@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
                 EditText Password = findViewById(R.id.signup_password);
                 userName = User.getText().toString();
                 password = Password.getText().toString();
-                if (userManager.signUp(userName, password)){
+                if (userManager.signUp(userName, password, getApplicationContext())){
                     SharedPreferences sharedPref =
                             SignUpActivity.this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();

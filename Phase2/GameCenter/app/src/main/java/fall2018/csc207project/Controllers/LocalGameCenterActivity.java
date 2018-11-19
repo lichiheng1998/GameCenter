@@ -38,7 +38,7 @@ public class LocalGameCenterActivity extends AppCompatActivity {
         setContentView(R.layout.local_game_center);
         SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         this.currentUser = sharedData.getString("currentUser", null);
-        this.userManager = new UserManager(DataStream.getInstance(), currentUser,this);
+        this.userManager = new UserManager(DataStream.getInstance(), currentUser);
         prepareGameList();
         addAddGameButtonListener();
     }

@@ -94,7 +94,7 @@ public class StartingActivity extends AppCompatActivity {
                 if(save == null){
                     makeNotStartedText();
                 } else {
-                    saveManager.saveToSlot(save, false);
+                    saveManager.saveToSlot(save, false, getApplicationContext());
                     makeToastSavedText();
                 }
             }

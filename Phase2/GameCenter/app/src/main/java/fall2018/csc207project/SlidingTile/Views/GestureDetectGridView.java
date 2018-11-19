@@ -15,6 +15,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.GridView;
 
+import fall2018.csc207project.SlidingTile.Controllers.BoardGamePresenter;
 import fall2018.csc207project.SlidingTile.Controllers.MovementController;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 
@@ -23,11 +24,10 @@ public class GestureDetectGridView extends GridView {
     public static final int SWIPE_MAX_OFF_PATH = 100;
     public static final int SWIPE_THRESHOLD_VELOCITY = 100;
     private GestureDetector gDetector;
-    private MovementController mController;
+    private BoardGamePresenter boardGamePresenter;
     private boolean mFlingConfirmed = false;
     private float mTouchX;
     private float mTouchY;
-    private BoardManager boardManager;
 
     public GestureDetectGridView(Context context) {
         super(context);
@@ -52,7 +52,6 @@ public class GestureDetectGridView extends GridView {
     }
 
     private void init(final Context context) {
-        mController = new MovementController();
         gDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
 
             @Override
@@ -60,7 +59,7 @@ public class GestureDetectGridView extends GridView {
                 int position = GestureDetectGridView.this.pointToPosition
                         (Math.round(event.getX()), Math.round(event.getY()));
 
-                mController.processTapMovement(context, position);
+                boardGamePresenter.onTapOnTile(context, position);
                 return true;
             }
 
@@ -104,8 +103,7 @@ public class GestureDetectGridView extends GridView {
         return gDetector.onTouchEvent(ev);
     }
 
-    public void setBoardManager(BoardManager boardManager) {
-        this.boardManager = boardManager;
-        mController.setBoardManager(boardManager);
+    public void setBoardGamePresenter(BoardGamePresenter presenter){
+        this.boardGamePresenter = presenter;
     }
 }

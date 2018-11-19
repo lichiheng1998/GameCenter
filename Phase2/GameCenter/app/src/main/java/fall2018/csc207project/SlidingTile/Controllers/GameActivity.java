@@ -53,15 +53,9 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.presenter = new BoardGamePresenter(this);
-        SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
-        String currentUser = shared.getString("currentUser", null);
-        String currentGame = shared.getString("currentGame", null);
+        this.presenter = new BoardGamePresenter(this, getApplicationContext());
         BoardManager boardManager = (BoardManager) getIntent().getSerializableExtra("save");
-        SaveManager saveManager = new SaveManager(DataStream.getInstance(), currentUser,
-                currentGame, this);
         this.tileButtons = boardManager.getButtonList(this);
-        setupPresenter(boardManager, saveManager, currentUser);
         setContentView(R.layout.activity_main);
         undoText = findViewById(R.id.StepsToUndo);
         setupGridView(boardManager);
@@ -70,22 +64,14 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
     }
 
     /**
-     * Setup the presenter (MVP pattern for android in order to reduce the size of this class lol)
-     */
-    private void setupPresenter(BoardManager boardManager, SaveManager saveManager,
-                                String currentUser){
-        presenter.setBoardManager(boardManager);
-        presenter.setSaveManager(saveManager);
-        presenter.setCurrentUser(currentUser);
-    }
-    /**
      * Setup the customized grid view and get the height and weight of the tiles.
      */
     private void setupGridView(final BoardManager boardManager){
+        presenter.setBoardManager(boardManager);
         // Add View to activity
         gridView = findViewById(R.id.grid);
+        gridView.setBoardGamePresenter(presenter);
         gridView.setNumColumns(boardManager.getComplexity());
-        gridView.setBoardManager(boardManager);
         // Observer sets up desired dimensions as well as calls our display function
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {

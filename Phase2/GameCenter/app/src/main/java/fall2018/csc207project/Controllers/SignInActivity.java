@@ -26,7 +26,7 @@ public class SignInActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userManager = new UserManager(DataStream.getInstance(), this);
+        userManager = new UserManager(DataStream.getInstance());
         setContentView(R.layout.sign_in);
         addLoginButtonListener();
         addCancelButtonListener();

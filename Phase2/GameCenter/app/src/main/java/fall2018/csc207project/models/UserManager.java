@@ -12,18 +12,16 @@ import java.util.Set;
 public class UserManager {
     private Map<String, List<String>> userToGames;
     private Map<String, String> userToPassword;
-    private Context context;
     private UserDataStream dataStream;
     private String currentUser;
 
-    public UserManager(UserDataStream dataStream, String user, Context context){
-        this(dataStream, context);
+    public UserManager(UserDataStream dataStream, String user){
+        this(dataStream);
         this.currentUser = user;
     }
 
-    public UserManager(UserDataStream dataStream, Context context){
+    public UserManager(UserDataStream dataStream){
         this.dataStream = dataStream;
-        this.context = context;
         this.userToPassword = dataStream.getAccountData();
         this.userToGames = dataStream.getUserToGames();
     }
@@ -32,7 +30,7 @@ public class UserManager {
      *  Returns true upon a successfully created new account. Also, logs them in.
      *  Returns false otherwise.
      */
-    public Boolean signUp(String username, String password){
+    public Boolean signUp(String username, String password, Context context){
         if (username.equals("") || password.equals(""))
             return false;
         if (userToPassword.containsKey(username)){
@@ -60,7 +58,7 @@ public class UserManager {
      * @param game: String
      * @return Boolean
      */
-    public Boolean addGame(String game){
+    public Boolean addGame(String game, Context context){
         List<String> userGames = userToGames.get(currentUser);
         boolean result = !userGames.contains(game) && userGames.add(game);
         if(result){
@@ -74,7 +72,7 @@ public class UserManager {
      * @param game: String
      * @return Boolean
      */
-    public Boolean removeGame(String game){
+    public Boolean removeGame(String game, Context context){
         boolean result = userToGames.get(currentUser).remove(game);
         if(result){
             dataStream.saveGlobalData(context);

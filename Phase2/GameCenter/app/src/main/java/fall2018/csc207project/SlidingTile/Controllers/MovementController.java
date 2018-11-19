@@ -16,15 +16,16 @@ public class MovementController {
         this.boardManager = boardManager;
     }
 
-    public void processTapMovement(Context context, int position) {
+    public boolean processTapMovement(Context context, int position) {
         if (boardManager.isValidTap(position)) {
             boardManager.pushLastStep();
             boardManager.touchMove(position);
             if (boardManager.puzzleSolved()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
+            return true;
         }
+        Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
+        return true;
     }
 }
