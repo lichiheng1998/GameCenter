@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="65dp"
+        android:textSize="6pt"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:text="@string/memoStarting" />
+
+    <Button
+        android:id="@+id/newMemogame"
+        android:layout_width="145dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="196dp"
+        android:text="New Game" />
+
+    <Button
+        android:id="@+id/memogameScoreboard"
+        android:layout_width="145dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/newMemogame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="my top scores" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="146dp"
+        android:layout_height="43dp"
+        android:layout_below="@+id/memogameScoreboard"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="280dp"
+        android:text="Top Players" />
+
+</RelativeLayout>
