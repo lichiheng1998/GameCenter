@@ -6,45 +6,37 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public class SaveManager {
     private String user;
     private String game;
-    private Map<String, Map<String, Object>> gameToSaves;
-    private Map<String, Map<String, Object>> gameToAutoSaves;
     private SaveDataStream dataStream;
 
-    public SaveManager(SaveDataStream dataStream, String user, String game, Context context){
+    public SaveManager(SaveDataStream dataStream, String user, String game){
         this.user = user;
         this.game = game;
         this.dataStream = dataStream;
-        gameToSaves = dataStream.getSaves();
-        gameToAutoSaves = dataStream.getAutoSaves();
-        initStructure(gameToSaves, context);
-        initStructure(gameToAutoSaves, context);
-
     }
 
-    private void initStructure(Map<String, Map<String, Object>> struct, Context context){
-        if (!struct.containsKey(user)){
-            struct.put(user, new HashMap<String, Object>());
-            dataStream.saveGlobalData(context);
-        }
+    private Map<String, Map<String, Object>> getGameToSaves(boolean isAutoSave, Context context){
+        return (Map<String, Map<String,Object>>)
+                dataStream.getSaves(new HashMap<String, Map<String, Object>>(), isAutoSave, context);
     }
 
     public void saveToSlot(Object save, boolean isAutoSave, Context context){
-        if (isAutoSave){
-            gameToAutoSaves.get(user).put(game, save);
-        } else {
-            gameToSaves.get(user).put(game, save);
+        Map<String, Map<String, Object>> saves = getGameToSaves(isAutoSave, context);
+        if (!saves.containsKey(user)){
+            saves.put(user, new HashMap<String, Object>());
         }
-        Log.d("debug", "saveToSlot: Is saved！");
-        dataStream.saveGlobalData(context);
+        saves.get(user).put(game, save);
+        dataStream.saveSaves(saves, isAutoSave, context);
     }
 
-    public Object readFromSlot(boolean isAutoSave){
-        if (isAutoSave){
-            return gameToAutoSaves.get(user).get(game);
+    public Object readFromSlot(boolean isAutoSave, Context context){
+        Map<String, Map<String, Object>> saves = getGameToSaves(isAutoSave, context);
+        if (!saves.containsKey(user)){
+            saves.put(user, new HashMap<String, Object>());
         }
-        return gameToSaves.get(user).get(game);
+        return saves.get(user).get(game);
     }
 }

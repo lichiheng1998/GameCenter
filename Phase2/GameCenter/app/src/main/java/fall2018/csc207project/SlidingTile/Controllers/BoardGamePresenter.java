@@ -10,6 +10,7 @@ import java.util.Observer;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
 import fall2018.csc207project.models.DataStream;
+import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
 
 public class BoardGamePresenter implements Observer {
@@ -39,7 +40,7 @@ public class BoardGamePresenter implements Observer {
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
         String currentGame = shared.getString("currentGame", null);
-        saveManager = new SaveManager(DataStream.getInstance(), currentUser, currentGame, context);
+        saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
         this.movementController = new MovementController();
     }
 

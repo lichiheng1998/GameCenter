@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 
+import javax.xml.parsers.DocumentBuilder;
+
 import fall2018.csc207project.models.DataStream;
+import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.GlobalConfig;
 import fall2018.csc207project.models.UserManager;
 import fall2018.csc207project.R;
@@ -26,7 +29,7 @@ public class GameListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         this.currentUser = sharedData.getString("currentUser", null);
-        userManager = new UserManager(DataStream.getInstance(), currentUser);
+        userManager = DatabaseUtil.getUserManager(currentUser);
         setContentView(R.layout.game_list);
         prepareGameList();
         addBackButtonListener();
@@ -67,7 +70,7 @@ public class GameListActivity extends AppCompatActivity {
      */
     private void prepareGameList(){
         BaseAdapter adapter = new GameListViewAdapter(this, GlobalConfig.GAMELIST,
-                userManager.getGames(), getSwitchListener());
+                userManager.getGames(getApplicationContext()), getSwitchListener());
         ListView gameList = findViewById(R.id.game_list);
         gameList.setAdapter(adapter);
     }

@@ -18,9 +18,6 @@ public class GlobalActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Initialize the shared data
-        GlobalDataStream dataStream = DataStream.getInstance();
-        dataStream.loadGlobalData(this);
         setContentView(R.layout.global);
         addSignInButtonListener();
         addSignUPButtonListener();

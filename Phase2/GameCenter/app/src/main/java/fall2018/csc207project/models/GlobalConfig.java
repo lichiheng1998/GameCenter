@@ -6,17 +6,28 @@ import java.util.Map;
 import fall2018.csc207project.SlidingTile.Controllers.StartingActivity;
 import fall2018.csc207project.R;
 
+/**
+ * The global configurations of the app. Those are shared data that shouldn't be changed.
+ */
 public class GlobalConfig {
+    /**
+     * Names of the games.
+     */
     public static final String[] GAMELIST = {"SlidingTile", "Bejeweled", "Some Other Games2",
             "SlidingTile3", "Bejeweled4", "Some Other Games5", "SlidingTile6", "Bejeweled7",
             "Some Other Games8", "newGame"};
-
+    /**
+     * Ids of the background resources of the games.
+     */
     public static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.bejeweled,
             R.drawable.sliding_tile, R.drawable.sliding_tile, R.drawable.bejeweled,
             R.drawable.sliding_tile, R.drawable.bejeweled, R.drawable.bejeweled,
             R.drawable.sliding_tile, R.drawable.global};
 
-    public static final Class[] gameEntry = {
+    /**
+     * The Entries of the each games.
+     */
+    public static final Class[] GAMEENTRY = {
             StartingActivity.class, StartingActivity.class, StartingActivity.class,
             StartingActivity.class, StartingActivity.class, StartingActivity.class,
             StartingActivity.class, StartingActivity.class, StartingActivity.class,
@@ -26,7 +37,7 @@ public class GlobalConfig {
 
     public static final Map<String, Integer> BGMAP = mapLists(GAMELIST, GAMEBG);
 
-    public static final Map<String, Class> ENTRYMAP = mapLists(GAMELIST, gameEntry);
+    public static final Map<String, Class> ENTRYMAP = mapLists(GAMELIST, GAMEENTRY);
 
     private static <T, V> Map<T, V> mapLists(T[] arr1, V[] arr2){
         Map<T, V> map = new HashMap<>();
