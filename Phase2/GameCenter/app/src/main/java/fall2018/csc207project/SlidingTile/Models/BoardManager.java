@@ -135,7 +135,6 @@ public class BoardManager implements Serializable{
         for (int i = 0; i < steps; i++) {
             touchMove(stackOfMovements.pop());
         }
-        totalSteps++;
         undoTimes--;
     }
 
@@ -144,9 +143,9 @@ public class BoardManager implements Serializable{
     }
 
     /**
-     * Return the total steps you did in each undo.
+     * Return the total steps you did.
      *
-     * @return the total steps you did in each undo
+     * @return the total steps you did
      */
     public int getTotalSteps() {
         return totalSteps;

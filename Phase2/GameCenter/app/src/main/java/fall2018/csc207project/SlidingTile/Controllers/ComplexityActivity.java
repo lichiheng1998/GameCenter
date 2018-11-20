@@ -80,16 +80,10 @@ public class ComplexityActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText UndoSteps = findViewById(R.id.TimesToUndo);
                 String steps = UndoSteps.getText().toString();
-                if (!steps.equals("")){
-                    undoStep = Integer.parseInt(steps);
-                    Toast.makeText(getApplicationContext(), "Successful setting",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Enter Something",
-                            Toast.LENGTH_SHORT).show();
-                }
-
+                undoStep = Integer.parseInt(steps);
+                Toast.makeText(getApplicationContext(),
+                        "Successfully set the Total Undo Steps to: " + undoStep,
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -100,6 +94,15 @@ public class ComplexityActivity extends AppCompatActivity {
     private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
         tmp.putExtra("save", new BoardManager(complexity, undoStep));
+        if (undoStep == 3) {
+            Toast.makeText(getApplicationContext(),
+                    "The Total Undo Steps set to default value: 3",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "The Total Undo Steps set to: " + undoStep,
+                    Toast.LENGTH_SHORT).show();
+        }
         startActivity(tmp);
         finish();
     }

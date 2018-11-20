@@ -87,7 +87,7 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
      * Active the listener for the step picker edit text.
      */
     private void addStepInputListener(){
-        undoText.setText("0");
+        undoText.setText("1");
         undoText.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -124,7 +124,7 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
     }
 
     /**
-     *Show the number picker dialog.
+     * Show the number picker dialog.
      */
     public void showNumberPicker(){
         NumberPickerDialog newFragment = new NumberPickerDialog();
