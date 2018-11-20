@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/memoStarting">
 
     <TextView
         android:id="@+id/textView4"
@@ -22,7 +23,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="196dp"
-        android:text="New Game" />
+        android:background="#fab359"
+        android:backgroundTintMode="src_over"
+        android:text="New Game"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/memogameScoreboard"
@@ -31,10 +35,15 @@
         android:layout_below="@+id/newMemogame"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="my top scores" />
+        android:background="#fab359"
+        android:backgroundTintMode="multiply"
+        android:text="my top scores"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/button7"
+        android:textStyle="bold"
+        android:background="#fab359"
         android:layout_width="146dp"
         android:layout_height="43dp"
         android:layout_below="@+id/memogameScoreboard"
@@ -42,6 +51,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="280dp"
+        android:textSize="14.5sp"
         android:text="Top Players" />
 
 </RelativeLayout>
