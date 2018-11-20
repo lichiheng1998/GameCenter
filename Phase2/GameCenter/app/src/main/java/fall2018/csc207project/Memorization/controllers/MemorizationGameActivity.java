@@ -1,6 +1,7 @@
 package fall2018.csc207project.Memorization.controllers;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +31,8 @@ public class MemorizationGameActivity extends AppCompatActivity {
     }
 
     private void switchToBoardsSize() {
+        Intent tmp = new Intent(this, MemoComplxActivity.class);
+        startActivity(tmp);
     }
 
     private void addMyTopScoresButtonListener(){}
