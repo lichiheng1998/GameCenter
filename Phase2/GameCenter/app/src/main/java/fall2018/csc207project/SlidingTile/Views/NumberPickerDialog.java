@@ -17,7 +17,7 @@ public class NumberPickerDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         final NumberPicker numberPicker = new NumberPicker(getActivity());
-
+        numberPicker.setValue(1);
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(60);
 

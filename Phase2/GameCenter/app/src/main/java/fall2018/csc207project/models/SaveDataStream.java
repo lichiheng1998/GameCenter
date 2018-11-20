@@ -1,8 +1,8 @@
 package fall2018.csc207project.models;
 
-import java.util.Map;
+import android.content.Context;
 
-public interface SaveDataStream extends GlobalDataStream{
-    Map<String, Map<String, Object>> getSaves();
-    Map<String, Map<String, Object>> getAutoSaves();
+public interface SaveDataStream {
+    Object getSaves(Object initData, boolean isAutoSave, Context context);
+    void saveSaves(Object data, boolean isAutoSave, Context context);
 }
