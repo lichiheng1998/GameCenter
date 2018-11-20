@@ -16,7 +16,7 @@ public class Board extends Observable implements Serializable,Iterable<Tile> {
     /**
      * The number of rows.
      */
-     final int NUM_ROWS;
+    final int NUM_ROWS;
 
     /**
      * The number of rows.
@@ -36,13 +36,13 @@ public class Board extends Observable implements Serializable,Iterable<Tile> {
      */
     Board(List<Tile> tiles) {
         int size = tiles.size();
-        Iterator<Tile> iter = tiles.iterator();
+        Iterator<Tile> newIterator = tiles.iterator();
         this.NUM_ROWS = (int) Math.sqrt(size);
         this.NUM_COLS = this.NUM_ROWS;
         this.tiles = new Tile[NUM_ROWS][NUM_COLS];
         for (int r = 0; r != NUM_ROWS; r++) {
             for (int c = 0; c != NUM_COLS; c++) {
-                this.tiles[r][c] = iter.next();
+                this.tiles[r][c] = newIterator.next();
             }
         }
     }
@@ -98,6 +98,7 @@ public class Board extends Observable implements Serializable,Iterable<Tile> {
                 "tiles=" + Arrays.toString(tiles) +
                 '}';
     }
+
     /**
      * Inner class that implements Iterable for Board
      * @return a Iterator<Tile>
@@ -115,7 +116,7 @@ public class Board extends Observable implements Serializable,Iterable<Tile> {
             }
 
             /*
-            * the implemenation of next method for iterator*/
+            * the implementation of next method for iterator*/
 
             public Tile next() {
                 if (hasNext()) {
