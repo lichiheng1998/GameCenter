@@ -3,6 +3,7 @@ package fall2018.csc207project.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import fall2018.csc207project.PushTheBox.Controllers.BoxStartingActivity;
 import fall2018.csc207project.SlidingTile.Controllers.StartingActivity;
 import fall2018.csc207project.R;
 
@@ -15,14 +16,14 @@ public class GlobalConfig {
      */
     public static final String[] GAMELIST = {"SlidingTile", "Bejeweled", "Some Other Games2",
             "SlidingTile3", "Bejeweled4", "Some Other Games5", "SlidingTile6", "Bejeweled7",
-            "Some Other Games8", "newGame"};
+            "Some Other Games8", "newGame", "Push The Box"};
     /**
      * Ids of the background resources of the games.
      */
     public static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.bejeweled,
             R.drawable.sliding_tile, R.drawable.sliding_tile, R.drawable.bejeweled,
             R.drawable.sliding_tile, R.drawable.bejeweled, R.drawable.bejeweled,
-            R.drawable.sliding_tile, R.drawable.global};
+            R.drawable.sliding_tile, R.drawable.global, R.drawable.global};
 
     /**
      * The Entries of the each games.
@@ -31,7 +32,7 @@ public class GlobalConfig {
             StartingActivity.class, StartingActivity.class, StartingActivity.class,
             StartingActivity.class, StartingActivity.class, StartingActivity.class,
             StartingActivity.class, StartingActivity.class, StartingActivity.class,
-            StartingActivity.class
+            StartingActivity.class, BoxStartingActivity.class
     };
 
 
