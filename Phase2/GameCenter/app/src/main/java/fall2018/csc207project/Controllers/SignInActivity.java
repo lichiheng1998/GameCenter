@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import fall2018.csc207project.models.DataStream;
+import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.UserManager;
 import fall2018.csc207project.R;
 
@@ -26,7 +27,7 @@ public class SignInActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userManager = new UserManager(DataStream.getInstance());
+        userManager = DatabaseUtil.getUserManager();
         setContentView(R.layout.sign_in);
         addLoginButtonListener();
         addCancelButtonListener();
@@ -58,7 +59,7 @@ public class SignInActivity extends AppCompatActivity {
                 EditText Password = findViewById(R.id.signin_password);
                 userName = User.getText().toString();
                 password = Password.getText().toString();
-                if(userManager.signIn(userName, password)){
+                if(userManager.signIn(userName, password, getApplicationContext())){
                     SharedPreferences sharedPref =
                             SignInActivity.this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();

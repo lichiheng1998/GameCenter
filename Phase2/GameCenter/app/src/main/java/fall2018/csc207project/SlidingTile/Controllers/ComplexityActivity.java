@@ -1,8 +1,6 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import fall2018.csc207project.Controllers.SignInActivity;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 
@@ -81,18 +78,12 @@ public class ComplexityActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText UndoSteps = findViewById(R.id.undo_step_input);
+                EditText UndoSteps = findViewById(R.id.TimesToUndo);
                 String steps = UndoSteps.getText().toString();
-                if (!steps.equals("")){
-                    undoStep = Integer.parseInt(steps);
-                    Toast.makeText(getApplicationContext(), "Successful setting",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Enter Something",
-                            Toast.LENGTH_SHORT).show();
-                }
-
+                undoStep = Integer.parseInt(steps);
+                Toast.makeText(getApplicationContext(),
+                        "Successfully set the Total Undo Steps to: " + undoStep,
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -103,6 +94,15 @@ public class ComplexityActivity extends AppCompatActivity {
     private void switchToGame() {
         Intent tmp = new Intent(this, GameActivity.class);
         tmp.putExtra("save", new BoardManager(complexity, undoStep));
+        if (undoStep == 3) {
+            Toast.makeText(getApplicationContext(),
+                    "The Total Undo Steps set to default value: 3",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "The Total Undo Steps set to: " + undoStep,
+                    Toast.LENGTH_SHORT).show();
+        }
         startActivity(tmp);
         finish();
     }

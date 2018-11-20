@@ -21,7 +21,7 @@ import java.util.List;
  * The CustomAdapter that maps the buttons to the customized grid view.
  */
 public class CustomAdapter extends BaseAdapter {
-    private List<Button> mButtons = null;
+    private List<Button> mButtons;
     private int mColumnWidth, mColumnHeight;
 
     public CustomAdapter(List<Button> buttons, int columnWidth, int columnHeight) {

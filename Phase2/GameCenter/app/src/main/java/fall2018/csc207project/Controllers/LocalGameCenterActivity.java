@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc207project.models.DataStream;
+import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.GlobalConfig;
 import fall2018.csc207project.models.SaveManager;
 import fall2018.csc207project.models.UserManager;
@@ -28,17 +30,17 @@ import fall2018.csc207project.R;
  * or remove game.
  */
 public class LocalGameCenterActivity extends AppCompatActivity {
-
-    private String currentUser;
     private UserManager userManager;
     private BaseAdapter adapter;
+    private List<String> gameList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.local_game_center);
         SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
-        this.currentUser = sharedData.getString("currentUser", null);
-        this.userManager = new UserManager(DataStream.getInstance(), currentUser);
+        String currentUser = sharedData.getString("currentUser", null);
+        this.userManager = DatabaseUtil.getUserManager(currentUser);
+        gameList = userManager.getGames(getApplicationContext());
         prepareGameList();
         addAddGameButtonListener();
     }
@@ -46,6 +48,8 @@ public class LocalGameCenterActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        gameList.clear();
+        gameList.addAll(userManager.getGames(getApplicationContext()));
         this.adapter.notifyDataSetChanged();
     }
 
@@ -75,15 +79,15 @@ public class LocalGameCenterActivity extends AppCompatActivity {
      */
     private void prepareGameList(){
         ListView listView = findViewById(R.id.gameList);
-        this.adapter = new GameCenterListViewAdapter(this, userManager.getGames(),
+        this.adapter = new GameCenterListViewAdapter(this, gameList,
                 GlobalConfig.BGMAP);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 String game = ((TextView)v.findViewById(R.id.gameName)).getText().toString();
                 launchGame(game);
             }
         });
-        listView.setAdapter(adapter);
     }
 
     /**

@@ -70,17 +70,17 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/undo_step_input"
+        android:id="@+id/TimesToUndo"
         android:layout_width="75dp"
         android:layout_height="40dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="100dp"
+        android:layout_alignParentStart="true"
         android:layout_marginBottom="80dp"
+        android:layout_marginStart="100dp"
         android:background="@color/colorPrimary"
         android:ems="10"
         android:inputType="number"
-        android:text="3"/>
+        android:text="3" />
 
     <Button
         android:id="@+id/set_undo_button"
@@ -91,7 +91,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="80dp"
-        android:layout_toEndOf="@+id/undo_step_input"
+        android:layout_toEndOf="@+id/StepsToUndo"
         android:text="accept"
         android:textStyle="bold" />
 

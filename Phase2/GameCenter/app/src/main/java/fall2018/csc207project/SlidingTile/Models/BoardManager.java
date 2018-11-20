@@ -5,7 +5,6 @@ import android.widget.Button;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observer;
@@ -31,7 +30,7 @@ public class BoardManager implements Serializable{
 
     private int totalSteps;
 
-    private List<Tile> tileList;
+    //    private List<Tile> tileList;
 
     /**
      * Manage a new shuffled board.
@@ -41,63 +40,13 @@ public class BoardManager implements Serializable{
         this.undoTimes = undoTimes;
         totalSteps = 0;
         stackOfMovements = new Stack<>();
-        List<Tile> tiles = new ArrayList<>();
-        final int numTiles = dim * dim;
-        for (int tileNum = 0; tileNum != numTiles; tileNum++) {
-            tiles.add(new Tile(tileNum));
+        if (dim == 3) {
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 81);
+        } else if (dim == 4) {
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 256);
+        } else if (dim == 5) {
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 625);
         }
-        do {
-            Collections.shuffle(tiles);
-            this.tileList = tiles;
-        } while (!isSolvable());
-        this.board = new Board(tiles);
-    }
-
-    /**
-     * Returns a int[] array of inversion information with
-     * {total number of inversions, blank tile's position}
-     *
-     * @return a int[] array of inversion information with
-     *
-     * From: https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
-     */
-    private int[] getInversionsInfo() {
-        int inversions = 0;
-        int blankPosition = 0;
-        ArrayList<Integer> integerList = new ArrayList<>();
-        for (int index = 0; index < tileList.size(); index++) {
-            if (tileList.get(index).getId() != Math.pow(complexity, 2)) {
-                integerList.add(tileList.get(index).getId());
-            } else {
-                blankPosition = index;
-            }
-        }
-        for (int i = 0; i < integerList.size(); i++) {
-            for (int j = i + 1; j < integerList.size(); j++) {
-                if (integerList.get(i) > integerList.get(j)) {
-                    inversions++;
-                }
-            }
-        }
-        return new int[] {inversions, blankPosition};
-    }
-
-    /**
-     * Return whether the given 3x3, 4x4 or 5x5
-     * sliding tile board is solvable.
-     *
-     * @return whether the given 3x3, 4x4 or 5x5
-     * sliding tile board is solvable
-     *
-     * From: https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
-     */
-    private boolean isSolvable() {
-        int[] array = getInversionsInfo();
-        int inversions = array[0];
-        int row = complexity;
-        int rowBlankTile = array[1] / row;
-        return ((row % 2 == 1) && (inversions % 2 == 0))
-                || ((row % 2 == 0) && ((rowBlankTile % 2 == 0) == !(inversions % 2 == 0)));
     }
 
     /**
@@ -186,17 +135,17 @@ public class BoardManager implements Serializable{
         for (int i = 0; i < steps; i++) {
             touchMove(stackOfMovements.pop());
         }
-        totalSteps++;
         undoTimes--;
     }
 
     public void pushLastStep(){
         stackOfMovements.push(findBlinkTilePosition());
     }
+
     /**
-     * Return the total steps you did in each undo.
+     * Return the total steps you did.
      *
-     * @return the total steps you did in each undo
+     * @return the total steps you did
      */
     public int getTotalSteps() {
         return totalSteps;

@@ -1,7 +1,5 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,16 +10,12 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 import java.util.Collections;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
 import fall2018.csc207project.SlidingTile.Views.GestureDetectGridView;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
-import fall2018.csc207project.models.DataStream;
-import fall2018.csc207project.models.SaveManager;
 
 /**
  * The game activity.
@@ -93,7 +87,7 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
      * Active the listener for the step picker edit text.
      */
     private void addStepInputListener(){
-        undoText.setText("0");
+        undoText.setText("1");
         undoText.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -130,7 +124,7 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
     }
 
     /**
-     *Show the number picker dialog.
+     * Show the number picker dialog.
      */
     public void showNumberPicker(){
         NumberPickerDialog newFragment = new NumberPickerDialog();
