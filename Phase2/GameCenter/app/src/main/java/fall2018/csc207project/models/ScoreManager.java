@@ -11,4 +11,11 @@ public class ScoreManager {
         userToScores = dataStream.getUserToScores();
         gameToScores = dataStream.getGameToScores();
     }
+    public Map getScorebyUser(String Name){
+        return null;
+
+    }
+    public Map<String, Score> getScores (){
+        return null;
+    }
 }
