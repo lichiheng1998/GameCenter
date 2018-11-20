@@ -44,7 +44,7 @@ public class BoardManager implements Serializable{
             this.board = (new SlidingTileGameShuffler()).shuffle(dim, 81);
         } else if (dim == 4) {
             this.board = (new SlidingTileGameShuffler()).shuffle(dim, 256);
-        } else {
+        } else if (dim == 5) {
             this.board = (new SlidingTileGameShuffler()).shuffle(dim, 625);
         }
     }
