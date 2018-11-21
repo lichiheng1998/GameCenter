@@ -36,6 +36,10 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
      */
     private GridView gridView;
 
+    /**
+     * The adapter for grid view.
+     */
+    MapAdapter mapAdapter;
 
     /**
      * The array of tiles' background id.
@@ -75,7 +79,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                         );
                         int displayWidth = gridView.getMeasuredWidth();
                         columnDim = displayWidth / mapManager.getNumCol();
-                        display();
+                        mapAdapter = new MapAdapter(mapManager.getTilesBg(), columnDim,
+                                getApplicationContext());
+                        updateMap(mapManager);
                     }
                 }
         );
@@ -171,13 +177,13 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
 
     @Override
     public void display() {
-        MapAdapter mapAdapter = new MapAdapter(tileBgs,columnDim, getApplicationContext());
         gridView.setAdapter(mapAdapter);
     }
 
     @Override
     public void updateMap(MapManager mapManager) {
-        tileBgs = mapManager.getTilesBg();
+        mapAdapter.setPerson(mapManager.getPersonPosToImage());
+        mapAdapter.setBoxesList(mapManager.getBoxPosToImage());
         display();
     }
 }

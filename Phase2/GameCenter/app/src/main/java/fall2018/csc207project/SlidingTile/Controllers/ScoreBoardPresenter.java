@@ -7,7 +7,7 @@ public class ScoreBoardPresenter {
     /**
      * The TileGame scoreboard logic
      */
-    private TileGameScoreManager;
+    private TileGameScoreManager tileGameScoreManager;
 
 
 }

@@ -38,7 +38,6 @@ public class LevelActivity extends AppCompatActivity {
         createLevelButtons();
         addAcceptButtonListener();
         display();
-
     }
 
     public void createLevelButtons(){

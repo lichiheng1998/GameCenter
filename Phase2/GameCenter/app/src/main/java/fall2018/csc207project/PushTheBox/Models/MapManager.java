@@ -1,5 +1,7 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import android.util.SparseIntArray;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observer;
@@ -43,6 +45,11 @@ public class MapManager implements Serializable {
     private HashMap<String, Object> levelInfo = new HashMap<>();
 
     /**
+     * The array that stores all the image id that will be displayed on the view.
+     */
+    Integer[] tileBgs;
+
+    /**
      * The counting of steps taken.
      */
     private int totalSteps;
@@ -56,6 +63,7 @@ public class MapManager implements Serializable {
     public MapManager(int level, int undoTimes){
         this.level = level;
         createGameByLevel();
+        initTileBg();
         this.undoTimes = undoTimes;
         this.totalSteps = 0;
         this.stackOfMovements = new Stack<>();
@@ -220,14 +228,32 @@ public class MapManager implements Serializable {
      * @return the array of the background ids
      */
     public Integer[] getTilesBg(){
-        Integer[] tileBgs = new Integer[bgElements.size()];
-        for (int i =0; i <  tileBgs.length; i++){
+        return tileBgs;
+    }
+
+
+    /**
+     * Initialize the array that stores all the image Id of tiles on the map.
+     */
+    private void initTileBg(){
+        tileBgs = new Integer[bgElements.size()];
+        for (int i = 0; i < tileBgs.length; i++ ){
             tileBgs[i] = bgElements.get(i).getBackground();
         }
-        tileBgs[person.getPosition()] = person.getImage();
-        for (Box box: boxArrayList) {
-            tileBgs[box.getPosition()] = box.getImage();
+    }
+
+
+    public SparseIntArray getPersonPosToImage(){
+        SparseIntArray personPosToImage = new SparseIntArray();
+        personPosToImage.append(person.getPosition(), person.getImage());
+        return personPosToImage;
+    }
+
+    public SparseIntArray getBoxPosToImage(){
+        SparseIntArray boxes = new SparseIntArray();
+        for (Box box : boxArrayList){
+            boxes.append(box.getPosition(), box.getImage());
         }
-        return tileBgs;
+        return boxes;
     }
 }
