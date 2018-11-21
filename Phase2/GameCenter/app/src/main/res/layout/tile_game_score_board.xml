@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/3button"
+        android:id="@+id/button3"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -16,21 +16,19 @@
         android:text="3x3" />
 
     <Button
-        android:id="@+id/4button"
+        android:id="@+id/button4"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/3button"
-        android:layout_alignBottom="@+id/3button"
+        android:layout_alignTop="@+id/button3"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="0dp"
-        android:layout_toStartOf="@+id/5x5"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="-3dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="7dp"
         android:text="4x4" />
 
     <Button
-        android:id="@+id/5x5"
+        android:id="@+id/button5"
         android:layout_width="57dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -40,10 +38,9 @@
         android:text="5x5" />
 
     <Button
-        android:id="@+id/6button"
+        android:id="@+id/button6"
         android:layout_width="61dp"
         android:layout_height="51dp"
-        android:layout_alignBottom="@+id/5x5"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="58dp"
@@ -54,9 +51,11 @@
     <ListView
         android:id="@+id/ScoreBoard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="349dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="160dp" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="218dp" />
 
     <TextView
         android:id="@+id/CurrentPlayer"
@@ -68,47 +67,46 @@
         android:layout_marginTop="20dp"
         android:text="empty" />
 
-    <TextView
-        android:id="@+id/CurrentScore3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/CurrentScore5"
-        android:layout_alignEnd="@+id/3button"
-        android:layout_alignBottom="@+id/4"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="0dp"
-        android:text="TextView" />
+
 
     <TextView
-        android:id="@+id/CurrentScore4"
-        android:layout_width="wrap_content"
+        android:id="@+id/playerscore3"
+        android:layout_width="59dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/3button"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="129dp"
-        android:layout_marginEnd="-83dp"
-        android:text="TextView" />
+        android:layout_below="@+id/button3"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="39dp"
+        android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/CurrentScore5"
-        android:layout_width="wrap_content"
+        android:id="@+id/playerscore4"
+        android:layout_width="59dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/3button"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="126dp"
-        android:layout_marginEnd="-160dp"
-        android:text="TextView" />
+        android:layout_below="@+id/button3"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="44dp"
+        android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/CurrentScore6"
-        android:layout_width="wrap_content"
+        android:id="@+id/playerscore5"
+        android:layout_width="59dp"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/CurrentScore5"
-        android:layout_alignEnd="@+id/3button"
-        android:layout_alignBottom="@+id/CurrentScore5"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="-248dp"
-        android:layout_marginBottom="-1dp"
-        android:text="TextView" />
+        android:layout_below="@+id/button3"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="193dp"
+        android:layout_marginTop="47dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/playerscore6"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button3"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="285dp"
+        android:layout_marginTop="49dp"
+        android:text="playerscore3" />
 
 </RelativeLayout>

@@ -10,7 +10,7 @@ public class TileScore extends Score{
     public String user;
     public int value;
 
-    TileScore(int complexity){
+    public TileScore(int complexity){
         this.complexity = complexity;
     }
 

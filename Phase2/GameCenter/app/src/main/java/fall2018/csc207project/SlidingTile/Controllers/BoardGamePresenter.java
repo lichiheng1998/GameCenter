@@ -2,14 +2,12 @@ package fall2018.csc207project.SlidingTile.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
-import fall2018.csc207project.models.DataStream;
 import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
 

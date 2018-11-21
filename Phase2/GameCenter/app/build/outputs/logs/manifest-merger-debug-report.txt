@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
+ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\b47c6a146e64b59470fda2c9d6045389\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:28.0.0] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\3fab6ab775ca3c2a8de3631f592bee42\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\6e5b2d20f0858917b1b23007b9ba1002\AndroidManifest.xml:17:1-22:12
@@ -30,25 +30,25 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] C:\Users\zhang\.gradle\cache
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\b0f0807cf6f223bf90f40865132b31af\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\65dda23be1d57497449375d7d328d1a1\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\interpolator-28.0.0.aar\e59f9c0abdbda76ae6881d81f49eb204\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
 	package
 		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:3:5-37
 		INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
+		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-28:12
+		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:5:5-26:19
+ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:5:5-30:19
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\b3abd7208ecf40b21bc08894ceee7ed4\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\b3abd7208ecf40b21bc08894ceee7ed4\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] C:\Users\zhang\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\f27142789a038201f070e6045a69c812\AndroidManifest.xml:22:5-23:19
@@ -109,6 +109,22 @@ activity#fall2018.csc207project.SlidingTile.Controllers.GameActivity
 ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:25:9-96
 	android:name
 		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:25:19-93
+activity#fall2018.csc207project.Memorization.controllers.MemorizationGameActivity
+ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:26:9-87
+	android:name
+		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:26:19-84
+activity#fall2018.csc207project.PushTheBox.Controllers.BoxStartingActivity
+ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:27:9-80
+	android:name
+		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:27:19-77
+activity#fall2018.csc207project.PushTheBox.Controllers.BoxGameActivity
+ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:28:9-75
+	android:name
+		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:28:19-73
+activity#fall2018.csc207project.PushTheBox.Controllers.LevelActivity
+ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:29:9-73
+	android:name
+		ADDED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml:29:19-71
 uses-sdk
 INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\zhang\Desktop\207final\group_0627\Phase2\GameCenter\app\src\main\AndroidManifest.xml
