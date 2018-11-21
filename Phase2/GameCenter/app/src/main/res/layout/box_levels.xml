@@ -14,4 +14,18 @@
         android:layout_marginTop="60dp"
         android:numColumns="4"
         tools:layout_editor_absoluteX="5db" />
+
+    <EditText
+        android:id="@+id/SetUndoTimes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text="3" />
+
+    <Button
+        android:id="@+id/SetUndoButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Accept" />
 </LinearLayout>

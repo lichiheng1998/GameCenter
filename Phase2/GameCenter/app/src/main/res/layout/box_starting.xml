@@ -49,23 +49,4 @@
         android:text="Scoreboard"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/SetUndoButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_alignEnd="@+id/newBoxGame"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="190dp"
-        android:text="accept" />
-
-    <EditText
-        android:id="@+id/TimesToUndo"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_alignStart="@+id/newBoxGame"
-        android:layout_alignTop="@+id/SetUndoButton"
-        android:ems="10"
-        android:inputType="number"
-        android:text="3" />
-
 </RelativeLayout>
