@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observer;
 import java.util.HashMap;
+import java.util.Stack;
+
 import fall2018.csc207project.PushTheBox.Controllers.LevelFactory;
 
 /**
@@ -43,14 +45,20 @@ public class MapManager implements Serializable {
     /**
      * The counting of steps taken.
      */
-    public int stepsTaken;
+    private int totalSteps;
+
+    private int undoTimes;
+    private Stack<int[]> stackOfMovements;
 
     /**
      * Initialize a new manager to manage a new map.
      */
-    public MapManager(int level){
+    public MapManager(int level, int undoTimes){
         this.level = level;
         createGameByLevel();
+        this.undoTimes = undoTimes;
+        this.totalSteps = 0;
+        this.stackOfMovements = new Stack<>();
     }
 
     /**
@@ -90,29 +98,29 @@ public class MapManager implements Serializable {
      */
     public Boolean isValidMovement(int posChange){
         int newPosition = person.getPosition() + posChange;
-        if ((!map.tileIsWall(newPosition) && boxAtPos(newPosition) == null)
-                || (boxAtPos(newPosition)!=null
+        return (!map.tileIsWall(newPosition) && boxAtPos(newPosition) == null)
+                || (boxAtPos(newPosition) != null
                 && !map.tileIsWall(newPosition + posChange)
-                && boxAtPos(newPosition + posChange) == null)){
-            return true;
-        }
-        return false;
+                && boxAtPos(newPosition + posChange) == null);
     }
+
+    public boolean isBoxesMoved = false;
 
     /**
      * Process person's movement.
      * @param posChange the changing in position to get new position
      */
     public void processPersonMovement(int posChange){
+        isBoxesMoved = false;
         int newPosition = person.getPosition() + posChange;
         // There may be a box on next step, so the person will push the box.
         if (boxAtPos(newPosition)!=null){
+            isBoxesMoved = true;
             processBoxMovement(newPosition, newPosition + posChange);
         }
         person.walk(posChange);
+        totalSteps++;
     }
-
-
 
     /**
      * Process the movement of the box on the map.
@@ -127,6 +135,48 @@ public class MapManager implements Serializable {
         }else{
             boxAtPos(newPosition).leaveDestination();
         }
+    }
+
+    public void pushLastStep(int personOldPos, int boxNewPos){
+        stackOfMovements.push(new int[]{personOldPos, boxNewPos});
+    }
+
+    /**
+     * Process the undo movement by the given steps.
+     * int[2] of {old position of person, new position of box}
+     *
+     * @param steps the steps you want to go back.
+     */
+    private void processUndoMovement(int steps) {
+        for (int i = 0; i < steps; i++) {
+            int[] poppedItem = stackOfMovements.pop();
+            int currentPersonPos = person.getPosition();
+            if (poppedItem[1] == -1) {
+                System.out.println(poppedItem[0]);
+            } else {
+                System.out.println(currentPersonPos);
+                System.out.println(poppedItem[1]);
+            }
+        }
+        undoTimes--;
+    }
+
+    public boolean canProcessUndo(int step){
+        if (undoTimes == 0 || step > stackOfMovements.size()){
+            return false;
+        } else {
+            processUndoMovement(step);
+            return true;
+        }
+    }
+
+    /**
+     * Return the total steps you did.
+     *
+     * @return the total steps you did
+     */
+    public int getTotalSteps() {
+        return totalSteps;
     }
 
     /**

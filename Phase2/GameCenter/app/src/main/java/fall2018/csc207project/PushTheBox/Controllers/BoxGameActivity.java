@@ -5,13 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Models.Map;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.R;
+import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
 
 /**
  * The game activity for Push The Box.
@@ -19,6 +23,8 @@ import fall2018.csc207project.R;
 public class BoxGameActivity extends AppCompatActivity implements MapView {
 
     private static int columnDim;
+
+    private EditText undoText;
 
     /**
      * The presenter of the map.
@@ -44,11 +50,14 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         tileBgs = mapManager.getTilesBg();
 
         setContentView(R.layout.box_gaming);
+        undoText = findViewById(R.id.StepsToUndo);
         setupGridView(mapManager);
         addUpButtonListener();
         addLeftButtonListener();
         addDownButtonListener();
         addRightButtonListener();
+        addUndoButtonListener();
+        addStepInputListener();
     }
 
     /**
@@ -113,6 +122,52 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         });
     }
 
+    /**
+     * Active the listener for the step picker edit text.
+     */
+    private void addStepInputListener(){
+        undoText.setText("1");
+        undoText.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                presenter.onUndoTextClicked();
+            }
+        });
+    }
+
+    /**
+     * Activate the start button.
+     */
+    private void addUndoButtonListener() {
+        Button undoButton = findViewById(R.id.UndoButton);
+        undoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onUndoButtonClicked(Integer.parseInt(undoText.getText().toString()));
+            }
+        });
+    }
+
+    /**
+     * Display that a game has No Undo Times Left.
+     */
+    public void makeToastNoUndoTimesLeftText() {
+        Toast.makeText(this, "No times or undo out of limit!", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Show the number picker dialog.
+     */
+    public void showNumberPicker(){
+        NumberPickerDialog newFragment = new NumberPickerDialog();
+        newFragment.setValueChangeListener(new NumberPicker.OnValueChangeListener(){
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                undoText.setText(Integer.toString(numberPicker.getValue()));
+            }
+        });
+        newFragment.show(getSupportFragmentManager(), "time picker");
+    }
 
     @Override
     public void display() {

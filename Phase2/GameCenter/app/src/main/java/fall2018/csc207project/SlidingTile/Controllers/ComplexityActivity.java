@@ -74,7 +74,7 @@ public class ComplexityActivity extends AppCompatActivity {
      * Activate the undo steps setting button.
      */
     private void addAcceptButtonListener() {
-        Button loginButton = findViewById(R.id.set_undo_button);
+        Button loginButton = findViewById(R.id.SetUndoButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
