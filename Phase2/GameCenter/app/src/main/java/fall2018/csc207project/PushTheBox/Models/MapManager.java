@@ -2,7 +2,8 @@ package fall2018.csc207project.PushTheBox.Models;
 
 import java.util.ArrayList;
 import java.util.Observer;
-
+import java.util.HashMap;
+import fall2018.csc207project.PushTheBox.Controllers.LevelFactory;
 
 /**
  * Manages a map, including the movements of the person and boxes on the map, and checks for a win.
@@ -34,6 +35,11 @@ public class MapManager {
     private ArrayList<BgTile> bgElements;
 
     /**
+     * The Hashmap which stores the initial information of the game.
+     */
+    private HashMap<String, Object> levelInfo = new HashMap<>();
+
+    /**
      * The counting of steps taken.
      */
     public int stepsTaken;
@@ -43,7 +49,7 @@ public class MapManager {
      */
     public MapManager(int level){
         this.level = level;
-        createGameByLevel();//TODO
+        createGameByLevel();
     }
 
     /**
@@ -126,22 +132,12 @@ public class MapManager {
      * Initialize the game elements by the chosen game level.
      */
     private void createGameByLevel(){
-        //TODO
-        bgElements = new ArrayList<>();
-        for (int i=0; i < 5*5;i++){
-            if(i<=5 | i==9 | i==10 | i==14 | i==15 | i >= 19){
-                bgElements.add(new BgTile("Wall"));
-            }else if (i==13 | i==16){
-                bgElements.add(new BgTile("Destination"));
-            }else{
-                bgElements.add(new BgTile("Floor"));
-            }
-        }
-        map = new Map(5,5,bgElements);
-        person = new Person(6);
-        boxArrayList.add(new Box(12));
-        boxArrayList.add(new Box(17));
-
+        LevelFactory levelFactory = new LevelFactory();
+        levelInfo = levelFactory.getGameElements(level);
+        bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
+        person = (Person) levelInfo.get("Person");
+        boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
+        map = (Map) levelInfo.get("map");
     }
 
     /**
