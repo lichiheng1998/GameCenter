@@ -1,11 +1,13 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import java.io.Serializable;
+
 import fall2018.csc207project.R;
 
 /**
  * Tile with a background image, and combination of tiles make a map.
  */
-public class BgTile {
+public class BgTile implements Serializable {
 
     /**
      * The image id of this bgTile.

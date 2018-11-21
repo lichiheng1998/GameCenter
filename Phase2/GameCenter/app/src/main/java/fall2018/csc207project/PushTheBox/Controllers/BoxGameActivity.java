@@ -40,8 +40,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.presenter = new BoxGamePresenter(this,getApplication());
-        //MapManager mapManager = (MapManager) getIntent().getSerializableExtra("save");
-        MapManager mapManager = new MapManager(3);
+        MapManager mapManager = (MapManager) getIntent().getSerializableExtra("save");
         tileBgs = mapManager.getTilesBg();
 
         setContentView(R.layout.box_gaming);

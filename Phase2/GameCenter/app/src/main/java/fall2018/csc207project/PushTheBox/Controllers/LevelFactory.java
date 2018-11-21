@@ -32,11 +32,18 @@ public class LevelFactory {
     private ArrayList<Box> boxArrayList = new ArrayList<>();
 
     /**
+     * the total number of levels.
+     */
+    private int levelNum;
+
+    /**
      * Create a new LevelFactory to initialize a game.
      */
     public LevelFactory(){
         initAllLevels();
+        levelNum = allLevels.size();
     }
+
 
 
     /**
@@ -90,5 +97,14 @@ public class LevelFactory {
 
 //        Integer[][] levelFour = {{6},{7},{12,23},{16,17},{24,26},{8}};
 //        allLevels.put(4, levelFour);
+    }
+
+
+    /**
+     * Return the total number of levels exists
+     * @return the total number of levels
+     */
+    public int getLevelAmount(){
+        return levelNum;
     }
 }

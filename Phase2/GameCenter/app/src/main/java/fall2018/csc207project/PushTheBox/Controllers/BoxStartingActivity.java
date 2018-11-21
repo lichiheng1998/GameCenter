@@ -23,7 +23,7 @@ public class BoxStartingActivity extends AppCompatActivity {
         setContentView(R.layout.box_starting);
         addNewGameButtonListener();
         addLoadButtonListener();
-        addScoreButtonListener();
+        //addScoreButtonListener();
     }
 
     /**
@@ -34,7 +34,7 @@ public class BoxStartingActivity extends AppCompatActivity {
         newGameButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                switchToBoxGame();
+                switchToSelectLevel();
             }
         } );
     }
@@ -64,14 +64,14 @@ public class BoxStartingActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
-//    /**
-//     * Switch to the level selection view.
-//     */
-//    private void switchToSelectLevel(){
-//        Intent tmp = new Intent (this, BoxLevelActivity.class);
-//        startActivity(tmp);
-//    }
-//
+    /**
+     * Switch to the level selection view.
+     */
+    private void switchToSelectLevel(){
+        Intent tmp = new Intent (this, LevelActivity.class);
+        startActivity(tmp);
+    }
+
 
 
 
