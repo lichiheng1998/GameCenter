@@ -72,7 +72,17 @@ public class BoxGamePresenter implements Observer {
         if (movementController.processTapMovement(context, direction)){
             saveManager.saveToSlot(mapManager, true, context);
         }
-}
+    }
+
+    public void onUndoButtonClicked(int step){
+        if(!mapManager.canProcessUndo(step)) {
+            view.makeToastNoUndoTimesLeftText();
+        }
+    }
+
+    public void onUndoTextClicked(){
+        view.showNumberPicker();
+    }
 
     /**
      * Updates notified to observer. Calls the View to update the map.

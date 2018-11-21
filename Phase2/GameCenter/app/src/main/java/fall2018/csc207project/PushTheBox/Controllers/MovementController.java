@@ -18,18 +18,32 @@ public class MovementController {
 
     public boolean processTapMovement(Context context, String direction) {
         int posChange;
-        if (direction.equals("left")){
-            posChange = -1;
-        } else if(direction.equals("up")){
-            posChange = - mapManager.getNumCol();
-        }else if (direction.equals("right")){
-            posChange = 1;
-        }else{
-            posChange = mapManager.getNumCol();
+        switch (direction) {
+            case "left":
+                posChange = -1;
+                break;
+            case "up":
+                posChange = -mapManager.getNumCol();
+                break;
+            case "right":
+                posChange = 1;
+                break;
+            default:
+                posChange = mapManager.getNumCol();
+                break;
         }
 
         if (mapManager.isValidMovement(posChange)) {
+            int personOldPos = mapManager.person.getPosition();
             mapManager.processPersonMovement(posChange);
+            int boxNewPos = mapManager.person.getPosition() + posChange;
+            if (!mapManager.isBoxesMoved) {
+                System.out.println(true);
+                mapManager.pushLastStep(personOldPos, -1);
+            } else {
+                System.out.println(false);
+                mapManager.pushLastStep(personOldPos, boxNewPos);
+            }
             if (mapManager.boxSolved()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
             }
