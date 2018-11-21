@@ -9,7 +9,7 @@ public class TileGameScoreManager {
         this.complexity = complexity;
         this.currrentUser = currrentUser;
     }
-    public getHighestScore(){
-        this.getScorebyUser(this.currrentUser);
-    }
+//    public getHighestScore(){
+//        this.getScorebyUser(this.currrentUser);
+//    }
 }
