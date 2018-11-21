@@ -41,7 +41,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         super.onCreate(savedInstanceState);
         this.presenter = new BoxGamePresenter(this,getApplication());
         //MapManager mapManager = (MapManager) getIntent().getSerializableExtra("save");
-        MapManager mapManager = new MapManager(1);
+        MapManager mapManager = new MapManager(3);
         tileBgs = mapManager.getTilesBg();
 
         setContentView(R.layout.box_gaming);
@@ -119,7 +119,6 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
     public void display() {
         MapAdapter mapAdapter = new MapAdapter(tileBgs,columnDim, getApplicationContext());
         gridView.setAdapter(mapAdapter);
-
     }
 
     @Override
