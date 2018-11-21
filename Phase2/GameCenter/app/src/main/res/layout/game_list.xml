@@ -26,11 +26,10 @@
 
     <ListView
         android:id="@+id/game_list"
-        style="@style/x"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@+id/game"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/game"
         android:layout_marginTop="40dp" />
 
 </RelativeLayout>
