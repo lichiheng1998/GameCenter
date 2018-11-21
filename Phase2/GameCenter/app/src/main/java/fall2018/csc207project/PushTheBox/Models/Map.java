@@ -1,12 +1,13 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * The map where a person will push the boxes to destinations.
  */
-public class Map {
+public class Map implements Serializable {
 
     /**
      * The list of background tiles.

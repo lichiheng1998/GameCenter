@@ -1,5 +1,6 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observer;
 import java.util.HashMap;
@@ -8,7 +9,7 @@ import fall2018.csc207project.PushTheBox.Controllers.LevelFactory;
 /**
  * Manages a map, including the movements of the person and boxes on the map, and checks for a win.
  */
-public class MapManager {
+public class MapManager implements Serializable {
     /**
      * The map to be managed.
      */

@@ -1,11 +1,13 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import java.io.Serializable;
+
 import fall2018.csc207project.R;
 
 /**
  * The box that is to be pushed by a person, to destination points.
  */
-public class Box {
+public class Box implements Serializable {
 
     /**
      * Position of the box.

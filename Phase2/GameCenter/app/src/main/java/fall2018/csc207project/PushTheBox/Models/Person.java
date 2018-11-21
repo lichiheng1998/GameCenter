@@ -1,5 +1,6 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 import fall2018.csc207project.R;
@@ -7,7 +8,7 @@ import fall2018.csc207project.R;
 /**
  * The person who will be pushing the boxes.
  */
-public class Person extends Observable {
+public class Person extends Observable implements Serializable {
 
     /**
      * The position of the person.

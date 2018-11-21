@@ -26,6 +26,7 @@
         <activity android:name=".Memorization.controllers.MemorizationGameActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxStartingActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxGameActivity"/>
+        <activity android:name=".PushTheBox.Controllers.LevelActivity"/>
     </application>
 
 </manifest>
