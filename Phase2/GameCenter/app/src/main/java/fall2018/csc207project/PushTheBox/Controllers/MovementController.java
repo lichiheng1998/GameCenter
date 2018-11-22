@@ -1,8 +1,6 @@
 package fall2018.csc207project.PushTheBox.Controllers;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.view.View;
 import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Models.MapManager;
@@ -42,15 +40,12 @@ public class MovementController {
         }
 
         if (mapManager.isValidMovement(posChange)) {
-            int personOldPos = mapManager.person.getPosition();
             mapManager.processPersonMovement(posChange);
             int boxNewPos = mapManager.person.getPosition() + posChange;
             if (!mapManager.isBoxesMoved) {
-                System.out.println(true);
-                mapManager.pushLastStep(personOldPos, -1);
+                mapManager.pushLastStep(posChange, -1);
             } else {
-                System.out.println(false);
-                mapManager.pushLastStep(personOldPos, boxNewPos);
+                mapManager.pushLastStep(posChange, boxNewPos);
             }
             if (mapManager.boxSolved()) {
                 return true;

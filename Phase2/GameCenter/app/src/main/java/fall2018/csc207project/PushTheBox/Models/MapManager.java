@@ -170,10 +170,10 @@ public class MapManager implements Serializable {
             int[] poppedItem = stackOfMovements.pop();
             int currentPersonPos = person.getPosition();
             if (poppedItem[1] == -1) {
-                System.out.println(poppedItem[0]);
+                person.walk(-poppedItem[0]);
             } else {
-                System.out.println(currentPersonPos);
-                System.out.println(poppedItem[1]);
+                person.walk(-poppedItem[0]);
+                processBoxMovement(poppedItem[1], currentPersonPos);
             }
         }
         undoTimes--;
