@@ -172,8 +172,8 @@ public class MapManager implements Serializable {
             if (poppedItem[1] == -1) {
                 person.walk(-poppedItem[0]);
             } else {
-                person.walk(-poppedItem[0]);
                 processBoxMovement(poppedItem[1], currentPersonPos);
+                person.walk(-poppedItem[0]);
             }
         }
         undoTimes--;
