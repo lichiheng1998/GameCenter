@@ -7,4 +7,5 @@ public interface MapView {
     void makeToastNoUndoTimesLeftText();
     void display();
     void updateMap(MapManager mapManager);
+    void levelComplete();
 }

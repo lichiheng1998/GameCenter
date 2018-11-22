@@ -47,14 +47,23 @@ public class MapManager implements Serializable {
     /**
      * The array that stores all the image id that will be displayed on the view.
      */
-    Integer[] tileBgs;
+    private Integer[] tileBgs;
 
     /**
      * The counting of steps taken.
      */
     private int totalSteps;
 
+    /**
+     * The number of undo available left.
+     */
     private int undoTimes;
+
+    /**
+     * The total number of undo times.
+     */
+    private final int totalUndoTimes;
+
     private Stack<int[]> stackOfMovements;
 
     /**
@@ -65,6 +74,7 @@ public class MapManager implements Serializable {
         createGameByLevel();
         initTileBg();
         this.undoTimes = undoTimes;
+        totalUndoTimes = undoTimes;
         this.totalSteps = 0;
         this.stackOfMovements = new Stack<>();
     }
@@ -179,6 +189,14 @@ public class MapManager implements Serializable {
     }
 
     /**
+     * Return the total number of undo times to be used.
+     * @return total number of undo times
+     */
+    public int getTotalUndoTimes(){
+        return totalUndoTimes;
+    }
+
+    /**
      * Return the total steps you did.
      *
      * @return the total steps you did
@@ -197,6 +215,14 @@ public class MapManager implements Serializable {
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
         map = (Map) levelInfo.get("map");
+    }
+
+    /**
+     * Return the level of the game.
+     * @return the level of the game
+     */
+    public int getLevel(){
+        return level;
     }
 
     /**

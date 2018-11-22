@@ -1,6 +1,8 @@
 package fall2018.csc207project.PushTheBox.Controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Models.Map;
@@ -46,12 +49,24 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
      */
     Integer[] tileBgs;
 
+    /**
+     * The level of current game.
+     */
+    private int level;
+
+    /**
+     * The total undo times to be used.
+     */
+    private int totalUndoTimes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.presenter = new BoxGamePresenter(this,getApplication());
         MapManager mapManager = (MapManager) getIntent().getSerializableExtra("save");
         tileBgs = mapManager.getTilesBg();
+        level = mapManager.getLevel();
+        totalUndoTimes = mapManager.getTotalUndoTimes();
 
         setContentView(R.layout.box_gaming);
         undoText = findViewById(R.id.StepsToUndo);
@@ -185,5 +200,64 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         mapAdapter.setPerson(mapManager.getPersonPosToImage());
         mapAdapter.setBoxesList(mapManager.getBoxPosToImage());
         display();
+    }
+
+    @Override
+    public void levelComplete() {
+        AlertDialog.Builder completeBuilder = new AlertDialog.Builder(this);
+        View completeView = getLayoutInflater().inflate(R.layout.box_complete_popup, null);
+        TextView levelText = (TextView) completeView.findViewById(R.id.indicateLevel);
+        String levelDiplay = "Level " + String.valueOf(level);
+        levelText.setText(levelDiplay);
+        createMenuButton(completeView);
+        createReplayButton(completeView);
+        createNextButton(completeView);
+
+        completeBuilder.setView(completeView);
+        AlertDialog dialog = completeBuilder.create();
+        dialog.show();
+    }
+
+
+    private void createMenuButton(View view){
+        Button menu = (Button) view.findViewById(R.id.boxMenuButton);
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void createReplayButton(View view){
+        Button replay = (Button) view.findViewById(R.id.boxReplayButton);
+        replay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
+                tmp.putExtra("save", new MapManager(level, totalUndoTimes));
+                startActivity(tmp);
+                finish();
+            }
+        });
+    }
+
+    private void createNextButton(View view){
+        Button next = (Button) view.findViewById(R.id.boxNextButton);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(level == 8){
+                    Toast.makeText(getApplicationContext(), "No more level left!",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                }else {
+                    Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
+                    tmp.putExtra("save", new MapManager(level + 1, totalUndoTimes));
+                    startActivity(tmp);
+                }
+                finish();
+            }
+        });
     }
 }

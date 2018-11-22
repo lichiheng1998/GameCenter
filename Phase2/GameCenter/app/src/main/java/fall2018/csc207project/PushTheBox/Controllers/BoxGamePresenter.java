@@ -2,6 +2,7 @@ package fall2018.csc207project.PushTheBox.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.ShareActionProvider;
 
 import java.util.Map;
@@ -69,8 +70,9 @@ public class BoxGamePresenter implements Observer {
      * @param direction direction chosen
      */
     public void arrowButtonClicked(Context context, String direction){
+        saveManager.saveToSlot(mapManager, true, context);
         if (movementController.processTapMovement(context, direction)){
-            saveManager.saveToSlot(mapManager, true, context);
+            view.levelComplete();
         }
     }
 

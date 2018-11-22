@@ -1,6 +1,8 @@
 package fall2018.csc207project.PushTheBox.Controllers;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.view.View;
 import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Models.MapManager;
@@ -16,6 +18,12 @@ public class MovementController {
         this.mapManager = mapManager;
     }
 
+    /**
+     * Process tap movement and return whether the game is completed or not.
+     * @param context context
+     * @param direction the direction going to
+     * @return whether the game is completed or not
+     */
     public boolean processTapMovement(Context context, String direction) {
         int posChange;
         switch (direction) {
@@ -45,11 +53,12 @@ public class MovementController {
                 mapManager.pushLastStep(personOldPos, boxNewPos);
             }
             if (mapManager.boxSolved()) {
-                Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
+                return true;
+            }else{
+                return false;
             }
-            return true;
         }
         Toast.makeText(context, "Invalid Movement", Toast.LENGTH_SHORT).show();
-        return true;
+        return false;
     }
 }
