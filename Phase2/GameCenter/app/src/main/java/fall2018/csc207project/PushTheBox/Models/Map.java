@@ -30,7 +30,7 @@ public class Map implements Serializable {
      * @param numCol the total number of columns
      * @param bgElements the list of elements that are the background tiles
      */
-    public Map(int numRow, int numCol, ArrayList<BgTile> bgElements){
+    public Map(int numCol, int numRow, ArrayList<BgTile> bgElements){
         this.NUM_ROW = numRow;
         this.NUM_COL = numCol;
         this.bgElements = bgElements;
