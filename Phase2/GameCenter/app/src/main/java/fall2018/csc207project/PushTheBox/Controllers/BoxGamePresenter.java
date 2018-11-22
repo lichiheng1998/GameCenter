@@ -70,10 +70,10 @@ public class BoxGamePresenter implements Observer {
      * @param direction direction chosen
      */
     public void arrowButtonClicked(Context context, String direction){
-        saveManager.saveToSlot(mapManager, true, context);
         if (movementController.processTapMovement(context, direction)){
             view.levelComplete();
         }
+        saveManager.saveToSlot(mapManager, true, context);
     }
 
     public void onUndoButtonClicked(int step){

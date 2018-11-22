@@ -1,15 +1,18 @@
 package fall2018.csc207project.PushTheBox.Controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Models.Map;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
+import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
 
 public class BoxStartingActivity extends AppCompatActivity {
@@ -19,6 +22,10 @@ public class BoxStartingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
+        this.currentUser = sharedData.getString("currentUser", null);
+        this.saveManager = DatabaseUtil.getSaveManager(currentUser,
+                sharedData.getString("currentGame", null));
 
         setContentView(R.layout.box_starting);
         addNewGameButtonListener();
@@ -44,7 +51,12 @@ public class BoxStartingActivity extends AppCompatActivity {
      */
     private void addLoadButtonListener(){
         Button loadButton = findViewById(R.id.loadBoxGame);
-        //TODO
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToGame(saveManager.readFromSlot(true, getApplicationContext()));
+            }
+        });
     }
 
     /**
@@ -57,11 +69,26 @@ public class BoxStartingActivity extends AppCompatActivity {
 
 
     /**
-     * Switch to the Push the Box game view.
+     * Switch to the the saved activity view to play the saved game.
+     * @param save the saved mapManager to be restored.
      */
-    private void switchToBoxGame(){
-        Intent tmp = new Intent (this, BoxGameActivity.class);
-        startActivity(tmp);
+    private void switchToGame(Object save) {
+        if (save == null){
+            makeNoPlayedText();
+        }else{
+            MapManager mapManager = (MapManager)save;
+            Intent tmp = new Intent (this, BoxGameActivity.class);
+            tmp.putExtra("save", mapManager);
+            startActivity(tmp);
+        }
+    }
+
+    /**
+     * Display that there is no game played yet.
+     */
+    private void makeNoPlayedText(){
+        Toast.makeText(this, "You haven't play yet!",
+                Toast.LENGTH_SHORT).show();
     }
 
     /**
