@@ -1,21 +1,17 @@
-package fall2018.csc207project.PushTheBox.Controllers;
+package fall2018.csc207project.PushTheBox.Models;
 
 import android.util.SparseArray;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
-import fall2018.csc207project.PushTheBox.Models.BgTile;
-import fall2018.csc207project.PushTheBox.Models.Box;
-import fall2018.csc207project.PushTheBox.Models.Map;
-import fall2018.csc207project.PushTheBox.Models.Person;
+import java.util.List;
 
 public class LevelFactory {
 
     /**
      * The array list that stores all the background tile for the map
      */
-    private ArrayList<BgTile> bgElements = new ArrayList<>();
+    private List<BgTile> bgElements = new ArrayList<>();
 
     /**
      * The hash map that maps all the information of the game to its corresponding level
@@ -47,7 +43,6 @@ public class LevelFactory {
     }
 
 
-
     /**
      * Get all the elements for the corresponding level to initialize a map.
      * @param level the level of the game ready to be played
@@ -60,11 +55,11 @@ public class LevelFactory {
         for(int i = 0; i < height * width; i++){
             if (i % width == 0 | i % width == (width - 1) | i < width | i >= ((height * width) - width)
                     | Arrays.asList(tmp[2]).contains(i)){
-                bgElements.add(new BgTile("Wall"));
+                bgElements.add(new BgTile(BgTile.WALLTYPE));
             } else if(Arrays.asList(tmp[4]).contains(i)){
-                bgElements.add(new BgTile("Destination"));
+                bgElements.add(new BgTile(BgTile.DESTTYPE));
             }else{
-                bgElements.add(new BgTile("Floor"));
+                bgElements.add(new BgTile(BgTile.FLOORTYPE));
             } if (Arrays.asList(tmp[3]).contains(i)){
                 Box tmpBox = new Box(i);
                 boxArrayList.add(tmpBox);
@@ -75,7 +70,7 @@ public class LevelFactory {
                    gameElements.put("Person", new Person(i));
             }
         }
-        gameElements.put("map", new Map(width, height, bgElements));
+        gameElements.put("map", new GameMap(width, height, bgElements));
         gameElements.put("boxArrayList", boxArrayList);
         gameElements.put("bgElements", bgElements);
         return gameElements;

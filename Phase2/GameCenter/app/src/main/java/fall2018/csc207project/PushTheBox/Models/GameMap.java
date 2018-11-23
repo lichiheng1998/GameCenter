@@ -3,16 +3,17 @@ package fall2018.csc207project.PushTheBox.Models;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The map where a person will push the boxes to destinations.
  */
-public class Map implements Serializable {
+public class GameMap implements Serializable {
 
     /**
      * The list of background tiles.
      */
-    private ArrayList<BgTile> bgElements = new ArrayList<>();
+    private List<BgTile> bgElements = new ArrayList<>();
 
     /**
      * The total number of rows of the map grid.
@@ -30,7 +31,7 @@ public class Map implements Serializable {
      * @param numCol the total number of columns
      * @param bgElements the list of elements that are the background tiles
      */
-    public Map(int numCol, int numRow, ArrayList<BgTile> bgElements){
+    public GameMap(int numCol, int numRow, List<BgTile> bgElements){
         this.NUM_ROW = numRow;
         this.NUM_COL = numCol;
         this.bgElements = bgElements;

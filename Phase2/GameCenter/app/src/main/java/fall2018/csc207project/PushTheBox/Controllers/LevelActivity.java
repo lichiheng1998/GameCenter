@@ -14,10 +14,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
-import fall2018.csc207project.SlidingTile.Controllers.GameActivity;
-import fall2018.csc207project.SlidingTile.Models.BoardManager;
 
 public class LevelActivity extends AppCompatActivity {
 
