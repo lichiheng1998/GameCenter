@@ -1,7 +1,5 @@
 package fall2018.csc207project.SlidingTile.Models;
 
-import android.support.annotation.NonNull;
-
 import fall2018.csc207project.models.Score;
 
 public class TileScore extends Score{
@@ -22,11 +20,19 @@ public class TileScore extends Score{
      */
     public String user;
 
-//    /**
-//     * score of the specific game for a specific player in a specific complexity
-//     */
-//    public int value;
+    /**
+     * score of the specific game for a specific player in a specific complexity
+     */
+    public int value;
+
+    /**
+     * number of undoSteps of the specific game for a specific player in a specific complexity
+     */
     public int undoSteps;
+
+    /**
+     * number of moveSteps executed for the specific game for a specific player in a specific complexity
+     */
     public int moveSteps;
 
 //    public TileScore(int complexity, String userName, int score){
