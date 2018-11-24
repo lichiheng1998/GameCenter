@@ -23,10 +23,12 @@
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.StartingActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ComplexityActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.GameActivity" />
-        <activity android:name=".Memorization.controllers.MemorizationGameActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxStartingActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxGameActivity"/>
         <activity android:name=".PushTheBox.Controllers.LevelActivity"/>
+        <activity android:name=".Memorization.controllers.MemoComplxActivity" />
+        <activity android:name=".Memorization.controllers.MemorizationStartingActivity" />
+        <activity android:name=".Memorization.controllers.MemoGameActivity" />
     </application>
 
 </manifest>
