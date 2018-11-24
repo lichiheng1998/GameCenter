@@ -210,7 +210,6 @@ public class MapManager implements Serializable {
      */
     private void createGameByLevel(){
         bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
-        Log.e(null, "the number of tileBg stored in map are "+ bgElements.size());
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
         map = (GameMap) levelInfo.get("map");
