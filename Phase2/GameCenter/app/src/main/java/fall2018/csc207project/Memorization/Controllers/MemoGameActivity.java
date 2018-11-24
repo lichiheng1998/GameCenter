@@ -13,6 +13,8 @@ import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
@@ -24,7 +26,6 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
     private GridView boardview;
     private List<Button> memoButtons;
     private GamePresenter presenter;
-    private Button filledButton;
     private int columnWidth;
     private int columnHeight;
 
@@ -37,7 +38,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         setContentView(R.layout.memo_main);
         setupButtons(memoManager.getSize());
         setupGridView(memoManager);
-        presenter.start();
+        presenter.startCycle();
     }
 
     private void setupButtons(int size){
@@ -48,7 +49,6 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     presenter.onTapOnTile((int)button.getTag());
-                    Log.e("test", "onClick: " );
                 }
             });
             setButtonColor(button, android.R.color.white);
@@ -79,30 +79,33 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         boardview.setAdapter(new CustomAdapter(memoButtons, columnWidth, columnHeight));
     }
 
-    public void updateButtonWithColor(int pos, int color) {
-        if(filledButton != null){
-            if(filledButton == memoButtons.get(0))
-                setButtonColor(memoButtons.get(0), android.R.color.white);
-            restoreButtonColor();
+    @Override
+    public void flashButtonToRed(int pos, Integer delay){
+        setButtonColor(memoButtons.get(pos), android.R.color.holo_red_dark);
+        if (delay != null){
+            unflashButton(pos, delay);
         }
-        Log.e("number of buttons", "updateButtonWithColor: " + String.valueOf(memoButtons.size()));
-        filledButton = memoButtons.get(pos);
-        setButtonColor(filledButton, color);
-        ViewCompat.setBackgroundTintList(filledButton, ContextCompat.getColorStateList(this,
-                color));
+    }
+
+    private void unflashButton(final int pos, int delay){
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() { restoreButtonColor(pos);
+            }
+        }, delay);
     }
 
     @Override
-    public void updateButtonToRed(int pos){
-        updateButtonWithColor(pos, android.R.color.holo_red_dark);
+    public void flashButtonToGreen(int pos, Integer delay){
+        setButtonColor(memoButtons.get(pos), android.R.color.holo_green_dark);
+        if (delay != null){
+            unflashButton(pos, delay);
+        }
     }
+
     @Override
-    public void updateButtonToGreen(int pos){
-        updateButtonWithColor(pos, android.R.color.holo_green_dark);
-    }
-    @Override
-    public void restoreButtonColor(){
-        setButtonColor(filledButton, android.R.color.white);
+    public void restoreButtonColor(int pos){
+        setButtonColor(memoButtons.get(pos), android.R.color.white);
     }
     private void setButtonColor(Button button, int color){
         ViewCompat.setBackgroundTintList(button, ContextCompat.getColorStateList(this,
