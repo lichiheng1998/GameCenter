@@ -1,4 +1,4 @@
-package fall2018.csc207project.Memorization.controllers;
+package fall2018.csc207project.Memorization.Controllers;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

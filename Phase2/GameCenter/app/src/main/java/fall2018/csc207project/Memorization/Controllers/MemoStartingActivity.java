@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import fall2018.csc207project.R;
 
-public class MemorizationGameActivity extends AppCompatActivity {
+public class MemoStartingActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

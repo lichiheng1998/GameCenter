@@ -7,11 +7,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MemosManager implements Iterable<MemoTile>{
+public class MemoManager implements Iterable<MemoTile>{
     private int curComplexity;
     private List<MemoTile> sequenceOrder;
 
-    MemosManager(){
+    MemoManager(){
         // Set the current complexity to be 1.
         curComplexity = 1;
         sequenceOrder = new ArrayList<>();

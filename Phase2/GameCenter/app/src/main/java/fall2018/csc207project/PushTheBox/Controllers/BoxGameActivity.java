@@ -89,8 +89,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this
-                        );
+                        gridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                         int displayWidth = gridView.getMeasuredWidth();
                         columnDim = displayWidth / mapManager.getNumCol();
                         mapAdapter = new MapAdapter(mapManager.getTilesBg(), columnDim,

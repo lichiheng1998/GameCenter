@@ -1,11 +1,15 @@
 package fall2018.csc207project.Memorization.Models;
 
-public class Memo {
+public class MemoTile {
     private int id;
-    public static final 
+    public static final int TYPEACTIVE = 1;
+    public static final int TYPEFAKE = 0;
 
-    Memo(int id){
+    private int status;
+
+    MemoTile(int id, int status){
         this.id = id;
+        this.status = status;
     }
 
     public int getId() {
@@ -17,10 +21,10 @@ public class Memo {
         if(obj == this){
             return true;
         }
-        if(!(obj instanceof Memo)){
+        if(!(obj instanceof MemoTile)){
             return false;
         }
-        Memo m = (Memo) obj;
+        MemoTile m = (MemoTile) obj;
 
         return Integer.compare(m.id, this.id) == 0;
     }
