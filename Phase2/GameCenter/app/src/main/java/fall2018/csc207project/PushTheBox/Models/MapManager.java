@@ -4,6 +4,7 @@ import android.util.SparseIntArray;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Observer;
 import java.util.HashMap;
 import java.util.Stack;
@@ -25,7 +26,7 @@ public class MapManager implements Serializable {
     /**
      * The list of box to be pushed on the map.
      */
-    public ArrayList<Box> boxArrayList = new ArrayList<>();
+    private ArrayList<Box> boxArrayList = new ArrayList<>();
 
     /**
      * The level of the game chosen by user.
@@ -38,19 +39,19 @@ public class MapManager implements Serializable {
     private ArrayList<BgTile> bgElements;
 
     /**
-     * The Hashmap which stores the initial information of the game.
-     */
-    private HashMap<String, Object> levelInfo = new HashMap<>();
-
-    /**
      * The array that stores all the image id that will be displayed on the view.
      */
     private Integer[] tileBgs;
 
     /**
-     * The counting of steps taken.
+     * The counting of total steps moved.
      */
-    private int totalSteps;
+    private int totalMoveSteps;
+
+    /**
+     * The counting of total steps undid.
+     */
+    private int totalUndoSteps;
 
     /**
      * The number of undo available left.
@@ -73,7 +74,6 @@ public class MapManager implements Serializable {
         initTileBg();
         this.undoTimes = undoTimes;
         totalUndoTimes = undoTimes;
-        this.totalSteps = 0;
         this.stackOfMovements = new Stack<>();
     }
 
@@ -96,7 +96,7 @@ public class MapManager implements Serializable {
      * @param position position which the box may occur
      * @return the box on this position. If there does not exist such box, return null
      */
-    public Box boxAtPos(int position){
+    private Box boxAtPos(int position){
         for (Box box: boxArrayList) {
             if (box.getPosition() == position){
                 return box;
@@ -135,7 +135,7 @@ public class MapManager implements Serializable {
             processBoxMovement(newPosition, newPosition + posChange);
         }
         person.walk(posChange);
-        totalSteps++;
+        totalMoveSteps++;
     }
 
     /**
@@ -145,11 +145,11 @@ public class MapManager implements Serializable {
      * @param newPosition new position for the box
      */
     private void processBoxMovement(int position, int newPosition){
-        boxAtPos(position).move(newPosition);
+        Objects.requireNonNull(boxAtPos(position)).move(newPosition);
         if (map.tileAtDestination(newPosition)){
-            boxAtPos(newPosition).arriveDestination();
+            Objects.requireNonNull(boxAtPos(newPosition)).arriveDestination();
         }else{
-            boxAtPos(newPosition).leaveDestination();
+            Objects.requireNonNull(boxAtPos(newPosition)).leaveDestination();
         }
     }
 
@@ -175,6 +175,7 @@ public class MapManager implements Serializable {
             }
         }
         undoTimes--;
+        totalUndoSteps++;
     }
 
     public boolean canProcessUndo(int step){
@@ -195,12 +196,21 @@ public class MapManager implements Serializable {
     }
 
     /**
-     * Return the total steps you did.
+     * Return the total steps you moved.
      *
-     * @return the total steps you did
+     * @return the total steps you moved
      */
-    public int getTotalSteps() {
-        return totalSteps;
+    public int getTotalMoveSteps() {
+        return totalMoveSteps;
+    }
+
+    /**
+     * Return the total steps you moved.
+     *
+     * @return the total steps you moved
+     */
+    public int getTotalUndoSteps() {
+        return totalUndoSteps;
     }
 
     /**
@@ -208,7 +218,7 @@ public class MapManager implements Serializable {
      */
     private void createGameByLevel(){
         LevelFactory levelFactory = new LevelFactory();
-        levelInfo = levelFactory.getGameElements(level);
+        HashMap<String, Object> levelInfo = levelFactory.getGameElements(level);
         bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
