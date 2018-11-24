@@ -97,7 +97,6 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         setButtonColor(filledButton, android.R.color.white);
     }
     private void setButtonColor(Button button, int color){
-        memoButtons.get(0).setText("wocao");
         ViewCompat.setBackgroundTintList(button, ContextCompat.getColorStateList(this,
                 color));
     }
