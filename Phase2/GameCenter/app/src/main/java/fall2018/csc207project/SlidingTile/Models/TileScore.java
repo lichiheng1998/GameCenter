@@ -4,7 +4,6 @@ import fall2018.csc207project.models.Score;
 
 public class TileScore extends Score{
 
-
     /**
      * complexity of current game
     */
@@ -35,21 +34,19 @@ public class TileScore extends Score{
      */
     public int moveSteps;
 
-//    public TileScore(int complexity, String userName, int score){
-//        this.complexity = complexity;
-//        this.user = userName;
-//        this.value = score;
-//    }
+    /**
+     * Construct a new TileScore system by given
+     * the userName, complexity, undoSteps, moveSteps
+     *
+     * @param userName the current user's name
+     * @param complexity the complexity the user chooses
+     * @param undoSteps the total undo steps the user used in Tile Game
+     * @param moveSteps the total movement steps the user moves in Tile Game
+     */
     public TileScore(String userName, int complexity,  int undoSteps, int moveSteps){
         this.user = userName;
         this.complexity = complexity;
         this.undoSteps = undoSteps;
         this.moveSteps = moveSteps;
     }
-
-//
-//    public boolean compareTo(TileScore score) {
-//        return value >= score.value;
-//    }
-
 }
