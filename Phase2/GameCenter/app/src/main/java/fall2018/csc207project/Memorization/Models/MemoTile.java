@@ -1,10 +1,11 @@
-package fall2018.csc207project.Memorization.model;
+package fall2018.csc207project.Memorization.Models;
 
 public class Memo {
     private int id;
+    public static final 
 
     Memo(int id){
-        this.id = id + 1;
+        this.id = id;
     }
 
     public int getId() {
