@@ -69,9 +69,10 @@ public class MapManager implements Serializable {
     /**
      * Initialize a new manager to manage a new map.
      */
-    public MapManager(HashMap<String, Object> levelInfo, int undoTimes){
+    public MapManager(HashMap<String, Object> levelInfo, int level, int undoTimes){
         this.levelInfo = levelInfo;
-        createGameByLevel();
+        this.level = level;
+        createGame();
         initTileBg();
         this.undoTimes = undoTimes;
         totalUndoTimes = undoTimes;
@@ -208,7 +209,7 @@ public class MapManager implements Serializable {
     /**
      * Initialize the game elements by the chosen game level.
      */
-    private void createGameByLevel(){
+    private void createGame(){
         bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");

@@ -26,11 +26,6 @@ public class LevelFactory implements Serializable {
     private int levelNum;
 
     /**
-     * the last level that was call to get element.
-     */
-    private int currLevel;
-
-    /**
      * Create a new LevelFactory to initialize a game.
      */
     public LevelFactory(Context context){
@@ -48,7 +43,6 @@ public class LevelFactory implements Serializable {
         HashMap<String, Object> gameElements = new HashMap<>();
         List<BgTile> bgElements = new ArrayList<>();
         ArrayList<Box> boxArrayList = new ArrayList<>();
-        currLevel = level;
         Integer[][] tmp = allLevels.get(level);
         int height  = tmp[0][0];
         int width = tmp[1][0];
@@ -109,10 +103,6 @@ public class LevelFactory implements Serializable {
             }
         }
         return intArr;
-    }
-
-    public int getCurrentLevel(){
-        return currLevel;
     }
 
 

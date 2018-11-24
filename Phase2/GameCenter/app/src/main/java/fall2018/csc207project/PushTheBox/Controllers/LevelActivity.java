@@ -77,8 +77,8 @@ public class LevelActivity extends AppCompatActivity {
 
     private void switchToGame(int level) {
         Intent tmp = new Intent(this, BoxGameActivity.class);
-        tmp.putExtra("savedManager", new MapManager(
-                levelFactory.getGameElements(level), undoStep));
+        tmp.putExtra("save", new MapManager(
+                levelFactory.getGameElements(level), level, undoStep));
         tmp.putExtra("levelFactory", levelFactory);
         if (undoStep == 3) {
             Toast.makeText(getApplicationContext(),
