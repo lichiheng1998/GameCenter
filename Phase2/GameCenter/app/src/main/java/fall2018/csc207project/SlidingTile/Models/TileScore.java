@@ -13,7 +13,7 @@ public class TileScore extends Score{
     /**
      * name of current game
      */
-    public String game = "Slidingtail";
+    public final String game = "SlidingTilesGame";
 
     /**
      * name of the current player
@@ -35,17 +35,18 @@ public class TileScore extends Score{
      */
     public int moveSteps;
 
-    public TileScore(int complexity, String userName, int score){
-        this.complexity = complexity;
+//    public TileScore(int complexity, String userName, int score){
+//        this.complexity = complexity;
+//        this.user = userName;
+//        this.value = score;
+//    }
+    public TileScore(String userName, int complexity,  int undoSteps, int moveSteps){
         this.user = userName;
-        this.value = score;
-    }
-    public TileScore(int complexity, String userName, int undoSteps, int moveSteps){
         this.complexity = complexity;
-        this.user = userName;
         this.undoSteps = undoSteps;
         this.moveSteps = moveSteps;
     }
+
 //
 //    public boolean compareTo(TileScore score) {
 //        return value >= score.value;
