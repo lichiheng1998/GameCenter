@@ -1,9 +1,8 @@
 package fall2018.csc207project.Memorization.Views;
 
-import java.util.List;
-
-import fall2018.csc207project.Memorization.Models.MemoTile;
-
+/**
+ * Class represent the Memorization master game view.
+ */
 public interface MemoGameView {
     void flashButtonToRed(int pos, Integer delay);
     void restoreButtonColor(int pos);
