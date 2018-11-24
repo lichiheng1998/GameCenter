@@ -3,21 +3,47 @@ package fall2018.csc207project.Memorization.Models;
 import java.io.Serializable;
 
 public class MemoTile implements Serializable{
+    /**
+     * unique id of a MemoTile
+     */
     private int id;
+    /**
+     * type active of MemoTile
+     */
     public static final int TYPEACTIVE = 1;
+    /**
+     * type fake of MemoTile
+     */
     public static final int TYPEFAKE = 0;
 
+    /**
+     * status type of this MemoTile
+     */
     public final int status;
 
+    /**
+     * a new MemoTile
+     * @param id unique id for this MemoTile
+     * @param status current type for this MemoTile
+     */
     MemoTile(int id, int status){
         this.id = id;
         this.status = status;
     }
 
+    /**
+     * gives the id of this MemoTile
+     * @return id of MemoTile
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * check equivalence of this MemoTile with an object
+     * @param obj object to compare with this MemoTile
+     * @return is this MemoTile equal to obj
+     */
     @Override
     public boolean equals(Object obj) {
         if(obj == this){
