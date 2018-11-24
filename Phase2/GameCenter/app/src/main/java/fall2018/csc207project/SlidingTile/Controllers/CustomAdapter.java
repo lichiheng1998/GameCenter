@@ -51,16 +51,14 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Button button;
-        Log.e("getView", "getView: " + String.valueOf(position));
         if (convertView == null) {
             button = mButtons.get(position);
+            android.widget.AbsListView.LayoutParams params =
+                    new android.widget.AbsListView.LayoutParams(mColumnWidth, mColumnHeight);
+            button.setLayoutParams(params);
         } else {
             button = (Button) convertView;
         }
-
-        android.widget.AbsListView.LayoutParams params =
-                new android.widget.AbsListView.LayoutParams(mColumnWidth, mColumnHeight);
-        button.setLayoutParams(params);
         return button;
     }
 }

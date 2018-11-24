@@ -6,21 +6,22 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.GridView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc207project.Memorization.Models.MemoManager;
-import fall2018.csc207project.Memorization.Views.GestureDetectGridView;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 
 public class MemoGameActivity extends AppCompatActivity implements MemoGameView {
 
-    private GestureDetectGridView boardview;
+    private GridView boardview;
     private List<Button> memoButtons;
     private GamePresenter presenter;
     private Button filledButton;
@@ -42,7 +43,14 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
     private void setupButtons(int size){
         memoButtons = new ArrayList<>();
         for(int count = 0; count < size; count++){
-            Button button = new Button(getApplicationContext());
+            final Button button = new Button(getApplicationContext());
+            button.setTag(count);
+            button.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    presenter.onTapOnTile((int)button.getTag());
+                    Log.e("test", "onClick: " );
+                }
+            });
             setButtonColor(button, android.R.color.white);
             memoButtons.add(button);
         }
@@ -50,7 +58,6 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
 
     private void setupGridView(final MemoManager memoManager) {
         boardview = findViewById(R.id.mapGrid);
-        boardview.setMemoGamePresenter(presenter);
         boardview.setNumColumns(memoManager.width);
         boardview.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -74,7 +81,8 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
 
     public void updateButtonWithColor(int pos, int color) {
         if(filledButton != null){
-            Log.e("test restore", "color restores!" + String.valueOf(memoButtons.indexOf(filledButton)));
+            if(filledButton == memoButtons.get(0))
+                setButtonColor(memoButtons.get(0), android.R.color.white);
             restoreButtonColor();
         }
         Log.e("number of buttons", "updateButtonWithColor: " + String.valueOf(memoButtons.size()));
