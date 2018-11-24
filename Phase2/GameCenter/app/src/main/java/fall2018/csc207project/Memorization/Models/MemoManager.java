@@ -26,6 +26,11 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
      */
     private List<MemoTile> sequenceOrder;
 
+    /**
+     * initialize a new MemoManger
+     * @param width width of the game board
+     * @param height height of the game board
+     */
     public MemoManager(int width, int height){
         this.width = width;
         this.height = height;
@@ -36,20 +41,35 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
         updateActiveTiles();
     }
 
+    /**
+     * return total number of memo tiles of the game board
+     * @return total number of memo tiles on the board
+     */
     public int getSize(){
         return width * height;
     }
 
+    /**
+     * give the current number of memo tiles to memorize
+     * @return current number of memo tiles for user to memorize
+     */
     public int getCurComplexity() {
         return curComplexity;
     }
 
+    /**
+     * iterator of MemoTile
+     * @return MemoTile iterator
+     */
     @NonNull
     @Override
     public Iterator<MemoTile> iterator() {
         return sequenceOrder.iterator();
     }
 
+    /**
+     * regenerate random active memoTiles to update sequenceOrder
+     */
     public void updateActiveTiles(){
         sequenceOrder.clear();
         int randomID;
