@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -23,9 +22,21 @@ import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 
 public class MemoGameActivity extends AppCompatActivity implements MemoGameView {
 
+    /**
+     * Represent the board view of the game.
+     */
     private GridView boardview;
+    /**
+     * List of buttons on the board.
+     */
     private List<Button> memoButtons;
+    /**
+     * The game logic persenter that control this view.
+     */
     private GamePresenter presenter;
+    /**
+     * Width and height of the board.
+     */
     private int columnWidth;
     private int columnHeight;
 
@@ -41,11 +52,17 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         presenter.startCycle();
     }
 
+    /**
+     * Initialize the buttons base on the capacity of the board.
+     * @param size the capacity.
+     */
     private void setupButtons(int size){
         memoButtons = new ArrayList<>();
         for(int count = 0; count < size; count++){
             final Button button = new Button(getApplicationContext());
             button.setTag(count);
+            button.setText(String.valueOf(count));
+            button.setTextSize(40);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     presenter.onTapOnTile((int)button.getTag());
@@ -56,6 +73,10 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         }
     }
 
+    /**
+     * Initialize the buttons base on the capacity of the board.
+     * @param memoManager the memoManager used to initialize the grid view.
+     */
     private void setupGridView(final MemoManager memoManager) {
         boardview = findViewById(R.id.mapGrid);
         boardview.setNumColumns(memoManager.width);
@@ -70,15 +91,16 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
 
                         columnWidth = displayWidth / memoManager.width;
                         columnHeight = displayHeight / memoManager.height;
-                        display();
+                        boardview.setAdapter(new CustomAdapter(memoButtons, columnWidth, columnHeight));
                     }
                 });
     }
 
-    public void display(){
-        boardview.setAdapter(new CustomAdapter(memoButtons, columnWidth, columnHeight));
-    }
-
+    /**
+     * Flash the button to red and unflash it after the given delay.
+     * @param pos the position of the button to flash.
+     * @param delay the time of the delay.
+     */
     @Override
     public void flashButtonToRed(int pos, Integer delay){
         setButtonColor(memoButtons.get(pos), android.R.color.holo_red_dark);
@@ -87,6 +109,12 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         }
     }
 
+
+    /**
+     * Flash the button to red and unflash it after the given delay.
+     * @param pos the position of the button to flash.
+     * @param delay the time of the delay.
+     */
     private void unflashButton(final int pos, int delay){
         new Timer().schedule(new TimerTask() {
             @Override
