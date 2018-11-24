@@ -43,6 +43,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         memoButtons = new ArrayList<>();
         for(int count = 0; count < size; count++){
             Button button = new Button(getApplicationContext());
+            setButtonColor(button, android.R.color.white);
             memoButtons.add(button);
         }
     }
