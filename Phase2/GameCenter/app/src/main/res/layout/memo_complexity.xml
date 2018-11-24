@@ -61,11 +61,10 @@
         android:id="@+id/hardmode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/memo2"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="-14dp"
-        android:layout_marginBottom="67dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="156dp"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
         android:text="Hard Mode" />
 </RelativeLayout>
