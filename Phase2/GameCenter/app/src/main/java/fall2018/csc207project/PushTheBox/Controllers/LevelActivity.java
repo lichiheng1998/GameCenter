@@ -24,13 +24,14 @@ public class LevelActivity extends AppCompatActivity {
 
     private List<Button> levelButtons = new ArrayList<>();
 
-    LevelFactory levelFactory = new LevelFactory();
+    private LevelFactory levelFactory;
 
     private int level;
     private int undoStep;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        levelFactory = new LevelFactory(getApplicationContext());
         undoStep = 3;
         setContentView(R.layout.box_levels);
         gridView = findViewById(R.id.boxLevelGrid);
@@ -76,7 +77,9 @@ public class LevelActivity extends AppCompatActivity {
 
     private void switchToGame(int level) {
         Intent tmp = new Intent(this, BoxGameActivity.class);
-        tmp.putExtra("save", new MapManager(level,undoStep));
+        tmp.putExtra("savedManager", new MapManager(
+                levelFactory.getGameElements(level), undoStep));
+        tmp.putExtra("levelFactory", levelFactory);
         if (undoStep == 3) {
             Toast.makeText(getApplicationContext(),
                     "The Total Undo Steps set to default value: 3",

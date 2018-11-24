@@ -1,9 +1,11 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import android.util.Log;
 import android.util.SparseIntArray;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Observer;
 import java.util.HashMap;
 import java.util.Stack;
@@ -40,7 +42,7 @@ public class MapManager implements Serializable {
     /**
      * The Hashmap which stores the initial information of the game.
      */
-    private HashMap<String, Object> levelInfo = new HashMap<>();
+    private HashMap<String, Object> levelInfo;
 
     /**
      * The array that stores all the image id that will be displayed on the view.
@@ -67,8 +69,8 @@ public class MapManager implements Serializable {
     /**
      * Initialize a new manager to manage a new map.
      */
-    public MapManager(int level, int undoTimes){
-        this.level = level;
+    public MapManager(HashMap<String, Object> levelInfo, int undoTimes){
+        this.levelInfo = levelInfo;
         createGameByLevel();
         initTileBg();
         this.undoTimes = undoTimes;
@@ -207,9 +209,8 @@ public class MapManager implements Serializable {
      * Initialize the game elements by the chosen game level.
      */
     private void createGameByLevel(){
-        LevelFactory levelFactory = new LevelFactory();
-        levelInfo = levelFactory.getGameElements(level);
         bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
+        Log.e(null, "the number of tileBg stored in map are "+ bgElements.size());
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
         map = (GameMap) levelInfo.get("map");

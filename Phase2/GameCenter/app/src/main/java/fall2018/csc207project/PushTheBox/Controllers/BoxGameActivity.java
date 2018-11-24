@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -14,6 +16,9 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.logging.Level;
+
+import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.R;
@@ -58,13 +63,16 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
      */
     private int totalUndoTimes;
 
+    private LevelFactory levelFactory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.presenter = new BoxGamePresenter(this,getApplicationContext());
-        MapManager mapManager = (MapManager) getIntent().getSerializableExtra("save");
+        MapManager mapManager = (MapManager) getIntent().getSerializableExtra("savedManager");
+        levelFactory = (LevelFactory) getIntent().getSerializableExtra("levelFactory");
+        level = levelFactory.getCurrentLevel();
         tileBgs = mapManager.getTilesBg();
-        level = mapManager.getLevel();
         totalUndoTimes = mapManager.getTotalUndoTimes();
 
         setContentView(R.layout.box_gaming);
@@ -234,7 +242,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
             @Override
             public void onClick(View v) {
                 Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                tmp.putExtra("save", new MapManager(level, totalUndoTimes));
+                tmp.putExtra("savedManager", new MapManager(
+                        levelFactory.getGameElements(level), totalUndoTimes));
+                tmp.putExtra("levelFactory", levelFactory);
                 startActivity(tmp);
                 finish();
             }
@@ -249,10 +259,11 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                 if(level == 8){
                     Toast.makeText(getApplicationContext(), "No more level left!",
                             Toast.LENGTH_SHORT).show();
-                    finish();
                 }else {
                     Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                    tmp.putExtra("save", new MapManager(level + 1, totalUndoTimes));
+                    tmp.putExtra("savedManager", new MapManager(
+                            levelFactory.getGameElements(level + 1), totalUndoTimes));
+                    tmp.putExtra("levelFactory", levelFactory);
                     startActivity(tmp);
                 }
                 finish();
