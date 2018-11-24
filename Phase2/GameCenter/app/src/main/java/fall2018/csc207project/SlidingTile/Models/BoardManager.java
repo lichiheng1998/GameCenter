@@ -1,6 +1,7 @@
 package fall2018.csc207project.SlidingTile.Models;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.widget.Button;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import fall2018.csc207project.R;
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class BoardManager implements Serializable{
+public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * The board being managed.
@@ -47,6 +48,12 @@ public class BoardManager implements Serializable{
         } else if (dim == 5) {
             this.board = (new SlidingTileGameShuffler()).shuffle(dim, 625);
         }
+    }
+
+    @NonNull
+    @Override
+    public Iterator<Tile> iterator() {
+        return board.iterator();
     }
 
     /**
@@ -165,22 +172,5 @@ public class BoardManager implements Serializable{
         }
         processUndoMovement(step);
         return true;
-    }
-
-    public List<Button> getButtonList(Context context){
-        List<Button> tileButtons = new ArrayList<>();
-        for (int row = 0; row != this.complexity; row++) {
-            for (int col = 0; col != this.complexity; col++) {
-                Button tmp = new Button(context);
-                Tile tmpTile = board.getTile(row, col);
-                if (tmpTile.getId() != board.numTiles()) {
-                    tmp.setTextSize(40);
-                    tmp.setText(Integer.toString(tmpTile.getId()));
-                }
-                tmp.setBackgroundResource(R.drawable.tile);
-                tileButtons.add(tmp);
-            }
-        }
-        return tileButtons;
     }
 }

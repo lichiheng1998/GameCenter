@@ -2,11 +2,19 @@ package fall2018.csc207project.SlidingTile.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
+import fall2018.csc207project.SlidingTile.Models.Tile;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
 import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
@@ -75,5 +83,28 @@ public class BoardGamePresenter implements Observer {
         } else {
 
         }
+    }
+
+    public List<Button> getButtonList(final Context context){
+        int complexity = boardManager.getComplexity();
+        List<Button> tileButtons = new ArrayList<>();
+        int count = 0;
+        for(Tile tmpTile: boardManager){
+            final int pos = count;
+            Button tmp = new Button(context);
+            if (tmpTile.getId() != complexity * complexity) {
+                tmp.setText(Integer.toString(tmpTile.getId()));
+            }
+            tmp.setTextSize(40);
+            tmp.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    onTapOnTile(context, pos);
+                }
+            });
+            tmp.setBackgroundResource(R.drawable.tile);
+            tileButtons.add(tmp);
+            count++;
+        }
+        return tileButtons;
     }
 }
