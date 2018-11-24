@@ -9,9 +9,21 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MemoManager implements Iterable<MemoTile>, Serializable{
+    /**
+     * width of the memo board
+     */
     public final int width;
+    /**
+     * height of memo board
+     */
     public final int height;
+    /**
+     * current number of memoTile output
+     */
     private int curComplexity;
+    /**
+     * list of all memo tiles
+     */
     private List<MemoTile> sequenceOrder;
 
     public MemoManager(int width, int height){
