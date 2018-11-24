@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.GridView;
-
+import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
 import fall2018.csc207project.R;
@@ -123,6 +122,11 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         }, delay);
     }
 
+    /**
+     * Flash the button to red red unflash it after the given delay.
+     * @param pos the position of the button to flash.
+     * @param delay the time of the delay.
+     */
     @Override
     public void flashButtonToGreen(int pos, Integer delay){
         setButtonColor(memoButtons.get(pos), android.R.color.holo_green_dark);
@@ -131,16 +135,30 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         }
     }
 
+
+    /**
+     * @param pos the position of the button to be restored to white.
+     */
     @Override
     public void restoreButtonColor(int pos){
         setButtonColor(memoButtons.get(pos), android.R.color.white);
     }
+
+    /**
+     * @param button the button that will change color.
+     * @param color the color to be set.
+     */
     private void setButtonColor(Button button, int color){
         ViewCompat.setBackgroundTintList(button, ContextCompat.getColorStateList(this,
                 color));
     }
+
+    /**
+     * Update the score to be displayed.
+     * @param score the score to be displayed.
+     */
     @Override
     public void updateScore(int score) {
-
+        ((TextView)findViewById(R.id.Score)).setText(String.valueOf(score));
     }
 }

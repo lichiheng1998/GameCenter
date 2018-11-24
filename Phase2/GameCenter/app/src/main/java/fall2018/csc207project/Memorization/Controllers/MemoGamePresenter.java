@@ -1,16 +1,14 @@
 package fall2018.csc207project.Memorization.Controllers;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
-
+/**
+ * Class represents the implementation of the  game logic.
+ */
 public class MemoGamePresenter implements GamePresenter{
     private MemoManager memoManager;
     private MemoGameView view;

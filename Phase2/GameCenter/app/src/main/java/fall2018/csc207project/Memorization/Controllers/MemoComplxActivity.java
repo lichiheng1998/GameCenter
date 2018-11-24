@@ -11,7 +11,9 @@ import android.widget.Switch;
 
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.R;
-
+/**
+ * Class represents the memorization master activity that user can select the complexity of the board.
+ */
 public class MemoComplxActivity extends AppCompatActivity {
     private int width;
     private int height;
@@ -28,6 +30,9 @@ public class MemoComplxActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Active the button listener that change the board complexity to 5 * 5.
+     */
     private void addL5ButtonListener() {
         Button L4Button = findViewById(R.id.memo4);
         L4Button.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +45,9 @@ public class MemoComplxActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Active the button listener that change the board complexity to 4 * 3.
+     */
     private void addL4ButtonListener() {
         Button L3Button = findViewById(R.id.memo3);
         L3Button.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +60,9 @@ public class MemoComplxActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Active the button listener that change the board complexity to 3 * 3.
+     */
     private void addL3ButtonListener() {
         Button L2Button = findViewById(R.id.memo2);
         L2Button.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +90,9 @@ public class MemoComplxActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Active the button listener that start game.
+     */
     private void switchToMemoGame() {
         Intent tmp = new Intent(this, MemoGameActivity.class);
         tmp.putExtra("save", new MemoManager(width, height, level));
