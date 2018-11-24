@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <GridView
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/mapGrid"
+    <LinearLayout
+        android:layout_below="@id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
+
+        <GridView xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/mapGrid"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            tools:layout_editor_absoluteX="0db" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        tools:layout_editor_absoluteX="0db" />
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="30dp"
+            android:text="Success: " />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="30dp"
+            android:text="3" />
+
+    </LinearLayout>
 </RelativeLayout>
