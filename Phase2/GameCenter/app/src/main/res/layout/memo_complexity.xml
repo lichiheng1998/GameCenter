@@ -54,7 +54,7 @@
         android:layout_marginStart="151dp"
         android:layout_marginTop="66dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="234dp"
+        android:layout_marginBottom="143dp"
         android:background="#af3b9c89"
         android:text="4 x 4"
         android:textSize="17sp" />
