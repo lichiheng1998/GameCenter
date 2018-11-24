@@ -4,14 +4,15 @@ import android.content.Context;
 import android.widget.Button;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemoBoard {
+public class MemoBoard implements Serializable {
     private int boardSize;
     private Memo[][] memos;
 
-    MemoBoard(int boardSize) {
+    public MemoBoard(int boardSize) {
         this.boardSize = boardSize;
         int dim = this.boardSize;
         this.memos = new Memo[dim][dim];

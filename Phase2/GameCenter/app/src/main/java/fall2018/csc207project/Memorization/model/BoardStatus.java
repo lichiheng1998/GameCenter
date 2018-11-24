@@ -1,10 +1,11 @@
 package fall2018.csc207project.Memorization.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BoardStatus{
+public class BoardStatus implements Serializable {
     private int curComplexity=0;
     private int indexPointer=0;
     private ArrayList<Integer> sequenceOrder = new ArrayList<Integer>();
@@ -12,7 +13,7 @@ public class BoardStatus{
     private Iterator checks = sequenceOrder.iterator();
 
 
-    BoardStatus(MemoBoard bd){
+    public BoardStatus(MemoBoard bd){
         int size = bd.getBoardSize();
         this.randomPoll = size * size;
     }
