@@ -43,7 +43,7 @@ public class StartingActivity extends AppCompatActivity {
         String currentGame = sharedData.getString("currentGame", null);
         ScoreManager<TileScore> scoreManager =
                 DatabaseUtil.getScoreManager(currentGame, currentUser, new TileGameCalculator());
-        scoreManager.saveScore(new TileScore(0), getApplicationContext());
+        scoreManager.saveScore(new TileScore(3,currentUser,0,0), getApplicationContext());
         Score score = scoreManager.getScoresOfUser(getApplicationContext()).get(0);
         Log.e("Test", "onCreate: " + "User: " + score.user + " " + score.game + " " + score.value);
         setContentView(R.layout.tile_game_starting);
