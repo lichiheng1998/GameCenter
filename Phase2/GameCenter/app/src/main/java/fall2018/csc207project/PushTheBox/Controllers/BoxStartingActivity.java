@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import fall2018.csc207project.PushTheBox.Models.Map;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.models.DatabaseUtil;
@@ -98,8 +97,4 @@ public class BoxStartingActivity extends AppCompatActivity {
         Intent tmp = new Intent (this, LevelActivity.class);
         startActivity(tmp);
     }
-
-
-
-
 }

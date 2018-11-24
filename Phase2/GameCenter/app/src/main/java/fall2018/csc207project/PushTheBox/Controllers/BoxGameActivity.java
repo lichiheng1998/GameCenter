@@ -14,7 +14,6 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import fall2018.csc207project.PushTheBox.Models.Map;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.R;
@@ -62,7 +61,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        this.presenter = new BoxGamePresenter(this,getApplication());
+        this.presenter = new BoxGamePresenter(this,getApplicationContext());
         MapManager mapManager = (MapManager) getIntent().getSerializableExtra("save");
         tileBgs = mapManager.getTilesBg();
         level = mapManager.getLevel();
@@ -206,7 +205,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
     public void levelComplete() {
         AlertDialog.Builder completeBuilder = new AlertDialog.Builder(this);
         View completeView = getLayoutInflater().inflate(R.layout.box_complete_popup, null);
-        TextView levelText = (TextView) completeView.findViewById(R.id.indicateLevel);
+        TextView levelText = completeView.findViewById(R.id.indicateLevel);
         String levelDiplay = "Level " + String.valueOf(level);
         levelText.setText(levelDiplay);
         createMenuButton(completeView);
@@ -220,7 +219,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
 
 
     private void createMenuButton(View view){
-        Button menu = (Button) view.findViewById(R.id.boxMenuButton);
+        Button menu = view.findViewById(R.id.boxMenuButton);
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -230,7 +229,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
     }
 
     private void createReplayButton(View view){
-        Button replay = (Button) view.findViewById(R.id.boxReplayButton);
+        Button replay = view.findViewById(R.id.boxReplayButton);
         replay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +242,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
     }
 
     private void createNextButton(View view){
-        Button next = (Button) view.findViewById(R.id.boxNextButton);
+        Button next = view.findViewById(R.id.boxNextButton);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

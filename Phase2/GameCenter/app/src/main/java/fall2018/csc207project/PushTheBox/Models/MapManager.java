@@ -8,8 +8,6 @@ import java.util.Observer;
 import java.util.HashMap;
 import java.util.Stack;
 
-import fall2018.csc207project.PushTheBox.Controllers.LevelFactory;
-
 /**
  * Manages a map, including the movements of the person and boxes on the map, and checks for a win.
  */
@@ -17,7 +15,7 @@ public class MapManager implements Serializable {
     /**
      * The map to be managed.
      */
-    public Map map;
+    public GameMap map;
 
     /**
      * The person who pushes the box on the map.
@@ -172,8 +170,8 @@ public class MapManager implements Serializable {
             if (poppedItem[1] == -1) {
                 person.walk(-poppedItem[0]);
             } else {
-                person.walk(-poppedItem[0]);
                 processBoxMovement(poppedItem[1], currentPersonPos);
+                person.walk(-poppedItem[0]);
             }
         }
         undoTimes--;
@@ -214,7 +212,7 @@ public class MapManager implements Serializable {
         bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
-        map = (Map) levelInfo.get("map");
+        map = (GameMap) levelInfo.get("map");
     }
 
     /**

@@ -8,6 +8,9 @@ import fall2018.csc207project.R;
  * Tile with a background image, and combination of tiles make a map.
  */
 public class BgTile implements Serializable {
+    public static final String WALLTYPE =  "Wall";
+    public static final String FLOORTYPE =  "Floor";
+    public static final String DESTTYPE =  "Destination";
 
     /**
      * The image id of this bgTile.
@@ -17,19 +20,19 @@ public class BgTile implements Serializable {
     /**
      * Whether if this tile is a destination point.
      */
-    private final Boolean WINNABLE;
+    private final boolean WINNABLE;
 
     /**
      * Whether if this tile is a wall.
      */
-    private final Boolean STANDABLE;
+    private final boolean STANDABLE;
 
     public BgTile(String bgType){
-        if(bgType.equals("Wall")){
+        if(bgType.equals(WALLTYPE)){
             BACKGROUND = R.drawable.wall;
             WINNABLE = false;
             STANDABLE = false;
-        }else if (bgType.equals("Floor")){
+        }else if (bgType.equals(FLOORTYPE)){
             BACKGROUND = R.drawable.floor;
             WINNABLE = false;
             STANDABLE = true;
@@ -44,7 +47,7 @@ public class BgTile implements Serializable {
      * Return whether if the person or the boxes can stand on this tile.
      * @return whether if this tile is standable
      */
-    public Boolean isStandable(){
+    public boolean isStandable(){
         return STANDABLE;
     }
 
@@ -52,7 +55,7 @@ public class BgTile implements Serializable {
      * Return whether if this tile is a destination point of a box.
      * @return whether if this tile is a destinaiton point
      */
-    public Boolean isWinnable(){
+    public boolean isWinnable(){
         return WINNABLE;
     }
 
