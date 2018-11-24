@@ -5,8 +5,8 @@ import java.util.List;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 
 public interface MemoGameView {
-    void updateButtonToRed(int pos);
-    void restoreButtonColor();
-    void updateButtonToGreen(int pos);
+    void flashButtonToRed(int pos, Integer delay);
+    void restoreButtonColor(int pos);
+    void flashButtonToGreen(int pos, Integer delay);
     void updateScore(int score);
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fall2018.csc207project.Memorization.Views.GestureDetectGridView
+    <GridView
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/mapGrid"
         android:layout_width="match_parent"
