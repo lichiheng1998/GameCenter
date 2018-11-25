@@ -1,11 +1,18 @@
 package fall2018.csc207project.Memorization.Controllers;
 
+import android.util.Log;
+import android.widget.Toast;
+
+
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
+
 /**
  * Class represents the implementation of the  game logic.
  */
@@ -17,6 +24,7 @@ public class MemoGamePresenter implements GamePresenter{
     private boolean isDisplaying;
     private int period = 2000;
     private int flashDelay = 1000;
+    private boolean gameOver = false;
 
     public MemoGamePresenter(final MemoGameView view) {
         this.view = view;
@@ -38,6 +46,7 @@ public class MemoGamePresenter implements GamePresenter{
         return verifyItem;
     }
     public void startCycle(){
+        Log.e("debug", "startCycle: hhhhhhhhhhhhhhhhhhhhhhhhhhhh" );
         final Iterator<MemoTile> iterator = memoManager.iterator();
         verifyIterator = memoManager.iterator();
         nextToVerify = getVerifyItems();
@@ -61,14 +70,22 @@ public class MemoGamePresenter implements GamePresenter{
      * @param pos the position that user taps.
      */
     public void verify(int pos){
-        if (nextToVerify == null){
-
-        } else if (nextToVerify.getId() == pos) {
+       if (!gameOver && nextToVerify.getId() == pos) {
             view.flashButtonToGreen(pos, flashDelay);
-        } else {
+            nextToVerify = getVerifyItems();
+           if (nextToVerify == null && !gameOver){
+               memoManager.updateActiveTiles();
+               try {
+                   TimeUnit.SECONDS.sleep(2);
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+               startCycle();
+           }
+       } else {
             view.flashButtonToRed(pos, flashDelay);
+            gameOver = true;
         }
-        nextToVerify = getVerifyItems();
     }
 
     /**

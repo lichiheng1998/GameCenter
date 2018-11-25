@@ -1,17 +1,10 @@
 package fall2018.csc207project.SlidingTile.Models;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.widget.Button;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Observer;
 import java.util.Stack;
-
-import fall2018.csc207project.R;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
@@ -29,9 +22,15 @@ public class BoardManager implements Serializable, Iterable<Tile>{
 
     private int undoTimes;
 
-    private int totalSteps;
+    /**
+     * The counting of total steps moved.
+     */
+    private int totalMoveSteps;
 
-    //    private List<Tile> tileList;
+    /**
+     * The counting of total steps undid.
+     */
+    private int totalUndoSteps;
 
     /**
      * Manage a new shuffled board.
@@ -39,7 +38,6 @@ public class BoardManager implements Serializable, Iterable<Tile>{
     public BoardManager(int dim, int undoTimes) {
         this.complexity = dim;
         this.undoTimes = undoTimes;
-        totalSteps = 0;
         stackOfMovements = new Stack<>();
         if (dim == 3) {
             this.board = (new SlidingTileGameShuffler()).shuffle(dim, 81);
@@ -99,7 +97,6 @@ public class BoardManager implements Serializable, Iterable<Tile>{
      * @param position the position
      */
     public void touchMove(int position) {
-        this.totalSteps += 1;
         int row = position / board.NUM_ROWS;
         int col = position % board.NUM_COLS;
         int blankId = board.numTiles();
@@ -113,6 +110,7 @@ public class BoardManager implements Serializable, Iterable<Tile>{
             }
         }
         board.swapTiles(row,col,rowBlank,colBlank);
+        totalMoveSteps++;
     }
 
     /**
@@ -141,7 +139,9 @@ public class BoardManager implements Serializable, Iterable<Tile>{
     private void processUndoMovement(int steps) {
         for (int i = 0; i < steps; i++) {
             touchMove(stackOfMovements.pop());
+            totalMoveSteps--;
         }
+        totalUndoSteps++;
         undoTimes--;
     }
 
@@ -154,8 +154,17 @@ public class BoardManager implements Serializable, Iterable<Tile>{
      *
      * @return the total steps you did
      */
-    public int getTotalSteps() {
-        return totalSteps;
+    public int getTotalMoveSteps() {
+        return totalMoveSteps;
+    }
+
+    /**
+     * Return the total steps you moved.
+     *
+     * @return the total steps you moved
+     */
+    public int getTotalUndoSteps() {
+        return totalUndoSteps;
     }
 
     public int getComplexity(){

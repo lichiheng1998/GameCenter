@@ -40,10 +40,13 @@ public class LevelActivity extends AppCompatActivity {
     }
 
     public void createLevelButtons(){
+        int buttonColor = android.graphics.Color.argb(255, 168, 193,164);
         for (int i = 0; i < levelFactory.getLevelAmount(); i++){
             Button tmp = new Button(getApplicationContext());
             tmp.setTextSize(40);
             tmp.setText(Integer.toString(i+1));
+            tmp.setBackgroundColor(buttonColor);
+            tmp.setStateListAnimator(null);
             tmp.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {

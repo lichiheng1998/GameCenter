@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.R;
@@ -15,6 +17,7 @@ import fall2018.csc207project.R;
 public class MemoComplxActivity extends AppCompatActivity {
     private int width;
     private int height;
+    private boolean level=false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class MemoComplxActivity extends AppCompatActivity {
         addL3ButtonListener();
         addL4ButtonListener();
         addL5ButtonListener();
+        hardModeSwitchListener();
 
     }
 
@@ -72,12 +76,26 @@ public class MemoComplxActivity extends AppCompatActivity {
 
     }
 
+    private void hardModeSwitchListener(){
+        Switch hardModeSwitch = findViewById(R.id.hardmode);
+        hardModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    level = true;
+                } else {
+                    level = false;
+                }
+            }
+        });
+    }
+
     /**
      * Active the button listener that start game.
      */
     private void switchToMemoGame() {
         Intent tmp = new Intent(this, MemoGameActivity.class);
-        tmp.putExtra("save", new MemoManager(width, height));
+        tmp.putExtra("save", new MemoManager(width, height, level));
         startActivity(tmp);
         finish();
     }

@@ -56,4 +56,15 @@
         android:background="#af3b9c89"
         android:text="5 X 5"
         android:textSize="17sp" />
+
+    <Switch
+        android:id="@+id/hardmode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="156dp"
+        android:textStyle="bold|italic"
+        android:textSize="20sp"
+        android:text="Hard Mode" />
 </RelativeLayout>

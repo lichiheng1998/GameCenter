@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/box_starting">
 
     <TextView
-        android:id="@+id/boxGameTile"
+        android:id="@+id/boxTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -12,40 +13,36 @@
         android:layout_marginTop="65dp"
         android:textSize="6pt"
         android:textStyle="bold"
-        android:text="Push The Box" />
+        android:textColor="#000000"
+        android:text="@string/boxStarting" />
 
     <Button
         android:id="@+id/newBoxGame"
         android:layout_width="145dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="171dp"
-        android:backgroundTintMode="src_over"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/boxTitle"
         android:text="New Game"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/loadBoxGame"
         android:layout_width="145dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/newBoxGame"
-        android:layout_alignStart="@+id/newBoxGame"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="223dp"
         android:text="Load Auto Save"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/boxScoreboard"
         android:layout_width="145dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/loadBoxGame"
-        android:layout_alignStart="@+id/newBoxGame"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="274dp"
         android:text="Scoreboard"
         android:textStyle="bold" />
 
