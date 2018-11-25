@@ -41,7 +41,7 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
         this.height = height;
         this.level = level;
         // Set the current complexity to be 1.
-        curComplexity = 10;
+        curComplexity = 1;
         sequenceOrder = new ArrayList<>();
         // Update the active tiles.
         updateActiveTiles();
