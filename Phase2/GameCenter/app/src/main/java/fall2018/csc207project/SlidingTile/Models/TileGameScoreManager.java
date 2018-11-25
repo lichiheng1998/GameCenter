@@ -2,6 +2,7 @@ package fall2018.csc207project.SlidingTile.Models;
 
 import java.util.ArrayList;
 
+import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.ScoreCalculator;
 import fall2018.csc207project.models.ScoreDataStream;
 import fall2018.csc207project.models.ScoreManager;
@@ -32,6 +33,9 @@ public class TileGameScoreManager extends ScoreManager {
      * @return a TileScore.
     * */
     public TileScore getHighestbyUserLevel (String userName, int complexity){
+        ArrayList <TileScore> allScore = new ArrayList<>();
+        DatabaseUtil.getScoreManager(userName,"slidingTail",this.calculator);
+
         return null;
     }
 
