@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/box_level">
 
 
     <GridView xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/boxLevelGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="60dp"
-        android:numColumns="4"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginTop="75dp"
+        android:numColumns="3"
+        android:verticalSpacing="63dp"
+        android:horizontalSpacing="80dp"
         tools:layout_editor_absoluteX="5db" />
 
     <EditText
@@ -21,6 +23,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
+        android:layout_marginTop="30dp"
         android:text="3" />
 
     <Button

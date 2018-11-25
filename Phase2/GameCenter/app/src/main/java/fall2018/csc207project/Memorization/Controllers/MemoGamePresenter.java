@@ -31,6 +31,9 @@ public class MemoGamePresenter implements GamePresenter{
         isDisplaying = false;
     }
 
+    /**
+     * Get the next MemoTile to be verified.
+     */
     private MemoTile getVerifyItems(){
         MemoTile verifyItem = null;
         while (verifyIterator.hasNext()){
@@ -62,6 +65,10 @@ public class MemoGamePresenter implements GamePresenter{
         }, 0, period);
     }
 
+    /**
+     * If the buttons tap are in wrong order, the game ends. Otherwise, flash the button to green.
+     * @param pos the position that user taps.
+     */
     public void verify(int pos){
        if (!gameOver && nextToVerify.getId() == pos) {
             view.flashButtonToGreen(pos, flashDelay);
@@ -81,6 +88,10 @@ public class MemoGamePresenter implements GamePresenter{
         }
     }
 
+    /**
+     * Flash the tile corresponding to the status of the tile. Green for active tile, red for fake
+     * tile.
+     */
     public void flashMemoTile(MemoTile tile){
         if(tile.status == MemoTile.TYPEACTIVE){
             view.flashButtonToGreen(tile.getId(), flashDelay);

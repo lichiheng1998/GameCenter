@@ -7,4 +7,6 @@
     <string name="current_game"></string>
     <string name="memoStarting">Welcome To Memorization Master\nA Game where you need to click
         on the buttons in exact order as they were shown</string>
+    <string name="boxStarting">Welcome To Push the Box\nA Game where you control the character
+        to push the boxes to red destination point</string>
 </resources>
