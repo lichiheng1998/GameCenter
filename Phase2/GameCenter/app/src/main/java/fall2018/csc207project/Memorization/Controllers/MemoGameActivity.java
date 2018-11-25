@@ -108,6 +108,18 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
         }
     }
 
+    /**
+     * Flash the button to red and unflash it after the given delay.
+     * @param pos the position of the button to flash.
+     * @param delay the time of the delay.
+     */
+    @Override
+    public void flashButtonToBlue(int pos, Integer delay){
+        setButtonColor(memoButtons.get(pos), android.R.color.holo_blue_dark);
+        if (delay != null){
+            unflashButton(pos, delay);
+        }
+    }
 
     /**
      * Flash the button to red and unflash it after the given delay.

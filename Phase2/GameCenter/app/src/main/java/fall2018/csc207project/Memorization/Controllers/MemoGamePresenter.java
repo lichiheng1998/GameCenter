@@ -46,23 +46,22 @@ public class MemoGamePresenter implements GamePresenter{
         return verifyItem;
     }
     public void startCycle(){
-        Log.e("debug", "startCycle: hhhhhhhhhhhhhhhhhhhhhhhhhhhh" );
         final Iterator<MemoTile> iterator = memoManager.iterator();
         verifyIterator = memoManager.iterator();
         nextToVerify = getVerifyItems();
+        isDisplaying = true;
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 if(iterator.hasNext()){
-                    isDisplaying = true;
                     flashMemoTile(iterator.next());
                 } else {
                     isDisplaying = false;
                     this.cancel();
                 }
             }
-        }, 0, period);
+        }, 2000, period);
     }
 
     /**
@@ -71,17 +70,12 @@ public class MemoGamePresenter implements GamePresenter{
      */
     public void verify(int pos){
        if (!gameOver && nextToVerify.getId() == pos) {
-            view.flashButtonToGreen(pos, flashDelay);
+            view.flashButtonToBlue(pos, flashDelay);
             nextToVerify = getVerifyItems();
-           if (nextToVerify == null && !gameOver){
-               memoManager.updateActiveTiles();
-               try {
-                   TimeUnit.SECONDS.sleep(2);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
-               startCycle();
-           }
+            if (nextToVerify == null) {
+                memoManager.updateActiveTiles();
+                startCycle();
+            }
        } else {
             view.flashButtonToRed(pos, flashDelay);
             gameOver = true;

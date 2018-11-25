@@ -5,6 +5,7 @@ package fall2018.csc207project.Memorization.Views;
  */
 public interface MemoGameView {
     void flashButtonToRed(int pos, Integer delay);
+    void flashButtonToBlue(int pos, Integer delay);
     void restoreButtonColor(int pos);
     void flashButtonToGreen(int pos, Integer delay);
     void updateScore(int score);
