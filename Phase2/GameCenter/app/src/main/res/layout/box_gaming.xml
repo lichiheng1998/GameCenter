@@ -6,60 +6,12 @@
     android:layout_height="match_parent">
 
     <fall2018.csc207project.PushTheBox.View.SwipeDetectGridView xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/mapGrid"
+        android:id="@+id/boxMapGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         tools:layout_editor_absoluteX="0db" />
-
-    <ImageButton
-        android:id="@+id/leftButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_alignTop="@+id/downButton"
-        android:layout_toStartOf="@+id/downButton"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:rotation="180"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/arrow" />
-
-    <ImageButton
-        android:id="@+id/downButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_above="@+id/UndoButton"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:rotation="90"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/arrow" />
-
-    <ImageButton
-        android:id="@+id/rightButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_above="@+id/UndoButton"
-        android:layout_toEndOf="@+id/downButton"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/arrow" />
-
-    <ImageButton
-        android:id="@+id/upButton"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_above="@+id/leftButton"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-
-        android:rotation="270"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/arrow" />
 
     <Button
         android:id="@+id/UndoButton"
