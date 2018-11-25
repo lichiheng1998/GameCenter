@@ -58,7 +58,7 @@
 
 
     <TextView
-        android:id="@+id/playerscore3*1"
+        android:id="@+id/playerscore3x1"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -68,7 +68,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore3*2"
+        android:id="@+id/playerscore3x2"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -78,7 +78,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore3*3"
+        android:id="@+id/playerscore3x3"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -88,7 +88,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore4*1"
+        android:id="@+id/playerscore4x1"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -98,7 +98,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore4*2"
+        android:id="@+id/playerscore4x2"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -108,7 +108,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore4*3"
+        android:id="@+id/playerscore4x3"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -118,7 +118,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore5*1"
+        android:id="@+id/playerscore5x1"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -128,7 +128,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore5*2"
+        android:id="@+id/playerscore5x2"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
@@ -138,7 +138,7 @@
         android:text="playerscore3" />
 
     <TextView
-        android:id="@+id/playerscore5*3"
+        android:id="@+id/playerscore5x3"
         android:layout_width="59dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/button3"
