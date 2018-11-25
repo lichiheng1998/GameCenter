@@ -113,7 +113,6 @@ public class LevelActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 Button button;
-
                 if (convertView == null) {
                     button = levelButtons.get(position);
                 } else {
