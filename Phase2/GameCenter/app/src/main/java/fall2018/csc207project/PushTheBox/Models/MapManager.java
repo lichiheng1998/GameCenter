@@ -67,10 +67,13 @@ public class MapManager implements Serializable {
 
     public boolean isBoxesMoved = false;
 
+    private HashMap<String, Object> levelInfo;
+
     /**
      * Initialize a new manager to manage a new map.
      */
-    public MapManager(int level, int undoTimes){
+    public MapManager(int level, HashMap<String,Object> levelInfo, int undoTimes){
+        this.levelInfo = levelInfo;
         this.level = level;
         createGameByLevel();
         initTileBg();
@@ -217,8 +220,6 @@ public class MapManager implements Serializable {
      * Initialize the game elements by the chosen game level.
      */
     private void createGameByLevel(){
-        LevelFactory levelFactory = new LevelFactory();
-        HashMap<String, Object> levelInfo = levelFactory.getGameElements(level);
         bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");

@@ -1,12 +1,19 @@
 package fall2018.csc207project.PushTheBox.Models;
 
-import android.util.SparseArray;
+import android.content.Context;
+import android.content.res.AssetManager;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class LevelFactory {
+public class LevelFactory implements Serializable {
 
     /**
      * The array list that stores all the background tile for the map
@@ -16,30 +23,13 @@ public class LevelFactory {
     /**
      * The hash map that maps all the information of the game to its corresponding level
      */
-    private SparseArray<Integer[][]> allLevels = new SparseArray<>();
-
-
-    /**
-     * The Hash Map that is in charge of mapping the elements for the game to their names.
-     */
-    private HashMap<String, Object> gameElements = new HashMap<>();
-
-    /**
-     * the array list of boxes in the game
-     */
-    private ArrayList<Box> boxArrayList = new ArrayList<>();
-
-    /**
-     * the total number of levels.
-     */
-    private int levelNum;
+    private Map<Integer, Integer[][]> allLevels = new HashMap<>();
 
     /**
      * Create a new LevelFactory to initialize a game.
      */
-    public LevelFactory(){
-        initAllLevels();
-        levelNum = allLevels.size();
+    public LevelFactory(Context context){
+        initAllLevels(context);
     }
 
 
@@ -49,6 +39,9 @@ public class LevelFactory {
      * @return Hash Map which maps the name of the needed element to the element
      */
     public HashMap<String, Object> getGameElements(int level){
+        HashMap<String, Object> gameElements = new HashMap<>();
+        List<BgTile> bgElements = new ArrayList<>();
+        ArrayList<Box> boxArrayList = new ArrayList<>();
         Integer[][] tmp = allLevels.get(level);
         int height  = tmp[0][0];
         int width = tmp[1][0];
@@ -80,40 +73,36 @@ public class LevelFactory {
     /**
      * Initialize the hash map which stores all the elements for each level of game.
      * */
-    private void initAllLevels(){
-        //the six arrays in the big array is the height, width, positions of walls
-        //(excluding wall on edges), boxes, destination points, and the person, in order.
-        Integer[][] levelOne = {{3},{5},{},{7},{8},{6}};
-        allLevels.put(1, levelOne);
+    private void initAllLevels(Context context) {
+            AssetManager assetManager = context.getAssets();
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        assetManager.open("box_levels.txt")));
+                String nextLine = reader.readLine();
+                int countLevel = 1;
+                while ((nextLine = reader.readLine()) != null) {
+                    String[] nextLevel = nextLine.split("-");
+                    Integer[][] levelInfo = new Integer[nextLevel.length][];
+                    for (int i = 0; i < nextLevel.length; i++) {
+                        levelInfo[i] = strArrToIntArr(nextLevel[i].split(","));
+                    }
+                    allLevels.put(countLevel, levelInfo);
+                    countLevel++;
 
-        Integer[][] levelTwo = {{5},{5},{},{12,17},{13,16},{6}};
-        allLevels.put(2, levelTwo);
-
-        Integer[][] levelThree = {{6},{6},{10,21},{14,15},{13,15},{7}};
-        allLevels.put(3, levelThree);
-
-        Integer[][] levelFour = {{6},{7},{12,23},{16,17},{24,26},{8}};
-        allLevels.put(4, levelFour);
-
-        Integer[][] levelFive = {{7},{7},{8,9,12,19,30},{18,25},{17,31},{15}};
-        allLevels.put(5,levelFive);
-
-        Integer[][] levelSix = {{7},{7},{8,12,17,36,40},{23,24,25},{24,31,38},{9}};
-        allLevels.put(6, levelSix);
-
-        Integer[][] levelSeven = {{6},{8},{13,14,35},{26,27,28},{20,21,37},{29}};
-        allLevels.put(7,levelSeven);
-
-        Integer[][] levelEight = {{8},{8},{9,13,14,19,27,29,45,46},{21,34,37},{10,34,38},{22}};
-        allLevels.put(8,levelEight);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
 
-    /**
-     * Return the total number of levels exists
-     * @return the total number of levels
-     */
-    public int getLevelAmount(){
-        return levelNum;
+    private Integer[] strArrToIntArr(String[] strArr){
+        Integer[] intArr = new Integer[strArr.length];
+        if (!strArr[0].equals("")) {
+            for (int i = 0; i < strArr.length; i++) {
+                intArr[i] = Integer.parseInt(strArr[i]);
+            }
+        }
+        return intArr;
     }
 }
