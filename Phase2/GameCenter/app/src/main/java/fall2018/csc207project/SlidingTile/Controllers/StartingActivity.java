@@ -4,26 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
+import fall2018.csc207project.Controllers.ManageSaveActivity;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Models.TileGameCalculator;
 import fall2018.csc207project.SlidingTile.Models.TileScore;
-import fall2018.csc207project.models.DataStream;
 import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
 import fall2018.csc207project.models.Score;
-import fall2018.csc207project.models.ScoreCalculator;
 import fall2018.csc207project.models.ScoreManager;
 
 /**
@@ -51,7 +45,7 @@ public class StartingActivity extends AppCompatActivity {
         setContentView(R.layout.tile_game_starting);
         addStartButtonListener();
         addLoadButtonListener();
-        addSaveButtonListener();
+//        addSaveButtonListener();
         addGlobalScoreButtonListener();
     }
 
@@ -87,17 +81,12 @@ public class StartingActivity extends AppCompatActivity {
      */
     private void addLoadButtonListener() {
         Button loadButton = findViewById(R.id.LoadButton);
-        Button loadAutoButton = findViewById(R.id.LoadAuto);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGame(saveManager.readFromSlot(false, getApplicationContext()));
-            }
-        });
-        loadAutoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchToGame(saveManager.readFromSlot(true, getApplicationContext()));
+                Intent tmp = new Intent(StartingActivity.this, ManageSaveActivity.class);
+                tmp.putExtra("save", boardManager);
+                startActivity(tmp);
             }
         });
     }
@@ -105,21 +94,21 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activate the save button.
      */
-    private void addSaveButtonListener() {
-        final Button saveButton = findViewById(R.id.SaveButton);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Object save = saveManager.readFromSlot(true, getApplicationContext());
-                if(save == null){
-                    makeNotStartedText();
-                } else {
-                    saveManager.saveToSlot(save, false, getApplicationContext());
-                    makeToastSavedText();
-                }
-            }
-            });
-    }
+//    private void addSaveButtonListener() {
+////        final Button saveButton = findViewById(R.id.SaveButton);
+////        saveButton.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                Object save = saveManager.readFromSlot(true, getApplicationContext());
+////                if(save == null){
+////                    makeNotStartedText();
+////                } else {
+////                    saveManager.saveToSlot(save, false, getApplicationContext());
+////                    makeToastSavedText();
+////                }
+////            }
+////            });
+////    }
 
     /**
      * Display that a game was saved successfully.

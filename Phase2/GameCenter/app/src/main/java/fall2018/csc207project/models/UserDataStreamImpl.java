@@ -7,7 +7,7 @@ public class UserDataStreamImpl implements UserDataStream{
     private static final String USERTOGAMES = "UserToGames.ser";
     private GlobalDataStream dataStream;
 
-    public UserDataStreamImpl(GlobalDataStream dataStream){
+    UserDataStreamImpl(GlobalDataStream dataStream){
         this.dataStream = dataStream;
     }
 

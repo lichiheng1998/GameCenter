@@ -13,6 +13,7 @@ import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
+import fall2018.csc207project.models.SaveSlot;
 
 public class BoxGamePresenter implements Observer {
     /**
@@ -40,6 +41,10 @@ public class BoxGamePresenter implements Observer {
      */
     MovementController movementController;
 
+    /**
+     * The save slot of the current user.
+     */
+    private SaveSlot saveSlot;
 
     /**
      * A new box game presenter.
@@ -52,6 +57,7 @@ public class BoxGamePresenter implements Observer {
         currentUser = shared.getString("currentUser", null);
         String currentGame = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
+        saveSlot = saveManager.readFromFile(context);
         movementController = new MovementController();
     }
 
@@ -73,7 +79,8 @@ public class BoxGamePresenter implements Observer {
         if (movementController.processTapMovement(context, direction)){
             view.levelComplete();
         }
-        saveManager.saveToSlot(mapManager, true, context);
+        saveSlot.saveToAutoSave(mapManager);
+        saveManager.saveToFile(saveSlot, context);
     }
 
     public void onUndoButtonClicked(int step){

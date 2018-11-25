@@ -53,7 +53,7 @@ public class BoxStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToGame(saveManager.readFromSlot(true, getApplicationContext()));
+//                switchToGame(saveManager.readFromSlot(true, getApplicationContext()));
             }
         });
     }

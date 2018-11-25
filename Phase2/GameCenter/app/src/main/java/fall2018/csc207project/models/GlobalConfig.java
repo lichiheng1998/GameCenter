@@ -3,8 +3,12 @@ package fall2018.csc207project.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import fall2018.csc207project.Memorization.Controllers.MemoGameActivity;
+import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Controllers.MemoStartingActivity;
+import fall2018.csc207project.PushTheBox.Controllers.BoxGameActivity;
 import fall2018.csc207project.PushTheBox.Controllers.BoxStartingActivity;
+import fall2018.csc207project.SlidingTile.Controllers.GameActivity;
 import fall2018.csc207project.SlidingTile.Controllers.StartingActivity;
 import fall2018.csc207project.R;
 
@@ -15,31 +19,31 @@ public class GlobalConfig {
     /**
      * Names of the games.
      */
-    public static final String[] GAMELIST = {"SlidingTile", "Memorization Master", "Some Other Games2",
-            "SlidingTile3", "Bejeweled4", "Some Other Games5", "SlidingTile6", "Bejeweled7",
-            "Some Other Games8", "newGame", "Push The Box"};
+    public static final String[] GAMELIST = {"SlidingTile", "Memorization Master", "Push The Box"};
     /**
      * Ids of the background resources of the games.
      */
-    public static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.bejeweled,
-            R.drawable.sliding_tile, R.drawable.sliding_tile, R.drawable.bejeweled,
-            R.drawable.sliding_tile, R.drawable.bejeweled, R.drawable.bejeweled,
-            R.drawable.sliding_tile, R.drawable.global, R.drawable.global};
+    private static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.bejeweled, R.drawable.global};
 
     /**
      * The Entries of the each games.
      */
-    public static final Class[] GAMEENTRY = {
-            StartingActivity.class, MemoStartingActivity.class, StartingActivity.class,
-            StartingActivity.class, StartingActivity.class, StartingActivity.class,
-            StartingActivity.class, StartingActivity.class, StartingActivity.class,
-            StartingActivity.class, BoxStartingActivity.class
+    private static final Class[] GAMEENTRY = {
+            StartingActivity.class, MemoStartingActivity.class, BoxStartingActivity.class
     };
 
+    /**
+     * The Entries of the each games.
+     */
+    private static final Class[] GAMESTART = {
+            GameActivity.class, MemoGameActivity.class, BoxGameActivity.class
+    };
 
     public static final Map<String, Integer> BGMAP = mapLists(GAMELIST, GAMEBG);
 
     public static final Map<String, Class> ENTRYMAP = mapLists(GAMELIST, GAMEENTRY);
+
+    public static final Map<String, Class> GAMEMAP = mapLists(GAMELIST, GAMESTART);
 
     private static <T, V> Map<T, V> mapLists(T[] arr1, V[] arr2){
         Map<T, V> map = new HashMap<>();
