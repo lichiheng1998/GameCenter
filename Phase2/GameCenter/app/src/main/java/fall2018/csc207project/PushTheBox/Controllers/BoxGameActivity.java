@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +17,9 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Map;
+
+import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.PushTheBox.View.OnSwipeListener;
@@ -64,25 +68,44 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
 
     private AlertDialog dialog;
 
+    private LevelFactory levelFactory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.presenter = new BoxGamePresenter(this,getApplicationContext());
-        MapManager mapManager = (MapManager) getIntent().getSerializableExtra("save");
-        tileBgs = mapManager.getTilesBg();
-        level = mapManager.getLevel();
-        totalUndoTimes = mapManager.getTotalUndoTimes();
-
         setContentView(R.layout.box_gaming);
+        setupLevelFactory();
+        setupMapManager();
         undoText = findViewById(R.id.StepsToUndo);
-        setupGridView(mapManager);
-        addUpButtonListener();
-        addLeftButtonListener();
-        addDownButtonListener();
-        addRightButtonListener();
         addUndoButtonListener();
         addStepInputListener();
+    }
+
+
+    private void setupLevelFactory() {
+        if (getIntent().hasExtra("levelFactory")) {
+            levelFactory = (LevelFactory) getIntent().getSerializableExtra("levelFactory");
+        } else {
+            levelFactory = new LevelFactory(getApplicationContext());
+        }
+    }
+
+    private void setupMapManager(){
+        MapManager mapManager;
+        if (getIntent().hasExtra("save")){
+            mapManager = (MapManager) getIntent().getSerializableExtra("save");
+            level = mapManager.getLevel();
+            totalUndoTimes = mapManager.getTotalUndoTimes();
+        }else {
+            level = (int) getIntent().getSerializableExtra("level");
+            totalUndoTimes = (int) getIntent().getSerializableExtra("undoStep");
+            mapManager = new MapManager(level, levelFactory.getGameElements(level),
+                    totalUndoTimes);
+        }
+        tileBgs = mapManager.getTilesBg();
+        setupGridView(mapManager);
     }
 
     /**
@@ -90,7 +113,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
      */
     private void setupGridView(final MapManager mapManager){
         presenter.setMapManager(mapManager);
-        gridView = findViewById(R.id.mapGrid);
+        gridView = findViewById(R.id.boxMapGrid);
         gridView.setNumColumns(mapManager.getNumCol());
         gridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -106,47 +129,6 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
                 }
         );
         gridView.setPresenter(presenter);
-    }
-
-
-    private void addUpButtonListener() {
-        ImageButton upButton = findViewById(R.id.upButton);
-        upButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.arrowButtonClicked(getApplicationContext(), "up");
-            }
-        });
-    }
-
-    private void addLeftButtonListener() {
-        ImageButton leftButton = findViewById(R.id.leftButton);
-        leftButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.arrowButtonClicked(getApplicationContext(), "left");
-            }
-        });
-    }
-
-    private void addDownButtonListener() {
-        ImageButton downButton = findViewById(R.id.downButton);
-        downButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.arrowButtonClicked(getApplicationContext(), "down");
-            }
-        });
-    }
-
-    private void addRightButtonListener() {
-        ImageButton rightButton = findViewById(R.id.rightButton);
-        rightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.arrowButtonClicked(getApplicationContext(), "right");
-            }
-        });
     }
 
     /**
@@ -243,7 +225,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
             @Override
             public void onClick(View v) {
                 Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                tmp.putExtra("save", new MapManager(level, totalUndoTimes));
+                tmp.putExtra("levelFactory", levelFactory);
+                tmp.putExtra("level", level);
+                tmp.putExtra("undoStep", totalUndoTimes);
                 startActivity(tmp);
                 dialog.dismiss();
                 finish();
@@ -262,7 +246,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
                     finish();
                 }else {
                     Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                    tmp.putExtra("save", new MapManager(level + 1, totalUndoTimes));
+                    tmp.putExtra("level", level + 1);
+                    tmp.putExtra("levelFactory", levelFactory);
+                    tmp.putExtra("undoStep", totalUndoTimes);
                     startActivity(tmp);
                 }
                 dialog.dismiss();

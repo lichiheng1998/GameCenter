@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
@@ -18,25 +19,30 @@ public class SaveManager {
         this.dataStream = dataStream;
     }
 
-    private Map<String, Map<String, Object>> getGameToSaves(boolean isAutoSave, Context context){
-        return (Map<String, Map<String,Object>>)
-                dataStream.getSaves(new HashMap<String, Map<String, Object>>(), isAutoSave, context);
+    private Map<String, Map<String, SaveSlot>> getSaveSlots(Context context){
+        return (Map<String, Map<String, SaveSlot>>)
+                dataStream.getSaves(new HashMap<String, Map<String, SaveSlot>>(), context);
     }
 
-    public void saveToSlot(Object save, boolean isAutoSave, Context context){
-        Map<String, Map<String, Object>> saves = getGameToSaves(isAutoSave, context);
-        if (!saves.containsKey(user)){
-            saves.put(user, new HashMap<String, Object>());
-        }
+    public void saveToFile(SaveSlot save, Context context){
+        Map<String, Map<String, SaveSlot>> saves = getSaveSlots(context);
+        initialize(saves);
         saves.get(user).put(game, save);
-        dataStream.saveSaves(saves, isAutoSave, context);
+        dataStream.saveSaves(saves, context);
     }
 
-    public Object readFromSlot(boolean isAutoSave, Context context){
-        Map<String, Map<String, Object>> saves = getGameToSaves(isAutoSave, context);
-        if (!saves.containsKey(user)){
-            saves.put(user, new HashMap<String, Object>());
-        }
+    public SaveSlot readFromFile(Context context){
+        Map<String, Map<String, SaveSlot>> saves = getSaveSlots(context);
+        initialize(saves);
         return saves.get(user).get(game);
+    }
+
+    private void initialize(Map<String, Map<String, SaveSlot>> saves){
+        if(!saves.containsKey(user)){
+            saves.put(user, new HashMap<String, SaveSlot>());
+        }
+        if(!saves.get(user).containsKey(game)){
+            saves.get(user).put(game, new SaveSlot());
+        }
     }
 }

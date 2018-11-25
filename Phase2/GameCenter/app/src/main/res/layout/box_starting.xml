@@ -30,10 +30,10 @@
         android:id="@+id/loadBoxGame"
         android:layout_width="145dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/newBoxGame"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/newBoxGame"
-        android:text="Load Auto Save"
+        android:text="Save/Load"
         android:textStyle="bold" />
 
     <Button

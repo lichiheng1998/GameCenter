@@ -13,9 +13,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import fall2018.csc207project.PushTheBox.Models.LevelFactory;
-import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
 
 public class LevelActivity extends AppCompatActivity {
@@ -23,8 +20,6 @@ public class LevelActivity extends AppCompatActivity {
     GridView gridView;
 
     private List<Button> levelButtons = new ArrayList<>();
-
-    LevelFactory levelFactory = new LevelFactory();
 
     private int level;
     private int undoStep;
@@ -41,7 +36,7 @@ public class LevelActivity extends AppCompatActivity {
 
     public void createLevelButtons(){
         int buttonColor = android.graphics.Color.argb(255, 168, 193,164);
-        for (int i = 0; i < levelFactory.getLevelAmount(); i++){
+        for (int i = 0; i < 9; i++){
             Button tmp = new Button(getApplicationContext());
             tmp.setTextSize(40);
             tmp.setText(Integer.toString(i+1));
@@ -79,7 +74,8 @@ public class LevelActivity extends AppCompatActivity {
 
     private void switchToGame(int level) {
         Intent tmp = new Intent(this, BoxGameActivity.class);
-        tmp.putExtra("save", new MapManager(level,undoStep));
+        tmp.putExtra("undoStep",undoStep);
+        tmp.putExtra("level",level);
         if (undoStep == 3) {
             Toast.makeText(getApplicationContext(),
                     "The Total Undo Steps set to default value: 3",
@@ -90,6 +86,7 @@ public class LevelActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
         startActivity(tmp);
+        finish();
     }
 
 

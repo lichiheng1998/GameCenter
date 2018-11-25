@@ -6,7 +6,7 @@ public class ScoreDataStreamImpl implements ScoreDataStream{
     private static final String GAMETOSCORESPATH = "GameToScores.ser";
     private GlobalDataStream dataStream;
 
-    public ScoreDataStreamImpl(GlobalDataStream dataStream){
+    ScoreDataStreamImpl(GlobalDataStream dataStream){
         this.dataStream = dataStream;
     }
 

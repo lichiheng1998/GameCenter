@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/save1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="90dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/load1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Load"
+        app:layout_constraintEnd_toEndOf="@+id/save1"
+        app:layout_constraintStart_toStartOf="@+id/save1"
+        app:layout_constraintTop_toBottomOf="@+id/save1" />
+
+    <Button
+        android:id="@+id/field1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:text="No Data"
+        app:layout_constraintBottom_toBottomOf="@+id/load1"
+        app:layout_constraintEnd_toStartOf="@+id/save1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/save1" />
+
+    <Button
+        android:id="@+id/save2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/load1" />
+
+    <Button
+        android:id="@+id/load2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Load"
+        app:layout_constraintEnd_toEndOf="@+id/save2"
+        app:layout_constraintStart_toStartOf="@+id/save2"
+        app:layout_constraintTop_toBottomOf="@+id/save2" />
+
+    <Button
+        android:id="@+id/field2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:text="No Data"
+        app:layout_constraintBottom_toBottomOf="@+id/load2"
+        app:layout_constraintEnd_toStartOf="@+id/save2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/save2" />
+
+    <Button
+        android:id="@+id/save3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/load2" />
+
+    <Button
+        android:id="@+id/load3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Load"
+        app:layout_constraintEnd_toEndOf="@+id/save3"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/save3"
+        app:layout_constraintTop_toBottomOf="@+id/save3" />
+
+    <Button
+        android:id="@+id/field3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:text="No Data"
+        app:layout_constraintBottom_toBottomOf="@+id/load3"
+        app:layout_constraintEnd_toStartOf="@+id/save3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/save3" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:text="AutoSave"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/load3" />
+
+    <Button
+        android:id="@+id/fieldAuto"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:text="No Data"
+        app:layout_constraintBottom_toBottomOf="@+id/loadAuto"
+        app:layout_constraintEnd_toStartOf="@+id/loadAuto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/loadAuto" />
+
+    <Button
+        android:id="@+id/loadAuto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Load"
+        app:layout_constraintEnd_toEndOf="@+id/load3"
+        app:layout_constraintStart_toStartOf="@+id/load3"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:text="SaveSlots"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/save1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

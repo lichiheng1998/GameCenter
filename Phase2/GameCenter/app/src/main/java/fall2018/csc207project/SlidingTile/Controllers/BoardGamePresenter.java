@@ -18,6 +18,7 @@ import fall2018.csc207project.SlidingTile.Models.Tile;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
 import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
+import fall2018.csc207project.models.SaveSlot;
 
 public class BoardGamePresenter implements Observer {
     /**
@@ -40,6 +41,10 @@ public class BoardGamePresenter implements Observer {
      * Process the Abstract game view.
      */
     private BoardGameView view;
+    /**
+     * The save slot of the current user.
+     */
+    private SaveSlot saveSlot;
 
     public BoardGamePresenter(BoardGameView view, Context context){
         this.view = view;
@@ -47,6 +52,7 @@ public class BoardGamePresenter implements Observer {
         currentUser = shared.getString("currentUser", null);
         String currentGame = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
+        saveSlot = saveManager.readFromFile(context);
         this.movementController = new MovementController();
     }
 
@@ -63,7 +69,8 @@ public class BoardGamePresenter implements Observer {
 
     public void onTapOnTile(Context context, int position){
         if (movementController.processTapMovement(context, position)){
-            saveManager.saveToSlot(boardManager, true, context);
+            saveSlot.saveToAutoSave(boardManager);
+            saveManager.saveToFile(saveSlot, context);
         }
     }
 

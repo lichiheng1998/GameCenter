@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/scoreboard_background"
-    tools:context="fall2018.csc207project.UI.Global">
+    android:background="@drawable/scoreboard_background">
 
 
 

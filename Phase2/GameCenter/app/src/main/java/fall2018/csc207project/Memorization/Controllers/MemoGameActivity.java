@@ -42,10 +42,10 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.memo_main);
         presenter = new MemoGamePresenter(this);
         MemoManager memoManager = (MemoManager) getIntent().getSerializableExtra("save");
         presenter.setMemoManager(memoManager);
-        setContentView(R.layout.memo_main);
         setupButtons(memoManager.getSize());
         setupGridView(memoManager);
         presenter.startCycle();
