@@ -86,6 +86,7 @@ public class LevelActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
         startActivity(tmp);
+        finish();
     }
 
 

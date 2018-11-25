@@ -6,26 +6,35 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import java.io.Serializable;
-
 import fall2018.csc207project.R;
 import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.GlobalConfig;
 import fall2018.csc207project.models.Save;
 import fall2018.csc207project.models.SaveManager;
 import fall2018.csc207project.models.SaveSlot;
+/**
+ * The activity that represents the page for managing saves.
+ */
 @SuppressWarnings("unchecked")
 public class ManageSaveActivity extends AppCompatActivity{
-    SaveManager saveManager;
-    String user;
-    String game;
-    SaveSlot saveSlot;
-    Class<? extends Activity> entry;
+    private SaveManager saveManager;
+    private String user;
+    private String game;
+    /**
+     * The save slot that stores all save of the user.
+     */
+    private SaveSlot saveSlot;
+    /**
+     * The entries of the game activities.
+     */
+    private Class<? extends Activity> entry;
+    /**
+     * The load and save button on the layout.
+     */
     int[] saveIds = {R.id.save1, R.id.save2, R.id.save3};
     int[] fields = {R.id.field1, R.id.field2, R.id.field3, R.id.fieldAuto};
     int[] loadIds = {R.id.load1, R.id.load2, R.id.load3, R.id.loadAuto};
@@ -43,6 +52,9 @@ public class ManageSaveActivity extends AppCompatActivity{
         setupInfos();
     }
 
+    /**
+     * Setup the save button.
+     */
     public void setupSaveButtons(){
         for (int i = 0; i < 3; i++){
             final int pos = i;
@@ -51,9 +63,10 @@ public class ManageSaveActivity extends AppCompatActivity{
                 public void onClick(View view) {
                     Save save = saveSlot.readFromAutoSave();
                     if (save == null){
-                        Toast.makeText(getApplicationContext(), "Not Started Yet!", Toast.LENGTH_SHORT).show();
+                        makeNotStartedText();
                         return;
                     }
+                    makeToastSavedText();
                     saveSlot.saveToSlot(pos, save.data);
                     saveManager.saveToFile(saveSlot, ManageSaveActivity.this.getApplicationContext());
                     setupInfos();
@@ -61,7 +74,9 @@ public class ManageSaveActivity extends AppCompatActivity{
             });
         }
     }
-
+    /**
+     * Setup the load button.
+     */
     public void setupLoadButtons(){
         for (int i = 0; i < 4; i++){
             final int pos = i;
@@ -70,7 +85,7 @@ public class ManageSaveActivity extends AppCompatActivity{
                 public void onClick(View view) {
                     Save save = pos == 3 ? saveSlot.readFromAutoSave():saveSlot.readFromSlot(pos);
                     if (save == null) {
-                        Toast.makeText(getApplicationContext(), "No Save!", Toast.LENGTH_SHORT).show();
+                        makeNoSavedText();
                         return;
                     }
                     Intent tmp = new Intent(ManageSaveActivity.this, entry);
@@ -93,4 +108,26 @@ public class ManageSaveActivity extends AppCompatActivity{
     }
 
 
+    /**
+     * Display that a game was saved successfully.
+     */
+    private void makeToastSavedText() {
+        Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Display that a game that has no saves.
+     */
+    private void makeNoSavedText() {
+        Toast.makeText(this, "No Save!", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Display that the game hasn't started yet.
+     */
+    private void makeNotStartedText() {
+        Toast.makeText(this, "Game is not started!", Toast.LENGTH_SHORT).show();
+    }
 }
+
+

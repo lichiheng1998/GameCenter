@@ -26,24 +26,23 @@ public class SaveManager {
 
     public void saveToFile(SaveSlot save, Context context){
         Map<String, Map<String, SaveSlot>> saves = getSaveSlots(context);
-        if (!saves.containsKey(user)){
-            initialize(saves);
-        }
+        initialize(saves);
         saves.get(user).put(game, save);
         dataStream.saveSaves(saves, context);
     }
 
     public SaveSlot readFromFile(Context context){
         Map<String, Map<String, SaveSlot>> saves = getSaveSlots(context);
-        if (!saves.containsKey(user)){
-            initialize(saves);
-        }
+        initialize(saves);
         return saves.get(user).get(game);
     }
 
     private void initialize(Map<String, Map<String, SaveSlot>> saves){
-        Map<String, SaveSlot> item = new HashMap<>();
-        item.put(game, new SaveSlot());
-        saves.put(user, item);
+        if(!saves.containsKey(user)){
+            saves.put(user, new HashMap<String, SaveSlot>());
+        }
+        if(!saves.get(user).containsKey(game)){
+            saves.get(user).put(game, new SaveSlot());
+        }
     }
 }

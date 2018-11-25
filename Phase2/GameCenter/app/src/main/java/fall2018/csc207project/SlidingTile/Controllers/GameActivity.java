@@ -83,12 +83,6 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
     }
 
     /**
-     * Setup grid view,
-     */
-    private void setupGridViewLisnter(){
-
-    }
-    /**
      * Active the listener for the step picker edit text.
      */
     private void addStepInputListener(){

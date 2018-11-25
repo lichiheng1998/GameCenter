@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/starting_background"
-    tools:context=".StartingActivity">
+    android:background="@drawable/starting_background">
 
     <TextView
         android:id="@+id/GameText"
@@ -37,55 +34,25 @@
         android:textColor="#ffffff" />
 
     <Button
-        android:id="@+id/LoadButton"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/StartButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="100dp"
-        android:background="@color/colorPrimary"
-        android:text="Load Saved Game"
-        android:textColor="#ffffff"
-        android:textStyle="bold" />
-
-    <Button
         android:id="@+id/SaveButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LoadButton"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/StartButton"
+        android:layout_marginEnd="100dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="100dp"
         android:background="@color/colorAccent"
-        android:text="Save Game"
+        android:text="Load/Save"
         android:textColor="#ffffff"
         android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/LoadAuto"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SaveButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="100dp"
-        android:background="@color/colorPrimaryDark"
-        android:textStyle="bold"
-        android:textColor="#ffffff"
-        android:text="Load AutoSave" />
 
     <Button
         android:id="@+id/global_score_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LoadAuto"
+        android:layout_below="@+id/SaveButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="100dp"
