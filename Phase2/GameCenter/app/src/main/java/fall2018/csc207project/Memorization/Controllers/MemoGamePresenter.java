@@ -17,6 +17,7 @@ import fall2018.csc207project.Memorization.Views.MemoGameView;
  * Class represents the implementation of the  game logic.
  */
 public class MemoGamePresenter implements GamePresenter{
+    private int successTap;
     private MemoManager memoManager;
     private MemoGameView view;
     private Iterator<MemoTile> verifyIterator;
@@ -24,11 +25,14 @@ public class MemoGamePresenter implements GamePresenter{
     private boolean isDisplaying;
     private int period = 2000;
     private int flashDelay = 1000;
-    private boolean gameOver = false;
+    private boolean gameOver;
 
     public MemoGamePresenter(final MemoGameView view) {
         this.view = view;
         isDisplaying = false;
+        gameOver = false;
+        successTap = 0;
+        view.updateScore(successTap);
     }
 
     /**
@@ -71,6 +75,8 @@ public class MemoGamePresenter implements GamePresenter{
     public void verify(int pos){
        if (!gameOver && nextToVerify.getId() == pos) {
             view.flashButtonToBlue(pos, flashDelay);
+            successTap += 1;
+            view.updateScore(successTap);
             nextToVerify = getVerifyItems();
             if (nextToVerify == null) {
                 memoManager.updateActiveTiles();
