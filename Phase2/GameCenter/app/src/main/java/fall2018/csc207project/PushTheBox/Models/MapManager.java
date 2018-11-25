@@ -65,6 +65,8 @@ public class MapManager implements Serializable {
 
     private Stack<int[]> stackOfMovements;
 
+    public boolean isBoxesMoved = false;
+
     /**
      * Initialize a new manager to manage a new map.
      */
@@ -119,8 +121,6 @@ public class MapManager implements Serializable {
                 && !map.tileIsWall(newPosition + posChange)
                 && boxAtPos(newPosition + posChange) == null);
     }
-
-    public boolean isBoxesMoved = false;
 
     /**
      * Process person's movement.

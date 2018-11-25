@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -17,13 +18,15 @@ import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
+import fall2018.csc207project.PushTheBox.View.OnSwipeListener;
+import fall2018.csc207project.PushTheBox.View.SwipeDetectGridView;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
 
 /**
  * The game activity for Push The Box.
  */
-public class BoxGameActivity extends AppCompatActivity implements MapView {
+public class BoxGameActivity extends AppCompatActivity implements MapView{
 
     private static int columnDim;
 
@@ -37,7 +40,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
     /**
      * The grid view.
      */
-    private GridView gridView;
+    private SwipeDetectGridView gridView;
 
     /**
      * The adapter for grid view.
@@ -58,6 +61,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
      * The total undo times to be used.
      */
     private int totalUndoTimes;
+
+    private AlertDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -99,6 +105,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                     }
                 }
         );
+        gridView.setPresenter(presenter);
     }
 
 
@@ -201,6 +208,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         display();
     }
 
+
     @Override
     public void levelComplete() {
         AlertDialog.Builder completeBuilder = new AlertDialog.Builder(this);
@@ -213,7 +221,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         createNextButton(completeView);
 
         completeBuilder.setView(completeView);
-        AlertDialog dialog = completeBuilder.create();
+        dialog = completeBuilder.create();
         dialog.show();
     }
 
@@ -223,6 +231,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
                 finish();
             }
         });
@@ -236,6 +245,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                 Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
                 tmp.putExtra("save", new MapManager(level, totalUndoTimes));
                 startActivity(tmp);
+                dialog.dismiss();
                 finish();
             }
         });
@@ -255,8 +265,11 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                     tmp.putExtra("save", new MapManager(level + 1, totalUndoTimes));
                     startActivity(tmp);
                 }
+                dialog.dismiss();
                 finish();
             }
         });
     }
+
+
 }
