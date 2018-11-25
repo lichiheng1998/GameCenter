@@ -58,6 +58,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
      */
     private int totalUndoTimes;
 
+    private AlertDialog dialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -212,7 +215,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         createNextButton(completeView);
 
         completeBuilder.setView(completeView);
-        AlertDialog dialog = completeBuilder.create();
+        dialog = completeBuilder.create();
         dialog.show();
     }
 
@@ -222,6 +225,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
                 finish();
             }
         });
@@ -235,6 +239,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                 Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
                 tmp.putExtra("save", new MapManager(level, totalUndoTimes));
                 startActivity(tmp);
+                dialog.dismiss();
                 finish();
             }
         });
@@ -254,6 +259,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView {
                     tmp.putExtra("save", new MapManager(level + 1, totalUndoTimes));
                     startActivity(tmp);
                 }
+                dialog.dismiss();
                 finish();
             }
         });
