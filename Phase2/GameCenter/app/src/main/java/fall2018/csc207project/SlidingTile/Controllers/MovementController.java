@@ -1,6 +1,7 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
@@ -23,9 +24,11 @@ public class MovementController {
             if (boardManager.puzzleSolved()) {
                 Toast.makeText(context, "YOU WIN!", Toast.LENGTH_SHORT).show();
             }
+            Log.e("debug", "processTapMovement: enter the if statement");
             return true;
         }
         Toast.makeText(context, "Invalid Tap", Toast.LENGTH_SHORT).show();
+        Log.e("debug", "processTapMovement:not enter the if statement");
         return true;
     }
 }

@@ -1,21 +1,15 @@
 package fall2018.csc207project.SlidingTile.Models;
 
-import android.content.Context;
-import android.widget.Button;
-
+import android.support.annotation.NonNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Observer;
 import java.util.Stack;
-
-import fall2018.csc207project.R;
 
 /**
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
-public class BoardManager implements Serializable{
+public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * The board being managed.
@@ -28,9 +22,15 @@ public class BoardManager implements Serializable{
 
     private int undoTimes;
 
-    private int totalSteps;
+    /**
+     * The counting of total steps moved.
+     */
+    private int totalMoveSteps;
 
-    //    private List<Tile> tileList;
+    /**
+     * The counting of total steps undid.
+     */
+    private int totalUndoSteps;
 
     /**
      * Manage a new shuffled board.
@@ -38,7 +38,6 @@ public class BoardManager implements Serializable{
     public BoardManager(int dim, int undoTimes) {
         this.complexity = dim;
         this.undoTimes = undoTimes;
-        totalSteps = 0;
         stackOfMovements = new Stack<>();
         if (dim == 3) {
             this.board = (new SlidingTileGameShuffler()).shuffle(dim, 81);
@@ -47,6 +46,12 @@ public class BoardManager implements Serializable{
         } else if (dim == 5) {
             this.board = (new SlidingTileGameShuffler()).shuffle(dim, 625);
         }
+    }
+
+    @NonNull
+    @Override
+    public Iterator<Tile> iterator() {
+        return board.iterator();
     }
 
     /**
@@ -92,7 +97,6 @@ public class BoardManager implements Serializable{
      * @param position the position
      */
     public void touchMove(int position) {
-        this.totalSteps += 1;
         int row = position / board.NUM_ROWS;
         int col = position % board.NUM_COLS;
         int blankId = board.numTiles();
@@ -106,6 +110,7 @@ public class BoardManager implements Serializable{
             }
         }
         board.swapTiles(row,col,rowBlank,colBlank);
+        totalMoveSteps++;
     }
 
     /**
@@ -134,7 +139,9 @@ public class BoardManager implements Serializable{
     private void processUndoMovement(int steps) {
         for (int i = 0; i < steps; i++) {
             touchMove(stackOfMovements.pop());
+            totalMoveSteps--;
         }
+        totalUndoSteps++;
         undoTimes--;
     }
 
@@ -147,8 +154,17 @@ public class BoardManager implements Serializable{
      *
      * @return the total steps you did
      */
-    public int getTotalSteps() {
-        return totalSteps;
+    public int getTotalMoveSteps() {
+        return totalMoveSteps;
+    }
+
+    /**
+     * Return the total steps you moved.
+     *
+     * @return the total steps you moved
+     */
+    public int getTotalUndoSteps() {
+        return totalUndoSteps;
     }
 
     public int getComplexity(){
@@ -165,22 +181,5 @@ public class BoardManager implements Serializable{
         }
         processUndoMovement(step);
         return true;
-    }
-
-    public List<Button> getButtonList(Context context){
-        List<Button> tileButtons = new ArrayList<>();
-        for (int row = 0; row != this.complexity; row++) {
-            for (int col = 0; col != this.complexity; col++) {
-                Button tmp = new Button(context);
-                Tile tmpTile = board.getTile(row, col);
-                if (tmpTile.getId() != board.numTiles()) {
-                    tmp.setTextSize(40);
-                    tmp.setText(Integer.toString(tmpTile.getId()));
-                }
-                tmp.setBackgroundResource(R.drawable.tile);
-                tileButtons.add(tmp);
-            }
-        }
-        return tileButtons;
     }
 }
