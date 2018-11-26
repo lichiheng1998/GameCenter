@@ -1,14 +1,8 @@
 package fall2018.csc207project.Memorization.Controllers;
 
-import android.util.Log;
-import android.widget.Toast;
-
-
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
@@ -77,6 +71,7 @@ public class MemoGamePresenter implements GamePresenter{
             view.flashButtonToBlue(pos, flashDelay);
             successTap += 1;
             view.updateScore(successTap);
+            memoManager.setScoreTotal(successTap);
             nextToVerify = getVerifyItems();
             if (nextToVerify == null) {
                 memoManager.updateActiveTiles();
