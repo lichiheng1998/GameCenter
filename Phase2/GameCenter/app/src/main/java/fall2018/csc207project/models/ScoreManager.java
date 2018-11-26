@@ -49,7 +49,7 @@ public class ScoreManager <T extends Score>{
 
     /**
      * Get all scores in the database;
-     * @param context the context of the app
+     * @param context the context of the app.
      * @return the list of scores.
      */
     private List<Score> getGameToScore(Context context){

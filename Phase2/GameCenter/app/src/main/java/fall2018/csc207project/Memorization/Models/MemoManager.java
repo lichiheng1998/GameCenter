@@ -101,4 +101,8 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
         curComplexity += 1;
     }
 
+    public MemoManager getNewInstance(){
+        return new MemoManager(width, height, level);
+    }
+
 }

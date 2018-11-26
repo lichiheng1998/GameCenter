@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
+import fall2018.csc207project.SlidingTile.Views.GameActivity;
 
 /**
  * The setting for SlidingTileGame activity.

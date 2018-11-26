@@ -1,7 +1,8 @@
-package fall2018.csc207project.Memorization.Controllers;
+package fall2018.csc207project.Memorization.Views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import fall2018.csc207project.Memorization.Controllers.GamePresenter;
+import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 
-public class MemoGameActivity extends AppCompatActivity implements MemoGameView {
+public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
+        GameOverDialogFragment.GameOverDialogListener {
 
     /**
      * Represent the board view of the game.
@@ -172,5 +177,17 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView 
     @Override
     public void updateScore(int score) {
         ((TextView)findViewById(R.id.Score)).setText(String.valueOf(score));
+    }
+
+    @Override
+    public void showGameOverDialog(int score, MemoManager manager){
+        FragmentManager fm = getSupportFragmentManager();
+        GameOverDialogFragment fragment = GameOverDialogFragment.newInstance(score, manager);
+        fragment.show(fm, "fragment_edit_name");
+    }
+
+    @Override
+    public void onRefresh() {
+        finish();
     }
 }
