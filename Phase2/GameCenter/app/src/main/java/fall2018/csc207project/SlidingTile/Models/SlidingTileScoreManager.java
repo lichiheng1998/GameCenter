@@ -1,11 +1,9 @@
 package fall2018.csc207project.SlidingTile.Models;
 
 import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import fall2018.csc207project.models.ScoreCalculator;
 import fall2018.csc207project.models.ScoreDataStream;
 import fall2018.csc207project.models.ScoreManager;
