@@ -22,7 +22,7 @@ public class GlobalConfig {
     /**
      * Ids of the background resources of the games.
      */
-    private static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.bejeweled, R.drawable.global};
+    private static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.memopick, R.drawable.global};
 
     /**
      * The Entries of the each games.
