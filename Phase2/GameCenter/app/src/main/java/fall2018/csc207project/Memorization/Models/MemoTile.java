@@ -2,6 +2,8 @@ package fall2018.csc207project.Memorization.Models;
 
 import java.io.Serializable;
 
+import fall2018.csc207project.R;
+
 public class MemoTile implements Serializable{
     /**
      * unique id of a MemoTile
@@ -15,6 +17,11 @@ public class MemoTile implements Serializable{
      * type fake of MemoTile
      */
     public static final int TYPEFAKE = 0;
+
+    public static final int FAKECOLOR = android.R.color.holo_orange_dark;
+    public static final int ACTIVECOLOR = android.R.color.holo_green_dark;
+    public static final int PRESSCOLOR = android.R.color.holo_blue_dark;
+    public static final int WRONGCOLOR = android.R.color.holo_red_dark;
 
     /**
      * status type of this MemoTile

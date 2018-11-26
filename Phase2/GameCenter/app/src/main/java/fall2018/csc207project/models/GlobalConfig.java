@@ -3,12 +3,11 @@ package fall2018.csc207project.models;
 import java.util.HashMap;
 import java.util.Map;
 
-import fall2018.csc207project.Memorization.Controllers.MemoGameActivity;
-import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
+import fall2018.csc207project.Memorization.Views.MemoGameActivity;
 import fall2018.csc207project.Memorization.Controllers.MemoStartingActivity;
-import fall2018.csc207project.PushTheBox.Controllers.BoxGameActivity;
+import fall2018.csc207project.PushTheBox.View.BoxGameActivity;
 import fall2018.csc207project.PushTheBox.Controllers.BoxStartingActivity;
-import fall2018.csc207project.SlidingTile.Controllers.GameActivity;
+import fall2018.csc207project.SlidingTile.Views.GameActivity;
 import fall2018.csc207project.SlidingTile.Controllers.StartingActivity;
 import fall2018.csc207project.R;
 
@@ -23,7 +22,7 @@ public class GlobalConfig {
     /**
      * Ids of the background resources of the games.
      */
-    private static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.bejeweled, R.drawable.global};
+    private static final Integer[] GAMEBG = {R.drawable.sliding_tile, R.drawable.memopick, R.drawable.global};
 
     /**
      * The Entries of the each games.

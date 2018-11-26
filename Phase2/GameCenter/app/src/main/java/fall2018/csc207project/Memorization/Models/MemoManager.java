@@ -9,18 +9,22 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MemoManager implements Iterable<MemoTile>, Serializable{
+
     /**
      * width of the memo board
      */
     public final int width;
+
     /**
      * height of memo board
      */
     public final int height;
+
     /**
      * current number of memoTile output
      */
     private int curComplexity;
+
     /**
      * list of all memo tiles
      */
@@ -32,9 +36,16 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
     private boolean level;
 
     /**
+     * the total score of this board
+     */
+    private int scoreTotal;
+
+    /**
      * initialize a new MemoManger
+     *
      * @param width width of the game board
      * @param height height of the game board
+     * @param level hard or normal for this game
      */
     public MemoManager(int width, int height, boolean level){
         this.width = width;
@@ -101,4 +112,39 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
         curComplexity += 1;
     }
 
+    /**
+     * Get a new MemoManager by this.width, this.height and this.level
+     *
+     * @return a new MemoManager by this.width, this.height and this.level
+     */
+    public MemoManager getNewInstance(){
+        return new MemoManager(width, height, level);
+    }
+
+    /**
+     * Set the current total score to the new total score.
+     *
+     * @param scoreTotal the new total score want to be set to
+     */
+    public void setScoreTotal(int scoreTotal) {
+        this.scoreTotal = scoreTotal;
+    }
+
+    /**
+     * Get the current total score for this MemoManager.
+     *
+     * @return the current total score for this MemoManager
+     */
+    public int getScoreTotal() {
+        return scoreTotal;
+    }
+
+    /**
+     * Get the current height for this MemoManager.
+     *
+     * @return the current height for this MemoManager
+     */
+    public int getHeightDifficulty() {
+        return height;
+    }
 }

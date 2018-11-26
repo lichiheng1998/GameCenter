@@ -1,6 +1,7 @@
 package fall2018.csc207project.PushTheBox.Controllers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.ShareActionProvider;
@@ -9,7 +10,9 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
+import fall2018.csc207project.PushTheBox.View.BoxGameActivity;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
@@ -83,12 +86,19 @@ public class BoxGamePresenter implements Observer {
         saveManager.saveToFile(saveSlot, context);
     }
 
+    /**
+     * When undo button is clicked, process undo.
+     * @param step the number of undo steps.
+     */
     public void onUndoButtonClicked(int step){
         if(!mapManager.canProcessUndo(step)) {
             view.makeToastNoUndoTimesLeftText();
         }
     }
 
+    /**
+     * When undo text is clicked, show number picker for user to choose undo steps.
+     */
     public void onUndoTextClicked(){
         view.showNumberPicker();
     }

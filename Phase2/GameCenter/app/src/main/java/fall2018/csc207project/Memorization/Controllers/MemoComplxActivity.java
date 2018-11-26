@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import fall2018.csc207project.Memorization.Models.MemoManager;
+import fall2018.csc207project.Memorization.Views.MemoGameActivity;
 import fall2018.csc207project.R;
 /**
  * Class represents the memorization master activity that user can select the complexity of the board.
@@ -77,13 +78,15 @@ public class MemoComplxActivity extends AppCompatActivity {
     }
 
     private void hardModeSwitchListener(){
-        Switch hardModeSwitch = findViewById(R.id.hardmode);
+        final Switch hardModeSwitch = findViewById(R.id.mode);
         hardModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    hardModeSwitch.setText("Crazy Mode");
                     level = true;
                 } else {
+                    hardModeSwitch.setText("Hard Mode");
                     level = false;
                 }
             }
