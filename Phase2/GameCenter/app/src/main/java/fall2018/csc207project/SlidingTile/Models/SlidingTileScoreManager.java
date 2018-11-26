@@ -4,26 +4,22 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import fall2018.csc207project.models.ScoreCalculator;
-import fall2018.csc207project.models.ScoreDataStream;
+import java.util.Stack;
 import fall2018.csc207project.models.ScoreManager;
 
 /**
  * The class that is used to calculate the score, store and retrieve the score.
  */
-public class SlidingTileScoreManager extends ScoreManager<TileScore>{
+public class SlidingTileScoreManager {
 
+    private ScoreManager<TileScore> scoreManager;
     /**
-     * Construct a new SlidingTileScoreManager
-     * by given a dataStream, a user, and a score calculator.
+     * Construct a new SlidingTileScoreManager by given a scoreManager
      *
-     * @param dataStream the score dataStream
-     * @param user the current user
-     * @param calculator a score calculator
+     * @param scoreManager the score manager we need
      */
-    public SlidingTileScoreManager(ScoreDataStream dataStream,
-                            String user, ScoreCalculator<TileScore> calculator) {
-        super(dataStream, "SlidingTilesGame", user, calculator);
+    public SlidingTileScoreManager(ScoreManager<TileScore> scoreManager) {
+        this.scoreManager = scoreManager;
     }
 
     /**
@@ -33,8 +29,29 @@ public class SlidingTileScoreManager extends ScoreManager<TileScore>{
      * @param complexity the complexity the user chooses
      * @return the top ten TileScores
      */
-    public List<TileScore> getTopTenScores(Context context, int complexity){
-        List<TileScore> tileScores = getScoresOfGame(context);
+    public Stack<TileScore> getTopTenScores(Context context, int complexity){
+        List<TileScore> scoreBoardScores = getSortedScores(context, complexity);
+        Stack<TileScore> topTenScores = new Stack<>();
+        if (scoreBoardScores.size() >= 10) {
+            topTenScores.addAll(scoreBoardScores.size() - 11, scoreBoardScores);
+        } else {
+            for (int i = 0; i < 10 - scoreBoardScores.size(); i++) {
+                topTenScores.add(null);
+            }
+            topTenScores.addAll(scoreBoardScores);
+        }
+        return topTenScores;
+    }
+
+    /**
+     * Get the sorted TileScore by giving a context and a complexity.
+     *
+     * @param context the context of the app
+     * @param complexity the complexity the user chooses
+     * @return the sorted TileScore by giving a context and a complexity
+     */
+    private List<TileScore> getSortedScores(Context context, int complexity) {
+        List<TileScore> tileScores = scoreManager.getScoresOfGame(context);
         List<TileScore> scoreBoardScores = new ArrayList<>();
         for (TileScore tileScore : tileScores) {
             if (tileScore.complexity == complexity) {
@@ -42,12 +59,7 @@ public class SlidingTileScoreManager extends ScoreManager<TileScore>{
             }
         }
         Collections.sort(scoreBoardScores);
-
-        List<TileScore> topTenScores = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            topTenScores.add(scoreBoardScores.get(i));
-        }
-        return topTenScores;
+        return scoreBoardScores;
     }
 
     /**
@@ -57,25 +69,57 @@ public class SlidingTileScoreManager extends ScoreManager<TileScore>{
      * @param context the context of the app
      * @return the top three scores of the current user
      */
-    public TileScore[][] getUserTopThreeScores(Context context) {
-        List<TileScore> tileScores = getScoresOfUser(context);
-        List<TileScore> scoresFor3x3 = new ArrayList<>();
-        List<TileScore> scoresFor4x4 = new ArrayList<>();
-        List<TileScore> scoresFor5x5 = new ArrayList<>();
+    public List<Stack<TileScore>> getUserTopThreeScores(Context context) {
+        List<Stack<TileScore>> listsTop3Scores = new ArrayList<>();
+        Stack<TileScore> top3For3x3 = getTop3ForComplexity(context, 3);
+        Stack<TileScore> top3For4x4 = getTop3ForComplexity(context, 4);
+        Stack<TileScore> top3For5x5 = getTop3ForComplexity(context, 5);
+        listsTop3Scores.add(top3For3x3);
+        listsTop3Scores.add(top3For4x4);
+        listsTop3Scores.add(top3For5x5);
+        return listsTop3Scores;
+    }
+
+    /**
+     * Get the sorted TileScore for a given complexity
+     * of the current user by giving a context.
+     *
+     * @param context the context of the app
+     * @param complexity the complexity the user chooses
+     * @return the sorted TileScore for a given complexity
+     */
+    private List<TileScore> getUserSortedScores(Context context, int complexity) {
+        List<TileScore> tileScores = scoreManager.getScoresOfUser(context);
+        List<TileScore> scoresForComplexity = new ArrayList<>();
         for (TileScore tileScore :tileScores) {
-            if (tileScore.complexity == 3) {
-                scoresFor3x3.add(tileScore);
-            } else if (tileScore.complexity == 4) {
-                scoresFor4x4.add(tileScore);
-            } else if (tileScore.complexity == 5) {
-                scoresFor5x5.add(tileScore);
+            if (tileScore.complexity == complexity) {
+                scoresForComplexity.add(tileScore);
             }
         }
-        Collections.sort(scoresFor3x3);
-        Collections.sort(scoresFor4x4);
-        Collections.sort(scoresFor5x5);
-        return new TileScore[][] {{scoresFor3x3.get(0), scoresFor3x3.get(1), scoresFor3x3.get(2)},
-                                  {scoresFor4x4.get(0), scoresFor4x4.get(1), scoresFor4x4.get(2)},
-                                  {scoresFor5x5.get(0), scoresFor5x5.get(1), scoresFor5x5.get(2)}};
+        Collections.sort(scoresForComplexity);
+        return scoresForComplexity;
+    }
+
+
+    /**
+     * Get the top three TileScore for a given complexity
+     * of the current user by giving a context.
+     *
+     * @param context the context of the app
+     * @param complexity the complexity the user chooses
+     * @return the top three TileScore for a given complexity
+     */
+    private Stack<TileScore> getTop3ForComplexity(Context context, int complexity) {
+        List<TileScore> scoresForComplexity = getUserSortedScores(context, complexity);
+        Stack<TileScore> top3ForComplexity = new Stack<>();
+        if (top3ForComplexity.size() >= 3) {
+            top3ForComplexity.addAll(scoresForComplexity.size() - 4, scoresForComplexity);
+        } else {
+            for (int i = 0; i < 3 - scoresForComplexity.size(); i++) {
+                top3ForComplexity.add(null);
+            }
+            top3ForComplexity.addAll(scoresForComplexity);
+        }
+        return top3ForComplexity;
     }
 }
