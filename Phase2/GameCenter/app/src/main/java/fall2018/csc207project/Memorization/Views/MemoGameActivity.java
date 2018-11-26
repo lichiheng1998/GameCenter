@@ -179,6 +179,11 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         ((TextView)findViewById(R.id.Score)).setText(String.valueOf(score));
     }
 
+    /**
+     * Display a dialog when game is over
+     * @param score score of user
+     * @param manager MemoManger that holds info of the game
+     */
     @Override
     public void showGameOverDialog(int score, MemoManager manager){
         FragmentManager fm = getSupportFragmentManager();
@@ -186,6 +191,9 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         fragment.show(fm, "fragment_edit_name");
     }
 
+    /**
+     * finish when user choose to exit
+     */
     @Override
     public void onRefresh() {
         finish();
