@@ -240,7 +240,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(level == 8){
+                if(level == 9){
                     Toast.makeText(getApplicationContext(), "No more level left!",
                             Toast.LENGTH_SHORT).show();
                     finish();
