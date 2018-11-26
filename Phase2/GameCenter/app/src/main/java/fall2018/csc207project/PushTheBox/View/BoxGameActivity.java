@@ -146,11 +146,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                tmp.putExtra("level", level);
-                tmp.putExtra("undoStep", totalUndoTimes);
-                startActivity(tmp);
-                finish();
+                startNewGame(level, false);
             }
         });
     }
@@ -222,12 +218,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         replay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                tmp.putExtra("level", level);
-                tmp.putExtra("undoStep", totalUndoTimes);
-                startActivity(tmp);
-                dialog.dismiss();
-                finish();
+                startNewGame(level, true);
             }
         });
     }
@@ -242,15 +233,21 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
                             Toast.LENGTH_SHORT).show();
                     finish();
                 }else {
-                    Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                    tmp.putExtra("level", level + 1);
-                    tmp.putExtra("undoStep", totalUndoTimes);
-                    startActivity(tmp);
+                    startNewGame(level + 1, true);
                 }
-                dialog.dismiss();
-                finish();
             }
         });
+    }
+
+    private void startNewGame(int level, Boolean ifCloseDialog){
+        Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
+        tmp.putExtra("level", level + 1);
+        tmp.putExtra("undoStep", totalUndoTimes);
+        startActivity(tmp);
+        if (ifCloseDialog){
+            dialog.dismiss();
+        }
+        finish();
     }
 
 
