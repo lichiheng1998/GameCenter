@@ -35,7 +35,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
      */
     private List<Button> memoButtons;
     /**
-     * The game logic persenter that control this view.
+     * The game logic presenter that control this view.
      */
     private GamePresenter presenter;
     /**
