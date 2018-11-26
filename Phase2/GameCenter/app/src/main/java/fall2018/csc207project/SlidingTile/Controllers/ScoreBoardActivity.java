@@ -91,16 +91,16 @@ public class ScoreBoardActivity extends AppCompatActivity {
         });
     }
     public void switchToLevel3(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 3);
-        this.personalList = scoreManager.getUserTopThreeScores(this);
+//        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 3);
+//        this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
 //        SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
 //        this.scoreList.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();
     }
     public void switchToLevel4(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 4);
-        this.personalList = scoreManager.getUserTopThreeScores(this);
+//        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 4);
+//        this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
 //        SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
 //        this.scoreList.setAdapter(adapter);
@@ -108,8 +108,8 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
     }
     public void switchToLevel5(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 5);
-        this.personalList = scoreManager.getUserTopThreeScores(this);
+//        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 5);
+//        this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
 //        SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
 //        this.scoreList.setAdapter(adapter);
