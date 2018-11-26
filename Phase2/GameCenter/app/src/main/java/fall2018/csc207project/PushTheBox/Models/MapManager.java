@@ -40,11 +40,6 @@ public class MapManager implements Serializable {
     private ArrayList<BgTile> bgElements;
 
     /**
-     * The array that stores all the image id that will be displayed on the view.
-     */
-    private Integer[] tileBgs;
-
-    /**
      * The counting of total steps moved.
      */
     private int totalMoveSteps;
@@ -77,7 +72,6 @@ public class MapManager implements Serializable {
         this.levelInfo = new LevelFactory(context).getGameElements(level);
         this.level = level;
         createGameByLevel();
-        initTileBg();
         this.undoTimes = undoTimes;
         totalUndoTimes = undoTimes;
         this.stackOfMovements = new Stack<>();
@@ -199,23 +193,6 @@ public class MapManager implements Serializable {
         return totalUndoTimes;
     }
 
-    /**
-     * Return the total steps you moved.
-     *
-     * @return the total steps you moved
-     */
-    public int getTotalMoveSteps() {
-        return totalMoveSteps;
-    }
-
-    /**
-     * Return the total steps you moved.
-     *
-     * @return the total steps you moved
-     */
-    public int getTotalUndoSteps() {
-        return totalUndoSteps;
-    }
 
     /**
      * Initialize the game elements by the chosen game level.
@@ -251,31 +228,17 @@ public class MapManager implements Serializable {
         return map.getNumCol();
     }
 
-    /**
-     * Return the number of rows
-     * @return number of rows
-     */
-    public int getNumRow(){
-        return map.getNumRow();
-    }
 
     /**
      * Get the array of the background id of all tiles which forms the map.
      * @return the array of the background ids
      */
     public Integer[] getTilesBg(){
-        return tileBgs;
-    }
-
-
-    /**
-     * Initialize the array that stores all the image Id of tiles on the map.
-     */
-    private void initTileBg(){
-        tileBgs = new Integer[bgElements.size()];
+        Integer[] tileBgs = new Integer[bgElements.size()];
         for (int i = 0; i < tileBgs.length; i++ ){
             tileBgs[i] = bgElements.get(i).getBackground();
         }
+        return tileBgs;
     }
 
 

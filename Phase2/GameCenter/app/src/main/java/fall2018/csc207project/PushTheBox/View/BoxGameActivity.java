@@ -45,11 +45,6 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
     MapAdapter mapAdapter;
 
     /**
-     * The array of tiles' background id.
-     */
-    Integer[] tileBgs;
-
-    /**
      * The level of current game.
      */
     private int level;
@@ -76,7 +71,6 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
     private void setupMapManager(){
         MapManager mapManager;
         if (getIntent().hasExtra("save")){
-            Log.e("werid", "setupMapManager: here");
             mapManager = (MapManager) getIntent().getSerializableExtra("save");
             level = mapManager.getLevel();
             totalUndoTimes = mapManager.getTotalUndoTimes();
@@ -85,7 +79,6 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
             totalUndoTimes = (int) getIntent().getSerializableExtra("undoStep");
             mapManager = new MapManager(level, totalUndoTimes, getApplicationContext());
         }
-        tileBgs = mapManager.getTilesBg();
         setupGridView(mapManager);
     }
 
