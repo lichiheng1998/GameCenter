@@ -23,22 +23,7 @@ public class MovementController {
      * @return whether the game is completed or not
      */
     public boolean processTapMovement(Context context, String direction) {
-        int posChange;
-        switch (direction) {
-            case "left":
-                posChange = -1;
-                break;
-            case "up":
-                posChange = -mapManager.getNumCol();
-                break;
-            case "right":
-                posChange = 1;
-                break;
-            default:
-                posChange = mapManager.getNumCol();
-                break;
-        }
-
+        int posChange = getPosChange(direction);
         if (mapManager.isValidMovement(posChange)) {
             mapManager.processPersonMovement(posChange);
             int boxNewPos = mapManager.person.getPosition() + posChange;
@@ -55,5 +40,29 @@ public class MovementController {
         }
         Toast.makeText(context, "Invalid Movement", Toast.LENGTH_SHORT).show();
         return false;
+    }
+
+    /**
+     * Get the value that represents the change in position.
+     * @param direction the string representing direciton(eg."up", "down", "right", "left")
+     * @return the value that represents the change in position
+     */
+    private int getPosChange(String direction){
+        int posChange;
+        switch (direction) {
+            case "left":
+                posChange = -1;
+                break;
+            case "up":
+                posChange = -mapManager.getNumCol();
+                break;
+            case "right":
+                posChange = 1;
+                break;
+            default:
+                posChange = mapManager.getNumCol();
+                break;
+        }
+        return posChange;
     }
 }
