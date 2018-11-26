@@ -36,7 +36,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
      */
     private List<Button> memoButtons;
     /**
-     * The game logic persenter that control this view.
+     * The game logic presenter that control this view.
      */
     private GamePresenter presenter;
     /**
@@ -180,6 +180,11 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
 
     }
 
+    /**
+     * Display a dialog when game is over
+     * @param score score of user
+     * @param manager MemoManger that holds info of the game
+     */
     @Override
     public void showGameOverDialog(int score, MemoManager manager){
         FragmentManager fm = getSupportFragmentManager();
@@ -187,6 +192,9 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         fragment.show(fm, "fragment_edit_name");
     }
 
+    /**
+     * finish when user choose to exit
+     */
     @Override
     public void onRefresh() {
         finish();
