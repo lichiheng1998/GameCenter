@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -15,7 +14,6 @@ import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Controllers.BoxGamePresenter;
 import fall2018.csc207project.PushTheBox.Controllers.MapAdapter;
-import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
@@ -54,6 +52,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
      */
     private int totalUndoTimes;
 
+    /**
+     * The alert dialog which will be displayed when game completed.
+     */
     private AlertDialog dialog;
 
     @Override
@@ -68,6 +69,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         addResetButtonListener();
     }
 
+    /**
+     * Set up the mapManager, level, and total undo times.
+     */
     private void setupMapManager(){
         MapManager mapManager;
         if (getIntent().hasExtra("save")){
@@ -165,11 +169,18 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         newFragment.show(getSupportFragmentManager(), "time picker");
     }
 
+    /**
+     * Display the map on the grid view.
+     */
     @Override
     public void display() {
         gridView.setAdapter(mapAdapter);
     }
 
+    /**
+     * Update the map with information taken from mapManager.
+     * @param mapManager the mapManager with updated info
+     */
     @Override
     public void updateMap(MapManager mapManager) {
         mapAdapter.setPerson(mapManager.getPersonPosToImage());
@@ -177,7 +188,9 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         display();
     }
 
-
+    /**
+     * Display the alert dialog when level is completed.
+     */
     @Override
     public void levelComplete() {
         AlertDialog.Builder completeBuilder = new AlertDialog.Builder(this);
@@ -188,13 +201,15 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         createMenuButton(completeView);
         createReplayButton(completeView);
         createNextButton(completeView);
-
         completeBuilder.setView(completeView);
         dialog = completeBuilder.create();
         dialog.show();
     }
 
-
+    /**
+     * Activate menu button in dialog.
+     * @param view view
+     */
     private void createMenuButton(View view){
         Button menu = view.findViewById(R.id.boxMenuButton);
         menu.setOnClickListener(new View.OnClickListener() {
@@ -206,6 +221,10 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         });
     }
 
+    /**
+     * Activate replay button in dialog
+     * @param view view
+     */
     private void createReplayButton(View view){
         Button replay = view.findViewById(R.id.boxReplayButton);
         replay.setOnClickListener(new View.OnClickListener() {
@@ -216,11 +235,15 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         });
     }
 
-    private void createNextButton(View view){
+    /**
+     * Activate next button in dialog.
+     * @param view view
+     */
+    private void createNextButton(View view) {
         Button next = view.findViewById(R.id.boxNextButton);
-        if (level == 9){
+        if (level == 9) {
             next.setEnabled(false);
-        }else {
+        } else {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -230,6 +253,11 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         }
     }
 
+    /**
+     * Start a new game.
+     * @param level the level of new game to be started.
+     * @param ifCloseDialog if there exist an alert dialog that should be dismissed.
+     */
     private void startNewGame(int level, Boolean ifCloseDialog){
         Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
         tmp.putExtra("level", level);
@@ -240,6 +268,4 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         }
         finish();
     }
-
-
 }
