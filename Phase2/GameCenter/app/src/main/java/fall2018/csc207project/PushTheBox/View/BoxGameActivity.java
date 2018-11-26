@@ -225,18 +225,16 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
 
     private void createNextButton(View view){
         Button next = view.findViewById(R.id.boxNextButton);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(level == 9){
-                    Toast.makeText(getApplicationContext(), "No more level left!",
-                            Toast.LENGTH_SHORT).show();
-                    finish();
-                }else {
+        if (level == 9){
+            next.setEnabled(false);
+        }else {
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     startNewGame(level + 1, true);
                 }
-            }
-        });
+            });
+        }
     }
 
     private void startNewGame(int level, Boolean ifCloseDialog){
