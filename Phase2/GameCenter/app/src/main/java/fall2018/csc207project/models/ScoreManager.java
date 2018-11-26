@@ -25,7 +25,7 @@ public class ScoreManager <T extends Score>{
 
     /**
      * Get all scores in the database;
-     * @param context the context of the app
+     * @param context the context of the app.
      * @return the list of scores.
      */
     private List<Score> getGameToScore(Context context){
@@ -78,10 +78,11 @@ public class ScoreManager <T extends Score>{
         scores.add(score);
         dataStream.saveScores(scores, context);
     }
+
     public Map getScorebyUser(String Name){
         return null;
-
     }
+
     public Map<String, Score> getScores (){
         return null;
     }

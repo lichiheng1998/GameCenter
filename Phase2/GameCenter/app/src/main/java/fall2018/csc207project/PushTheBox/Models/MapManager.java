@@ -1,5 +1,6 @@
 package fall2018.csc207project.PushTheBox.Models;
 
+import android.content.Context;
 import android.util.SparseIntArray;
 
 import java.io.Serializable;
@@ -72,8 +73,8 @@ public class MapManager implements Serializable {
     /**
      * Initialize a new manager to manage a new map.
      */
-    public MapManager(int level, HashMap<String,Object> levelInfo, int undoTimes){
-        this.levelInfo = levelInfo;
+    public MapManager(int level, int undoTimes, Context context){
+        this.levelInfo = new LevelFactory(context).getGameElements(level);
         this.level = level;
         createGameByLevel();
         initTileBg();

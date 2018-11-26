@@ -73,7 +73,7 @@ public class MemoGamePresenter implements GamePresenter{
      * @param pos the position that user taps.
      */
     public void verify(int pos){
-       if (!gameOver && nextToVerify.getId() == pos) {
+        if (!gameOver && nextToVerify.getId() == pos) {
             view.flashButtonToBlue(pos, flashDelay);
             successTap += 1;
             view.updateScore(successTap);
@@ -82,8 +82,9 @@ public class MemoGamePresenter implements GamePresenter{
                 memoManager.updateActiveTiles();
                 startCycle();
             }
-       } else {
+        } else {
             view.flashButtonToRed(pos, flashDelay);
+            view.showGameOverDialog(successTap, memoManager.getNewInstance());
             gameOver = true;
         }
     }

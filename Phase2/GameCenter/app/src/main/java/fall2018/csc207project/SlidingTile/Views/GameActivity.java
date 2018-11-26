@@ -1,4 +1,4 @@
-package fall2018.csc207project.SlidingTile.Controllers;
+package fall2018.csc207project.SlidingTile.Views;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import fall2018.csc207project.SlidingTile.Controllers.BoardGamePresenter;
+import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
 import fall2018.csc207project.R;

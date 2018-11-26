@@ -1,29 +1,22 @@
-package fall2018.csc207project.PushTheBox.Controllers;
+package fall2018.csc207project.PushTheBox.View;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Map;
-
+import fall2018.csc207project.PushTheBox.Controllers.BoxGamePresenter;
+import fall2018.csc207project.PushTheBox.Controllers.MapAdapter;
 import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
-import fall2018.csc207project.PushTheBox.View.MapView;
-import fall2018.csc207project.PushTheBox.View.OnSwipeListener;
-import fall2018.csc207project.PushTheBox.View.SwipeDetectGridView;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
 
@@ -68,41 +61,28 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
 
     private AlertDialog dialog;
 
-    private LevelFactory levelFactory;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.presenter = new BoxGamePresenter(this,getApplicationContext());
         setContentView(R.layout.box_gaming);
-        setupLevelFactory();
         setupMapManager();
         undoText = findViewById(R.id.StepsToUndo);
         addUndoButtonListener();
         addStepInputListener();
     }
 
-
-    private void setupLevelFactory() {
-        if (getIntent().hasExtra("levelFactory")) {
-            levelFactory = (LevelFactory) getIntent().getSerializableExtra("levelFactory");
-        } else {
-            levelFactory = new LevelFactory(getApplicationContext());
-        }
-    }
-
     private void setupMapManager(){
         MapManager mapManager;
         if (getIntent().hasExtra("save")){
+            Log.e("werid", "setupMapManager: here");
             mapManager = (MapManager) getIntent().getSerializableExtra("save");
             level = mapManager.getLevel();
             totalUndoTimes = mapManager.getTotalUndoTimes();
         }else {
             level = (int) getIntent().getSerializableExtra("level");
             totalUndoTimes = (int) getIntent().getSerializableExtra("undoStep");
-            mapManager = new MapManager(level, levelFactory.getGameElements(level),
-                    totalUndoTimes);
+            mapManager = new MapManager(level, totalUndoTimes, getApplicationContext());
         }
         tileBgs = mapManager.getTilesBg();
         setupGridView(mapManager);
@@ -225,7 +205,6 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
             @Override
             public void onClick(View v) {
                 Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-                tmp.putExtra("levelFactory", levelFactory);
                 tmp.putExtra("level", level);
                 tmp.putExtra("undoStep", totalUndoTimes);
                 startActivity(tmp);
@@ -247,7 +226,6 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
                 }else {
                     Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
                     tmp.putExtra("level", level + 1);
-                    tmp.putExtra("levelFactory", levelFactory);
                     tmp.putExtra("undoStep", totalUndoTimes);
                     startActivity(tmp);
                 }

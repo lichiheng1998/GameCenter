@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import fall2018.csc207project.Memorization.Models.MemoManager;
+import fall2018.csc207project.Memorization.Views.MemoGameActivity;
 import fall2018.csc207project.R;
 /**
  * Class represents the memorization master activity that user can select the complexity of the board.
