@@ -138,4 +138,13 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
     public int getScoreTotal() {
         return scoreTotal;
     }
+
+    /**
+     * Get the current height for this MemoManager.
+     *
+     * @return the current height for this MemoManager
+     */
+    public int getHeightDifficulty() {
+        return height;
+    }
 }
