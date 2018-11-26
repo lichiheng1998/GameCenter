@@ -241,7 +241,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
 
     private void startNewGame(int level, Boolean ifCloseDialog){
         Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
-        tmp.putExtra("level", level + 1);
+        tmp.putExtra("level", level);
         tmp.putExtra("undoStep", totalUndoTimes);
         startActivity(tmp);
         if (ifCloseDialog){
