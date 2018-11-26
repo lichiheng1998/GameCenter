@@ -86,12 +86,19 @@ public class BoxGamePresenter implements Observer {
         saveManager.saveToFile(saveSlot, context);
     }
 
+    /**
+     * When undo button is clicked, process undo.
+     * @param step the number of undo steps.
+     */
     public void onUndoButtonClicked(int step){
         if(!mapManager.canProcessUndo(step)) {
             view.makeToastNoUndoTimesLeftText();
         }
     }
 
+    /**
+     * When undo text is clicked, show number picker for user to choose undo steps.
+     */
     public void onUndoTextClicked(){
         view.showNumberPicker();
     }
