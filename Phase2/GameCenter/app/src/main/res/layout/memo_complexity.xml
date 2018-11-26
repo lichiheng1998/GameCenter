@@ -58,13 +58,13 @@
         android:textSize="17sp" />
 
     <Switch
-        android:id="@+id/hardmode"
+        android:id="@+id/mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="156dp"
-        android:textStyle="bold|italic"
+        android:text="Hard Mode"
         android:textSize="20sp"
-        android:text="Hard Mode" />
+        android:textStyle="bold|italic" />
 </RelativeLayout>

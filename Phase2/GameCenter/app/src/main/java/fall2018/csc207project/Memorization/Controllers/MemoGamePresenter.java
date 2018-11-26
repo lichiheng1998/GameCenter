@@ -23,6 +23,7 @@ public class MemoGamePresenter implements GamePresenter{
     private Iterator<MemoTile> verifyIterator;
     private MemoTile nextToVerify;
     private boolean isDisplaying;
+    private int life;
     private int period = 2000;
     private int flashDelay = 1000;
     private boolean gameOver;
@@ -32,7 +33,9 @@ public class MemoGamePresenter implements GamePresenter{
         isDisplaying = false;
         gameOver = false;
         successTap = 0;
+        life = 3;
         view.updateScore(successTap);
+        view.updateLife(life);
     }
 
     /**
@@ -54,6 +57,7 @@ public class MemoGamePresenter implements GamePresenter{
         verifyIterator = memoManager.iterator();
         nextToVerify = getVerifyItems();
         isDisplaying = true;
+        view.updateStatus(true);
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -62,6 +66,7 @@ public class MemoGamePresenter implements GamePresenter{
                     flashMemoTile(iterator.next());
                 } else {
                     isDisplaying = false;
+                    view.updateStatus(false);
                     this.cancel();
                 }
             }
@@ -74,30 +79,40 @@ public class MemoGamePresenter implements GamePresenter{
      */
     public void verify(int pos){
         if (!gameOver && nextToVerify.getId() == pos) {
-            view.flashButtonToBlue(pos, flashDelay);
-            successTap += 1;
-            view.updateScore(successTap);
-            nextToVerify = getVerifyItems();
-            if (nextToVerify == null) {
-                memoManager.updateActiveTiles();
-                startCycle();
-            }
+            success(pos);
         } else {
-            view.flashButtonToRed(pos, flashDelay);
-            view.showGameOverDialog(successTap, memoManager.getNewInstance());
-            gameOver = true;
+            fail(pos);
         }
     }
 
+    private void success(int pos){
+        view.flashButtonToColor(pos, flashDelay, MemoTile.PRESSCOLOR);
+        successTap += 1;
+        view.updateScore(successTap);
+        nextToVerify = getVerifyItems();
+        if (nextToVerify == null) {
+            memoManager.updateActiveTiles();
+            startCycle();
+        }
+    }
+    private void fail(int pos){
+        view.flashButtonToColor(pos, flashDelay, MemoTile.WRONGCOLOR);
+        life = life == 0 ? 0 : life-1;
+        view.updateLife(life);
+        gameOver = life == 0;
+        if(gameOver){
+            view.showGameOverDialog(successTap, memoManager.getNewInstance());
+        }
+    }
     /**
      * Flash the tile corresponding to the status of the tile. Green for active tile, red for fake
      * tile.
      */
     public void flashMemoTile(MemoTile tile){
         if(tile.status == MemoTile.TYPEACTIVE){
-            view.flashButtonToGreen(tile.getId(), flashDelay);
+            view.flashButtonToColor(tile.getId(), flashDelay, MemoTile.ACTIVECOLOR);
         } else if (tile.status == MemoTile.TYPEFAKE) {
-            view.flashButtonToRed(tile.getId(), flashDelay);
+            view.flashButtonToColor(tile.getId(), flashDelay, MemoTile.FAKECOLOR);
         }
     }
 

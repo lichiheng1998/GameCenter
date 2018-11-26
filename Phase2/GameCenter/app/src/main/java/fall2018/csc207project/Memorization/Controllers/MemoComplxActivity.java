@@ -78,13 +78,15 @@ public class MemoComplxActivity extends AppCompatActivity {
     }
 
     private void hardModeSwitchListener(){
-        Switch hardModeSwitch = findViewById(R.id.hardmode);
+        final Switch hardModeSwitch = findViewById(R.id.mode);
         hardModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
+                    hardModeSwitch.setText("Crazy Mode");
                     level = true;
                 } else {
+                    hardModeSwitch.setText("Hard Mode");
                     level = false;
                 }
             }
