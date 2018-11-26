@@ -9,11 +9,6 @@ public class BoxGameCalculator implements ScoreCalculator<BoxScore> {
         int basicPoints = 50;
         int finalScore = scoreInfo.level * basicPoints
                          - 2 * scoreInfo.moveSteps - scoreInfo.undoSteps;
-        if (finalScore > 0){
-            return finalScore;
-        }
-        else {
-            return 0;
-        }
+        return (finalScore > 0) ? finalScore : 0;
     }
 }
