@@ -10,7 +10,19 @@ import fall2018.csc207project.models.ScoreCalculator;
 import fall2018.csc207project.models.ScoreDataStream;
 import fall2018.csc207project.models.ScoreManager;
 
+/**
+ * The class that is used to calculate the score, store and retrieve the score.
+ */
 public class SlidingTileScoreManager extends ScoreManager<TileScore>{
+
+    /**
+     * Construct a new SlidingTileScoreManager
+     * by given a dataStream, a user, and a score calculator.
+     *
+     * @param dataStream the score dataStream
+     * @param user the current user
+     * @param calculator a score calculator
+     */
     public SlidingTileScoreManager(ScoreDataStream dataStream,
                             String user, ScoreCalculator<TileScore> calculator) {
         super(dataStream, "SlidingTilesGame", user, calculator);
