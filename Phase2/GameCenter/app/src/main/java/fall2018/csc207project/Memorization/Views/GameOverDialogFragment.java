@@ -24,8 +24,19 @@ import fall2018.csc207project.R;
  */
 public class GameOverDialogFragment extends DialogFragment {
 
+    /**
+     * button to restart a new game
+     */
     private Button restartButton;
+
+    /**
+     * button to quit
+     */
     private Button quitButton;
+
+    /**
+     * text view for displaying score
+     */
     private TextView scoreField;
     GameOverDialogListener listener;
 
