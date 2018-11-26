@@ -70,6 +70,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         undoText = findViewById(R.id.StepsToUndo);
         addUndoButtonListener();
         addStepInputListener();
+        addResetButtonListener();
     }
 
     private void setupMapManager(){
@@ -133,6 +134,23 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
             @Override
             public void onClick(View v) {
                 presenter.onUndoButtonClicked(Integer.parseInt(undoText.getText().toString()));
+            }
+        });
+    }
+
+    /**
+     * Activate the reset button.
+     */
+    private void addResetButtonListener() {
+        Button resetButton = findViewById(R.id.ResetButton);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tmp = new Intent(getApplicationContext(), BoxGameActivity.class);
+                tmp.putExtra("level", level);
+                tmp.putExtra("undoStep", totalUndoTimes);
+                startActivity(tmp);
+                finish();
             }
         });
     }
