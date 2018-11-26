@@ -203,6 +203,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         createNextButton(completeView);
         completeBuilder.setView(completeView);
         dialog = completeBuilder.create();
+        dialog.setCancelable(false);
         dialog.show();
     }
 

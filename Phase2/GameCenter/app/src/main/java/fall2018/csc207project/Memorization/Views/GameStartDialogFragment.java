@@ -9,17 +9,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-
-import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.R;
 
+/**
+ * Instruction Dialog Fragment for Memorization Master
+ */
 public class GameStartDialogFragment extends DialogFragment {
-    private MemoGamePresenter presenter;
+    /**
+     * interface that handles events after dialog appear
+     */
     private StartDialogListener listener;
 
 
     /**
      * Adapted from "https://www.cs.dartmouth.edu/~sergey/cs65/fragments-puzzles.txt"
+     * Ensure interface StartDialogListener is implemented
      */
     @Override
     public void onAttach(Context context) {
@@ -36,9 +40,18 @@ public class GameStartDialogFragment extends DialogFragment {
         }
     }
 
+    /**
+     * interface for events after buttons in the dialog are clicked
+     */
     interface StartDialogListener{
         void onButtonClicked();
     }
+
+    /**
+     * create a dialog that gives game instruction
+     * @param savedInstanceState saved instances
+     * @return a dialog object
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
