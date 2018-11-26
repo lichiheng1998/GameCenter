@@ -14,11 +14,6 @@ public class TileGameCalculator implements ScoreCalculator<TileScore> {
         } else if (scoreInfo.complexity == 5) {
             finalScore = maxScore - scoreInfo.moveSteps - scoreInfo.undoSteps;
         }
-        if (finalScore > 0){
-            return finalScore;
-        }
-        else {
-            return 0;
-        }
+        return (finalScore > 0) ? finalScore : 0;
     }
 }
