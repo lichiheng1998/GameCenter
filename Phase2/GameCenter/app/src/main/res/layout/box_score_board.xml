@@ -69,9 +69,10 @@
     <ListView
         android:id="@+id/boxScoreBoard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="131dp" />
+        android:layout_height="469dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintTop_toTopOf="@+id/playerName"
+        tools:layout_editor_absoluteX="8dp" />
 
     <TextView
         android:id="@+id/globalDisplay"
