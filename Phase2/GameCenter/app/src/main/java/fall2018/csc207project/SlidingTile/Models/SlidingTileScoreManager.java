@@ -4,7 +4,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import fall2018.csc207project.models.ScoreManager;
+import fall2018.csc207project.Models.ScoreManager;
 
 /**
  * The class that is used to calculate the score, store and retrieve the score.
@@ -120,7 +120,7 @@ public class SlidingTileScoreManager {
         } else {
             top3ForComplexity.addAll(scoresForComplexity);
             for (int i = 0; i < 3 - scoresForComplexity.size(); i++) {
-                top3ForComplexity.add(new TileScore("placeholder",complexity, 1000, 1000));
+                top3ForComplexity.add(new TileScore(complexity, 1000, 1000));
             }
         }
         return top3ForComplexity;

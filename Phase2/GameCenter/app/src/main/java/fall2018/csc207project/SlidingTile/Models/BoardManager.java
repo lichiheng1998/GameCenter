@@ -40,11 +40,11 @@ public class BoardManager implements Serializable, Iterable<Tile>{
         this.undoTimes = undoTimes;
         stackOfMovements = new Stack<>();
         if (dim == 3) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 81);
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 2);
         } else if (dim == 4) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 256);
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 2);
         } else if (dim == 5) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 625);
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 2);
         }
     }
 
@@ -170,6 +170,7 @@ public class BoardManager implements Serializable, Iterable<Tile>{
     public int getComplexity(){
         return complexity;
     }
+
 
     public void subscribe(Observer o){
         board.addObserver(o);

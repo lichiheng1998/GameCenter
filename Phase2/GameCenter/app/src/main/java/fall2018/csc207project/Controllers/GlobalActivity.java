@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import fall2018.csc207project.R;
-import fall2018.csc207project.models.DataStream;
-import fall2018.csc207project.models.GlobalDataStream;
 
 /**
  * The initial activity after user run the app

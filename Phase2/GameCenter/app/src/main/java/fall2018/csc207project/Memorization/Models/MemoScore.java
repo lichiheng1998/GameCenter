@@ -1,6 +1,6 @@
 package fall2018.csc207project.Memorization.Models;
 
-import fall2018.csc207project.models.Score;
+import fall2018.csc207project.Models.Score;
 
 public class MemoScore extends Score{
 

@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
@@ -17,10 +15,10 @@ import fall2018.csc207project.SlidingTile.Models.Tile;
 import fall2018.csc207project.SlidingTile.Models.TileGameCalculator;
 import fall2018.csc207project.SlidingTile.Models.TileScore;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
-import fall2018.csc207project.models.DatabaseUtil;
-import fall2018.csc207project.models.SaveManager;
-import fall2018.csc207project.models.SaveSlot;
-import fall2018.csc207project.models.ScoreManager;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.SaveManager;
+import fall2018.csc207project.Models.SaveSlot;
+import fall2018.csc207project.Models.ScoreManager;
 
 public class BoardGamePresenter implements GamePresenter {
     /**
@@ -76,7 +74,7 @@ public class BoardGamePresenter implements GamePresenter {
             saveSlot.saveToAutoSave(boardManager);
             saveManager.saveToFile(saveSlot, context);
             if (boardManager.puzzleSolved() && !isSolved){
-                TileScore score = new TileScore( currentUser,boardManager.getComplexity()
+                TileScore score = new TileScore(boardManager.getComplexity()
                         , boardManager.getTotalUndoSteps(), boardManager.getTotalMoveSteps());
                 TileGameCalculator calculator = new TileGameCalculator();
                 ScoreManager<TileScore> scoreManager= DatabaseUtil.getScoreManager("SlidingTile", currentUser,calculator);

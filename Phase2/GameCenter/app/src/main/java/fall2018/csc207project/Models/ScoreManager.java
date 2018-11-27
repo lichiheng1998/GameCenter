@@ -1,4 +1,4 @@
-package fall2018.csc207project.models;
+package fall2018.csc207project.Models;
 
 import android.content.Context;
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class ScoreManager <T extends Score>{
         List<T> retArray = new ArrayList<>();
         for (Score score : scores){
             if(score.game.equals(currentGame)){
-                retArray.add((T)score);
+                       retArray.add((T)score);
             }
         }
         return retArray;
