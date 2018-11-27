@@ -16,20 +16,19 @@ import java.util.Map;
 public class LevelFactory implements Serializable {
 
     /**
-     * The array list that stores all the background tile for the map
-     */
-    private List<BgTile> bgElements = new ArrayList<>();
-
-    /**
      * The hash map that maps all the information of the game to its corresponding level
      */
     private Map<Integer, Integer[][]> allLevels = new HashMap<>();
+
+    private Context context;
+
+    private HashMap<String, Object> gameElements = new HashMap<>();
 
     /**
      * Create a new LevelFactory to initialize a game.
      */
     public LevelFactory(Context context){
-        initAllLevels(context);
+        this.context = context;
     }
 
 
@@ -39,10 +38,9 @@ public class LevelFactory implements Serializable {
      * @return Hash Map which maps the name of the needed element to the element
      */
     public HashMap<String, Object> getGameElements(int level){
-        HashMap<String, Object> gameElements = new HashMap<>();
         List<BgTile> bgElements = new ArrayList<>();
         ArrayList<Box> boxArrayList = new ArrayList<>();
-        Integer[][] tmp = allLevels.get(level);
+        Integer[][] tmp = getInfoFromFile(level);
         int height  = tmp[0][0];
         int width = tmp[1][0];
         for(int i = 0; i < height * width; i++){
@@ -73,29 +71,34 @@ public class LevelFactory implements Serializable {
     /**
      * Initialize the hash map which stores all the elements for each level of game.
      * */
-    private void initAllLevels(Context context) {
-            AssetManager assetManager = context.getAssets();
-            try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        assetManager.open("box_levels.txt")));
-                String nextLine = reader.readLine();
-                int countLevel = 1;
-                while ((nextLine = reader.readLine()) != null) {
+    private Integer[][] getInfoFromFile(int level) {
+        Integer[][] levelInfo = new Integer[6][];;
+        AssetManager assetManager = context.getAssets();
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    assetManager.open("box_levels.txt")));
+            String nextLine = reader.readLine();
+            int countLevel = 0;
+            while ((nextLine = reader.readLine()) != null && countLevel != level) {
+                countLevel++;
+                if (countLevel == level) {
                     String[] nextLevel = nextLine.split("-");
-                    Integer[][] levelInfo = new Integer[nextLevel.length][];
                     for (int i = 0; i < nextLevel.length; i++) {
                         levelInfo[i] = strArrToIntArr(nextLevel[i].split(","));
                     }
-                    allLevels.put(countLevel, levelInfo);
-                    countLevel++;
-
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return levelInfo;
     }
 
-
+    /**
+     * Convert an array of string representation of integers into an array of integers.
+     * @param strArr an array of string representation of integers
+     * @return the array of integers
+     */
     private Integer[] strArrToIntArr(String[] strArr){
         Integer[] intArr = new Integer[strArr.length];
         if (!strArr[0].equals("")) {
