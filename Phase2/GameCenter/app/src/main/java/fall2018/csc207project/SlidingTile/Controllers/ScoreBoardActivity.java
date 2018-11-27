@@ -14,8 +14,8 @@ import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.SlidingTileScoreManager;
 import fall2018.csc207project.SlidingTile.Models.TileGameCalculator;
 import fall2018.csc207project.SlidingTile.Models.TileScore;
-import fall2018.csc207project.models.DatabaseUtil;
-import fall2018.csc207project.models.ScoreManager;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.ScoreManager;
 
 public class ScoreBoardActivity extends AppCompatActivity {
 
