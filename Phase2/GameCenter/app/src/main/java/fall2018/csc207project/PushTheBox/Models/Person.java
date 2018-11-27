@@ -33,7 +33,14 @@ public class Person extends Observable implements Serializable {
      * @param posChange the changing of position to get new position
      */
     public void walk(int posChange) {
-        position = position + posChange;
+        try {
+            position = position + posChange;
+            if (position < 0) {
+                throw new IllegalAccessException("There does not exist negative position!");
+            }
+        }catch(IllegalAccessException e){
+            position = position - posChange;
+        }
         faceTo(posChange);
         setChanged();
         notifyObservers();
