@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc207project.PushTheBox.View.BoxGameActivity;
+import fall2018.csc207project.PushTheBox.View.LevelView;
 import fall2018.csc207project.R;
 
-public class LevelActivity extends AppCompatActivity {
+public class LevelActivity extends AppCompatActivity implements LevelView {
 
     GridView gridView;
 
@@ -26,8 +27,11 @@ public class LevelActivity extends AppCompatActivity {
     private int level;
     private int undoStep;
 
+    private LevelPresenter presenter;
+
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        this.presenter = new LevelPresenter(this, getApplicationContext());
         undoStep = 3;
         setContentView(R.layout.box_levels);
         gridView = findViewById(R.id.boxLevelGrid);
@@ -66,10 +70,7 @@ public class LevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText UndoSteps = findViewById(R.id.SetUndoTimes);
                 String steps = UndoSteps.getText().toString();
-                undoStep = Integer.parseInt(steps);
-                Toast.makeText(getApplicationContext(),
-                        "Successfully set the Total Undo Steps to: " + undoStep,
-                        Toast.LENGTH_SHORT).show();
+                presenter.acceptButtonClicked(steps);
             }
         });
     }
@@ -78,19 +79,16 @@ public class LevelActivity extends AppCompatActivity {
         Intent tmp = new Intent(this, BoxGameActivity.class);
         tmp.putExtra("undoStep",undoStep);
         tmp.putExtra("level",level);
-        if (undoStep == 3) {
-            Toast.makeText(getApplicationContext(),
-                    "The Total Undo Steps set to default value: 3",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(),
-                    "The Total Undo Steps set to: " + undoStep,
-                    Toast.LENGTH_SHORT).show();
-        }
+        presenter.undoStepsSetted(undoStep);
         startActivity(tmp);
         finish();
     }
 
+
+    @Override
+    public void makeToastText(String text){
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+    }
 
     public void display(){
         gridView.setAdapter(new BaseAdapter() {
