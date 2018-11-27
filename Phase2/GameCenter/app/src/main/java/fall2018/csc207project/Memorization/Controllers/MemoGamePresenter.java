@@ -97,6 +97,9 @@ public class MemoGamePresenter implements GamePresenter{
         if(gameOver){
             memoManager.setScoreTotal(successTap);
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
+
+
+
         }
     }
     /**

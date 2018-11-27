@@ -171,6 +171,7 @@ public class BoardManager implements Serializable, Iterable<Tile>{
         return complexity;
     }
 
+
     public void subscribe(Observer o){
         board.addObserver(o);
     }

@@ -78,4 +78,12 @@ public class Person extends Observable implements Serializable {
         return imageId;
     }
 
+    /**
+     * Compare if person is the same.
+     * @param person the person to compare with.
+     * @return if person is the same person.
+     */
+    public Boolean equals(Person person){
+        return person.getPosition() == this.getPosition();
+    }
 }

@@ -28,11 +28,10 @@ public class TileScore extends Score{
      * @param undoSteps the total undo steps the user used in Tile Game
      * @param moveSteps the total movement steps the user moves in Tile Game
      */
-    public TileScore(int complexity, int undoSteps, int moveSteps){
+    public TileScore( int complexity, int undoSteps, int moveSteps){
         this.complexity = complexity;
         this.undoSteps = undoSteps;
         this.moveSteps = moveSteps;
-
         this.game = "SlidingTile";
     }
     public String toString(){

@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/quit"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/scoreBoardScoer" />
 
     <TextView
         android:id="@+id/textView16"
@@ -48,16 +48,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Score:"
-        app:layout_constraintStart_toStartOf="@+id/textView16"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintStart_toStartOf="@+id/scoreBoardUser"
+        app:layout_constraintTop_toBottomOf="@+id/scoreBoardUser" />
 
     <TextView
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView17"
-        app:layout_constraintEnd_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="@+id/textView17" />
+        app:layout_constraintBottom_toBottomOf="@+id/scoreBoardScoer"
+        app:layout_constraintEnd_toEndOf="@+id/scoreBoardUser"
+        app:layout_constraintTop_toTopOf="@+id/scoreBoardScoer" />
 
 </android.support.constraint.ConstraintLayout>

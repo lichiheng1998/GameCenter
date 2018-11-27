@@ -77,4 +77,13 @@ public class Box implements Serializable {
     public int getImage(){
         return currImage;
     }
+
+    /**
+     * Compare if boxes are the same.
+     * @param box the box to compare with.
+     * @return if boxes are the same box.
+     */
+    public Boolean equals(Box box){
+        return box.getPosition() == this.getPosition();
+    }
 }
