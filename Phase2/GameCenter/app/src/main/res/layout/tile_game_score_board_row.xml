@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/scoreBoardUser"
         android:layout_width="100dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:text="TextView"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/textView7"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
