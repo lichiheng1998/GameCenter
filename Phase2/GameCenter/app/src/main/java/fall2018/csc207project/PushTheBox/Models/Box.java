@@ -30,11 +30,6 @@ public class Box implements Serializable {
      */
     private int currImage = normalImage;
 
-    /**
-     * Whether the box is at a destination point.
-     */
-    private Boolean atDestination = false;
-
 
     /**
      * A new box with initial position.
@@ -57,7 +52,6 @@ public class Box implements Serializable {
      * The box has arrived at a destination point.
      */
     public void arriveDestination(){
-        atDestination = true;
         currImage = winningImage;
     }
 
@@ -65,7 +59,6 @@ public class Box implements Serializable {
      * The box have left a destination point.
      */
     public void  leaveDestination(){
-        atDestination = false;
         currImage = normalImage;
     }
 

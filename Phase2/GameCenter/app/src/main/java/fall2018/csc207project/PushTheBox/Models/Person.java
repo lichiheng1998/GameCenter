@@ -41,7 +41,7 @@ public class Person extends Observable implements Serializable {
 
     /**
      * Change the direction the person facing to the direction he is going to.
-     * @param posChange if it is -1, then face to the left. If it is 1, then face to the right. Otherwise, face forward.
+     * @param posChange the change in position
      */
     private void faceTo(int posChange){
         if (posChange == -1){
