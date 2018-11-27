@@ -75,7 +75,7 @@ public class BoardGamePresenter implements GamePresenter {
             saveManager.saveToFile(saveSlot, context);
             if (boardManager.puzzleSolved()){
                 TileScore score = new TileScore(boardManager.getComplexity()
-                        , boardManager.getTotalUndoSteps(), boardManager.getTotalUndoSteps());
+                        , boardManager.getTotalUndoSteps(), boardManager.getTotalMoveSteps());
                 TileGameCalculator calculator = new TileGameCalculator();
                 ScoreManager<TileScore> scoreManager= DatabaseUtil.getScoreManager("SlidingTile", currentUser,calculator);
                 scoreManager.saveScore(score, context);
