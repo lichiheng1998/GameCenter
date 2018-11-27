@@ -84,6 +84,14 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
     }
 
     /**
+     * return the list of MemoTile Displayed
+     * @return list of MemoTile displayed
+     */
+    public List<MemoTile> getSequenceOrder() {
+        return sequenceOrder;
+    }
+
+    /**
      * iterator of MemoTile
      * @return MemoTile iterator
      */
