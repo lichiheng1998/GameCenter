@@ -28,14 +28,14 @@
         android:text="4x5" />
 
     <Button
-        android:id="@+id/Memobutton5x6"
+        android:id="@+id/Memobutton5x5"
         android:layout_width="57dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="52dp"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="23dp"
-        android:text="5x6" />
+        android:layout_marginTop="52dp"
+        android:text="5x5" />
 
     <ListView
         android:id="@+id/memoScoreBoard"
