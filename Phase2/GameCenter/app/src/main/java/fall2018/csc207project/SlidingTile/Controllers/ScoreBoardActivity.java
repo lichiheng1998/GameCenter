@@ -1,10 +1,12 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,30 +26,32 @@ public class ScoreBoardActivity extends AppCompatActivity {
     private ArrayList sortList;
     private ArrayList<ArrayList<TileScore>> personalList;
     private String currentUser;
-    private TileGameCalculator calculator;
     private ListView scoreList;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-
         SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
-        calculator = new TileGameCalculator();
+        TileGameCalculator calculator = new TileGameCalculator();
         ScoreManager <TileScore> globalScoreManager;
         globalScoreManager = DatabaseUtil.getScoreManager("SlidingTile", this.currentUser, calculator);
         this.scoreManager = new SlidingTileScoreManager(globalScoreManager);
         setContentView(R.layout.tile_game_score_board);
         this.scoreList = this.findViewById(R.id.scoreBoard);
         switchToLevel3();
-        addButtonListeners();
+        this.personalList = scoreManager.getUserTopThreeScores(this);
+        setTexts();
+        SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
+        this.scoreList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
-
-    public void addButtonListeners(){
+    private void createButton(){
         add3ButtonListener();
         add4ButtonListener();
         add5ButtonListener();
     }
+
     public void setTexts(){
         ((TextView)findViewById(R.id.currentPlayer)).setText(currentUser);
         ((TextView)findViewById(R.id.playerscore3x1)).setText(this.personalList.get(0).get(0).value +"");
@@ -62,10 +66,11 @@ public class ScoreBoardActivity extends AppCompatActivity {
     }
 
     public void add3ButtonListener (){
-        Button Level3Listener = findViewById(R.id.Button3x3);
+        Button Level3Listener = findViewById(R.id.button3x3);
         Level3Listener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createButton();
                 switchToLevel3();
             }
         });
@@ -76,6 +81,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         Level4Listener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createButton();
                 switchToLevel4();
             }
         });
@@ -85,12 +91,13 @@ public class ScoreBoardActivity extends AppCompatActivity {
         Level3Listener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createButton();
                 switchToLevel5();
             }
         });
     }
     public void switchToLevel3(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 3);
+        this.sortList = scoreManager.getTopTenScores(this, 3);
         this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
@@ -98,7 +105,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
     public void switchToLevel4(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 4);
+        this.sortList = scoreManager.getTopTenScores(this, 4);
         this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
@@ -107,11 +114,12 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
     }
     public void switchToLevel5(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 5);
+        this.sortList = scoreManager.getTopTenScores(this, 5);
         this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
         this.scoreList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
     }
 }
