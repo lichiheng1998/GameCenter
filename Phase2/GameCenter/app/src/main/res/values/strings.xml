@@ -9,4 +9,6 @@
         on the buttons in exact order as they were shown</string>
     <string name="boxStarting">Welcome To Push the Box\nA Game where you control the character
         to push the boxes to red destination point</string>
+    <string name="memo_instructions">"Challenge your memorization!\nPlease try to remember as much numbers in correct order at displaying time.\nWhen it's your turn, click on the tiles in order you just saw in order to earn marks.\nBeware! If you choose crazy mode, the tiles displayed orange are just there to confuse you!You should ignore them and only click on tiles showed in green!"</string>
+    <string name="memo_proceed">Understand!</string>
 </resources>

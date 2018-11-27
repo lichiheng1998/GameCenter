@@ -89,8 +89,7 @@ public class StartingActivity extends AppCompatActivity {
     }
 
     private void switchToScoreboard() {
-//        Intent tmp = new Intent(this, Scoreboard.class);
-//        tmp = tmp.putExtra("GlobalCenter", globalCenter);
-//        startActivity(tmp);
+        Intent tmp = new Intent(this, ScoreBoardActivity.class);
+        startActivity(tmp);
     }
 }

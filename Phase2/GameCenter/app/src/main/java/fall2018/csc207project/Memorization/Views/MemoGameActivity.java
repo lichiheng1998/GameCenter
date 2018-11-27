@@ -3,6 +3,7 @@ package fall2018.csc207project.Memorization.Views;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
@@ -25,7 +26,8 @@ import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 
 public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
-        GameOverDialogFragment.GameOverDialogListener {
+        GameOverDialogFragment.GameOverDialogListener,
+        GameStartDialogFragment.StartDialogListener {
 
     /**
      * Represent the board view of the game.
@@ -61,7 +63,9 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         presenter.setMemoManager(memoManager);
         setupButtons(memoManager.getSize());
         setupGridView(memoManager);
-        presenter.startCycle();
+        DialogFragment dialog = new GameStartDialogFragment();
+        dialog.setCancelable(false);
+        dialog.show(getSupportFragmentManager(), "StartDialog");
     }
 
     /**
@@ -193,10 +197,15 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     }
 
     /**
-     * finish when user choose to exit
+     * Finish when user choose to exit
      */
     @Override
     public void onRefresh() {
         finish();
+    }
+
+    @Override
+    public void onButtonClicked() {
+        presenter.startCycle();
     }
 }
