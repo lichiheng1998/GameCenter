@@ -76,6 +76,22 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
     }
 
     /**
+     * boolean value represent if game is in crazy mode
+     * @return whether the game in crazy mode
+     */
+    public boolean isLevel() {
+        return level;
+    }
+
+    /**
+     * return the list of MemoTile Displayed
+     * @return list of MemoTile displayed
+     */
+    public List<MemoTile> getSequenceOrder() {
+        return sequenceOrder;
+    }
+
+    /**
      * iterator of MemoTile
      * @return MemoTile iterator
      */
