@@ -18,7 +18,7 @@ import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
 import fall2018.csc207project.models.SaveSlot;
 
-public class BoxGamePresenter implements Observer {
+public class BoxGamePresenter implements GamePresenter {
     /**
      * The map manager.
      */

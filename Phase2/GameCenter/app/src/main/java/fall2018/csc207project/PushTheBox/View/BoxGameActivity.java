@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fall2018.csc207project.PushTheBox.Controllers.BoxGamePresenter;
+import fall2018.csc207project.PushTheBox.Controllers.GamePresenter;
 import fall2018.csc207project.PushTheBox.Controllers.MapAdapter;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
@@ -30,7 +31,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
     /**
      * The presenter of the map.
      */
-    private BoxGamePresenter presenter;
+    private GamePresenter presenter;
 
     /**
      * The grid view.

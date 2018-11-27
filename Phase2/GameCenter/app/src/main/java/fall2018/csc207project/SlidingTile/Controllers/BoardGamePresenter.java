@@ -20,7 +20,7 @@ import fall2018.csc207project.models.DatabaseUtil;
 import fall2018.csc207project.models.SaveManager;
 import fall2018.csc207project.models.SaveSlot;
 
-public class BoardGamePresenter implements Observer {
+public class BoardGamePresenter implements GamePresenter {
     /**
      * The movement processing logic
      */

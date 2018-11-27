@@ -94,10 +94,10 @@ public class GameOverDialogFragment extends DialogFragment {
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                listener.onRefresh();
                 Intent tmp = new Intent(getActivity(), MemoGameActivity.class);
                 tmp.putExtra("save", manager);
                 startActivity(tmp);
-                listener.onRefresh();
             }
         });
     }
@@ -106,8 +106,6 @@ public class GameOverDialogFragment extends DialogFragment {
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent tmp = new Intent(getActivity(), MemoStartingActivity.class);
-                startActivity(tmp);
                 listener.onRefresh();
             }
         });
