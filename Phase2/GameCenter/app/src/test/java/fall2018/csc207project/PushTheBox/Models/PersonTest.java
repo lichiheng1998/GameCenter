@@ -55,5 +55,4 @@ public class PersonTest {
         assertEquals("position after change is invalid so posiiton should not" +
                         "change", person.getPosition(), 5);
     }
-
 }
