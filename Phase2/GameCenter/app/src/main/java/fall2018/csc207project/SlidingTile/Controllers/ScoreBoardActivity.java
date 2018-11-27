@@ -1,5 +1,6 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ public class ScoreBoardActivity extends AppCompatActivity {
     private ArrayList<TileScore> sortList = new ArrayList<>();
     private ArrayList<ArrayList<TileScore>> personalList = new ArrayList<>();
     private String currentUser;
-    private TileGameCalculator calculator;
     private ListView scoreList;
 
     @Override
@@ -33,7 +33,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
         SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
-        calculator = new TileGameCalculator();
+        TileGameCalculator calculator = new TileGameCalculator();
         ScoreManager <TileScore> globalScoreManager;
         globalScoreManager = DatabaseUtil.getScoreManager("SlidingTile", this.currentUser, calculator);
         this.scoreManager = new SlidingTileScoreManager(globalScoreManager);
@@ -48,6 +48,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         add4ButtonListener();
         add5ButtonListener();
     }
+    @SuppressLint("SetTextI18n")
     public void setTexts(){
         ((TextView)findViewById(R.id.currentPlayer)).setText(currentUser);
         ((TextView)findViewById(R.id.playerscore3x1)).setText(this.personalList.get(0).get(0).value +"");
@@ -90,7 +91,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         });
     }
     public void switchToLevel3(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 3);
+        this.sortList = scoreManager.getTopTenScores(this, 3);
         this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
@@ -98,7 +99,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
     public void switchToLevel4(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 4);
+        this.sortList = scoreManager.getTopTenScores(this, 4);
         this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
@@ -107,7 +108,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
     }
     public void switchToLevel5(){
-        this.sortList = (ArrayList)scoreManager.getTopTenScores(this, 5);
+        this.sortList = scoreManager.getTopTenScores(this, 5);
         this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
