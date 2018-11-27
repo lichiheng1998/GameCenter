@@ -38,16 +38,17 @@
         android:text="5x5" />
 
     <ListView
-        android:id="@+id/ScoreBoard"
+        android:id="@+id/scoreBoard"
         android:layout_width="match_parent"
-        android:layout_height="349dp"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="218dp" />
+        android:layout_marginTop="218dp"
+        android:fillViewport="true" />
 
     <TextView
-        android:id="@+id/CurrentPlayer"
+        android:id="@+id/currentPlayer"
         android:layout_width="76dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"

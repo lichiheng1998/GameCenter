@@ -25,7 +25,7 @@ public class GameCenterListViewAdapter extends ArrayAdapter<String>{
 
     private Map<String, Integer> bgMap;
 
-    GameCenterListViewAdapter(Context context, List<String> gameList, Map<String, Integer> bgMap){
+    public GameCenterListViewAdapter(Context context, List<String> gameList, Map<String, Integer> bgMap){
         super(context,0, gameList);
         this.bgMap = bgMap;
     }

@@ -11,4 +11,8 @@
         to push the boxes to red destination point</string>
     <string name="memo_instructions">"Challenge your memorization!\nPlease try to remember as much numbers in correct order at displaying time.\nWhen it's your turn, click on the tiles in order you just saw in order to earn marks.\nBeware! If you choose crazy mode, the tiles displayed orange are just there to confuse you!You should ignore them and only click on tiles showed in green!"</string>
     <string name="memo_proceed">Understand!</string>
+    <string name="gallery">Background</string>
+    <string name="clear">Reset Background</string>
+    <string name="logout">Log out</string>
+    <string name="avatar">Avatar</string>
 </resources>

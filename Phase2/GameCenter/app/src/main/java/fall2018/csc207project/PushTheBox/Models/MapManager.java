@@ -40,11 +40,6 @@ public class MapManager implements Serializable {
     private ArrayList<BgTile> bgElements;
 
     /**
-     * The array that stores all the image id that will be displayed on the view.
-     */
-    private Integer[] tileBgs;
-
-    /**
      * The counting of total steps moved.
      */
     private int totalMoveSteps;
@@ -58,26 +53,24 @@ public class MapManager implements Serializable {
      * The number of undo available left.
      */
     private int undoTimes;
-
-    /**
-     * The total number of undo times.
-     */
     private final int totalUndoTimes;
 
+    /**
+     * Stores all the movements taken.
+     */
     private Stack<int[]> stackOfMovements;
 
+    /**
+     * Whether the boxes are moved.
+     */
     public boolean isBoxesMoved = false;
-
-    private HashMap<String, Object> levelInfo;
 
     /**
      * Initialize a new manager to manage a new map.
      */
     public MapManager(int level, int undoTimes, Context context){
-        this.levelInfo = new LevelFactory(context).getGameElements(level);
         this.level = level;
-        createGameByLevel();
-        initTileBg();
+        createGameByLevel(new LevelFactory(context).getGameElements(level));
         this.undoTimes = undoTimes;
         totalUndoTimes = undoTimes;
         this.stackOfMovements = new Stack<>();
@@ -113,9 +106,8 @@ public class MapManager implements Serializable {
 
     /**
      * Check if changing the position into new position is a valid movement.
-     * Movement is only valid when there is no wall and no box on next step OR when there is a box
+     * Movement is only valid when no wall and no box on next step OR when there is a box
      * on next step but no box nor wall on next next step.
-     *
      * @param posChange the changing in position to get new position
      */
     public Boolean isValidMovement(int posChange){
@@ -150,7 +142,7 @@ public class MapManager implements Serializable {
      */
     private void processBoxMovement(int position, int newPosition){
         Objects.requireNonNull(boxAtPos(position)).move(newPosition);
-        if (map.tileAtDestination(newPosition)){
+        if (map.tileIsDestination(newPosition)){
             Objects.requireNonNull(boxAtPos(newPosition)).arriveDestination();
         }else{
             Objects.requireNonNull(boxAtPos(newPosition)).leaveDestination();
@@ -182,6 +174,11 @@ public class MapManager implements Serializable {
         totalUndoSteps++;
     }
 
+    /**
+     * Whether it is available to process the given number of undo steps
+     * @param step the number of steps requested for undo
+     * @return if the request of undo is available
+     */
     public boolean canProcessUndo(int step){
         if (undoTimes == 0 || step > stackOfMovements.size()){
             return false;
@@ -200,27 +197,9 @@ public class MapManager implements Serializable {
     }
 
     /**
-     * Return the total steps you moved.
-     *
-     * @return the total steps you moved
-     */
-    public int getTotalMoveSteps() {
-        return totalMoveSteps;
-    }
-
-    /**
-     * Return the total steps you moved.
-     *
-     * @return the total steps you moved
-     */
-    public int getTotalUndoSteps() {
-        return totalUndoSteps;
-    }
-
-    /**
      * Initialize the game elements by the chosen game level.
      */
-    private void createGameByLevel(){
+    private void createGameByLevel(HashMap<String, Object> levelInfo){
         bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
@@ -251,40 +230,33 @@ public class MapManager implements Serializable {
         return map.getNumCol();
     }
 
-    /**
-     * Return the number of rows
-     * @return number of rows
-     */
-    public int getNumRow(){
-        return map.getNumRow();
-    }
 
     /**
      * Get the array of the background id of all tiles which forms the map.
      * @return the array of the background ids
      */
     public Integer[] getTilesBg(){
-        return tileBgs;
-    }
-
-
-    /**
-     * Initialize the array that stores all the image Id of tiles on the map.
-     */
-    private void initTileBg(){
-        tileBgs = new Integer[bgElements.size()];
+        Integer[] tileBgs = new Integer[bgElements.size()];
         for (int i = 0; i < tileBgs.length; i++ ){
             tileBgs[i] = bgElements.get(i).getBackground();
         }
+        return tileBgs;
     }
 
-
+    /**
+     * Get the person's position mapping with the image id of the person
+     * @return person's position mapping with his image
+     */
     public SparseIntArray getPersonPosToImage(){
         SparseIntArray personPosToImage = new SparseIntArray();
         personPosToImage.append(person.getPosition(), person.getImage());
         return personPosToImage;
     }
 
+    /**
+     * Get all the boxes' position mapping with the image id of each box
+     * @return boxes' position mapping with the image id of each box
+     */
     public SparseIntArray getBoxPosToImage(){
         SparseIntArray boxes = new SparseIntArray();
         for (Box box : boxArrayList){

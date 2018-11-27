@@ -11,11 +11,11 @@ import android.widget.Button;
 import android.widget.Toast;
 import java.io.Serializable;
 import fall2018.csc207project.R;
-import fall2018.csc207project.models.DatabaseUtil;
-import fall2018.csc207project.models.GlobalConfig;
-import fall2018.csc207project.models.Save;
-import fall2018.csc207project.models.SaveManager;
-import fall2018.csc207project.models.SaveSlot;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.GlobalConfig;
+import fall2018.csc207project.Models.Save;
+import fall2018.csc207project.Models.SaveManager;
+import fall2018.csc207project.Models.SaveSlot;
 /**
  * The activity that represents the page for managing saves.
  */

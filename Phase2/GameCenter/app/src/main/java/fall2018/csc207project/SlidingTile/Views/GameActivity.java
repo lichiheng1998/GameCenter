@@ -14,6 +14,7 @@ import java.util.List;
 
 import fall2018.csc207project.SlidingTile.Controllers.BoardGamePresenter;
 import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
+import fall2018.csc207project.SlidingTile.Controllers.GamePresenter;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
 import fall2018.csc207project.R;
@@ -35,7 +36,7 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
 
     // Grid View and calculated column height and width based on device size
     private GridView gridView;
-    private BoardGamePresenter presenter;
+    private GamePresenter presenter;
 
     /**
      * Set up the background image for each button based on the master list

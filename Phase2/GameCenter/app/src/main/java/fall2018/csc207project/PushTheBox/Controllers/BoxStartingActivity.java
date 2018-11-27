@@ -7,15 +7,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 import fall2018.csc207project.Controllers.ManageSaveActivity;
-import fall2018.csc207project.PushTheBox.Models.MapManager;
+import fall2018.csc207project.PushTheBox.View.LevelActivity;
 import fall2018.csc207project.R;
-import fall2018.csc207project.SlidingTile.Controllers.StartingActivity;
-import fall2018.csc207project.models.DatabaseUtil;
-import fall2018.csc207project.models.SaveManager;
 
+// excluded from tests because it's a view class
 public class BoxStartingActivity extends AppCompatActivity {
     private String currentUser;
 

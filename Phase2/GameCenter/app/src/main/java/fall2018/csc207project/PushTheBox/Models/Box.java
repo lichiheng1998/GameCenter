@@ -6,6 +6,7 @@ import fall2018.csc207project.R;
 
 /**
  * The box that is to be pushed by a person, to destination points.
+ * Excluded from tests because it's a model class
  */
 public class Box implements Serializable {
 
@@ -29,11 +30,6 @@ public class Box implements Serializable {
      */
     private int currImage = normalImage;
 
-    /**
-     * Whether the box is at a destination point.
-     */
-    private Boolean atDestination = false;
-
 
     /**
      * A new box with initial position.
@@ -56,7 +52,6 @@ public class Box implements Serializable {
      * The box has arrived at a destination point.
      */
     public void arriveDestination(){
-        atDestination = true;
         currImage = winningImage;
     }
 
@@ -64,19 +59,8 @@ public class Box implements Serializable {
      * The box have left a destination point.
      */
     public void  leaveDestination(){
-        atDestination = false;
         currImage = normalImage;
     }
-
-
-    /**
-     * Returns whether this box is at a destination
-     * @return whether this box is a a destination
-     */
-    public Boolean isAtDestination(){
-        return atDestination;
-    }
-
 
     /**
      * Return the position of this box.
@@ -94,6 +78,12 @@ public class Box implements Serializable {
         return currImage;
     }
 
-
-
+    /**
+     * Compare if boxes are the same.
+     * @param box the box to compare with.
+     * @return if boxes are the same box.
+     */
+    public Boolean equals(Box box){
+        return box.getPosition() == this.getPosition();
+    }
 }

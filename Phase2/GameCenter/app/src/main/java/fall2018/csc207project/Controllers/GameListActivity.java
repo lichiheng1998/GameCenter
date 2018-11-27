@@ -1,7 +1,6 @@
 package fall2018.csc207project.Controllers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +10,9 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 
-import javax.xml.parsers.DocumentBuilder;
-
-import fall2018.csc207project.models.DataStream;
-import fall2018.csc207project.models.DatabaseUtil;
-import fall2018.csc207project.models.GlobalConfig;
-import fall2018.csc207project.models.UserManager;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.GlobalConfig;
+import fall2018.csc207project.Models.UserManager;
 import fall2018.csc207project.R;
 
 /**

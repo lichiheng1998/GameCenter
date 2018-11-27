@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fall2018.csc207project">
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,15 +18,17 @@
         </activity>
         <activity android:name="fall2018.csc207project.Controllers.SignInActivity" />
         <activity android:name="fall2018.csc207project.Controllers.SignUpActivity" />
-        <activity android:name="fall2018.csc207project.Controllers.LocalGameCenterActivity" />
+        <activity android:name="fall2018.csc207project.Views.LocalGameCenterActivity" />
         <activity android:name="fall2018.csc207project.Controllers.GameListActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.StartingActivity" />
+        <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ScoreBoardActivity" />
+
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ComplexityActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Views.GameActivity" />
         <activity android:name=".Memorization.Controllers.MemoStartingActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxStartingActivity" />
         <activity android:name=".PushTheBox.View.BoxGameActivity"/>
-        <activity android:name=".PushTheBox.Controllers.LevelActivity"
+        <activity android:name=".PushTheBox.View.LevelActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".Memorization.Controllers.MemoComplxActivity" />
         <activity android:name=".Memorization.Views.MemoGameActivity" />

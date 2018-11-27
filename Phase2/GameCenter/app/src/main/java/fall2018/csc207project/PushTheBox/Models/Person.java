@@ -33,7 +33,14 @@ public class Person extends Observable implements Serializable {
      * @param posChange the changing of position to get new position
      */
     public void walk(int posChange) {
-        position = position + posChange;
+        try {
+            position = position + posChange;
+            if (position < 0) {
+                throw new IllegalAccessException("There does not exist negative position!");
+            }
+        }catch(IllegalAccessException e){
+            position = position - posChange;
+        }
         faceTo(posChange);
         setChanged();
         notifyObservers();
@@ -41,7 +48,7 @@ public class Person extends Observable implements Serializable {
 
     /**
      * Change the direction the person facing to the direction he is going to.
-     * @param posChange if it is -1, then face to the left. If it is 1, then face to the right. Otherwise, face forward.
+     * @param posChange the change in position
      */
     private void faceTo(int posChange){
         if (posChange == -1){
@@ -71,4 +78,12 @@ public class Person extends Observable implements Serializable {
         return imageId;
     }
 
+    /**
+     * Compare if person is the same.
+     * @param person the person to compare with.
+     * @return if person is the same person.
+     */
+    public Boolean equals(Person person){
+        return person.getPosition() == this.getPosition();
+    }
 }

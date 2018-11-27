@@ -1,6 +1,6 @@
 package fall2018.csc207project.SlidingTile.Models;
 
-import fall2018.csc207project.models.ScoreCalculator;
+import fall2018.csc207project.Models.ScoreCalculator;
 
 public class TileGameCalculator implements ScoreCalculator<TileScore> {
     @Override

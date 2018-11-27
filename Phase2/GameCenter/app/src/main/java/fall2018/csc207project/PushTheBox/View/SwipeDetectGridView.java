@@ -10,10 +10,11 @@ import android.view.View;
 import android.widget.GridView;
 
 import fall2018.csc207project.PushTheBox.Controllers.BoxGamePresenter;
+import fall2018.csc207project.PushTheBox.Controllers.GamePresenter;
 
 public class SwipeDetectGridView extends GridView {
     GestureDetector gestureDetector;
-    BoxGamePresenter presenter;
+    GamePresenter presenter;
 
     private final static int UP = 1;
     private final static int LEFT = 2;
@@ -71,7 +72,7 @@ public class SwipeDetectGridView extends GridView {
         });
     }
 
-    public void setPresenter(BoxGamePresenter presenter){
+    public void setPresenter(GamePresenter presenter){
         this.presenter = presenter;
     }
 }

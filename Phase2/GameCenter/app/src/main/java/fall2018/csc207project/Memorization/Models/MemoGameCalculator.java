@@ -1,7 +1,7 @@
 package fall2018.csc207project.Memorization.Models;
 
 
-import fall2018.csc207project.models.ScoreCalculator;
+import fall2018.csc207project.Models.ScoreCalculator;
 
 public class MemoGameCalculator implements ScoreCalculator<MemoScore> {
 

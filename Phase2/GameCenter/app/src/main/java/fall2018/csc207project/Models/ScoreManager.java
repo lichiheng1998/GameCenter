@@ -1,4 +1,4 @@
-package fall2018.csc207project.models;
+package fall2018.csc207project.Models;
 
 import android.content.Context;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ScoreManager <T extends Score>{
      * @param context the context of the app.
      * @return the list of scores.
      */
-    private List<Score> getGameToScore(Context context){
+    public List<Score> getGameToScore(Context context){
         return (List<Score>)
                 dataStream.getScores(new ArrayList<Score>(), context);
     }
@@ -62,12 +62,12 @@ public class ScoreManager <T extends Score>{
      * @param context the context of the app
      * @return the list of scores.
      */
-    protected List<T> getScoresOfGame(Context context){
+    public List<T> getScoresOfGame(Context context){
         List<Score> scores = getGameToScore(context);
         List<T> retArray = new ArrayList<>();
         for (Score score : scores){
             if(score.game.equals(currentGame)){
-                retArray.add((T)score);
+                       retArray.add((T)score);
             }
         }
         return retArray;
@@ -78,7 +78,7 @@ public class ScoreManager <T extends Score>{
      * @param context the context of the app
      * @return the list of scores.
      */
-    protected List<T> getScoresOfUser(Context context){
+    public List<T> getScoresOfUser(Context context){
         List<T> scores = getScoresOfGame(context);
         List<T> retArray = new ArrayList<>();
         for (T score: scores){
