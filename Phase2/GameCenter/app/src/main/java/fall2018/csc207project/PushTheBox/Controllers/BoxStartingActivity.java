@@ -12,6 +12,7 @@ import fall2018.csc207project.Controllers.ManageSaveActivity;
 import fall2018.csc207project.PushTheBox.View.LevelActivity;
 import fall2018.csc207project.R;
 
+// excluded from tests because it's a view class
 public class BoxStartingActivity extends AppCompatActivity {
     private String currentUser;
 

@@ -6,6 +6,7 @@ import fall2018.csc207project.R;
 
 /**
  * The box that is to be pushed by a person, to destination points.
+ * Excluded from tests because it's a model class
  */
 public class Box implements Serializable {
 
@@ -68,16 +69,6 @@ public class Box implements Serializable {
         currImage = normalImage;
     }
 
-
-    /**
-     * Returns whether this box is at a destination
-     * @return whether this box is a a destination
-     */
-    public Boolean isAtDestination(){
-        return atDestination;
-    }
-
-
     /**
      * Return the position of this box.
      * @return the position of this box
@@ -93,7 +84,4 @@ public class Box implements Serializable {
     public int getImage(){
         return currImage;
     }
-
-
-
 }

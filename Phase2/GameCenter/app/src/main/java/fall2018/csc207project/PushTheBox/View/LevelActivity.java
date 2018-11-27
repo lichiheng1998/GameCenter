@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -16,10 +14,9 @@ import java.util.List;
 
 import fall2018.csc207project.PushTheBox.Controllers.LevelAdapter;
 import fall2018.csc207project.PushTheBox.Controllers.LevelPresenter;
-import fall2018.csc207project.PushTheBox.View.BoxGameActivity;
-import fall2018.csc207project.PushTheBox.View.LevelView;
 import fall2018.csc207project.R;
 
+// excluded from tests because it's a view class
 public class LevelActivity extends AppCompatActivity implements LevelView {
 
     /**
