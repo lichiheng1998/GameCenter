@@ -1,7 +1,6 @@
-package fall2018.csc207project.models;
+package fall2018.csc207project.Models;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;

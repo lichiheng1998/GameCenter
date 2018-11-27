@@ -1,4 +1,4 @@
-package fall2018.csc207project.models;
+package fall2018.csc207project.Models;
 
 import android.support.annotation.NonNull;
 

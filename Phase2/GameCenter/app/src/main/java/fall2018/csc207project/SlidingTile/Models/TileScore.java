@@ -1,6 +1,6 @@
 package fall2018.csc207project.SlidingTile.Models;
 
-import fall2018.csc207project.models.Score;
+import fall2018.csc207project.Models.Score;
 
 public class TileScore extends Score{
 

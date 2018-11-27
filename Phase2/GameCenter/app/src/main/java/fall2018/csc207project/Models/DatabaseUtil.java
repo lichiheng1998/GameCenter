@@ -1,4 +1,4 @@
-package fall2018.csc207project.models;
+package fall2018.csc207project.Models;
 
 /**
  * The utility class used to initialize the UserManager, SaveManager, and ScoreManager.
@@ -28,5 +28,11 @@ public class DatabaseUtil {
     public static <T extends Score> ScoreManager<T>
     getScoreManager(String game, String user, ScoreCalculator<T> calculator) {
         return new ScoreManager<>(new ScoreDataStreamImpl(new DataStream()), game, user, calculator);
+    }
+    /**
+     * @param user the name of the user whose image and avatar to be saved or load
+     */
+    public static ImageManager getImageManager(String user){
+        return new ImageManager(user);
     }
 }
