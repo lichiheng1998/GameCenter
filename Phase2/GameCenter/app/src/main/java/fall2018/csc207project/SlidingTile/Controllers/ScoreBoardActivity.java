@@ -42,6 +42,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         switchToLevel3();
         this.personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
+        createButton();
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
         this.scoreList.setAdapter(adapter);
         adapter.notifyDataSetChanged();

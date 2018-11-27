@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scoreboard_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/MemoButton3x4"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="56dp"
+        android:text="3x4" />
+
+    <Button
+        android:id="@+id/Memobutton4x5"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="7dp"
+        android:text="4x5" />
+
+    <Button
+        android:id="@+id/Memobutton5x6"
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="23dp"
+        android:text="5x6" />
+
+    <ListView
+        android:id="@+id/memoScoreBoard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="218dp"
+        android:fillViewport="true" />
+
+    <TextView
+        android:id="@+id/memoCurrentPlayer"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="20dp"
+        android:text="empty" />
+
+
+    <TextView
+        android:id="@+id/MemoPlayerscore3x1"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="4dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore3x2"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="35dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore3x3"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="70dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore4x1"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="-1dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore4x2"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="171dp"
+        android:layout_marginTop="37dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore4x3"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="74dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore5x1"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="-3dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore5x2"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="30dp"
+        android:text="playerscore3" />
+
+    <TextView
+        android:id="@+id/MemoPlayerscore5x3"
+        android:layout_width="59dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MemoButton3x4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="68dp"
+        android:text="playerscore3" />
+
+</RelativeLayout>
