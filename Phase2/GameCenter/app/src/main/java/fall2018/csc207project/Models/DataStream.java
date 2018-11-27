@@ -1,4 +1,4 @@
-package fall2018.csc207project.models;
+package fall2018.csc207project.Models;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,12 +15,7 @@ import java.io.ObjectOutputStream;
  */
 public class DataStream implements GlobalDataStream{
 
-    /**
-     * Load form the given path.
-     * @param path the path of the file to be loaded
-     * @return the deserialize object.
-     */
-    public Object loadGlobalData(String path, Context context){
+    private Object loadGlobalData(String path, Context context){
         Object object = null;
         File file = new File(context.getFilesDir() + "/" + path);
         if (!file.exists()) {
@@ -38,11 +33,7 @@ public class DataStream implements GlobalDataStream{
         return object;
     }
 
-    /**
-     * Save to the given path.
-     * @param path the path of the file to be saved.
-     * @param data the object to be saved.
-     */
+    @Override
     public void saveGlobalData(Object data, String path, Context context){
         try {
             ObjectOutputStream out = new ObjectOutputStream(context.openFileOutput(path,
@@ -56,12 +47,7 @@ public class DataStream implements GlobalDataStream{
         }
     }
 
-    /**
-     * Get the data in given path. If not exists, initialize with the initData, and save to the path.
-     * @param path the path of the file to be loaded.
-     * @param initData the data used to initialize.
-     * @return the loaded data.
-     */
+    @Override
     public Object getAndInit(Object initData, String path, Context context){
         Object data = loadGlobalData(path, context);
         if(data == null){

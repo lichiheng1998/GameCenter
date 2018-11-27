@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
 import fall2018.csc207project.Controllers.ManageSaveActivity;
 import fall2018.csc207project.PushTheBox.View.LevelActivity;
 import fall2018.csc207project.R;

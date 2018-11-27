@@ -19,27 +19,23 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
 
     private List<TileScore> slidingTileTopScores;
     private Context mContext;
-//    private LayoutInflater mLayoutInflater = null;
-    private String[] strings = new String[2];
-
 
     public SlidingTileScoreBoardAdapter(List<TileScore> list, Context context) {
         mContext = context;
         slidingTileTopScores = list;
-//        mLayoutInflater = (LayoutInflater) mContext
-//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
+
     @Override
     public int getCount() {
         return slidingTileTopScores.size();
     }
+
     @Override
     public Object getItem(int pos) {
-        strings[0] = slidingTileTopScores.get(pos).user;
-        strings[1] = String.valueOf(slidingTileTopScores.get(pos).value);
         return new String[] {slidingTileTopScores.get(pos).user,
-                             String.valueOf(slidingTileTopScores.get(pos).value)};
+                String.valueOf(slidingTileTopScores.get(pos).value)};
     }
+
     @Override
     public long getItemId(int position) {
         return position;

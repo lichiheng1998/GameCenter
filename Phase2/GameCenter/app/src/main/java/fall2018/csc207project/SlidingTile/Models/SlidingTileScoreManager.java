@@ -4,7 +4,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import fall2018.csc207project.models.ScoreManager;
+import fall2018.csc207project.Models.ScoreManager;
 
 /**
  * The class that is used to calculate the score, store and retrieve the score.
