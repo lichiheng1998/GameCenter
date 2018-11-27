@@ -1,5 +1,4 @@
 package fall2018.csc207project.SlidingTile.Controllers;
-import java.sql.SQLOutput;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -20,21 +19,23 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
 
     private List<TileScore> slidingTileTopScores;
     private Context mContext;
-    private LayoutInflater inflater;
-
 
     public SlidingTileScoreBoardAdapter(List<TileScore> list, Context context) {
         mContext = context;
         slidingTileTopScores = list;
     }
+
     @Override
     public int getCount() {
         return slidingTileTopScores.size();
     }
+
     @Override
     public Object getItem(int pos) {
-        return slidingTileTopScores.get(pos);
+        return new String[] {slidingTileTopScores.get(pos).user,
+                String.valueOf(slidingTileTopScores.get(pos).value)};
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -61,51 +62,24 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
     @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-//        View v = convertView;
-//        CompleteListViewHolder viewHolder;
-//        if (convertView == null) {
-//            mLayoutInflater= (LayoutInflater) mContext
-//                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//            v = mLayoutInflater.inflate(R.layout.tile_game_score_board_row,parent, false);
-//            viewHolder = new CompleteListViewHolder(v);
-//            v.setTag(viewHolder);
-//        } else {
-//            viewHolder = (CompleteListViewHolder) v.getTag();
-//        }
-//
-//        viewHolder.userName.setText(slidingTileTopScores.get(position).user);
-//        viewHolder.userScore.setText(slidingTileTopScores.get(position).value+"");
-//        System.out.println(slidingTileTopScores.get(position).user);
-//        System.out.println(slidingTileTopScores.get(position).value);
-//        return v;
-        inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
-        View row = inflater.inflate(R.layout.tile_game_score_board_row, parent,false);
-        TextView userName = (TextView)row.findViewById(R.id.scoreBoardUser);
-        TextView score = (TextView)row.findViewById(R.id.scoreBoardScore);
-
-        userName.setText(slidingTileTopScores.get(position).user);
-        score.setText(slidingTileTopScores.get(position).value+"");
-
-        return row;
-//
-//        View view = convertView;
-//        MyViewHolder viewHolder;
-//        if (view == null) {
-//            view = LayoutInflater.from(mContext).inflate(R.layout.tile_game_score_board_row, parent, false);
-//            viewHolder = new MyViewHolder(view);
-//            view.setTag(viewHolder);
+        View view = convertView;
+        MyViewHolder viewHolder;
+        if (view == null) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.tile_game_score_board_row, parent, false);
+            viewHolder = new MyViewHolder(view);
+            view.setTag(viewHolder);
 //            LayoutInflater li = (LayoutInflater) mContext
 //                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //            assert li != null;
 //            view = li.inflate(R.layout.tile_game_score_board_row, null);
 //            viewHolder = new MyViewHolder(view);
 //            view.setTag(viewHolder);
-//        } else {
-//            viewHolder = (MyViewHolder) view.getTag();
-//        }
-//        viewHolder.userName.setText(slidingTileTopScores.get(position).user);
-//        viewHolder.userScore.setText(String.valueOf(slidingTileTopScores.get(position).value));
-//        return view;
+        } else {
+            viewHolder = (MyViewHolder) view.getTag();
+        }
+        viewHolder.userName.setText(slidingTileTopScores.get(position).user);
+        viewHolder.userScore.setText(String.valueOf(slidingTileTopScores.get(position).value));
+        return view;
 //        if(convertView == null){
 //            LayoutInflater inflater = LayoutInflater.from(this.mContext);
 //            convertView = inflater.inflate(R.layout.tile_game_score_board_row, parent, false);
