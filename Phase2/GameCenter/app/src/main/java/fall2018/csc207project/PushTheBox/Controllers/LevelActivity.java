@@ -116,32 +116,6 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
      * Display the grid with all levels.
      */
     public void display(){
-        gridView.setAdapter(new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return levelButtons.size();
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return levelButtons.get(position);
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return position;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                Button button;
-                if (convertView == null) {
-                    button = levelButtons.get(position);
-                } else {
-                    button = (Button) convertView;
-                }
-                return button;
-            }
-        });
+        gridView.setAdapter(new LevelAdapter(levelButtons));
     }
 }
