@@ -1,4 +1,4 @@
-package fall2018.csc207project.PushTheBox.Controllers;
+package fall2018.csc207project.PushTheBox.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import fall2018.csc207project.PushTheBox.Controllers.LevelAdapter;
+import fall2018.csc207project.PushTheBox.Controllers.LevelPresenter;
 import fall2018.csc207project.PushTheBox.View.BoxGameActivity;
 import fall2018.csc207project.PushTheBox.View.LevelView;
 import fall2018.csc207project.R;
