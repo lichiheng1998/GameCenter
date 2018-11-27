@@ -18,7 +18,7 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater = null;
 
 
-    public SlidingTileScoreBoardAdapter(Context context, List<TileScore> list) {
+    public SlidingTileScoreBoardAdapter(List<TileScore> list, Context context) {
         mContext = context;
         slidingTileTopScores = list;
         mLayoutInflater = (LayoutInflater) mContext
@@ -50,7 +50,7 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
             viewHolder = (CompleteListViewHolder) v.getTag();
         }
         viewHolder.userName.setText(slidingTileTopScores.get(position).user);
-        viewHolder.userScore.setText(slidingTileTopScores.get(position).value);
+        viewHolder.userScore.setText(slidingTileTopScores.get(position).value+"");
         return v;
     }
 }
@@ -58,7 +58,8 @@ class CompleteListViewHolder {
     public TextView userName;
     public TextView userScore;
     public CompleteListViewHolder(View base) {
-//        userName = (TextView) base.findViewById(R.id.user);
+        userName = (TextView) base.findViewById(R.id.scoreBoardUser);
+        userScore = (TextView) base.findViewById(R.id.scoreBoardScore);
     }
 }
 
