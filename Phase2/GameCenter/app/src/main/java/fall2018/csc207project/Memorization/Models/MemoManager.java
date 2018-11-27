@@ -76,6 +76,14 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
     }
 
     /**
+     * boolean value represent if game is in crazy mode
+     * @return whether the game in crazy mode
+     */
+    public boolean isLevel() {
+        return level;
+    }
+
+    /**
      * iterator of MemoTile
      * @return MemoTile iterator
      */
