@@ -21,8 +21,8 @@ import fall2018.csc207project.models.ScoreManager;
 public class ScoreBoardActivity extends AppCompatActivity {
 
     private SlidingTileScoreManager scoreManager;
-    private ArrayList<TileScore> sortList = new ArrayList<>();
-    private ArrayList<ArrayList<TileScore>> personalList = new ArrayList<>();
+    private ArrayList sortList;
+    private ArrayList<ArrayList<TileScore>> personalList;
     private String currentUser;
     private TileGameCalculator calculator;
     private ListView scoreList;
@@ -62,7 +62,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
     }
 
     public void add3ButtonListener (){
-        Button Level3Listener = findViewById(R.id.button3x3);
+        Button Level3Listener = findViewById(R.id.Button3x3);
         Level3Listener.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +113,5 @@ public class ScoreBoardActivity extends AppCompatActivity {
         SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
         this.scoreList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 }
