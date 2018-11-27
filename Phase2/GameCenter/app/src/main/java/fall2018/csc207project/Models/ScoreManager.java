@@ -52,7 +52,7 @@ public class ScoreManager <T extends Score>{
      * @param context the context of the app.
      * @return the list of scores.
      */
-    private List<Score> getGameToScore(Context context){
+    public List<Score> getGameToScore(Context context){
         return (List<Score>)
                 dataStream.getScores(new ArrayList<Score>(), context);
     }

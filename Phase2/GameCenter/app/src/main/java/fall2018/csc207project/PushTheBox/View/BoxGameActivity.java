@@ -21,6 +21,7 @@ import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
 
 /**
  * The game activity for Push The Box.
+ * Excluded from tests because it's a view class
  */
 public class BoxGameActivity extends AppCompatActivity implements MapView{
 

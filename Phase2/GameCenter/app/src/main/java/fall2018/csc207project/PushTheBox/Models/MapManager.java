@@ -142,7 +142,7 @@ public class MapManager implements Serializable {
      */
     private void processBoxMovement(int position, int newPosition){
         Objects.requireNonNull(boxAtPos(position)).move(newPosition);
-        if (map.tileAtDestination(newPosition)){
+        if (map.tileIsDestination(newPosition)){
             Objects.requireNonNull(boxAtPos(newPosition)).arriveDestination();
         }else{
             Objects.requireNonNull(boxAtPos(newPosition)).leaveDestination();

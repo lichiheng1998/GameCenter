@@ -1,11 +1,9 @@
-package fall2018.csc207project.PushTheBox.Controllers;
+package fall2018.csc207project.PushTheBox.View;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -14,20 +12,36 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import fall2018.csc207project.PushTheBox.View.BoxGameActivity;
+import fall2018.csc207project.PushTheBox.Controllers.LevelAdapter;
+import fall2018.csc207project.PushTheBox.Controllers.LevelPresenter;
 import fall2018.csc207project.R;
 
-public class LevelActivity extends AppCompatActivity {
+// excluded from tests because it's a view class
+public class LevelActivity extends AppCompatActivity implements LevelView {
 
+    /**
+     * The grid view for level buttons.
+     */
     GridView gridView;
 
+    /**
+     * The list of buttons for levels.
+     */
     private List<Button> levelButtons = new ArrayList<>();
 
-    private int level;
+    /**
+     * number of steps for undo.
+     */
     private int undoStep;
+
+    /**
+     * Presenter of level page.
+     */
+    private LevelPresenter presenter;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        this.presenter = new LevelPresenter(this, getApplicationContext());
         undoStep = 3;
         setContentView(R.layout.box_levels);
         gridView = findViewById(R.id.boxLevelGrid);
@@ -36,6 +50,9 @@ public class LevelActivity extends AppCompatActivity {
         display();
     }
 
+    /**
+     * Create all the buttons with numbers indicating levels.
+     */
     public void createLevelButtons(){
         int buttonColor = android.graphics.Color.argb(255, 168, 193,164);
         for (int i = 0; i < 9; i++){
@@ -48,7 +65,7 @@ public class LevelActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Button button = (Button) v;
-                    level = Integer.parseInt(button.getText().toString());
+                    int level = Integer.parseInt(button.getText().toString());
                     switchToGame(level);
                 }
             });
@@ -66,61 +83,38 @@ public class LevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText UndoSteps = findViewById(R.id.SetUndoTimes);
                 String steps = UndoSteps.getText().toString();
-                undoStep = Integer.parseInt(steps);
-                Toast.makeText(getApplicationContext(),
-                        "Successfully set the Total Undo Steps to: " + undoStep,
-                        Toast.LENGTH_SHORT).show();
+                presenter.acceptButtonClicked(steps);
             }
         });
     }
 
+    /**
+     * Switch to game with given level
+     * @param level level of game to start
+     */
     private void switchToGame(int level) {
         Intent tmp = new Intent(this, BoxGameActivity.class);
         tmp.putExtra("undoStep",undoStep);
         tmp.putExtra("level",level);
-        if (undoStep == 3) {
-            Toast.makeText(getApplicationContext(),
-                    "The Total Undo Steps set to default value: 3",
-                    Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(),
-                    "The Total Undo Steps set to: " + undoStep,
-                    Toast.LENGTH_SHORT).show();
-        }
+        presenter.undoStepsSetted(undoStep);
         startActivity(tmp);
         finish();
     }
 
 
-    public void display(){
-        gridView.setAdapter(new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return levelButtons.size();
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return levelButtons.get(position);
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return position;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                Button button;
-                if (convertView == null) {
-                    button = levelButtons.get(position);
-                } else {
-                    button = (Button) convertView;
-                }
-                return button;
-            }
-        });
+    /**
+     * make Toast text on screen displaying given text
+     * @param text text to display
+     */
+    @Override
+    public void makeToastText(String text){
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 
-
+    /**
+     * Display the grid with all levels.
+     */
+    public void display(){
+        gridView.setAdapter(new LevelAdapter(levelButtons));
+    }
 }

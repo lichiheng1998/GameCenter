@@ -120,7 +120,7 @@ public class SlidingTileScoreManager {
         } else {
             top3ForComplexity.addAll(scoresForComplexity);
             for (int i = 0; i < 3 - scoresForComplexity.size(); i++) {
-                top3ForComplexity.add(new TileScore(complexity, 0, 0));
+                top3ForComplexity.add(new TileScore(complexity, 1000, 1000));
             }
         }
         return top3ForComplexity;

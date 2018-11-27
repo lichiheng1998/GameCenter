@@ -46,6 +46,8 @@ public class BoardGamePresenter implements GamePresenter {
      */
     private SaveSlot saveSlot;
 
+    private boolean isSolved = false;
+
     public BoardGamePresenter(BoardGameView view, Context context){
         this.view = view;
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
@@ -71,12 +73,13 @@ public class BoardGamePresenter implements GamePresenter {
         if (movementController.processTapMovement(context, position)){
             saveSlot.saveToAutoSave(boardManager);
             saveManager.saveToFile(saveSlot, context);
-            if (boardManager.puzzleSolved()){
+            if (boardManager.puzzleSolved() && !isSolved){
                 TileScore score = new TileScore(boardManager.getComplexity()
-                        , boardManager.getTotalUndoSteps(), boardManager.getTotalUndoSteps());
+                        , boardManager.getTotalUndoSteps(), boardManager.getTotalMoveSteps());
                 TileGameCalculator calculator = new TileGameCalculator();
                 ScoreManager<TileScore> scoreManager= DatabaseUtil.getScoreManager("SlidingTile", currentUser,calculator);
                 scoreManager.saveScore(score, context);
+                isSolved = true;
             }
         }
     }

@@ -6,6 +6,7 @@ import fall2018.csc207project.R;
 
 /**
  * Tile with a background image, and combination of tiles make a map.
+ * Excluded from tests because it's a model class
  */
 public class BgTile implements Serializable {
     public static final String WALLTYPE =  "Wall";

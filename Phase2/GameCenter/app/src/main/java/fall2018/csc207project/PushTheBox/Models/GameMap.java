@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * The map where a person will push the boxes to destinations.
+ * Excluded from tests because it's a model class.
  */
 public class GameMap implements Serializable {
 
@@ -50,13 +51,13 @@ public class GameMap implements Serializable {
         }
     }
 
-
-    public Boolean tileAtDestination(int tileId){
-        if (bgElements.get(tileId).isWinnable()){
-            return true;
-        }else{
-            return false;
-        }
+    /**
+     * Whether tile is a destination.
+     * @param tileId the id of the tile
+     * @return if tile is a destination
+     */
+    public Boolean tileIsDestination(int tileId){
+        return bgElements.get(tileId).isWinnable();
     }
 
     /**
