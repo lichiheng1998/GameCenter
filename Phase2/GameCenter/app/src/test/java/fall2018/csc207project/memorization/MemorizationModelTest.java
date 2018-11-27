@@ -1,6 +1,6 @@
 package fall2018.csc207project.memorization;
 
-import org.junit.Assert.*;
+
 import org.junit.Test;
 import org.junit.After;
 import org.junit.Before;
