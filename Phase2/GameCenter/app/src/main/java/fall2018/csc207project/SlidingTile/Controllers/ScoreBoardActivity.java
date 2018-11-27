@@ -54,15 +54,15 @@ public class ScoreBoardActivity extends AppCompatActivity {
 
     public void setTexts(){
         ((TextView)findViewById(R.id.currentPlayer)).setText(currentUser);
-        ((TextView)findViewById(R.id.playerscore3x1)).setText(this.personalList.get(0).get(0).value);
-        ((TextView)findViewById(R.id.playerscore3x2)).setText(this.personalList.get(0).get(1).value);
-        ((TextView)findViewById(R.id.playerscore3x3)).setText(this.personalList.get(0).get(2).value);
-        ((TextView)findViewById(R.id.playerscore4x1)).setText(this.personalList.get(1).get(0).value);
-        ((TextView)findViewById(R.id.playerscore4x2)).setText(this.personalList.get(1).get(1).value);
-        ((TextView)findViewById(R.id.playerscore4x3)).setText(this.personalList.get(1).get(2).value);
-        ((TextView)findViewById(R.id.playerscore5x1)).setText(this.personalList.get(2).get(0).value);
-        ((TextView)findViewById(R.id.playerscore5x2)).setText(this.personalList.get(2).get(1).value);
-        ((TextView)findViewById(R.id.playerscore5x3)).setText(this.personalList.get(2).get(2).value);
+        ((TextView)findViewById(R.id.playerscore3x1)).setText(String.valueOf(personalList.get(0).get(0).value));
+        ((TextView)findViewById(R.id.playerscore3x2)).setText(String.valueOf(personalList.get(0).get(1).value));
+        ((TextView)findViewById(R.id.playerscore3x3)).setText(String.valueOf(personalList.get(0).get(2).value));
+        ((TextView)findViewById(R.id.playerscore4x1)).setText(String.valueOf(personalList.get(1).get(0).value));
+        ((TextView)findViewById(R.id.playerscore4x2)).setText(String.valueOf(personalList.get(1).get(1).value));
+        ((TextView)findViewById(R.id.playerscore4x3)).setText(String.valueOf(personalList.get(1).get(2).value));
+        ((TextView)findViewById(R.id.playerscore5x1)).setText(String.valueOf(personalList.get(2).get(0).value));
+        ((TextView)findViewById(R.id.playerscore5x2)).setText(String.valueOf(personalList.get(2).get(1).value));
+        ((TextView)findViewById(R.id.playerscore5x3)).setText(String.valueOf(personalList.get(2).get(2).value));
     }
 
     public void add3ButtonListener (){

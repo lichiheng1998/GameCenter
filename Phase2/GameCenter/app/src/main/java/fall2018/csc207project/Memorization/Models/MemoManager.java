@@ -86,26 +86,35 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
     }
 
     /**
+     * Generate random position under the bound of current complexity.
+     * @param bound the upper bound of the id generated.
+     */
+    private void shuffleSequence(int bound){
+        sequenceOrder.clear();
+        int randomID = ThreadLocalRandom.current().nextInt(bound);
+        sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEACTIVE));
+        for (int count = 1; count < curComplexity; count++) {
+            randomID = ThreadLocalRandom.current().nextInt(bound);
+            int fake = ThreadLocalRandom.current().nextInt(10);
+            if(fake > 2){
+                sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEACTIVE));
+            } else {
+                sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEFAKE));
+            }
+        }
+    }
+    /**
      * regenerate random active memoTiles to update sequenceOrder
      * different generate method based on value of level
      */
     public void updateActiveTiles(){
-        int randomID;
+
         int bound = getSize();
         // Generate some Tiles with random ids.
         if(level){
-            sequenceOrder.clear();
-            for (int count = 0; count < curComplexity; count++) {
-                randomID = ThreadLocalRandom.current().nextInt(bound);
-                int fake = ThreadLocalRandom.current().nextInt(10);
-                if(fake > 2){
-                    sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEACTIVE));
-                } else {
-                    sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEFAKE));
-                }
-            }
+            shuffleSequence(bound);
         } else {
-            randomID = ThreadLocalRandom.current().nextInt(bound);
+            int randomID = ThreadLocalRandom.current().nextInt(bound);
             sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEACTIVE));
         }
 
