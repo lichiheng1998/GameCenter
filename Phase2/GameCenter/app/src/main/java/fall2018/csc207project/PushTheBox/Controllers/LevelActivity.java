@@ -20,13 +20,24 @@ import fall2018.csc207project.R;
 
 public class LevelActivity extends AppCompatActivity implements LevelView {
 
+    /**
+     * The grid view for level buttons.
+     */
     GridView gridView;
 
+    /**
+     * The list of buttons for levels.
+     */
     private List<Button> levelButtons = new ArrayList<>();
 
-    private int level;
+    /**
+     * number of steps for undo.
+     */
     private int undoStep;
 
+    /**
+     * Presenter of level page.
+     */
     private LevelPresenter presenter;
 
     protected void onCreate(Bundle savedInstanceState){
@@ -40,6 +51,9 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
         display();
     }
 
+    /**
+     * Create all the buttons with numbers indicating levels.
+     */
     public void createLevelButtons(){
         int buttonColor = android.graphics.Color.argb(255, 168, 193,164);
         for (int i = 0; i < 9; i++){
@@ -52,7 +66,7 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
                 @Override
                 public void onClick(View v) {
                     Button button = (Button) v;
-                    level = Integer.parseInt(button.getText().toString());
+                    int level = Integer.parseInt(button.getText().toString());
                     switchToGame(level);
                 }
             });
@@ -75,6 +89,10 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
         });
     }
 
+    /**
+     * Switch to game with given level
+     * @param level level of game to start
+     */
     private void switchToGame(int level) {
         Intent tmp = new Intent(this, BoxGameActivity.class);
         tmp.putExtra("undoStep",undoStep);
@@ -85,11 +103,18 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
     }
 
 
+    /**
+     * make Toast text on screen displaying given text
+     * @param text text to display
+     */
     @Override
     public void makeToastText(String text){
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Display the grid with all levels.
+     */
     public void display(){
         gridView.setAdapter(new BaseAdapter() {
             @Override
@@ -119,6 +144,4 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
             }
         });
     }
-
-
 }
