@@ -11,7 +11,11 @@ import fall2018.csc207project.Models.ScoreManager;
  */
 public class SlidingTileScoreManager {
 
+    /**
+     * The ScoreManager to manage the TileScore.
+     */
     private ScoreManager<TileScore> scoreManager;
+
     /**
      * Construct a new SlidingTileScoreManager by given a scoreManager
      *
