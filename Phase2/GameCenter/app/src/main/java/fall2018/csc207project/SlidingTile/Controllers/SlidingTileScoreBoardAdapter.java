@@ -78,6 +78,7 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
 //        System.out.println(slidingTileTopScores.get(position).user);
 //        System.out.println(slidingTileTopScores.get(position).value);
 //        return v;
+        inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) ;
         View row = inflater.inflate(R.layout.tile_game_score_board_row, parent,false);
         TextView userName = (TextView)row.findViewById(R.id.scoreBoardUser);
         TextView score = (TextView)row.findViewById(R.id.scoreBoardScore);
