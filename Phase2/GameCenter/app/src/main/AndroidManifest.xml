@@ -28,7 +28,7 @@
         <activity android:name=".Memorization.Controllers.MemoStartingActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxStartingActivity" />
         <activity android:name=".PushTheBox.View.BoxGameActivity"/>
-        <activity android:name=".PushTheBox.Controllers.LevelActivity"
+        <activity android:name=".PushTheBox.View.LevelActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".Memorization.Controllers.MemoComplxActivity" />
         <activity android:name=".Memorization.Views.MemoGameActivity" />
