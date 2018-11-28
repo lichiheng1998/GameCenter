@@ -40,18 +40,4 @@
         android:text="my top scores"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/memoTop"
-        android:textStyle="bold"
-        android:background="#fab359"
-        android:layout_width="146dp"
-        android:layout_height="43dp"
-        android:layout_below="@+id/memogameScoreboard"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="280dp"
-        android:textSize="14.5sp"
-        android:text="Top Players" />
-
 </RelativeLayout>
