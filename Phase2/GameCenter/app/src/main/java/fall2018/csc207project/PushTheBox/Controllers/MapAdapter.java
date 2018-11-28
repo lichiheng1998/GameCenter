@@ -33,7 +33,7 @@ public class MapAdapter extends BaseAdapter {
     private int columnDim;
     private Context context;
     private Person person;
-    private SparseIntArray boxes = new SparseIntArray();
+    private HashMap<Integer, Integer> boxes = new HashMap<>();
 
     public MapAdapter(Integer[] tileBgs, int columnDim, Context context) {
         this.tileBgs = tileBgs;
@@ -48,7 +48,7 @@ public class MapAdapter extends BaseAdapter {
     public void setBoxesList(ArrayList<Box> boxes){
         this.boxes.clear();
         for (Box box : boxes){
-            this.boxes.append(box.getPosition(), box.getImage());
+            this.boxes.put(box.getPosition(), box.getImage());
         }
     }
 
@@ -59,7 +59,12 @@ public class MapAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        if (person != null && position == person.getPosition()){
+            return person.getImage();
+        }else if (boxes.size() != 0 && boxes.get(position) != null){
+            return boxes.get(position);
+        }
+        return tileBgs[position];
     }
 
     @Override
@@ -70,13 +75,8 @@ public class MapAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = new ImageView(context);
-        if(person.getPosition() == position){
-            imageView.setImageResource(person.getImage());
-        }else if (boxes.get(position) != 0){
-            imageView.setImageResource(boxes.get(position));
-        }else {
-            imageView.setImageResource(tileBgs[position]);
-        }
+        imageView.setImageResource((int)getItem(position));
+
         android.widget.AbsListView.LayoutParams params =
                 new android.widget.AbsListView.LayoutParams(columnDim, columnDim);
         imageView.setLayoutParams(params);
