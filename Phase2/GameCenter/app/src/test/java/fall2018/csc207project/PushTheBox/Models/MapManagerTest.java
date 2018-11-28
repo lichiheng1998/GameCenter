@@ -88,7 +88,7 @@ public class MapManagerTest {
     }
 
     @Test
-    public void processPersonMovementNoPushBox() {
+    public void testPersonMovementNoPushBox() {
         MapManager mapManager = new MapManager(0,0,levelInfo);
         mapManager.processPersonMovement(1);
         mapManager.processPersonMovement(-1);
@@ -96,6 +96,15 @@ public class MapManagerTest {
                 !mapManager.isBoxesMoved);
         assertEquals("the person didn't move or moved to wrong" +
                 "place", mapManager.person.getPosition(), 7);
+    }
+
+    @Test
+    public void testBoxArriveDestination(){
+        MapManager mapManager = new MapManager(0,0,levelInfo);
+        mapManager.processPersonMovement(1);
+        mapManager.processPersonMovement(1);
+        assertEquals("box should show that it is on a destination",
+                mapManager.getBoxList().get(0).getImage(), R.drawable.winbox);
     }
 
     @Test
