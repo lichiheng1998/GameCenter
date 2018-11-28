@@ -1,12 +1,9 @@
 package fall2018.csc207project.PushTheBox.Models;
 
-import android.content.Context;
 
-import junit.framework.TestCase;
+import android.util.Range;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -15,15 +12,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import fall2018.csc207project.R;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 public class MapManagerTest {
     private HashMap<String, Object> levelInfo = new HashMap<>();
+    private ArrayList<BgTile> bgElements;
 
 
     public void init(){
-        List<BgTile> bgElements = new ArrayList<>();
+        bgElements = new ArrayList<>();
         ArrayList<Box> boxes = new ArrayList<>();
         Integer[] wallPos = {0,1,2,3,4,5,6,11,12,13,14,15,16,17};
         for (int i = 0; i < 18; i++){
@@ -59,6 +59,14 @@ public class MapManagerTest {
         assertFalse("game is unsolved yet", mapManager.boxSolved());
     }
 
+    @Test
+    public void testSolvedBoxSolved(){
+        MapManager mapManager = new MapManager(0,0,levelInfo);
+        mapManager.processPersonMovement(1);
+        mapManager.processPersonMovement(1);
+        assertTrue("game is solved", mapManager.boxSolved());
+    }
+
 
     @Test
     public void testUnvalidMovementTowardsWall() {
@@ -90,10 +98,6 @@ public class MapManagerTest {
                 "place", mapManager.person.getPosition(), 7);
     }
 
-//    @Test
-//    public void pushLastStep() {
-//    }
-
     @Test
     public void testNoUndoMadeCanProcessUndo() {
         MapManager mapManager = new MapManager(0,3,levelInfo);
@@ -107,24 +111,52 @@ public class MapManagerTest {
                         "taken", mapManager.canProcessUndo(3));
     }
 
-//    @Test
-//    public void getTotalUndoTimes() {
-//    }
-//
-//    @Test
-//    public void getTilesBg() {
-//    }
-//
-//    @Test
-//    public void getPersonPosToImage() {
-//    }
-//
-//    @Test
-//    public void getBoxPosToImage() {
-//    }
-//
-//    @Test
-//    @After
-//    public void testSolvedBoxSolved(){
-//    }
+    @Test
+    public void testProcessUndoMovement(){
+        MapManager mapManager = new MapManager(0,3,levelInfo);
+        mapManager.processPersonMovement(1);
+        mapManager.processPersonMovement(1);
+        mapManager.pushLastStep(1,9);
+        mapManager.pushLastStep(1,10);
+        mapManager.canProcessUndo(1);
+        assertEquals("failed to undo 1 step",
+                mapManager.person.getPosition(), 8);
+        assertEquals("box didn't undo with person",
+                mapManager.getBoxList().get(0).getPosition(), 9);
+        mapManager.processPersonMovement(1);
+        mapManager.pushLastStep(1,10);
+        mapManager.canProcessUndo(2);
+        assertEquals("undo 2 steps failed",
+                mapManager.person.getPosition(), 7);
+        assertEquals("box didn't undo with person",
+                mapManager.getBoxList().get(0).getPosition(), 8);
+    }
+
+
+    @Test
+    public void testGetTotalUndoTimes() {
+        MapManager mapManager = new MapManager(0,3,levelInfo);
+        mapManager.processPersonMovement(1);
+        assertEquals("Total undo times should never change",
+                mapManager.getTotalUndoTimes(), 3);
+    }
+
+    @Test
+    public void testGetTilesBg() {
+        MapManager mapManager = new MapManager(0,0, levelInfo);
+        Integer[] tileBg = mapManager.getTilesBg();
+        for (int i = 0; i < 18; i++){
+            Integer bg = bgElements.get(i).getBackground();
+            assertEquals("Background on position " + i + "is incorrect",
+                    tileBg[i], bg);
+        }
+    }
+
+    @Test
+    public void testGetBoxList(){
+        MapManager mapManager = new MapManager(0,0, levelInfo);
+        ArrayList<Box> boxes = mapManager.getBoxList();
+        assertTrue("wrong list of boxes",
+                boxes.get(0).equals(new Box(8)));
+    }
 }
