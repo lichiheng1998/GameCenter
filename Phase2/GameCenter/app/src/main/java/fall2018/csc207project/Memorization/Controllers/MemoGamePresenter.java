@@ -103,6 +103,8 @@ public class MemoGamePresenter implements GamePresenter {
             startCycle();
         }
     }
+
+    private boolean isFinish = true;
     private void fail(int pos, Context context){
         view.flashButtonToColor(pos, flashDelay, MemoTile.WRONGCOLOR);
         life = life == 0 ? 0 : life-1;
@@ -111,13 +113,15 @@ public class MemoGamePresenter implements GamePresenter {
         if(gameOver){
             memoManager.setScoreTotal(successTap);
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
-
-            MemoScore score = new MemoScore(memoManager.width,
-                    memoManager.isLevel(), memoManager.getScoreTotal());
-            MemoGameCalculator calculator = new MemoGameCalculator();
-            ScoreManager<MemoScore> scoreManager
-                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
-            scoreManager.saveScore(score, context);
+            if (isFinish) {
+                MemoScore score = new MemoScore(memoManager.width,
+                        memoManager.isLevel(), memoManager.getScoreTotal());
+                MemoGameCalculator calculator = new MemoGameCalculator();
+                ScoreManager<MemoScore> scoreManager
+                        = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
+                scoreManager.saveScore(score, context);
+                isFinish = false;
+            }
         }
     }
     /**
