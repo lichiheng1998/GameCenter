@@ -16,40 +16,48 @@ import fall2018.csc207project.Models.GlobalConfig;
 import fall2018.csc207project.Models.Save;
 import fall2018.csc207project.Models.SaveManager;
 import fall2018.csc207project.Models.SaveSlot;
+
 /**
  * The activity that represents the page for managing saves.
  */
 @SuppressWarnings("unchecked")
 public class ManageSaveActivity extends AppCompatActivity{
+
+    /**
+     * The SaveManager to manage save.
+     */
     private SaveManager saveManager;
-    private String user;
-    private String game;
+
     /**
      * The save slot that stores all save of the user.
      */
     private SaveSlot saveSlot;
+
     /**
      * The entries of the game activities.
      */
     private Class<? extends Activity> entry;
+
     /**
      * The load and save button on the layout.
      */
     int[] saveIds = {R.id.save1, R.id.save2, R.id.save3};
     int[] fields = {R.id.field1, R.id.field2, R.id.field3, R.id.fieldAuto};
     int[] loadIds = {R.id.load1, R.id.load2, R.id.load3, R.id.loadAuto};
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.save_manage);
         SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
-        user = shared.getString("currentUser", null);
-        game = shared.getString("currentGame", null);
+        String user = shared.getString("currentUser", null);
+        String game = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(user, game);
         saveSlot = saveManager.readFromFile(getApplicationContext());
         entry = (Class<? extends Activity>)GlobalConfig.GAMEMAP.get(game);
         setupSaveButtons();
         setupLoadButtons();
-        setupInfos();
+        setupInfo();
     }
 
     /**
@@ -69,11 +77,12 @@ public class ManageSaveActivity extends AppCompatActivity{
                     makeToastSavedText();
                     saveSlot.saveToSlot(pos, save.data);
                     saveManager.saveToFile(saveSlot, ManageSaveActivity.this.getApplicationContext());
-                    setupInfos();
+                    setupInfo();
                 }
             });
         }
     }
+
     /**
      * Setup the load button.
      */
@@ -97,7 +106,10 @@ public class ManageSaveActivity extends AppCompatActivity{
         }
     }
 
-    public void setupInfos(){
+    /**
+     * Setup the info.
+     */
+    public void setupInfo(){
         for (int i = 0; i < 4; i++){
             Button button = findViewById(fields[i]);
             Save save = i == 3 ? saveSlot.readFromAutoSave() : saveSlot.readFromSlot(i);

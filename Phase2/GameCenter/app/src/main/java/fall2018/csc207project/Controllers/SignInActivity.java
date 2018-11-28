@@ -9,20 +9,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.UserManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Views.LocalGameCenterActivity;
 
+/**
+ * The class SignInActivity that extends AppCompatActivity
+ */
 public class SignInActivity extends AppCompatActivity {
 
+    /**
+     * The user's name that need to sign in to the Game Center.
+     */
     private String userName = "";
 
+    /**
+     * The user's password that need to sign in to the Game Center.
+     */
     private String password = "";
 
+    /**
+     * The UserManager to manage the users.
+     */
     private UserManager userManager;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userManager = DatabaseUtil.getUserManager();
@@ -62,7 +74,7 @@ public class SignInActivity extends AppCompatActivity {
                             SignInActivity.this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString("currentUser", userName);
-                    editor.commit();
+                    editor.apply();
                     localCenter();
                 }else{
                     Toast.makeText(getApplicationContext(), "Login Failed",

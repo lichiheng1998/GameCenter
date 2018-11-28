@@ -9,7 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
-
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.GlobalConfig;
 import fall2018.csc207project.Models.UserManager;
@@ -19,12 +18,17 @@ import fall2018.csc207project.R;
  * The activity that allows the user to add or remove game.
  */
 public class GameListActivity extends AppCompatActivity {
+
+    /**
+     * The user manager to manage each user.
+     */
     private UserManager userManager;
-    private String currentUser;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
-        this.currentUser = sharedData.getString("currentUser", null);
+        String currentUser = sharedData.getString("currentUser", null);
         userManager = DatabaseUtil.getUserManager(currentUser);
         setContentView(R.layout.game_list);
         prepareGameList();
