@@ -15,4 +15,17 @@
     <string name="clear">Reset Background</string>
     <string name="logout">Log out</string>
     <string name="avatar">Avatar</string>
+
+    <string-array name = "numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+
 </resources>

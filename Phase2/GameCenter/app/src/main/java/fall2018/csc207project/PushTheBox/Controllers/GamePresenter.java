@@ -11,4 +11,5 @@ public interface GamePresenter extends Observer{
     void arrowButtonClicked(Context context, String direction);
     void onUndoButtonClicked(int step);
     void onUndoTextClicked();
+    void saveScores(Context context);
 }

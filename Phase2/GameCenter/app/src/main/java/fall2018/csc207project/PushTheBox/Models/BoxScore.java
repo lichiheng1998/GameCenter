@@ -33,5 +33,6 @@ public class BoxScore extends Score{
         this.level = level;
         this.undoSteps = undoSteps;
         this.moveSteps = moveSteps;
+        this.game = "PushBox";
     }
 }

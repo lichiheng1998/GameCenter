@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 
 import java.util.Observable;
 
+import fall2018.csc207project.Models.ScoreManager;
+import fall2018.csc207project.PushTheBox.Models.BoxGameCalculator;
+import fall2018.csc207project.PushTheBox.Models.BoxGameScoreManager;
+import fall2018.csc207project.PushTheBox.Models.BoxScore;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.Models.DatabaseUtil;
@@ -96,6 +100,17 @@ public class BoxGamePresenter implements GamePresenter {
         view.showNumberPicker();
     }
 
+    @Override
+    public void saveScores(Context context) {
+        if (mapManager.boxSolved()){
+            BoxGameCalculator calculator = new BoxGameCalculator();
+            ScoreManager<BoxScore> scoreManager = DatabaseUtil.getScoreManager("PushBox",currentUser,calculator);
+            BoxGameScoreManager boxScoreManager = new BoxGameScoreManager(scoreManager);
+            BoxScore boxScore = new BoxScore(mapManager.getLevel(), mapManager.getTotalUndoTimes(), mapManager.getTotalMoveSteps());
+            scoreManager.saveScore(boxScore, context);
+        }
+    }
+
     /**
      * Updates notified to observer. Calls the View to update the map.
      * @param o
@@ -105,4 +120,5 @@ public class BoxGamePresenter implements GamePresenter {
     public void update(Observable o, Object arg) {
         view.updateMap(mapManager);
     }
+
 }

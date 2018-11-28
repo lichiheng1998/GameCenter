@@ -7,85 +7,100 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/playerName"
+        android:id="@+id/boxPlayerName"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="17dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="30dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/highestText"
+        app:layout_constraintBottom_toTopOf="@+id/boxHighestText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/highestText"
+        android:id="@+id/boxHighestText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="Highest Three Score:"
-        app:layout_constraintBottom_toTopOf="@+id/topTwo"
+        app:layout_constraintBottom_toTopOf="@+id/boxTopTwo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxPlayerName" />
 
     <TextView
-        android:id="@+id/topOne"
+        android:id="@+id/boxTopOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/topTwo"
+        app:layout_constraintBottom_toBottomOf="@+id/boxTopTwo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/highestText" />
+        app:layout_constraintTop_toTopOf="@+id/boxTopTwo" />
 
     <TextView
-        android:id="@+id/topTwo"
-        android:layout_width="62dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
-        app:layout_constraintEnd_toStartOf="@+id/topThree"
-        app:layout_constraintStart_toEndOf="@+id/topOne"
-        app:layout_constraintTop_toBottomOf="@+id/highestText" />
-
-    <TextView
-        android:id="@+id/topThree"
+        android:id="@+id/boxTopTwo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="15dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="296dp"
-        tools:layout_editor_absoluteY="49dp" />
+        app:layout_constraintEnd_toStartOf="@+id/boxTopThree"
+        app:layout_constraintStart_toEndOf="@+id/boxTopOne"
+        app:layout_constraintTop_toBottomOf="@+id/boxHighestText" />
 
     <ListView
         android:id="@+id/boxScoreBoard"
-        android:layout_width="match_parent"
-        android:layout_height="469dp"
-        android:layout_marginTop="120dp"
-        app:layout_constraintTop_toTopOf="@+id/playerName"
-        tools:layout_editor_absoluteX="8dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/boxHighestText" />
 
     <TextView
-        android:id="@+id/globalDisplay"
+        android:id="@+id/boxGlobalDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="13dp"
         android:text="Overall player score"
         app:layout_constraintBottom_toTopOf="@+id/boxScoreBoard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topThree" />
+        app:layout_constraintTop_toBottomOf="@+id/boxTopTwo" />
+
+    <TextView
+        android:id="@+id/boxTopThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/boxTopTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/boxTopTwo" />
+
+    <Spinner
+        android:id="@+id/boxSpinner"
+        android:layout_width="472dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
