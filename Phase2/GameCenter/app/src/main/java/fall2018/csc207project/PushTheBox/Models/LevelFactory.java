@@ -24,6 +24,8 @@ public class LevelFactory implements Serializable {
 
     private HashMap<String, Object> gameElements = new HashMap<>();
 
+    private BufferedReader reader;
+
     /**
      * Create a new LevelFactory to initialize a game.
      */
@@ -73,24 +75,33 @@ public class LevelFactory implements Serializable {
     private Integer[][] getInfoFromFile(int level) {
         Integer[][] levelInfo = new Integer[6][];;
         AssetManager assetManager = context.getAssets();
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    assetManager.open("box_levels.txt")));
-            String nextLine = reader.readLine();
-            int countLevel = 0;
-            while ((nextLine = reader.readLine()) != null && countLevel != level) {
-                countLevel++;
-                if (countLevel == level) {
-                    String[] nextLevel = nextLine.split("-");
-                    for (int i = 0; i < nextLevel.length; i++) {
-                        levelInfo[i] = strArrToIntArr(nextLevel[i].split(","));
-                    }
+        String nextLine = readLine(assetManager);
+        int countLevel = 0;
+        while ((nextLine = readLine(assetManager)) != null && countLevel != level) {
+            countLevel++;
+            if (countLevel == level) {
+                String[] nextLevel = nextLine.split("-");
+                for (int i = 0; i < nextLevel.length; i++) {
+                    levelInfo[i] = strArrToIntArr(nextLevel[i].split(","));
                 }
             }
+        }
+        return levelInfo;
+    }
+
+
+    public String readLine(AssetManager assetManager){
+        String result = "";
+        try {
+            if (reader == null) {
+                reader = new BufferedReader(new InputStreamReader(
+                        assetManager.open("box_levels.txt")));
+            }
+            result = reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return levelInfo;
+        return result;
     }
 
     /**

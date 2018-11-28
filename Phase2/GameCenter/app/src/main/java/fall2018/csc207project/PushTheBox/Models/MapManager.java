@@ -250,5 +250,4 @@ public class MapManager implements Serializable {
     public ArrayList<Box> getBoxList(){
         return boxArrayList;
     }
-
 }
