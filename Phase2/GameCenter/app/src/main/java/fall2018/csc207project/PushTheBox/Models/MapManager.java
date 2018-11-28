@@ -122,7 +122,6 @@ public class MapManager implements Serializable {
         int newPosition = person.getPosition() + posChange;
         // There may be a box on next step, so the person will push the box.
         if (boxAtPos(newPosition)!=null){
-            isBoxesMoved = true;
             processBoxMovement(newPosition, newPosition + posChange);
         }
         person.walk(posChange);
@@ -142,6 +141,7 @@ public class MapManager implements Serializable {
         }else{
             Objects.requireNonNull(boxAtPos(newPosition)).leaveDestination();
         }
+        isBoxesMoved = true;
     }
 
     public void pushLastStep(int personOldPos, int boxNewPos){
