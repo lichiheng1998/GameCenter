@@ -23,11 +23,29 @@ import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.ScoreManager;
 import fall2018.csc207project.R;
 
+/**
+ * The MemoScoreBoardActivity that extends AppCompatActivity
+ */
 public class MemoScoreBoardActivity extends AppCompatActivity {
 
+    /**
+     * The MemoScoreManager that manage each MemoScoreManager
+     */
     private MemoScoreManager scoreManager;
+
+    /**
+     * The sorted ArrayList<MemoScore> to be show on the top 10 ListView.
+     */
     private ArrayList<MemoScore> sortList = new ArrayList<>();
+
+    /**
+     * Tells weather the level is on hard mode or crazy mode.
+     */
     private boolean level = false;
+
+    /**
+     * The ListView of top 10 players for this game.
+     */
     private ListView scoreList;
 
     @Override
@@ -55,8 +73,7 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
     }
 
     /**
-     * addAcceptButton
-     * that creates all Button Listener to this instance
+     * addAcceptButton that creates all Button Listener to this instance
      */
     public void addAcceptButton(){
         hardModeSwitchListener();
@@ -85,6 +102,8 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
     /**
      * update the ListView in this instance
      *
+     * @param difficulty the difficulty depends on the width of the game
+     * @param level the level can be hard or crazy mode
      */
     public void updateView(int difficulty, boolean level){
         BaseAdapter adapter = new MemoScoreBoardAdapter(
@@ -101,6 +120,9 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
                 .setText(String.valueOf(personalList.get(2).value));
     }
 
+    /**
+     * Activate the hard mode Switch.
+     */
     private void hardModeSwitchListener(){
         final Switch hardModeSwitch = findViewById(R.id.memoMode);
         hardModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

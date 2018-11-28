@@ -1,4 +1,5 @@
 package fall2018.csc207project.Memorization.Controllers;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import fall2018.csc207project.R;
  */
 public class MemoStartingActivity extends AppCompatActivity {
 
+    @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_game_starting);
@@ -35,7 +37,7 @@ public class MemoStartingActivity extends AppCompatActivity {
      * Setup the listener for the switch to board size button.
      */
     private void switchToBoardsSize() {
-        Intent tmp = new Intent(this, MemoComplxActivity.class);
+        Intent tmp = new Intent(this, MemoComplexActivity.class);
         startActivity(tmp);
     }
 
@@ -52,6 +54,9 @@ public class MemoStartingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Switch the current slide to the ScoreBoard slide.
+     */
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, MemoScoreBoardActivity.class);
         startActivity(tmp);

@@ -2,6 +2,9 @@ package fall2018.csc207project.Memorization.Models;
 
 import fall2018.csc207project.Models.Score;
 
+/**
+ * The class MemoScore that extends Score.
+ */
 public class MemoScore extends Score{
 
     /**
@@ -10,12 +13,12 @@ public class MemoScore extends Score{
     public int difficulty;
 
     /**
-     * hard or normal game level
+     * hard or normal game level.
      */
     public boolean level;
 
     /**
-     * the total score of this board
+     * the total score of this board.
      */
     public int scoreTotal;
 

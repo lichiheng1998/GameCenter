@@ -15,11 +15,11 @@ import fall2018.csc207project.R;
  * Instruction Dialog Fragment for Memorization Master
  */
 public class GameStartDialogFragment extends DialogFragment {
+
     /**
      * interface that handles events after dialog appear
      */
     private StartDialogListener listener;
-
 
     /**
      * Adapted from "https://www.cs.dartmouth.edu/~sergey/cs65/fragments-puzzles.txt"

@@ -2,12 +2,9 @@ package fall2018.csc207project.Memorization.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
-
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import fall2018.csc207project.Memorization.Models.MemoGameCalculator;
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoScore;
@@ -17,22 +14,68 @@ import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.ScoreManager;
 
 /**
- * Class represents the implementation of the  game logic.
+ * Class represents the implementation of the game logic.
  */
 public class MemoGamePresenter implements GamePresenter {
 
+    /**
+     * The current user on the game.
+     */
     private String currentUser;
+
+    /**
+     * The number of taps that to click correct.
+     */
     private int successTap;
+
+    /**
+     * The MemoManager that manage the Memo game.
+     */
     private MemoManager memoManager;
+
+    /**
+     * The View of the Memo Game.
+     */
     private MemoGameView view;
+
+    /**
+     * The Iterator<MemoTile> that let you iterate throw all MemoTiles.
+     */
     private Iterator<MemoTile> verifyIterator;
+
+    /**
+     * The next MemoTile to get verifies.
+     */
     private MemoTile nextToVerify;
+
+    /**
+     * Tells whether the user can tap on the tile
+     * or not if it is still displaying.
+     */
     private boolean isDisplaying;
+
+    /**
+     * Number of life left for the current user.
+     */
     private int life;
-    private int period = 2000;
+
+    /**
+     * The delay of each flashing between each tiles.
+     */
     private int flashDelay = 1000;
+
+    /**
+     * Tells weather the game is stop.
+     */
     private boolean gameOver;
 
+    /**
+     * Construct a new MemoGamePresenter
+     * by given a final MemoGameView and a Context.
+     *
+     * @param view the MemoGame's view
+     * @param context the context of the app
+     */
     public MemoGamePresenter(final MemoGameView view, Context context) {
         this.view = view;
         SharedPreferences shared
@@ -60,6 +103,10 @@ public class MemoGamePresenter implements GamePresenter {
         }
         return verifyItem;
     }
+
+    /**
+     * Start the cycle for the MemoTiles to flash.
+     */
     public void startCycle(){
         final Iterator<MemoTile> iterator = memoManager.iterator();
         verifyIterator = memoManager.iterator();
@@ -67,6 +114,7 @@ public class MemoGamePresenter implements GamePresenter {
         isDisplaying = true;
         view.updateStatus(true);
         Timer timer = new Timer();
+        int period = 2000;
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -83,9 +131,10 @@ public class MemoGamePresenter implements GamePresenter {
 
     /**
      * If the buttons tap are in wrong order, the game ends. Otherwise, flash the button to green.
+     *
      * @param pos the position that user taps.
      */
-    public void verify(int pos, Context context){
+    private void verify(int pos, Context context){
         if (!gameOver && nextToVerify.getId() == pos){
             success(pos);
         } else {
@@ -93,6 +142,11 @@ public class MemoGamePresenter implements GamePresenter {
         }
     }
 
+    /**
+     * Continue the the game after a tap the user tapped is correct.
+     *
+     * @param pos the position that the user tapped
+     */
     private void success(int pos){
         view.flashButtonToColor(pos, flashDelay, MemoTile.PRESSCOLOR);
         successTap += 1;
@@ -105,6 +159,12 @@ public class MemoGamePresenter implements GamePresenter {
     }
 
     private boolean isFinish = true;
+
+    /**
+     * End the the game after a tap the user tapped is incorrect.
+     *
+     * @param pos the position that the user tapped
+     */
     private void fail(int pos, Context context){
         view.flashButtonToColor(pos, flashDelay, MemoTile.WRONGCOLOR);
         life = life == 0 ? 0 : life-1;
@@ -124,11 +184,14 @@ public class MemoGamePresenter implements GamePresenter {
             }
         }
     }
+
     /**
      * Flash the tile corresponding to the status of the tile. Green for active tile, red for fake
      * tile.
+     *
+     * @param tile the MemoTile that need to flash.
      */
-    public void flashMemoTile(MemoTile tile){
+    private void flashMemoTile(MemoTile tile){
         if(tile.status == MemoTile.TYPEACTIVE){
             view.flashButtonToColor(tile.getId(), flashDelay, MemoTile.ACTIVECOLOR);
         } else if (tile.status == MemoTile.TYPEFAKE) {

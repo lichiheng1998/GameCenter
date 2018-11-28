@@ -54,8 +54,8 @@ public class MemoScoreBoardAdapter extends BaseAdapter {
         return position;
     }
 
-    @SuppressLint("InflateParams")
     @Override
+    @SuppressLint("InflateParams")
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
         MemoScoreBoardAdapter.MyViewHolder viewHolder;

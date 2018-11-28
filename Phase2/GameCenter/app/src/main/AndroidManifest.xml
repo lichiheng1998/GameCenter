@@ -30,7 +30,7 @@
         <activity android:name=".PushTheBox.View.BoxGameActivity"/>
         <activity android:name=".PushTheBox.View.LevelActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity android:name=".Memorization.Controllers.MemoComplxActivity" />
+        <activity android:name=".Memorization.Controllers.MemoComplexActivity" />
         <activity android:name=".Memorization.Views.MemoGameActivity" />
         <activity android:name="fall2018.csc207project.Controllers.ManageSaveActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxScoreBoardActivity" />
