@@ -12,6 +12,7 @@ import android.widget.GridView;
 import fall2018.csc207project.PushTheBox.Controllers.BoxGamePresenter;
 import fall2018.csc207project.PushTheBox.Controllers.GamePresenter;
 
+// excluded from test coverage since this is a view class.
 public class SwipeDetectGridView extends GridView {
     GestureDetector gestureDetector;
     GamePresenter presenter;
