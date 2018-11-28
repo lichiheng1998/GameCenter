@@ -189,8 +189,8 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
      */
     @Override
     public void updateMap(MapManager mapManager) {
-        mapAdapter.setPerson(mapManager.getPersonPosToImage());
-        mapAdapter.setBoxesList(mapManager.getBoxPosToImage());
+        mapAdapter.setPerson(mapManager.person);
+        mapAdapter.setBoxesList(mapManager.getBoxList());
         display();
     }
 

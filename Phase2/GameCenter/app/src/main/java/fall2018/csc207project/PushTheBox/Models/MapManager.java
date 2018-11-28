@@ -238,24 +238,10 @@ public class MapManager implements Serializable {
     }
 
     /**
-     * Get the person's position mapping with the image id of the person
-     * @return person's position mapping with his image
-     */
-    public SparseIntArray getPersonPosToImage(){
-        SparseIntArray personPosToImage = new SparseIntArray();
-        personPosToImage.append(person.getPosition(), person.getImage());
-        return personPosToImage;
-    }
-
-    /**
      * Get all the boxes' position mapping with the image id of each box
      * @return boxes' position mapping with the image id of each box
      */
-    public SparseIntArray getBoxPosToImage(){
-        SparseIntArray boxes = new SparseIntArray();
-        for (Box box : boxArrayList){
-            boxes.append(box.getPosition(), box.getImage());
-        }
-        return boxes;
+    public ArrayList<Box> getBoxList(){
+        return boxArrayList;
     }
 }
