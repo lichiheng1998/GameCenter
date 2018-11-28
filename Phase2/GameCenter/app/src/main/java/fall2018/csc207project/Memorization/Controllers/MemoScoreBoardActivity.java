@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import fall2018.csc207project.Memorization.Models.MemoGameCalculator;
 import fall2018.csc207project.Memorization.Models.MemoScore;
@@ -72,6 +74,9 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
                     case "5":
                         updateView(5, level);
                         break;
+                    default:
+                        Toast.makeText(getApplicationContext(),
+                                "Wrong input numbers", Toast.LENGTH_SHORT).show();
                 }
             }
         });
