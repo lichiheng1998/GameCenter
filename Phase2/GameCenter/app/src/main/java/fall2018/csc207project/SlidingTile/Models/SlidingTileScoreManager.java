@@ -17,9 +17,9 @@ public class SlidingTileScoreManager {
     private ScoreManager<TileScore> scoreManager;
 
     /**
-     * Construct a new SlidingTileScoreManager by given a scoreManager
+     * Construct a new SlidingTileScoreManager by given a scoreManager.
      *
-     * @param scoreManager the score manager we need
+     * @param scoreManager the TileScores manager we need
      */
     public SlidingTileScoreManager(ScoreManager<TileScore> scoreManager) {
         this.scoreManager = scoreManager;
@@ -95,7 +95,7 @@ public class SlidingTileScoreManager {
      *
      * @param tileScores the list of TileScores that need to be sort.
      * @param complexity the complexity the user chooses
-     * @return the sorted TileScores by giving a context and a complexity
+     * @return the sorted TileScores by giving a List of TileScores and a complexity
      */
     private ArrayList<TileScore> getSortedScores(List<TileScore> tileScores, int complexity) {
         ArrayList<TileScore> scoreBoardScores = new ArrayList<>();
