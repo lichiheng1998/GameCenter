@@ -98,7 +98,6 @@ public class BoardGamePresenter implements GamePresenter {
         if (arr[0] == 0){
             view.swapButtons(arr[1], arr[2]);
         } else {
-
         }
     }
 

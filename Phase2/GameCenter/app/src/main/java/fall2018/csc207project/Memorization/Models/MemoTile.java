@@ -33,7 +33,7 @@ public class MemoTile implements Serializable{
      * @param id unique id for this MemoTile
      * @param status current type for this MemoTile
      */
-    MemoTile(int id, int status){
+    public MemoTile(int id, int status){
         this.id = id;
         this.status = status;
     }
