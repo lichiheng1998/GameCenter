@@ -13,4 +13,11 @@
     <string name="clear">Reset Background</string>
     <string name="logout">Log out</string>
     <string name="avatar">Avatar</string>
+    <string name="accept">accept</string>
+    <string name="empty">empty</string>
+    <string name="playerscore1">playerscore1</string>
+    <string name="playerscore2">playerscore2</string>
+    <string name="playerscore3">playerscore3</string>
+    <string name="_3">3</string>
+    <string name="hard_mode">hard_mode</string>
 </resources>

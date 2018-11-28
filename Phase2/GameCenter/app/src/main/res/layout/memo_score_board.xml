@@ -42,7 +42,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="108dp"
-        android:text="playerscore1" />
+        android:text="@string/playerscore1" />
 
     <TextView
         android:id="@+id/memoPlayerTop3x2"
@@ -51,7 +51,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="143dp"
-        android:text="playerscore2" />
+        android:text="@string/playerscore2" />
 
     <TextView
         android:id="@+id/memoPlayerTop3x3"
