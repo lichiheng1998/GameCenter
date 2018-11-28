@@ -10,6 +10,8 @@ import java.util.Observer;
 import java.util.HashMap;
 import java.util.Stack;
 
+import fall2018.csc207project.Models.DatabaseUtil;
+
 /**
  * Manages a map, including the movements of the person and boxes on the map, and checks for a win.
  */
@@ -68,6 +70,8 @@ public class MapManager implements Serializable {
     /**
      * Initialize a new manager to manage a new map.
      */
+
+
     public MapManager(int level, int undoTimes, Context context){
         this.level = level;
         createGameByLevel(new LevelFactory(context).getGameElements(level));
@@ -196,6 +200,10 @@ public class MapManager implements Serializable {
         return totalUndoTimes;
     }
 
+    public int getTotalMoveSteps(){
+        return totalMoveSteps;
+    }
+
     /**
      * Initialize the game elements by the chosen game level.
      */
@@ -264,4 +272,5 @@ public class MapManager implements Serializable {
         }
         return boxes;
     }
+
 }

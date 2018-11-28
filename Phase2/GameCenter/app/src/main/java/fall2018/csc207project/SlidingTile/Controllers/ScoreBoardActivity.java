@@ -33,7 +33,7 @@ public class ScoreBoardActivity extends AppCompatActivity {
         TileGameCalculator calculator = new TileGameCalculator();
         ScoreManager <TileScore> globalScoreManager;
         globalScoreManager = DatabaseUtil.getScoreManager("SlidingTile", this.currentUser, calculator);
-        this.scoreManager = new SlidingTileScoreManager(globalScoreManager);
+        scoreManager = new SlidingTileScoreManager(globalScoreManager);
         setContentView(R.layout.tile_game_score_board);
         this.scoreList = this.findViewById(R.id.scoreBoard);
         createButton();

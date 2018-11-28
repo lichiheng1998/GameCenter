@@ -40,11 +40,11 @@ public class BoardManager implements Serializable, Iterable<Tile>{
         this.undoTimes = undoTimes;
         stackOfMovements = new Stack<>();
         if (dim == 3) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 2);
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 81);
         } else if (dim == 4) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 2);
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 256);
         } else if (dim == 5) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 2);
+            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 512);
         }
     }
 

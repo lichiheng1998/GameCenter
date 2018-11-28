@@ -24,7 +24,7 @@ public class BoxStartingActivity extends AppCompatActivity {
         setContentView(R.layout.box_starting);
         addNewGameButtonListener();
         addLoadButtonListener();
-        //addScoreButtonListener();
+        addScoreButtonListener();
     }
 
     /**
@@ -58,8 +58,13 @@ public class BoxStartingActivity extends AppCompatActivity {
      * Activate the myScore button.
      */
     private void addScoreButtonListener(){
-        Button myScoreButton = findViewById(R.id.boxScoreboard);
-        //TODO
+        Button scoreButton = findViewById(R.id.boxScoreboard);
+        scoreButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent tmp = new Intent(BoxStartingActivity.this, BoxScoreBoardActivity.class);
+                startActivity(tmp);
+            }
+        });
     }
 
     /**
