@@ -63,7 +63,6 @@ public class LevelFactory implements Serializable {
         }
         gameElements.put("map", new GameMap(width, height, bgElements));
         gameElements.put("boxArrayList", boxArrayList);
-        gameElements.put("bgElements", bgElements);
         return gameElements;
     }
 
