@@ -35,11 +35,6 @@ public class MapManager implements Serializable {
     private int level;
 
     /**
-     * The list of all background tiles.
-     */
-    private ArrayList<BgTile> bgElements;
-
-    /**
      * The counting of total steps moved.
      */
     private int totalMoveSteps;
@@ -83,7 +78,7 @@ public class MapManager implements Serializable {
     public Boolean boxSolved(){
         for (Box box: boxArrayList) {
             // if there exist boxes on not destination point, the game is not solved.
-            if(!bgElements.get(box.getPosition()).isWinnable()){
+            if(!map.getBgElements().get(box.getPosition()).isWinnable()){
                 return false;
             }
         }
@@ -200,7 +195,6 @@ public class MapManager implements Serializable {
      * Initialize the game elements by the chosen game level.
      */
     private void createGameByLevel(HashMap<String, Object> levelInfo){
-        bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
         map = (GameMap) levelInfo.get("map");
@@ -236,9 +230,9 @@ public class MapManager implements Serializable {
      * @return the array of the background ids
      */
     public Integer[] getTilesBg(){
-        Integer[] tileBgs = new Integer[bgElements.size()];
+        Integer[] tileBgs = new Integer[map.getBgElements().size()];
         for (int i = 0; i < tileBgs.length; i++ ){
-            tileBgs[i] = bgElements.get(i).getBackground();
+            tileBgs[i] = map.getBgElements().get(i).getBackground();
         }
         return tileBgs;
     }

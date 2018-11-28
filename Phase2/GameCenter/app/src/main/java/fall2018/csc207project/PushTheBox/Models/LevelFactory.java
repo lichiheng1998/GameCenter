@@ -46,11 +46,11 @@ public class LevelFactory implements Serializable {
         for(int i = 0; i < height * width; i++){
             if (i % width == 0 | i % width == (width - 1) | i < width | i >= ((height * width) - width)
                     | Arrays.asList(tmp[2]).contains(i)){
-                bgElements.add(new BgTile(BgTile.WALLTYPE));
+                bgElements.add(new BgTile("Wall"));
             } else if(Arrays.asList(tmp[4]).contains(i)){
-                bgElements.add(new BgTile(BgTile.DESTTYPE));
+                bgElements.add(new BgTile("Destination"));
             }else{
-                bgElements.add(new BgTile(BgTile.FLOORTYPE));
+                bgElements.add(new BgTile("Floor"));
             } if (Arrays.asList(tmp[3]).contains(i)){
                 Box tmpBox = new Box(i);
                 boxArrayList.add(tmpBox);
@@ -63,7 +63,6 @@ public class LevelFactory implements Serializable {
         }
         gameElements.put("map", new GameMap(width, height, bgElements));
         gameElements.put("boxArrayList", boxArrayList);
-        gameElements.put("bgElements", bgElements);
         return gameElements;
     }
 

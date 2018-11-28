@@ -9,9 +9,11 @@ import fall2018.csc207project.R;
  * Excluded from tests because it's a model class
  */
 public class BgTile implements Serializable {
-    public static final String WALLTYPE =  "Wall";
-    public static final String FLOORTYPE =  "Floor";
-    public static final String DESTTYPE =  "Destination";
+    /**
+     * The strings which should be given to constructor to verify the type of bgtile.
+     */
+    private static final String WALLTYPE =  "Wall";
+    private static final String FLOORTYPE =  "Floor";
 
     /**
      * The image id of this bgTile.
@@ -66,5 +68,14 @@ public class BgTile implements Serializable {
      */
     public int getBackground(){
         return BACKGROUND;
+    }
+
+    /**
+     * Check if the two bgtiles are the same(in type)
+     * @param bgTile the bgtile to compare with
+     * @return whether two bgtiles are the same
+     */
+    public Boolean equals(BgTile bgTile){
+        return bgTile.getBackground() == BACKGROUND;
     }
 }
