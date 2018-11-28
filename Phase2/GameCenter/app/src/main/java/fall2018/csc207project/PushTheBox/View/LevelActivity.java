@@ -41,7 +41,7 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        this.presenter = new LevelPresenter(this, getApplicationContext());
+        this.presenter = new LevelPresenter(this);
         undoStep = 3;
         setContentView(R.layout.box_levels);
         gridView = findViewById(R.id.boxLevelGrid);
