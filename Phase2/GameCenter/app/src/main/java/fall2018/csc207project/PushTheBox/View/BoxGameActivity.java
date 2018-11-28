@@ -161,6 +161,11 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         Toast.makeText(this, "No times or undo out of limit!", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void makeInvalidMovementText() {
+        Toast.makeText(this, "Invalid Movement", Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * Show the number picker dialog.
      */

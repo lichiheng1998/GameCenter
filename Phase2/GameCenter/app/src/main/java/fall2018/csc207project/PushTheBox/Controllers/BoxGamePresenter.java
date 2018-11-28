@@ -2,6 +2,7 @@ package fall2018.csc207project.PushTheBox.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import java.util.Observable;
 
@@ -35,7 +36,7 @@ public class BoxGamePresenter implements GamePresenter {
     /**
      * The controller which controls the movements of person and boxes.
      */
-    MovementController movementController;
+    private MovementController movementController;
 
     /**
      * The save slot of the current user.
@@ -72,7 +73,9 @@ public class BoxGamePresenter implements GamePresenter {
      * @param direction direction chosen
      */
     public void arrowButtonClicked(Context context, String direction){
-        if (movementController.processTapMovement(context, direction)){
+        if (!movementController.processTapMovement(direction)){
+            view.makeInvalidMovementText();
+        }else if(mapManager.boxSolved()){
             view.levelComplete();
         }
         saveSlot.saveToAutoSave(mapManager);
