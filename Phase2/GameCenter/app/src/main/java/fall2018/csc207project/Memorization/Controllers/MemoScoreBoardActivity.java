@@ -38,7 +38,7 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
         String currentUser = shared.getString("currentUser", null);
         MemoGameCalculator calculator = new MemoGameCalculator();
         ScoreManager<MemoScore> globalScoreManager;
-        globalScoreManager = DatabaseUtil.getScoreManager("Memo", currentUser, calculator);
+        globalScoreManager = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
         scoreManager = new MemoScoreManager(globalScoreManager);
 
         setContentView(R.layout.memo_score_board);
@@ -63,8 +63,8 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
         Button acceptButton = findViewById(R.id.buttonAccept);
         acceptButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                EditText acceptText = findViewById(R.id.acceptText);
-                switch (acceptText.getText().toString()) {
+                String acceptText = ((EditText) findViewById(R.id.acceptText)).getText().toString();
+                switch (acceptText) {
                     case "3":
                         updateView(3, level);
                         break;

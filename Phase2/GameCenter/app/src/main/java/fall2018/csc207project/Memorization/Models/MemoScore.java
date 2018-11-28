@@ -21,14 +21,14 @@ public class MemoScore extends Score{
 
     /**
      * Construct a new TileScore system
-     * by given level, scoreTotal,
+     * by given width, level and scoreTotal.
      *
-     * @param height the height of the game board
+     * @param width the width of the game board
      * @param level hard or normal for this game
      * @param scoreTotal the total score for this game
      */
-    public MemoScore(int height, boolean level, int scoreTotal) {
-        this.difficulty = height;
+    public MemoScore(int width, boolean level, int scoreTotal) {
+        this.difficulty = width;
         this.level = level;
         this.scoreTotal = scoreTotal;
     }
