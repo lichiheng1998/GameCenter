@@ -107,7 +107,7 @@ public class MemoGamePresenter implements GamePresenter {
                     , memoManager.isLevel(), memoManager.getScoreTotal());
             MemoGameCalculator calculator = new MemoGameCalculator();
 //            ScoreManager<MemoScore> scoreManager
-//                    = DatabaseUtil.getScoreManager("SlidingTile", currentUser, calculator);
+//                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
 //            scoreManager.saveScore(score, context);
         }
     }
