@@ -68,12 +68,12 @@ public class MapManager implements Serializable {
     /**
      * Initialize a new manager to manage a new map.
      */
-    public MapManager(int level, int undoTimes, Context context){
-        this.level = level;
-        createGameByLevel(new LevelFactory(context).getGameElements(level));
+    public MapManager(int level, int undoTimes, HashMap<String, Object> levelInfo){
+        this.level = level;;
         this.undoTimes = undoTimes;
         totalUndoTimes = undoTimes;
         this.stackOfMovements = new Stack<>();
+        createGameByLevel(levelInfo);
     }
 
     /**
