@@ -27,7 +27,6 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
 
     private MemoScoreManager scoreManager;
     private ArrayList<MemoScore> sortList = new ArrayList<>();
-    private EditText acceptText;
     private boolean level = false;
     private ListView scoreList;
 
@@ -45,7 +44,7 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
         setContentView(R.layout.memo_score_board);
 
         ((TextView)findViewById(R.id.memoCurrentPlayer)).setText(currentUser);
-        acceptText = findViewById(R.id.acceptText);
+
         scoreList = findViewById(R.id.memoScoreBoard);
 
         addAcceptButton();
@@ -64,6 +63,7 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
         Button acceptButton = findViewById(R.id.buttonAccept);
         acceptButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                EditText acceptText = findViewById(R.id.acceptText);
                 switch (acceptText.getText().toString()) {
                     case "3":
                         updateView(3, level);

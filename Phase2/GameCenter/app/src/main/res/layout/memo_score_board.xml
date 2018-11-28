@@ -8,7 +8,7 @@
     <Button
         android:id="@+id/buttonAccept"
         android:layout_width="100dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="20dp"
@@ -18,11 +18,11 @@
     <ListView
         android:id="@+id/memoScoreBoard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="322dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="218dp"
+        android:layout_marginTop="245dp"
         android:fillViewport="true" />
 
     <TextView
@@ -39,18 +39,17 @@
         android:id="@+id/memoPlayerTop3x1"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/memoPlayerTop3x2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="108dp"
         android:text="@string/playerscore1" />
 
     <TextView
         android:id="@+id/memoPlayerTop3x2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@+id/memoPlayerTop3x3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="143dp"
+        android:layout_marginBottom="-180dp"
         android:text="@string/playerscore2" />
 
     <TextView
@@ -59,15 +58,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="177dp"
+        android:layout_marginTop="180dp"
         android:text="@string/playerscore3" />
 
     <EditText
         android:id="@+id/acceptText"
         android:layout_width="100dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/buttonAccept"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/buttonAccept"
         android:layout_marginStart="20dp"
         android:ems="10"
         android:inputType="number"
@@ -77,9 +76,26 @@
     <Switch
         android:id="@+id/memoMode"
         android:layout_width="100dp"
-        android:layout_height="35dp"
-        android:layout_alignTop="@+id/buttonAccept"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/buttonAccept"
         android:layout_centerHorizontal="true"
         android:text="@string/hard_mode" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="292dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/memoScoreBoard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-245dp"
+        android:text="Top 10 Scores for Choisen Difficulty and Mode" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/memoPlayerTop3x1"
+        android:layout_centerHorizontal="true"
+        android:text="Player's Top 3 for Choisen Difficulty and Mode" />
 
 </RelativeLayout>

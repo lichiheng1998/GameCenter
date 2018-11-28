@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import fall2018.csc207project.Controllers.ManageSaveActivity;
+import fall2018.csc207project.PushTheBox.Controllers.BoxScoreBoardActivity;
 import fall2018.csc207project.R;
 
 // excluded from tests because it's a view class

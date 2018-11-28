@@ -57,7 +57,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         score = findViewById(R.id.Score);
         life = findViewById(R.id.life);
         status = findViewById(R.id.status);
-        presenter = new MemoGamePresenter(this);
+        presenter = new MemoGamePresenter(this, getApplicationContext());
         isActive = true;
         MemoManager memoManager = (MemoManager) getIntent().getSerializableExtra("save");
         presenter.setMemoManager(memoManager);
@@ -81,7 +81,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
             button.setTextSize(40);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    presenter.onTapOnTile((int)button.getTag());
+                    presenter.onTapOnTile(getApplicationContext(), (int)button.getTag());
                 }
             });
             setButtonColor(button, android.R.color.white);

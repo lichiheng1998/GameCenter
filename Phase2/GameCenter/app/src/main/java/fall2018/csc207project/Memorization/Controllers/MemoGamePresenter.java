@@ -1,5 +1,9 @@
 package fall2018.csc207project.Memorization.Controllers;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.view.View;
+
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,6 +20,8 @@ import fall2018.csc207project.Models.ScoreManager;
  * Class represents the implementation of the  game logic.
  */
 public class MemoGamePresenter implements GamePresenter {
+
+    private String currentUser;
     private int successTap;
     private MemoManager memoManager;
     private MemoGameView view;
@@ -27,8 +33,11 @@ public class MemoGamePresenter implements GamePresenter {
     private int flashDelay = 1000;
     private boolean gameOver;
 
-    public MemoGamePresenter(final MemoGameView view) {
+    public MemoGamePresenter(final MemoGameView view, Context context) {
         this.view = view;
+        SharedPreferences shared
+                = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
+        currentUser = shared.getString("currentUser", null);
         isDisplaying = false;
         gameOver = false;
         successTap = 0;
@@ -76,11 +85,11 @@ public class MemoGamePresenter implements GamePresenter {
      * If the buttons tap are in wrong order, the game ends. Otherwise, flash the button to green.
      * @param pos the position that user taps.
      */
-    public void verify(int pos){
+    public void verify(int pos, Context context){
         if (!gameOver && nextToVerify.getId() == pos){
             success(pos);
         } else {
-            fail(pos);
+            fail(pos, context);
         }
     }
 
@@ -94,7 +103,7 @@ public class MemoGamePresenter implements GamePresenter {
             startCycle();
         }
     }
-    private void fail(int pos){
+    private void fail(int pos, Context context){
         view.flashButtonToColor(pos, flashDelay, MemoTile.WRONGCOLOR);
         life = life == 0 ? 0 : life-1;
         view.updateLife(life);
@@ -106,9 +115,9 @@ public class MemoGamePresenter implements GamePresenter {
             MemoScore score = new MemoScore(memoManager.getHeightDifficulty()
                     , memoManager.isLevel(), memoManager.getScoreTotal());
             MemoGameCalculator calculator = new MemoGameCalculator();
-//            ScoreManager<MemoScore> scoreManager
-//                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
-//            scoreManager.saveScore(score, context);
+            ScoreManager<MemoScore> scoreManager
+                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
+            scoreManager.saveScore(score, context);
         }
     }
     /**
@@ -124,9 +133,9 @@ public class MemoGamePresenter implements GamePresenter {
     }
 
     @Override
-    public void onTapOnTile(int position) {
+    public void onTapOnTile(Context context, int position) {
         if(!isDisplaying){
-            verify(position);
+            verify(position, context);
         }
     }
 

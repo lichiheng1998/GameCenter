@@ -3,16 +3,13 @@ package fall2018.csc207project.SlidingTile.Controllers;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import fall2018.csc207project.Controllers.GameListViewAdapter;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.TileScore;
 
@@ -98,8 +95,8 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
          * @param base the current view show on screen
          */
         MyViewHolder(View base) {
-            userName = base.findViewById(R.id.scoreBoardUser);
-            userScore = base.findViewById(R.id.scoreBoardScore);
+            userName = base.findViewById(R.id.memoScoreBoardUser);
+            userScore = base.findViewById(R.id.memoScoreBoardScore);
         }
     }
 }

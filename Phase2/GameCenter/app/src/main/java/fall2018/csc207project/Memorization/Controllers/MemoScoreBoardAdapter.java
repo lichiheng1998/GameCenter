@@ -93,8 +93,8 @@ public class MemoScoreBoardAdapter extends BaseAdapter {
          * @param base the current view show on screen
          */
         MyViewHolder(View base) {
-            userName = base.findViewById(R.id.scoreBoardUser);
-            userScore = base.findViewById(R.id.scoreBoardScore);
+            userName = base.findViewById(R.id.memoScoreBoardUser);
+            userScore = base.findViewById(R.id.memoScoreBoardScore);
         }
     }
 }
