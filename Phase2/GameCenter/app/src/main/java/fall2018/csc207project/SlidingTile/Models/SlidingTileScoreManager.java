@@ -7,7 +7,8 @@ import java.util.List;
 import fall2018.csc207project.Models.ScoreManager;
 
 /**
- * The class that is used to calculate the score, store and retrieve the score.
+ * The class SlidingTileScoreManager
+ * that is used to calculate the score, store and retrieve the score.
  */
 public class SlidingTileScoreManager {
 

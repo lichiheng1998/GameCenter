@@ -1,14 +1,15 @@
 package fall2018.csc207project.Memorization.Models;
 
 import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import fall2018.csc207project.Models.ScoreManager;
 
-
+/**
+ * The class MemoScoreManager
+ * that is used to calculate the score, store and retrieve the score.
+ */
 public class MemoScoreManager {
 
     /**
