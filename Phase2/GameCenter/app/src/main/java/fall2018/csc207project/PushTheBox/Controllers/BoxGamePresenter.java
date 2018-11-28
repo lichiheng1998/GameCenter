@@ -54,12 +54,20 @@ public class BoxGamePresenter implements GamePresenter {
      */
     public BoxGamePresenter(MapView view, Context context){
         this.view = view;
+        setUpSaveManager(context);
+        movementController = new MovementController();
+    }
+
+    /**
+     * Set up save manager to save game.
+     * @param context context
+     */
+    public void setUpSaveManager(Context context){
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
         String currentGame = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
         saveSlot = saveManager.readFromFile(context);
-        movementController = new MovementController();
     }
 
     /**

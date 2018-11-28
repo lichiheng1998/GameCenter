@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.renderscript.ScriptGroup;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,8 +27,10 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LevelFactoryTest {
+    HashMap<String, Object> result;
+    private GameMap map;
 
-    @Test
+    @Before
     public void getGameElementForLevel1() {
         Context context = mock(Context.class);
         LevelFactory levelFactory = spy(new LevelFactory(context));
@@ -35,14 +38,26 @@ public class LevelFactoryTest {
         when(context.getAssets()).thenReturn(assetManager);
         doReturn("3-5--7-8-6").when(levelFactory).readLine(assetManager);
         when(levelFactory.getGameElements(1)).thenCallRealMethod();
-        HashMap<String, Object> result = levelFactory.getGameElements(1);
+        result = levelFactory.getGameElements(1);
+        map = (GameMap) result.get("map");
+
+
+    }
+
+    @Test
+    public void testPerson(){
         assertTrue("wrong person for level 1",
                 ((Person)result.get("Person")).equals(new Person(6)));
+    }
+
+    @Test
+    public void testBoxArrayList(){
         assertEquals("wrong box for level 1",
                 ((ArrayList<Box>)result.get("boxArrayList")).get(0).getPosition(), 7);
-        GameMap map = (GameMap) result.get("map");
-        assertEquals("wrong height", map.NUM_ROW, 3);
-        assertEquals("wrong width", map.NUM_COL, 5);
+    }
+
+    @Test
+    public void testBgTiles(){
         Integer[] wallPos = {0,1,2,3,4,5,9,10,11,12,13,14};
         for (int i = 0; i < 15; i++){
             if (Arrays.asList(wallPos).contains(i)){
@@ -56,5 +71,11 @@ public class LevelFactoryTest {
                         (!map.tileIsDestination(i) && !map.tileIsWall(i)));
             }
         }
+    }
+
+    @Test
+    public void testDimensions(){
+        assertEquals("wrong height", map.NUM_ROW, 3);
+        assertEquals("wrong width", map.NUM_COL, 5);
     }
 }
