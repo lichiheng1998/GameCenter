@@ -27,9 +27,10 @@ public class MovementControllerTest {
     MovementController mc = new MovementController();
 
     private void init(){
+        bgElements.clear();
         bgElements.add(new BgTile("Floor"));
         bgElements.add(new BgTile("Floor"));
-        ArrayList<Box> boxes = new ArrayList<Box>();
+        boxes.clear();
         levelInfo.put("boxArrayList", new ArrayList<Box>());
         levelInfo.put("map", new GameMap(2, 1, bgElements));
     }
@@ -122,7 +123,7 @@ public class MovementControllerTest {
     @Test
     public void testMovementPushBoxToFloor(){
         init();
-        bgElements.set(2, new BgTile("Floor"));
+        bgElements.add(new BgTile("Floor"));
         levelInfo.put("Person", new Person(0));
         boxes.add(new Box(1));
         levelInfo.put("boxArrayList", boxes);
@@ -138,7 +139,7 @@ public class MovementControllerTest {
     @Test
     public void testMovementPushingBoxToDes(){
         init();
-        bgElements.set(2, new BgTile("Destination"));
+        bgElements.add(new BgTile("Destination"));
         levelInfo.put("Person", new Person(0));
         boxes.add(new Box(1));
         levelInfo.put("boxArrayList", boxes);
@@ -154,7 +155,7 @@ public class MovementControllerTest {
     @Test
     public void testMovementPushingBoxToWall(){
         init();
-        bgElements.set(2, new BgTile("Wall"));
+        bgElements.add(new BgTile("Wall"));
         levelInfo.put("Person", new Person(0));
         boxes.add(new Box(1));
         levelInfo.put("boxArrayList", boxes);
@@ -165,5 +166,25 @@ public class MovementControllerTest {
         mc.processTapMovement("right");
         assertEquals("box shouldn't be pushed",
                 mapManager.getBoxList().get(0).getPosition(), 1);
+    }
+
+    @Test
+    public void testMovementPushingBoxToBox(){
+        init();
+        bgElements.add(new BgTile("Floor"));
+        bgElements.add(new BgTile("Floor"));
+        levelInfo.put("Person", new Person(0));
+        boxes.add(new Box(1));
+        boxes.add(new Box(2));
+        levelInfo.put("boxArrayList", boxes);
+        levelInfo.put("map", new GameMap(4,1,bgElements));
+        MapManager mapManager = new MapManager(0,0,levelInfo);
+
+        mc.setMapManager(mapManager);
+        mc.processTapMovement("right");
+        assertEquals("first box shouldn't be pushed",
+                mapManager.getBoxList().get(0).getPosition(), 1);
+        assertEquals("second box shouldn't be pushed",
+                mapManager.getBoxList().get(1).getPosition(), 2);
     }
 }
