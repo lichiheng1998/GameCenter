@@ -2,13 +2,9 @@ package fall2018.csc207project.PushTheBox.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
-
 import java.util.Observable;
-
 import fall2018.csc207project.Models.ScoreManager;
 import fall2018.csc207project.PushTheBox.Models.BoxGameCalculator;
-import fall2018.csc207project.PushTheBox.Models.BoxGameScoreManager;
 import fall2018.csc207project.PushTheBox.Models.BoxScore;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
@@ -16,6 +12,9 @@ import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.SaveManager;
 import fall2018.csc207project.Models.SaveSlot;
 
+/**
+ * The class BoxGamePresenter that implements GamePresenter
+ */
 public class BoxGamePresenter implements GamePresenter {
     /**
      * The map manager.
@@ -49,8 +48,9 @@ public class BoxGamePresenter implements GamePresenter {
 
     /**
      * A new box game presenter.
-     * @param view
-     * @param context
+     *
+     * @param view the view of this game
+     * @param context the context of this app
      */
     public BoxGamePresenter(MapView view, Context context){
         this.view = view;
@@ -62,7 +62,7 @@ public class BoxGamePresenter implements GamePresenter {
      * Set up save manager to save game.
      * @param context context
      */
-    public void setUpSaveManager(Context context){
+    private void setUpSaveManager(Context context){
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
         String currentGame = shared.getString("currentGame", null);
@@ -115,17 +115,19 @@ public class BoxGamePresenter implements GamePresenter {
     public void saveScores(Context context) {
         if (mapManager.boxSolved()){
             BoxGameCalculator calculator = new BoxGameCalculator();
-            ScoreManager<BoxScore> scoreManager = DatabaseUtil.getScoreManager("PushBox",currentUser,calculator);
-            BoxGameScoreManager boxScoreManager = new BoxGameScoreManager(scoreManager);
-            BoxScore boxScore = new BoxScore(mapManager.getLevel(), mapManager.getTotalUndoTimes(), mapManager.getTotalMoveSteps());
+            ScoreManager<BoxScore> scoreManager
+                    = DatabaseUtil.getScoreManager("PushBox",currentUser,calculator);
+            BoxScore boxScore = new BoxScore(mapManager.getLevel(),
+                    mapManager.getTotalUndoTimes(), mapManager.getTotalMoveSteps());
             scoreManager.saveScore(boxScore, context);
         }
     }
 
     /**
      * Updates notified to observer. Calls the View to update the map.
-     * @param o
-     * @param arg
+     *
+     * @param o updates to the Observable
+     * @param arg the Object to be update
      */
     @Override
     public void update(Observable o, Object arg) {

@@ -54,7 +54,7 @@ public class ManageSaveActivity extends AppCompatActivity{
         String game = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(user, game);
         saveSlot = saveManager.readFromFile(getApplicationContext());
-        entry = (Class<? extends Activity>)GlobalConfig.GAMEMAP.get(game);
+        entry = (Class<? extends Activity>)GlobalConfig.GAME_MAP.get(game);
         setupSaveButtons();
         setupLoadButtons();
         setupInfo();

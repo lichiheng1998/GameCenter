@@ -7,22 +7,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import fall2018.csc207project.PushTheBox.Models.BoxScore;
 import fall2018.csc207project.R;
 
+/**
+ * The class BoxScoreAdapter that extends BaseAdapter.
+ */
 public class BoxScoreAdapter extends BaseAdapter {
 
+    /**
+     * The context for the app.
+     */
     private Context context;
+
+    /**
+     * List of BoxScore want to be show on the ListView.
+     */
     private List<BoxScore> scores;
 
-    public BoxScoreAdapter(Context context, List<BoxScore> scores){
+    /**
+     * Construct a new BoxScoreAdapter
+     * by taking a Context and a List<BoxScore>.
+     *
+     * @param context the context for the app
+     * @param scores List of BoxScore want to be show on the ListView
+     */
+    BoxScoreAdapter(Context context, List<BoxScore> scores){
         this.context = context;
         this.scores = scores;
     }
+
     @Override
     public int getCount() {
         return scores.size();
@@ -55,13 +70,32 @@ public class BoxScoreAdapter extends BaseAdapter {
 
         return view;
     }
-}
+
+    /**
+     *  A class called MyViewHolder
+     */
     class MyViewHolder{
+
+        /**
+         * Current user's name
+         */
         TextView userName;
+
+        /**
+         * Current user's score
+         */
         TextView userScore;
+
+        /**
+         * Construct a new MyViewHolder by given a View base.
+         *
+         * @param base the current view show on screen
+         */
         MyViewHolder(View base) {
-            userName = base.findViewById(R.id.boxScoreBoardUser);
-            userScore = base.findViewById(R.id.boxScoreBoardScore);
+            userName = base.findViewById(R.id.memoScoreBoardUser);
+            userScore = base.findViewById(R.id.memoScoreBoardScore);
         }
     }
+}
+
 

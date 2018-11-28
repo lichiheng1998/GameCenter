@@ -69,7 +69,7 @@ public class GameListActivity extends AppCompatActivity {
      * Map the data to the game list view.
      */
     private void prepareGameList(){
-        BaseAdapter adapter = new GameListViewAdapter(this, GlobalConfig.GAMELIST,
+        BaseAdapter adapter = new GameListViewAdapter(this, GlobalConfig.GAME_LIST,
                 userManager.getGames(getApplicationContext()), getSwitchListener());
         ListView gameList = findViewById(R.id.game_list);
         gameList.setAdapter(adapter);

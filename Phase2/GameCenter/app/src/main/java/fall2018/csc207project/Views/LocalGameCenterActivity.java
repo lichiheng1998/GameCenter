@@ -94,7 +94,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     private void prepareGameList(){
         ListView listView = findViewById(R.id.gameList);
         this.adapter = new GameCenterListViewAdapter(this, gameList,
-                GlobalConfig.BGMAP);
+                GlobalConfig.BG_MAP);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
@@ -114,7 +114,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("currentGame", game);
         editor.commit();
-        Class gameActivity = GlobalConfig.ENTRYMAP.get(game);
+        Class gameActivity = GlobalConfig.ENTRY_MAP.get(game);
         Intent tmp = new Intent(this, gameActivity);
         startActivity(tmp);
     }

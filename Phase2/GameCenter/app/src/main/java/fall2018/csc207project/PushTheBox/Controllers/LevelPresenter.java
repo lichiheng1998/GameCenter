@@ -1,13 +1,15 @@
 package fall2018.csc207project.PushTheBox.Controllers;
 
-import android.content.Context;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import fall2018.csc207project.PushTheBox.View.LevelView;
 
+/**
+ * The class LevelPresenter which interact with the level of the game.
+ */
 public class LevelPresenter {
 
+    /**
+     * The View of each level.
+     */
     private LevelView view;
 
     /**
@@ -15,12 +17,16 @@ public class LevelPresenter {
      */
     public String text;
 
-
+    /**
+     * Construct a new LevelPresenter by given a LevelView.
+     *
+     * @param view the View of each level
+     */
     public LevelPresenter(LevelView view){
         this.view = view;
     }
 
-    public void undoStepsSetted(int undoStep){
+    public void setUndoSteps(int undoStep){
         if (undoStep == 3) {
             text = "The Total Undo Steps set to default value: 3";
         } else {

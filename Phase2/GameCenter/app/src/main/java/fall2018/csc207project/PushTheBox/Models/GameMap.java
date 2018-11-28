@@ -1,8 +1,6 @@
 package fall2018.csc207project.PushTheBox.Models;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,11 +42,7 @@ public class GameMap implements Serializable {
      * @return whether the tile with tile's ID is a wall
      */
     public Boolean tileIsWall(int tileId){
-        if(!bgElements.get(tileId).isStandable()){
-            return true;
-        }else{
-            return false;
-        }
+        return !bgElements.get(tileId).canBeStand();
     }
 
     /**

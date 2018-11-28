@@ -1,16 +1,11 @@
 package fall2018.csc207project.PushTheBox.Models;
 
-import android.content.Context;
-import android.util.SparseIntArray;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Observer;
 import java.util.HashMap;
 import java.util.Stack;
-
-import fall2018.csc207project.Models.DatabaseUtil;
 
 /**
  * Manages a map, including the movements of the person and boxes on the map, and checks for a win.
@@ -40,11 +35,6 @@ public class MapManager implements Serializable {
      * The counting of total steps moved.
      */
     private int totalMoveSteps;
-
-    /**
-     * The counting of total steps undid.
-     */
-    private int totalUndoSteps;
 
     /**
      * The number of undo available left.
@@ -168,7 +158,6 @@ public class MapManager implements Serializable {
             }
         }
         undoTimes--;
-        totalUndoSteps++;
     }
 
     /**
@@ -200,6 +189,7 @@ public class MapManager implements Serializable {
     /**
      * Initialize the game elements by the chosen game level.
      */
+    @SuppressWarnings("unchecked")
     private void createGameByLevel(HashMap<String, Object> levelInfo){
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");

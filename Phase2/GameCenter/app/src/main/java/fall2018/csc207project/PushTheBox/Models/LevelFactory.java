@@ -2,7 +2,6 @@ package fall2018.csc207project.PushTheBox.Models;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,19 +10,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * The class LevelFactory that implements Serializable.
+ */
 public class LevelFactory implements Serializable {
 
     /**
-     * The hash map that maps all the information of the game to its corresponding level
+     * The context of this app.
      */
-    private Map<Integer, Integer[][]> allLevels = new HashMap<>();
-
     private Context context;
 
+    /**
+     * The HashMap<String, Object> that contains all the game elements.
+     */
     private HashMap<String, Object> gameElements = new HashMap<>();
 
+    /**
+     * The BufferedReader for read file.
+     */
     private BufferedReader reader;
 
     /**
@@ -73,9 +78,9 @@ public class LevelFactory implements Serializable {
      * Initialize the hash map which stores all the elements for each level of game.
      * */
     private Integer[][] getInfoFromFile(int level) {
-        Integer[][] levelInfo = new Integer[6][];;
+        Integer[][] levelInfo = new Integer[6][];
         AssetManager assetManager = context.getAssets();
-        String nextLine = readLine(assetManager);
+        String nextLine;
         int countLevel = 0;
         while ((nextLine = readLine(assetManager)) != null && countLevel != level) {
             countLevel++;
@@ -89,7 +94,12 @@ public class LevelFactory implements Serializable {
         return levelInfo;
     }
 
-
+    /**
+     * Get a string of what is read from the file.
+     *
+     * @param assetManager the AssetManager for this game
+     * @return a string of what is read from the file
+     */
     public String readLine(AssetManager assetManager){
         String result = "";
         try {
