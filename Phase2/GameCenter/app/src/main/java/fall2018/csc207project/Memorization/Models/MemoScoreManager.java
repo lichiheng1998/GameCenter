@@ -22,7 +22,7 @@ public class MemoScoreManager {
      *
      * @param scoreManager the MemoScores manager we need
      */
-    MemoScoreManager(ScoreManager<MemoScore> scoreManager) {
+    public MemoScoreManager(ScoreManager<MemoScore> scoreManager) {
         this.scoreManager = scoreManager;
     }
 
@@ -49,30 +49,6 @@ public class MemoScoreManager {
     }
 
     /**
-     * Get the top three MemoScores for all complexity
-     * of the current user by giving a context.
-     *
-     * @param context the context of the app
-     * @return the top three MemoScores of the current user
-     */
-    public ArrayList<ArrayList<MemoScore>> getUserTopThreeScores(Context context) {
-        ArrayList<ArrayList<MemoScore>> listsTop3Scores = new ArrayList<>();
-        ArrayList<MemoScore> top3For3x3Easy = getTop3ForComplexity(context, 3, false);
-        ArrayList<MemoScore> top3For4x4Easy = getTop3ForComplexity(context, 4, false);
-        ArrayList<MemoScore> top3For5x5Easy = getTop3ForComplexity(context, 5, false);
-        ArrayList<MemoScore> top3For3x3Hard = getTop3ForComplexity(context, 3, true);
-        ArrayList<MemoScore> top3For4x4Hard = getTop3ForComplexity(context, 4, true);
-        ArrayList<MemoScore> top3For5x5Hard = getTop3ForComplexity(context, 5, true);
-        listsTop3Scores.add(top3For3x3Easy);
-        listsTop3Scores.add(top3For4x4Easy);
-        listsTop3Scores.add(top3For5x5Easy);
-        listsTop3Scores.add(top3For3x3Hard);
-        listsTop3Scores.add(top3For4x4Hard);
-        listsTop3Scores.add(top3For5x5Hard);
-        return listsTop3Scores;
-    }
-
-    /**
      * Get the top three MemoScores for all level of difficulties and modes.
      *
      * @param context the context of the app
@@ -80,7 +56,7 @@ public class MemoScoreManager {
      * @param level the mode level for hard or easy
      * @return the top three MemoScores for all level of difficulties and modes
      */
-    private ArrayList<MemoScore> getTop3ForComplexity(Context context, int difficulty, boolean level) {
+    public ArrayList<MemoScore> getUserTopThree(Context context, int difficulty, boolean level) {
         ArrayList<MemoScore> scoresForComplexity
                 = getSortedScores(scoreManager.getScoresOfUser(context), difficulty, level);
         ArrayList<MemoScore> top3ForComplexity = new ArrayList<>();
