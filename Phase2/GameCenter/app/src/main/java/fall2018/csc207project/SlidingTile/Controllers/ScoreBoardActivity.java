@@ -17,31 +17,56 @@ import fall2018.csc207project.SlidingTile.Models.TileScore;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.ScoreManager;
 
+/**
+ * A class called ScoreBoardActivity extends AppCompatActivity.
+ */
 public class ScoreBoardActivity extends AppCompatActivity {
 
-    private SlidingTileScoreManager scoreManager;
-    private ArrayList<TileScore> sortList = new ArrayList<>();
-    private ArrayList<ArrayList<TileScore>> personalList = new ArrayList<>();
+    /**
+     * The current user that is now playing
+     */
     private String currentUser;
+
+    /**
+     * The score manager we currently needed.
+     */
+    private SlidingTileScoreManager scoreManager;
+
+    /**
+     * The ArrayList of TileSore for the current game's top 10 players' score.
+     */
+    private ArrayList<TileScore> sortList = new ArrayList<>();
+
+    /**
+     * The ArrayList of ArrayList of TileSore for
+     * the current player's top 3 score in each game mode.
+     */
+    private ArrayList<ArrayList<TileScore>> personalList = new ArrayList<>();
+
+    /**
+     * The ListView that needed for showing the top 10 players.
+     */
     private ListView scoreList;
 
     @Override
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
-        SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
+        SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
         TileGameCalculator calculator = new TileGameCalculator();
         ScoreManager <TileScore> globalScoreManager;
-        globalScoreManager = DatabaseUtil.getScoreManager("SlidingTile", this.currentUser, calculator);
+        globalScoreManager = DatabaseUtil
+                .getScoreManager("SlidingTile", currentUser, calculator);
         scoreManager = new SlidingTileScoreManager(globalScoreManager);
         setContentView(R.layout.tile_game_score_board);
-        this.scoreList = this.findViewById(R.id.scoreBoard);
+        scoreList = findViewById(R.id.scoreBoard);
         createButton();
-        this.personalList = scoreManager.getUserTopThreeScores(this);
+
+        personalList = scoreManager.getUserTopThreeScores(this);
         setTexts();
-        createButton();
-        SlidingTileScoreBoardAdapter adapter = new SlidingTileScoreBoardAdapter(sortList, this);
-        this.scoreList.setAdapter(adapter);
+        SlidingTileScoreBoardAdapter adapter
+                = new SlidingTileScoreBoardAdapter(sortList, this);
+        scoreList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 
@@ -50,9 +75,6 @@ public class ScoreBoardActivity extends AppCompatActivity {
      * that creates all Button Listener to this instance
      */
     public void createButton(){
-        /*
-      the Button Instances Instance
-     */
         Button threeTimeThree = findViewById(R.id.button3x3);
         threeTimeThree.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -74,24 +96,38 @@ public class ScoreBoardActivity extends AppCompatActivity {
     }
 
     /**
-     * update the ListView in this instance
+     * Update the ListView in this instance.
      *
+     * @param level the level of the game.
      */
     public void updateListView(int level){
-        BaseAdapter adapter = new SlidingTileScoreBoardAdapter(scoreManager.getTopTenScores(this, level), this);
+        BaseAdapter adapter = new SlidingTileScoreBoardAdapter(
+                scoreManager.getTopTenScores(this, level), this);
         scoreList.setAdapter(adapter);
     }
 
+    /**
+     * Set the current person info on screen.
+     */
     public void setTexts(){
         ((TextView)findViewById(R.id.currentPlayer)).setText(currentUser);
-        ((TextView)findViewById(R.id.playerscore3x1)).setText(String.valueOf(this.personalList.get(0).get(0).value));
-        ((TextView)findViewById(R.id.playerscore3x2)).setText(String.valueOf(this.personalList.get(0).get(1).value));
-        ((TextView)findViewById(R.id.playerscore3x3)).setText(String.valueOf(this.personalList.get(0).get(2).value));
-        ((TextView)findViewById(R.id.playerscore4x1)).setText(String.valueOf(this.personalList.get(1).get(0).value));
-        ((TextView)findViewById(R.id.playerscore4x2)).setText(String.valueOf(this.personalList.get(1).get(1).value));
-        ((TextView)findViewById(R.id.playerscore4x3)).setText(String.valueOf(this.personalList.get(1).get(2).value));
-        ((TextView)findViewById(R.id.playerscore5x1)).setText(String.valueOf(this.personalList.get(2).get(0).value));
-        ((TextView)findViewById(R.id.playerscore5x2)).setText(String.valueOf(this.personalList.get(2).get(1).value));
-        ((TextView)findViewById(R.id.playerscore5x3)).setText(String.valueOf(this.personalList.get(2).get(2).value));
+        ((TextView)findViewById(R.id.playerscore3x1))
+                .setText(String.valueOf(this.personalList.get(0).get(0).value));
+        ((TextView)findViewById(R.id.playerscore3x2))
+                .setText(String.valueOf(this.personalList.get(0).get(1).value));
+        ((TextView)findViewById(R.id.playerscore3x3))
+                .setText(String.valueOf(this.personalList.get(0).get(2).value));
+        ((TextView)findViewById(R.id.playerscore4x1))
+                .setText(String.valueOf(this.personalList.get(1).get(0).value));
+        ((TextView)findViewById(R.id.playerscore4x2))
+                .setText(String.valueOf(this.personalList.get(1).get(1).value));
+        ((TextView)findViewById(R.id.playerscore4x3))
+                .setText(String.valueOf(this.personalList.get(1).get(2).value));
+        ((TextView)findViewById(R.id.playerscore5x1))
+                .setText(String.valueOf(this.personalList.get(2).get(0).value));
+        ((TextView)findViewById(R.id.playerscore5x2))
+                .setText(String.valueOf(this.personalList.get(2).get(1).value));
+        ((TextView)findViewById(R.id.playerscore5x3))
+                .setText(String.valueOf(this.personalList.get(2).get(2).value));
     }
 }

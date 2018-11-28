@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import fall2018.csc207project.PushTheBox.Models.Box;
+import fall2018.csc207project.PushTheBox.Models.Person;
 
 /**
  * The CustomAdapter that maps the buttons to the customized grid view.
@@ -31,7 +32,7 @@ public class MapAdapter extends BaseAdapter {
     private Integer[] tileBgs;
     private int columnDim;
     private Context context;
-    private SparseIntArray person = new SparseIntArray();
+    private Person person;
     private SparseIntArray boxes = new SparseIntArray();
 
     public MapAdapter(Integer[] tileBgs, int columnDim, Context context) {
@@ -40,12 +41,15 @@ public class MapAdapter extends BaseAdapter {
         this.context = context;
     }
 
-    public void setPerson(SparseIntArray personPosToImage){
-        this.person = personPosToImage.clone();
+    public void setPerson(Person person){
+        this.person = person;
     }
 
-    public void setBoxesList(SparseIntArray boxes){
-        this.boxes = boxes.clone();
+    public void setBoxesList(ArrayList<Box> boxes){
+        this.boxes.clear();
+        for (Box box : boxes){
+            this.boxes.append(box.getPosition(), box.getImage());
+        }
     }
 
     @Override
@@ -66,8 +70,8 @@ public class MapAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = new ImageView(context);
-        if(person.get(position) != 0){
-            imageView.setImageResource(person.get(position));
+        if(person.getPosition() == position){
+            imageView.setImageResource(person.getImage());
         }else if (boxes.get(position) != 0){
             imageView.setImageResource(boxes.get(position));
         }else {

@@ -12,9 +12,12 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.logging.Level;
+
 import fall2018.csc207project.PushTheBox.Controllers.BoxGamePresenter;
 import fall2018.csc207project.PushTheBox.Controllers.GamePresenter;
 import fall2018.csc207project.PushTheBox.Controllers.MapAdapter;
+import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
@@ -83,7 +86,8 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         }else {
             level = (int) getIntent().getSerializableExtra("level");
             totalUndoTimes = (int) getIntent().getSerializableExtra("undoStep");
-            mapManager = new MapManager(level, totalUndoTimes, getApplicationContext());
+            LevelFactory levelFactory = new LevelFactory(getApplicationContext());
+            mapManager = new MapManager(level, totalUndoTimes, levelFactory.getGameElements(level));
         }
         setupGridView(mapManager);
     }
@@ -157,6 +161,11 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         Toast.makeText(this, "No times or undo out of limit!", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void makeInvalidMovementText() {
+        Toast.makeText(this, "Invalid Movement", Toast.LENGTH_SHORT).show();
+    }
+
     /**
      * Show the number picker dialog.
      */
@@ -185,8 +194,8 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
      */
     @Override
     public void updateMap(MapManager mapManager) {
-        mapAdapter.setPerson(mapManager.getPersonPosToImage());
-        mapAdapter.setBoxesList(mapManager.getBoxPosToImage());
+        mapAdapter.setPerson(mapManager.person);
+        mapAdapter.setBoxesList(mapManager.getBoxList());
         display();
     }
 

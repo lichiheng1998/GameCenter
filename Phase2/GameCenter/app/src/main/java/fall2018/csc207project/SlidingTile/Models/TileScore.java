@@ -35,6 +35,6 @@ public class TileScore extends Score{
         this.game = "SlidingTile";
     }
     public String toString(){
-        return new String(complexity + user+value);
+        return complexity + user + value;
     }
 }

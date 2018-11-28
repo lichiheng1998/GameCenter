@@ -1,57 +1,52 @@
-package fall2018.csc207project.SlidingTile.Controllers;
-
-import java.util.List;
+package fall2018.csc207project.Memorization.Controllers;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import fall2018.csc207project.Controllers.GameListViewAdapter;
+import java.util.List;
+import fall2018.csc207project.Memorization.Models.MemoScore;
 import fall2018.csc207project.R;
-import fall2018.csc207project.SlidingTile.Models.TileScore;
 
 /**
- * A class called SlidingTileScoreBoardAdapter extends BaseAdapter.
+ * A class called MemoScoreBoardAdapter extends BaseAdapter.
  */
-public class SlidingTileScoreBoardAdapter extends BaseAdapter {
+public class MemoScoreBoardAdapter extends BaseAdapter {
 
     /**
-     * List of of TileScores.
+     * List of of MemoScores.
      */
-    private List<TileScore> slidingTileTopScores;
+    private List<MemoScore> memoTopScores;
 
     /**
-     * The context of this app.
+     * List of of MemoScores.
      */
     private Context mContext;
 
     /**
-     * Construct a new SlidingTileScoreBoardAdapter
+     * Construct a new MemoScoreBoardAdapter
      * by given a list and a context.
      *
-     * @param list the list of TileScores
+     * @param list the list of MemoScores
      * @param context the context of this app
      */
-    SlidingTileScoreBoardAdapter(List<TileScore> list, Context context) {
-        slidingTileTopScores = list;
+    MemoScoreBoardAdapter(List<MemoScore> list, Context context) {
+        memoTopScores = list;
         mContext = context;
     }
 
     @Override
     public int getCount() {
-        return slidingTileTopScores.size();
+        return memoTopScores.size();
     }
 
     @Override
     public Object getItem(int pos) {
-        return new String[] {slidingTileTopScores.get(pos).user,
-                String.valueOf(slidingTileTopScores.get(pos).value)};
+        return new String[] {memoTopScores.get(pos).user,
+                String.valueOf(memoTopScores.get(pos).value)};
     }
 
     @Override
@@ -59,21 +54,21 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
         return position;
     }
 
-    @Override
     @SuppressLint("InflateParams")
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        MyViewHolder viewHolder;
+        MemoScoreBoardAdapter.MyViewHolder viewHolder;
         if (view == null) {
             view = LayoutInflater.from(mContext)
-                    .inflate(R.layout.tile_game_score_board_row, parent, false);
-            viewHolder = new MyViewHolder(view);
+                    .inflate(R.layout.memo_score_board_row, parent, false);
+            viewHolder = new MemoScoreBoardAdapter.MyViewHolder(view);
             view.setTag(viewHolder);
         } else {
-            viewHolder = (MyViewHolder) view.getTag();
+            viewHolder = (MemoScoreBoardAdapter.MyViewHolder) view.getTag();
         }
-        viewHolder.userName.setText(slidingTileTopScores.get(position).user);
-        viewHolder.userScore.setText(String.valueOf(slidingTileTopScores.get(position).value));
+        viewHolder.userName.setText(memoTopScores.get(position).user);
+        viewHolder.userScore.setText(String.valueOf(memoTopScores.get(position).value));
         return view;
     }
 
@@ -103,6 +98,3 @@ public class SlidingTileScoreBoardAdapter extends BaseAdapter {
         }
     }
 }
-
-
-

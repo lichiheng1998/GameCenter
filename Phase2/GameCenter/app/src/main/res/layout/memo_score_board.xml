@@ -3,39 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scoreboard_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <Button
-        android:id="@+id/MemoButton3x4"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="56dp"
-        android:text="3x4" />
-
-    <Button
-        android:id="@+id/Memobutton4x5"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="7dp"
-        android:text="4x5" />
-
-    <Button
-        android:id="@+id/Memobutton5x6"
-        android:layout_width="57dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:id="@+id/buttonAccept"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="23dp"
-        android:text="5x6" />
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="53dp"
+        android:text="@string/accept" />
 
     <ListView
         android:id="@+id/memoScoreBoard"
@@ -49,103 +27,59 @@
 
     <TextView
         android:id="@+id/memoCurrentPlayer"
-        android:layout_width="76dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="20dp"
-        android:text="empty" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="@string/empty" />
 
 
     <TextView
-        android:id="@+id/MemoPlayerscore3x1"
-        android:layout_width="59dp"
+        android:id="@+id/memoPlayerTop3x1"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:text="playerscore3" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="108dp"
+        android:text="@string/playerscore1" />
 
     <TextView
-        android:id="@+id/MemoPlayerscore3x2"
-        android:layout_width="59dp"
+        android:id="@+id/memoPlayerTop3x2"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="35dp"
-        android:text="playerscore3" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="143dp"
+        android:text="@string/playerscore2" />
 
     <TextView
-        android:id="@+id/MemoPlayerscore3x3"
-        android:layout_width="59dp"
+        android:id="@+id/memoPlayerTop3x3"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="70dp"
-        android:text="playerscore3" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="177dp"
+        android:text="@string/playerscore3" />
 
-    <TextView
-        android:id="@+id/MemoPlayerscore4x1"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
+    <EditText
+        android:id="@+id/acceptText"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="-1dp"
-        android:text="playerscore3" />
+        android:layout_alignTop="@+id/buttonAccept"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text="@string/_3"
+        tools:ignore="LabelFor" />
 
-    <TextView
-        android:id="@+id/MemoPlayerscore4x2"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="37dp"
-        android:text="playerscore3" />
-
-    <TextView
-        android:id="@+id/MemoPlayerscore4x3"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="169dp"
-        android:layout_marginTop="74dp"
-        android:text="playerscore3" />
-
-    <TextView
-        android:id="@+id/MemoPlayerscore5x1"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="-3dp"
-        android:text="playerscore3" />
-
-    <TextView
-        android:id="@+id/MemoPlayerscore5x2"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="30dp"
-        android:text="playerscore3" />
-
-    <TextView
-        android:id="@+id/MemoPlayerscore5x3"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/MemoButton3x4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="68dp"
-        android:text="playerscore3" />
+    <Switch
+        android:id="@+id/memoMode"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/buttonAccept"
+        android:layout_centerHorizontal="true"
+        android:text="@string/hard_mode" />
 
 </RelativeLayout>

@@ -14,7 +14,7 @@ public class GameMap implements Serializable {
     /**
      * The list of background tiles.
      */
-    private List<BgTile> bgElements = new ArrayList<>();
+    private List<BgTile> bgElements;
 
     /**
      * The total number of rows of the map grid.
@@ -61,13 +61,13 @@ public class GameMap implements Serializable {
     }
 
     /**
-     * Returns the background tile with given tile ID
-     * @param tileId the ID of the tile looking for
-     * @return the bgTile with given tile ID
+     * Returns the list of tiles on the map
+     * @return the list of all BgTile
      */
-    public BgTile getTileAtId(int tileId){
-        return bgElements.get(tileId);
+    public List<BgTile> getBgElements(){
+        return bgElements;
     }
+
 
     /**
      * Returns the number of columns of the map.
@@ -77,11 +77,5 @@ public class GameMap implements Serializable {
         return NUM_COL;
     }
 
-    /**
-     * Returns the number of rows of the map.
-     * @return the total number of rows
-     */
-    public int getNumRow(){
-        return NUM_ROW;
-    }
+
 }

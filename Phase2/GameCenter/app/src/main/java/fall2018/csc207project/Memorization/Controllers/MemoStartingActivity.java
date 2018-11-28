@@ -15,10 +15,8 @@ public class MemoStartingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_game_starting);
         addNewGameButtonListener();
-        addMyTopScoresButtonListener();
-        addTopPlayersButtonListener();
+        addMyTpoScoreButtonListener();
     }
-
 
     /**
      * Setup the listener for the new game button.
@@ -44,11 +42,18 @@ public class MemoStartingActivity extends AppCompatActivity {
     /**
      * Setup the listener for the switch to board size button.
      */
-    private void addMyTopScoresButtonListener(){
-
+    private void addMyTpoScoreButtonListener(){
+        Button myScoreButton = findViewById(R.id.memogameScoreboard);
+        myScoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToScoreboard();
+            }
+        });
     }
 
-    private void addTopPlayersButtonListener() {
-
+    private void switchToScoreboard() {
+        Intent tmp = new Intent(this, MemoScoreBoardActivity.class);
+        startActivity(tmp);
     }
 }

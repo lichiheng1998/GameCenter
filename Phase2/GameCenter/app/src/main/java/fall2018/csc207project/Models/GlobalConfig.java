@@ -6,7 +6,7 @@ import java.util.Map;
 import fall2018.csc207project.Memorization.Views.MemoGameActivity;
 import fall2018.csc207project.Memorization.Controllers.MemoStartingActivity;
 import fall2018.csc207project.PushTheBox.View.BoxGameActivity;
-import fall2018.csc207project.PushTheBox.Controllers.BoxStartingActivity;
+import fall2018.csc207project.PushTheBox.View.BoxStartingActivity;
 import fall2018.csc207project.SlidingTile.Controllers.StartingActivity;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Views.GameActivity;

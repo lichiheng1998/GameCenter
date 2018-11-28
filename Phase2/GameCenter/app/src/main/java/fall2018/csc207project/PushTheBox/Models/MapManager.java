@@ -37,11 +37,6 @@ public class MapManager implements Serializable {
     private int level;
 
     /**
-     * The list of all background tiles.
-     */
-    private ArrayList<BgTile> bgElements;
-
-    /**
      * The counting of total steps moved.
      */
     private int totalMoveSteps;
@@ -70,14 +65,12 @@ public class MapManager implements Serializable {
     /**
      * Initialize a new manager to manage a new map.
      */
-
-
-    public MapManager(int level, int undoTimes, Context context){
+    public MapManager(int level, int undoTimes, HashMap<String, Object> levelInfo){
         this.level = level;
-        createGameByLevel(new LevelFactory(context).getGameElements(level));
         this.undoTimes = undoTimes;
         totalUndoTimes = undoTimes;
         this.stackOfMovements = new Stack<>();
+        createGameByLevel(levelInfo);
     }
 
     /**
@@ -87,7 +80,7 @@ public class MapManager implements Serializable {
     public Boolean boxSolved(){
         for (Box box: boxArrayList) {
             // if there exist boxes on not destination point, the game is not solved.
-            if(!bgElements.get(box.getPosition()).isWinnable()){
+            if(!map.getBgElements().get(box.getPosition()).isWinnable()){
                 return false;
             }
         }
@@ -131,7 +124,6 @@ public class MapManager implements Serializable {
         int newPosition = person.getPosition() + posChange;
         // There may be a box on next step, so the person will push the box.
         if (boxAtPos(newPosition)!=null){
-            isBoxesMoved = true;
             processBoxMovement(newPosition, newPosition + posChange);
         }
         person.walk(posChange);
@@ -151,6 +143,7 @@ public class MapManager implements Serializable {
         }else{
             Objects.requireNonNull(boxAtPos(newPosition)).leaveDestination();
         }
+        isBoxesMoved = true;
     }
 
     public void pushLastStep(int personOldPos, int boxNewPos){
@@ -208,7 +201,6 @@ public class MapManager implements Serializable {
      * Initialize the game elements by the chosen game level.
      */
     private void createGameByLevel(HashMap<String, Object> levelInfo){
-        bgElements = (ArrayList<BgTile>) levelInfo.get("bgElements");
         person = (Person) levelInfo.get("Person");
         boxArrayList = (ArrayList<Box>) levelInfo.get("boxArrayList");
         map = (GameMap) levelInfo.get("map");
@@ -244,33 +236,19 @@ public class MapManager implements Serializable {
      * @return the array of the background ids
      */
     public Integer[] getTilesBg(){
-        Integer[] tileBgs = new Integer[bgElements.size()];
+        Integer[] tileBgs = new Integer[map.getBgElements().size()];
         for (int i = 0; i < tileBgs.length; i++ ){
-            tileBgs[i] = bgElements.get(i).getBackground();
+            tileBgs[i] = map.getBgElements().get(i).getBackground();
         }
         return tileBgs;
-    }
-
-    /**
-     * Get the person's position mapping with the image id of the person
-     * @return person's position mapping with his image
-     */
-    public SparseIntArray getPersonPosToImage(){
-        SparseIntArray personPosToImage = new SparseIntArray();
-        personPosToImage.append(person.getPosition(), person.getImage());
-        return personPosToImage;
     }
 
     /**
      * Get all the boxes' position mapping with the image id of each box
      * @return boxes' position mapping with the image id of each box
      */
-    public SparseIntArray getBoxPosToImage(){
-        SparseIntArray boxes = new SparseIntArray();
-        for (Box box : boxArrayList){
-            boxes.append(box.getPosition(), box.getImage());
-        }
-        return boxes;
+    public ArrayList<Box> getBoxList(){
+        return boxArrayList;
     }
 
 }

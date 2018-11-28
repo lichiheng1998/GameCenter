@@ -3,14 +3,19 @@ package fall2018.csc207project.Memorization.Controllers;
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import fall2018.csc207project.Memorization.Models.MemoGameCalculator;
 import fall2018.csc207project.Memorization.Models.MemoManager;
+import fall2018.csc207project.Memorization.Models.MemoScore;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.ScoreManager;
 
 /**
  * Class represents the implementation of the  game logic.
  */
-public class MemoGamePresenter implements GamePresenter{
+public class MemoGamePresenter implements GamePresenter {
     private int successTap;
     private MemoManager memoManager;
     private MemoGameView view;
@@ -98,8 +103,12 @@ public class MemoGamePresenter implements GamePresenter{
             memoManager.setScoreTotal(successTap);
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
 
-
-
+            MemoScore score = new MemoScore(memoManager.getHeightDifficulty()
+                    , memoManager.isLevel(), memoManager.getScoreTotal());
+            MemoGameCalculator calculator = new MemoGameCalculator();
+//            ScoreManager<MemoScore> scoreManager
+//                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
+//            scoreManager.saveScore(score, context);
         }
     }
     /**
