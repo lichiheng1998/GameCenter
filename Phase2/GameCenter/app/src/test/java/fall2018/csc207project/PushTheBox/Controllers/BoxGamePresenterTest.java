@@ -41,14 +41,10 @@ public class BoxGamePresenterTest {
         when(context.getSharedPreferences("GameData", Context.MODE_PRIVATE)).thenReturn(shared);
         when(shared.getString("currentUser", null)).thenReturn("n");
         when(shared.getString("currentGame", null)).thenReturn("pushTheBox");
-
-
         FileOutputStream out = mock(FileOutputStream.class);
         try {
             when(context.openFileOutput("Saves.ser", Context.MODE_PRIVATE)).thenReturn(out);
         }catch(IOException e){ }//do nothing
-
-
         presenter = spy(new BoxGamePresenter(view, context));
     }
 

@@ -24,10 +24,10 @@ public class MapAdapterTest {
     @Test
     public void testConstructor(){
         MapAdapter mapAdapter = new MapAdapter(tileBgs, 3, context);
-        assertEquals("wrong number of tiles", mapAdapter.getCount(), 9);
-        assertEquals("wrong item", mapAdapter.getItem(4), floor);
-        assertEquals("wrong item", mapAdapter.getItem(3), wall);
-        assertEquals("wrong id", mapAdapter.getItemId(3), 3);
+        assertEquals("wrong number of tiles", 9, mapAdapter.getCount() );
+        assertEquals("wrong item", floor, mapAdapter.getItem(4));
+        assertEquals("wrong item", wall, mapAdapter.getItem(3));
+        assertEquals("wrong id", 3, mapAdapter.getItemId(3));
     }
 
     @Test
@@ -35,8 +35,8 @@ public class MapAdapterTest {
         MapAdapter mapAdapter = new MapAdapter(tileBgs, 3, context);
         Person person = new Person(4);
         mapAdapter.setPerson(person);
-        assertEquals("element on positio 4 should be the person",
-                mapAdapter.getItem(4), R.drawable.person);
+        assertEquals("element on positio 4 should be the person",  R.drawable.person,
+                mapAdapter.getItem(4));
     }
 
     @Test
@@ -45,8 +45,8 @@ public class MapAdapterTest {
         ArrayList<Box> boxes = new ArrayList<>();
         boxes.add(new Box(4));
         mapAdapter.setBoxesList(boxes);
-        assertEquals("element on positio 4 should be the box",
-                mapAdapter.getItem(4), R.drawable.box);
+        assertEquals("element on positio 4 should be the box", R.drawable.box,
+                mapAdapter.getItem(4));
     }
 
 }
