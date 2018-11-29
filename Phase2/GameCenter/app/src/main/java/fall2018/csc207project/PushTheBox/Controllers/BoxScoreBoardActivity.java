@@ -12,8 +12,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
-import java.util.List;
-
 import fall2018.csc207project.PushTheBox.Models.BoxGameScoreManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Models.DatabaseUtil;
@@ -112,9 +110,10 @@ public class BoxScoreBoardActivity extends AppCompatActivity implements AdapterV
      * set the ListView of the top 10 players score board.
      */
     public void setViewAdapter(){
-        List<BoxScore> sortList = scoreManager.getTopPlayers(this);
+        ArrayList<BoxScore> sortList = scoreManager.getTopPlayers(this);
         BoxScoreAdapter adapter = new BoxScoreAdapter(this, sortList);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 }
+

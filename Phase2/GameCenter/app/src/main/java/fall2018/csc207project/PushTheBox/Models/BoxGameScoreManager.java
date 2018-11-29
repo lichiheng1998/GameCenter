@@ -3,29 +3,25 @@ package fall2018.csc207project.PushTheBox.Models;
 import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-
 import fall2018.csc207project.Models.ScoreManager;
 
-/**
- * The BoxGameScoreManager that manages the BoxGameScore
- */
+@SuppressWarnings("unchecked")
 public class BoxGameScoreManager {
 
     /**
-     * the level of current game.
+     * The game's level.
      */
     private int level = 1;
 
     /**
-     * The ScoreManager<BoxScore> that manages the BoxScore.
+     * The ScoreManager<BoxScore> helps to mange the BoxScore.
      */
     private ScoreManager<BoxScore> scoreManager;
 
     /**
-     * Construct a new BoxGameScoreManager by given a ScoreManager<BoxScore>
+     * Construct a new BoxGameScoreManager that takes a ScoreManager<BoxScore>.
      *
-     * @param scoreManager the ScoreManager<BoxScore> that manages the BoxScore
+     * @param scoreManager the ScoreManager<BoxScore> helps to mange the BoxScore
      */
     public BoxGameScoreManager(ScoreManager<BoxScore> scoreManager){
         this.scoreManager = scoreManager;
@@ -38,8 +34,8 @@ public class BoxGameScoreManager {
      * @param context the context of the app
      * @return the sorted BoxScore by giving a context
      */
-    private List<BoxScore> getSortedScores(Context context) {
-        List<BoxScore> scores = scoreManager.getScoresOfGame(context);
+    private ArrayList<BoxScore> getSortedScores(Context context) {
+        ArrayList<BoxScore> scores = (ArrayList)scoreManager.getScoresOfGame(context);
         Collections.sort(scores);
         Collections.reverse(scores);
         return scores;
@@ -47,14 +43,14 @@ public class BoxGameScoreManager {
 
     /**
      * Get the top ten BoxScore for a given complexity
-     * of the current game by giving a context.
+     * of the current user by giving a context.
      *
      * @param context the context of the app
      * @return the top ten BoxScore for a given complexity
      */
-    public List<BoxScore> getTopPlayers(Context context){
-        List<BoxScore> scores = getSortedScores(context);
-        scores = filterByLevel(level, scores);
+    public ArrayList<BoxScore> getTopPlayers(Context context){
+        ArrayList scores = getSortedScores(context);
+        scores = filterByLevel(level,scores);
         return scores;
     }
 
@@ -66,7 +62,7 @@ public class BoxGameScoreManager {
      * @return the top three BoxScore for a given complexity
      */
     public ArrayList<BoxScore> getTopThreePerUser(Context context) {
-        ArrayList<BoxScore> scores = (ArrayList<BoxScore>)scoreManager.getScoresOfUser(context);
+        ArrayList<BoxScore> scores = (ArrayList)scoreManager.getScoresOfUser(context);
         scores = filterByLevel(level, scores);
         Collections.sort(scores);
         Collections.reverse(scores);
@@ -87,21 +83,21 @@ public class BoxGameScoreManager {
     /**
      * Set the level of the game.
      *
-     * @param level the game level
+     * @param level the level of the game
      */
     public void setLevel(int level) {
         this.level = level;
     }
 
     /**
-     * Create a filter for ListView by given an int and a List<BoxScore>.
+     * Get the ArrayList<BoxScore> for the Top 10 Players ListView.
      *
-     * @param level the game level
-     * @param scores the BoxScore for the user
-     * @return the ArrayList<BoxScore> for the ListView
+     * @param level the level of the game
+     * @param scores the ArrayList<BoxScore>
+     * @return the ArrayList<BoxScore> for the Top 10 Player ListView
      */
-    private ArrayList<BoxScore> filterByLevel(int level, List<BoxScore> scores){
-        ArrayList<BoxScore> filterScores = new ArrayList<>();
+    private ArrayList<BoxScore> filterByLevel(int level, ArrayList<BoxScore> scores){
+        ArrayList<BoxScore> filterScores = new ArrayList();
         for (BoxScore score : scores){
             if (score.level == level){
                 filterScores.add(score);

@@ -37,7 +37,6 @@ public class BoxScoreAdapter extends BaseAdapter {
         this.context = context;
         this.scores = scores;
     }
-
     @Override
     public int getCount() {
         return scores.size();
@@ -59,7 +58,8 @@ public class BoxScoreAdapter extends BaseAdapter {
         View view = convertView;
         MyViewHolder viewHolder;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.box_game_score_board_row, parent, false);
+            view = LayoutInflater.from(context).inflate(R.layout.box_game_score_board_row, parent,
+                    false);
             viewHolder = new MyViewHolder(view);
             view.setTag(viewHolder);
         } else {
@@ -70,31 +70,31 @@ public class BoxScoreAdapter extends BaseAdapter {
 
         return view;
     }
+}
+
+/**
+ *  A class called MyViewHolder
+ */
+class MyViewHolder{
 
     /**
-     *  A class called MyViewHolder
+     * Current user's name
      */
-    class MyViewHolder{
+    TextView userName;
 
-        /**
-         * Current user's name
-         */
-        TextView userName;
+    /**
+     * Current user's score
+     */
+    TextView userScore;
 
-        /**
-         * Current user's score
-         */
-        TextView userScore;
-
-        /**
-         * Construct a new MyViewHolder by given a View base.
-         *
-         * @param base the current view show on screen
-         */
-        MyViewHolder(View base) {
-            userName = base.findViewById(R.id.memoScoreBoardUser);
-            userScore = base.findViewById(R.id.memoScoreBoardScore);
-        }
+    /**
+     * Construct a new MyViewHolder by given a View base.
+     *
+     * @param base the current view show on screen
+     */
+    MyViewHolder(View base) {
+        userName = base.findViewById(R.id.boxScoreBoardUser);
+        userScore = base.findViewById(R.id.boxScoreBoardScore);
     }
 }
 

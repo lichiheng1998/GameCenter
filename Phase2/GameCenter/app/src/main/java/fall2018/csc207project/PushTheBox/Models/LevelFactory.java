@@ -2,6 +2,7 @@ package fall2018.csc207project.PushTheBox.Models;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,25 +11,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * The class LevelFactory that implements Serializable.
- */
 public class LevelFactory implements Serializable {
 
-    /**
-     * The context of this app.
-     */
     private Context context;
 
-    /**
-     * The HashMap<String, Object> that contains all the game elements.
-     */
     private HashMap<String, Object> gameElements = new HashMap<>();
 
-    /**
-     * The BufferedReader for read file.
-     */
     private BufferedReader reader;
 
     /**
@@ -65,7 +55,7 @@ public class LevelFactory implements Serializable {
                     tmpBox.arriveDestination();
                 }
             }else if (Arrays.asList(tmp[5]).contains(i)){
-                   gameElements.put("Person", new Person(i));
+                gameElements.put("Person", new Person(i));
             }
         }
         gameElements.put("map", new GameMap(width, height, bgElements));
@@ -80,7 +70,7 @@ public class LevelFactory implements Serializable {
     private Integer[][] getInfoFromFile(int level) {
         Integer[][] levelInfo = new Integer[6][];
         AssetManager assetManager = context.getAssets();
-        String nextLine;
+        String nextLine = readLine(assetManager);
         int countLevel = 0;
         while ((nextLine = readLine(assetManager)) != null && countLevel != level) {
             countLevel++;
@@ -94,12 +84,7 @@ public class LevelFactory implements Serializable {
         return levelInfo;
     }
 
-    /**
-     * Get a string of what is read from the file.
-     *
-     * @param assetManager the AssetManager for this game
-     * @return a string of what is read from the file
-     */
+
     public String readLine(AssetManager assetManager){
         String result = "";
         try {
