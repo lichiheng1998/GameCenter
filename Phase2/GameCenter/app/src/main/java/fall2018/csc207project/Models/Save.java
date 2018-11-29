@@ -24,7 +24,7 @@ public class Save implements Serializable{
      * @param date the current date
      * @param data the data to be save
      */
-    Save(Date date, Object data){
+    public Save(Date date, Object data){
         this.data = data;
         this.date = date;
     }
