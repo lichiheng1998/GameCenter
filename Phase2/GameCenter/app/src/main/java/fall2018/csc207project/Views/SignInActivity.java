@@ -1,43 +1,32 @@
-package fall2018.csc207project.Controllers;
+package fall2018.csc207project.Views;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import fall2018.csc207project.Controllers.UserPresenter;
+import fall2018.csc207project.Controllers.UserPresenterImpl;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.UserManager;
 import fall2018.csc207project.R;
-import fall2018.csc207project.Views.LocalGameCenterActivity;
 
 /**
- * The class SignInActivity that extends AppCompatActivity
+ * The class SignInActivity that extends AppCompatActivity and implements LoginView.
  */
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity implements LoginView{
 
     /**
-     * The user's name that need to sign in to the Game Center.
+     * The UserPresenter that interact with SignInActivity
      */
-    private String userName = "";
-
-    /**
-     * The user's password that need to sign in to the Game Center.
-     */
-    private String password = "";
-
-    /**
-     * The UserManager to manage the users.
-     */
-    private UserManager userManager;
-
+    private UserPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userManager = DatabaseUtil.getUserManager();
+        UserManager userManager = DatabaseUtil.getUserManager();
+        presenter = new UserPresenterImpl(userManager, this);
         setContentView(R.layout.sign_in);
         addLoginButtonListener();
         addCancelButtonListener();
@@ -61,33 +50,26 @@ public class SignInActivity extends AppCompatActivity {
      */
     private void addLoginButtonListener() {
         Button loginButton = findViewById(R.id.signin_button);
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText User = findViewById(R.id.signin_username);
                 EditText Password = findViewById(R.id.signin_password);
-                userName = User.getText().toString();
-                password = Password.getText().toString();
-                if(userManager.signIn(userName, password, getApplicationContext())){
-                    SharedPreferences sharedPref =
-                            SignInActivity.this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("currentUser", userName);
-                    editor.apply();
-                    localCenter();
-                }else{
-                    Toast.makeText(getApplicationContext(), "Login Failed",
-                            Toast.LENGTH_SHORT).show();
-                }
+                String userName = User.getText().toString();
+                String password = Password.getText().toString();
+                presenter.loginUser(userName, password, getApplicationContext());
             }
         });
     }
 
-    /**
-     * Switch to the LocalGameCenterActivity view for the current user that just logs in.
-     */
-    private void localCenter(){
+    @Override
+    public void makeLoginFailedText(){
+        Toast.makeText(getApplicationContext(), "Login Failed",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void localCenter(){
         Intent tmp = new Intent(this, LocalGameCenterActivity.class);
         startActivity(tmp);
     }

@@ -13,12 +13,22 @@ import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Views.GameActivity;
 
 /**
- * The setting for SlidingTileGame activity.
+ * The class ComplexityActivity setting for SlidingTileGame activity
+ * extends AppCompatActivity.
  */
 public class ComplexityActivity extends AppCompatActivity {
 
+    /**
+     * the total undo steps for user to use in this game.
+     */
     private int undoStep;
+
+    /**
+     * The complexity of the SlidingTileGame can be 3x3, 4x4 or 5x5
+     */
     private int complexity;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         undoStep = 3;

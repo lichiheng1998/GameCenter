@@ -1,4 +1,4 @@
-package fall2018.csc207project.Controllers;
+package fall2018.csc207project.Views;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import fall2018.csc207project.R;
  * The initial activity after user run the app
  */
 public class GlobalActivity extends AppCompatActivity {
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

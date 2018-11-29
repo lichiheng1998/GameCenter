@@ -1,5 +1,6 @@
 package fall2018.csc207project.SlidingTile.Views;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,24 +10,26 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.NumberPicker;
 import android.widget.Toast;
-
 import java.util.List;
-
 import fall2018.csc207project.SlidingTile.Controllers.BoardGamePresenter;
 import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 import fall2018.csc207project.SlidingTile.Controllers.GamePresenter;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
-import fall2018.csc207project.SlidingTile.Views.BoardGameView;
 import fall2018.csc207project.R;
-import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
 
 /**
- * The game activity.
+ * The game activity that extends AppCompatActivity implements BoardGameView.
  */
 public class GameActivity extends AppCompatActivity implements BoardGameView{
 
+    /**
+     * The column's width and height.
+     */
     private static int columnWidth, columnHeight;
 
+    /**
+     * The EditText for the undo.
+     */
     private EditText undoText;
 
     /**
@@ -34,8 +37,14 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
      */
     private List<Button> tileButtons;
 
-    // Grid View and calculated column height and width based on device size
+    /**
+     * Grid View and calculated column height and width based on device size.
+     */
     private GridView gridView;
+
+    /**
+     * The GamePresenter that helps the GameActivity
+     */
     private GamePresenter presenter;
 
     /**
@@ -97,6 +106,7 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
             }
         });
     }
+
     /**
      * Activate the start button.
      */
@@ -132,6 +142,7 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
     public void showNumberPicker(){
         NumberPickerDialog newFragment = new NumberPickerDialog();
         newFragment.setValueChangeListener(new NumberPicker.OnValueChangeListener(){
+            @SuppressLint("SetTextI18n")
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                 undoText.setText(Integer.toString(numberPicker.getValue()));

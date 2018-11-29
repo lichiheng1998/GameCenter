@@ -29,7 +29,7 @@ public class MovementController {
     /**
      * Process tap movement and return whether the game is completed or not.
      *
-     * @param direction the direction going to
+     * @param direction the direction going to move
      * @return whether the game is completed or not
      */
     public boolean processTapMovement(String direction) {

@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
-import fall2018.csc207project.Controllers.ManageSaveActivity;
+import fall2018.csc207project.Views.ManageSaveActivity;
 import fall2018.csc207project.R;
 
 /**
@@ -26,7 +25,6 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activate the start button.
      */
-
     private void addStartButtonListener() {
         Button startButton = findViewById(R.id.StartButton);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -40,7 +38,6 @@ public class StartingActivity extends AppCompatActivity {
     /**
      * Activate the myScore button.
      */
-
     private void addGlobalScoreButtonListener() {
         Button myScoreButton = findViewById(R.id.global_score_button);
         myScoreButton.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +70,9 @@ public class StartingActivity extends AppCompatActivity {
         startActivity(tmp);
     }
 
+    /**
+     * Switch to the Scoreboard selection view.
+     */
     private void switchToScoreboard() {
         Intent tmp = new Intent(this, ScoreBoardActivity.class);
         startActivity(tmp);

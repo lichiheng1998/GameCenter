@@ -89,7 +89,7 @@ public class GameCenterListViewAdapter extends ArrayAdapter<String> {
     }
 
     /**
-     * The view holder class is used for implement the view holder pattern of android.
+     * Cut the resource with the resId to the image with round corner.
      * @param resId The id of the resource.
      * @return imageRounded The bit with the round corner.
      * */
