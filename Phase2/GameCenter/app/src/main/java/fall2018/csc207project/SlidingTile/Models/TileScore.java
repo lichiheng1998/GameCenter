@@ -2,7 +2,10 @@ package fall2018.csc207project.SlidingTile.Models;
 
 import fall2018.csc207project.Models.Score;
 
-public class TileScore extends Score{
+/**
+ * The class TileScore that extends Score
+ */
+public class TileScore extends Score {
 
     /**
      * complexity of current game
@@ -34,6 +37,8 @@ public class TileScore extends Score{
         this.moveSteps = moveSteps;
         this.game = "SlidingTile";
     }
+
+    @Override
     public String toString(){
         return complexity + user + value;
     }

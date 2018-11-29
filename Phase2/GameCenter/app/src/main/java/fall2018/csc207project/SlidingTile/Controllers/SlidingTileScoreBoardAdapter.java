@@ -1,7 +1,6 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
 import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.TileScore;
 

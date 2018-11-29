@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Observable;
 
 /**
- * The sliding tiles board.
+ * The sliding tiles board that extends Observable implements Serializable and Iterable<Tile>.
  */
-public class Board extends Observable implements Serializable,Iterable<Tile> {
+public class Board extends Observable implements Serializable, Iterable<Tile> {
 
     /**
      * The number of rows.
@@ -83,15 +83,6 @@ public class Board extends Observable implements Serializable,Iterable<Tile> {
         notifyObservers(swapId);
     }
 
-    /**
-     * When the board is completed, all tiles will be displayed including the last blank tile.
-     */
-    public void completeBoard(){
-        int[] arr = {1, NUM_COLS, NUM_ROWS};
-        setChanged();
-        notifyObservers(arr);
-    }
-
     @Override
     public String toString() {
         return "Board{" +
@@ -107,17 +98,24 @@ public class Board extends Observable implements Serializable,Iterable<Tile> {
     @Override
     public Iterator<Tile> iterator() {
         return new Iterator<Tile>() {
+
+            /**
+             * THe index of this Iterator<Tile>
+             */
             int Index = 0;
+
+            /**
+             * the implementation of hasNext for iterator
+             */
             @Override
-            /*
-            * the implementation of hasNext for iterator*/
             public boolean hasNext() {
                 return Index < NUM_ROWS*NUM_COLS;
             }
 
-            /*
-            * the implementation of next method for iterator*/
-
+            /**
+             * the implementation of next method for iterator
+             */
+            @Override
             public Tile next() {
                 if (hasNext()) {
                     int RowIndex = Index / NUM_COLS;

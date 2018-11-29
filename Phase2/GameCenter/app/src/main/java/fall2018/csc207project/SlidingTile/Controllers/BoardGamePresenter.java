@@ -1,14 +1,13 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Models.Tile;
@@ -20,6 +19,9 @@ import fall2018.csc207project.Models.SaveManager;
 import fall2018.csc207project.Models.SaveSlot;
 import fall2018.csc207project.Models.ScoreManager;
 
+/**
+ * The class BoardGamePresenter that implements GamePresenter.
+ */
 public class BoardGamePresenter implements GamePresenter {
     /**
      * The movement processing logic
@@ -48,6 +50,13 @@ public class BoardGamePresenter implements GamePresenter {
 
     private boolean isSolved = false;
 
+    /**
+     * Construct a new BoardGamePresenter
+     * by given a BoardGameView, and a Context.
+     *
+     * @param view the BoardGame's View
+     * @param context the context of this app
+     */
     public BoardGamePresenter(BoardGameView view, Context context){
         this.view = view;
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
@@ -58,17 +67,19 @@ public class BoardGamePresenter implements GamePresenter {
         this.movementController = new MovementController();
     }
 
-
+    @Override
     public void onUndoButtonClicked(int step){
         if(!boardManager.undo(step)) {
             view.makeToastNoUndoTimesLeftText();
         }
     }
 
+    @Override
     public void onUndoTextClicked(){
         view.showNumberPicker();
     }
 
+    @Override
     public void onTapOnTile(Context context, int position){
         if (movementController.processTapMovement(context, position)){
             saveSlot.saveToAutoSave(boardManager);
@@ -77,13 +88,14 @@ public class BoardGamePresenter implements GamePresenter {
                 TileScore score = new TileScore(boardManager.getComplexity()
                         , boardManager.getTotalUndoSteps(), boardManager.getTotalMoveSteps());
                 TileGameCalculator calculator = new TileGameCalculator();
-                ScoreManager<TileScore> scoreManager= DatabaseUtil.getScoreManager("SlidingTile", currentUser,calculator);
+                ScoreManager<TileScore> scoreManager
+                        = DatabaseUtil.getScoreManager("SlidingTile", currentUser,calculator);
                 scoreManager.saveScore(score, context);
                 isSolved = true;
             }
         }
     }
-
+    @Override
     public void setBoardManager(BoardManager boardManager){
         this.boardManager = boardManager;
         this.movementController.setBoardManager(boardManager);
@@ -95,12 +107,12 @@ public class BoardGamePresenter implements GamePresenter {
         int[] arr = (int[]) arg;
         // arr[0] = 0 means that it is a change of position of two tiles
         // arr[0] = 1 means that it is a change of the last tile because of completion
-        if (arr[0] == 0){
+        if (arr[0] == 0) {
             view.swapButtons(arr[1], arr[2]);
-        } else {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public List<Button> getButtonList(final Context context){
         int complexity = boardManager.getComplexity();
         List<Button> tileButtons = new ArrayList<>();

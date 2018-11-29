@@ -1,6 +1,7 @@
 package fall2018.csc207project.Views;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,12 +38,33 @@ import fall2018.csc207project.R;
  * or remove game.
  */
 public class LocalGameCenterActivity extends AppCompatActivity implements NavView{
+
+    /**
+     * The UserManager to manage the user.
+     */
     private UserManager userManager;
+
+    /**
+     * The BaseAdapter to interact with the ListView.
+     */
     private BaseAdapter adapter;
+
+    /**
+     * The List of String represent all games.
+     */
     private List<String> gameList;
+
+    /**
+     * The BasePresenter to interact with the GameActivities.
+     */
     private BasePresenter presenter;
+
+    /**
+     * The NavigationView to navigate the View.
+     */
     private NavigationView navigationView;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.local_game_center);
@@ -108,6 +130,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
      * Launch the game with the given game name.
      * @param game the name of the current game.
      */
+    @SuppressLint("ApplySharedPref")
     private void launchGame(String game){
         SharedPreferences sharedPref =
                 this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
@@ -119,11 +142,14 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         startActivity(tmp);
     }
 
+    /**
+     * Set the Nav.
+     */
     private void setupNavListener(){
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         int id = menuItem.getItemId();
                         switch (id){
                             case R.id.nav_avatar:
@@ -150,10 +176,14 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
      */
     private void openGallery(int requestCode){
         try {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
             } else {
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, requestCode);
             }
         } catch (Exception e) {
@@ -189,20 +219,26 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         ((ImageView)navigationView.getHeaderView(0).findViewById(R.id.avatar)).setImageDrawable(drawable);
     }
 
+    /**
+     * Display the user's name.
+     *
+     * @param userName the given user's name
+     */
     private void showUserName(String userName){
         ((TextView)navigationView.getHeaderView(0).findViewById(R.id.username)).setText(userName);
     }
 
     /**
      * Request the permission to access the picture from the gallery.
-     * Taken the code from the stackoverflow url: "https://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m/39866945"
+     * Taken the code from the stack-overflow url: "https://stackoverflow.com/questions/39866869/how-to-ask-permission-to-access-gallery-on-android-m/39866945"
      * */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
     {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(galleryIntent, requestCode);
             } else {
                 Toast.makeText(this, "Not granted permission", Toast.LENGTH_SHORT).show();
