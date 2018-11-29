@@ -33,7 +33,7 @@ public class MemoScoreBoardAdapter extends BaseAdapter {
      * @param list the list of MemoScores
      * @param context the context of this app
      */
-    MemoScoreBoardAdapter(List<MemoScore> list, Context context) {
+    public MemoScoreBoardAdapter(List<MemoScore> list, Context context) {
         memoTopScores = list;
         mContext = context;
     }

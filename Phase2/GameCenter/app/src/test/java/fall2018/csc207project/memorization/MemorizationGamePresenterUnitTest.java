@@ -72,10 +72,6 @@ public class MemorizationGamePresenterUnitTest {
         presenter.verify(100, context);
         assertEquals(2, presenter.getLife());
 
-
-//        Method method = targetClass.getDeclaredMethod(methodName, argClasses);
-//        method.setAccessible(true);
-//        return method.invoke(targetObject, argObjects);
     }
 
     @Test
