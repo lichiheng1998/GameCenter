@@ -1,4 +1,4 @@
-package fall2018.csc207project.memorization;
+package fall2018.csc207project.Memorization;
 
 public class MemorizationControllerTest {
 

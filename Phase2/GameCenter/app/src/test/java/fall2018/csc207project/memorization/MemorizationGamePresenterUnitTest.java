@@ -17,9 +17,12 @@ import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
+import fall2018.csc207project.SlidingTile.Models.Tile;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -93,5 +96,17 @@ public class MemorizationGamePresenterUnitTest {
         assertEquals(2, presenter.getLife());
     }
 
-
+    @Test
+    public void shouldFlash()throws NoSuchMethodException, InvocationTargetException,
+            IllegalAccessException{
+        MemoTile tile = new MemoTile(3, MemoTile.TYPEACTIVE);
+        MemoTile fakeTile = new MemoTile(3, MemoTile.TYPEFAKE);
+        Class memoPresenter = presenter.getClass();
+        Method flash = memoPresenter.getDeclaredMethod("flashMemoTile", MemoTile.class);
+        flash.setAccessible(true);
+        flash.invoke(presenter, tile);
+        verify(view).flashButtonToColor(eq(3), anyInt(), eq(MemoTile.ACTIVECOLOR));
+        flash.invoke(presenter, fakeTile);
+        verify(view).flashButtonToColor(eq(3), anyInt(), eq(MemoTile.FAKECOLOR));
+    }
 }
