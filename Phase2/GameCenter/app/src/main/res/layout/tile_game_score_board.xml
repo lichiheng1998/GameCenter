@@ -7,145 +7,142 @@
 
     <Button
         android:id="@+id/button3x3"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="56dp"
+        android:layout_alignTop="@+id/button4x4"
+        android:layout_marginStart="16dp"
         android:text="3x3" />
 
     <Button
         android:id="@+id/button4x4"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="-1dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="7dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/button5x5"
+        android:layout_centerHorizontal="true"
         android:text="4x4" />
 
     <Button
         android:id="@+id/button5x5"
-        android:layout_width="57dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="23dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="84dp"
         android:text="5x5" />
 
     <ListView
         android:id="@+id/scoreBoard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="303dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="218dp"
+        android:layout_marginTop="264dp"
         android:fillViewport="true" />
 
     <TextView
         android:id="@+id/currentPlayer"
-        android:layout_width="76dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="20dp"
-        android:text="empty" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Current User Name" />
 
 
     <TextView
         android:id="@+id/playerscore3x1"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/button3x3"
+        android:layout_marginTop="136dp"
+        android:text="Player Score 3" />
 
     <TextView
         android:id="@+id/playerscore3x2"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="35dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignStart="@+id/button3x3"
+        android:layout_alignTop="@+id/playerscore4x2"
+        android:text="Player Score 3" />
 
     <TextView
         android:id="@+id/playerscore3x3"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="70dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/button3x3"
+        android:layout_marginTop="204dp"
+        android:text="Player Score 3" />
 
     <TextView
         android:id="@+id/playerscore4x1"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="-1dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/playerscore3x1"
+        android:layout_centerHorizontal="true"
+        android:text="Player Score 4" />
 
     <TextView
         android:id="@+id/playerscore4x2"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="171dp"
-        android:layout_marginTop="37dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/playerscore5x2"
+        android:layout_centerHorizontal="true"
+        android:text="Player Score 4" />
 
     <TextView
         android:id="@+id/playerscore4x3"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="169dp"
-        android:layout_marginTop="74dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/playerscore3x3"
+        android:layout_centerHorizontal="true"
+        android:text="Player Score 4" />
 
     <TextView
         android:id="@+id/playerscore5x1"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="-3dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignStart="@+id/button5x5"
+        android:layout_alignTop="@+id/playerscore3x1"
+        android:text="Player Score 5" />
 
     <TextView
         android:id="@+id/playerscore5x2"
-        android:layout_width="59dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="30dp"
-        android:text="playerscore3" />
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/button5x5"
+        android:layout_marginTop="170dp"
+        android:text="Player Score 5" />
 
     <TextView
         android:id="@+id/playerscore5x3"
-        android:layout_width="59dp"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_alignStart="@+id/button5x5"
+        android:layout_alignTop="@+id/playerscore3x3"
+        android:text="Player Score 5" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="221dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button3x3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="302dp"
-        android:layout_marginTop="68dp"
-        android:text="playerscore3" />
+        android:layout_above="@+id/scoreBoard"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-264dp"
+        android:text="Top 10 Player in SlidingTile Game" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="My Top 3 Score in Different Complexities" />
 
 </RelativeLayout>
