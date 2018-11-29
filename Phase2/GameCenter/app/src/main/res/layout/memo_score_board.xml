@@ -32,34 +32,35 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:text="@string/empty" />
+        android:text="Current User Name" />
 
 
     <TextView
         android:id="@+id/memoPlayerTop3x1"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/memoPlayerTop3x2"
-        android:layout_centerHorizontal="true"
-        android:text="@string/playerscore1" />
+        android:layout_alignStart="@+id/memoPlayerTop3x2"
+        android:layout_below="@+id/textView20"
+        android:text="Player Score 1" />
 
     <TextView
         android:id="@+id/memoPlayerTop3x2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/memoPlayerTop3x3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-180dp"
-        android:text="@string/playerscore2" />
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/memoPlayerTop3x3"
+        android:layout_marginTop="161dp"
+        android:text="Player Score 2" />
 
     <TextView
         android:id="@+id/memoPlayerTop3x3"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
-        android:text="@string/playerscore3" />
+        android:layout_marginEnd="93dp"
+        android:layout_marginTop="191dp"
+        android:text="Player Score 3" />
 
     <EditText
         android:id="@+id/acceptText"
@@ -94,8 +95,33 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/memoPlayerTop3x1"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="113dp"
         android:text="Player's Top 3 for Choisen Difficulty and Mode" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView27"
+        android:layout_alignTop="@+id/memoPlayerTop3x1"
+        android:text="First" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView21"
+        android:layout_alignTop="@+id/memoPlayerTop3x2"
+        android:text="Second" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/acceptText"
+        android:layout_alignTop="@+id/memoPlayerTop3x3"
+        android:text="Third" />
 
 </RelativeLayout>
