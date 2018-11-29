@@ -92,7 +92,7 @@ public class MemoGamePresenter implements GamePresenter {
     /**
      * Get the next MemoTile to be verified.
      */
-    private MemoTile getVerifyItems(){
+    public MemoTile getVerifyItems(){
         MemoTile verifyItem = null;
         while (verifyIterator.hasNext()){
             MemoTile item = verifyIterator.next();
@@ -109,8 +109,8 @@ public class MemoGamePresenter implements GamePresenter {
      */
     public void startCycle(){
         final Iterator<MemoTile> iterator = memoManager.iterator();
-        verifyIterator = memoManager.iterator();
-        nextToVerify = getVerifyItems();
+        setVerifyIterator();
+        setNextToVerify();
         isDisplaying = true;
         view.updateStatus(true);
         Timer timer = new Timer();
@@ -127,6 +127,14 @@ public class MemoGamePresenter implements GamePresenter {
                 }
             }
         }, 2000, period);
+    }
+
+    public void setVerifyIterator() {
+        verifyIterator = memoManager.iterator();
+    }
+
+    public void setNextToVerify(){
+        nextToVerify = getVerifyItems();
     }
 
     /**
