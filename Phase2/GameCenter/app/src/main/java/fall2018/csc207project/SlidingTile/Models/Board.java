@@ -78,7 +78,7 @@ public class Board extends Observable implements Serializable, Iterable<Tile> {
         Tile temp = tiles[row1][col1];
         tiles[row1][col1] = tiles[row2][col2];
         tiles[row2][col2] = temp;
-        int[] swapId = {0, row1 * NUM_COLS + col1, row2 * NUM_ROWS + col2};
+        int[] swapId = {row1 * NUM_COLS + col1, row2 * NUM_ROWS + col2};
         setChanged();
         notifyObservers(swapId);
     }

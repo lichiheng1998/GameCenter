@@ -10,21 +10,22 @@ import java.util.Stack;
  * Manage a board, including swapping tiles, checking for a win, and managing taps.
  */
 public class BoardManager implements Serializable, Iterable<Tile>{
-
     /**
      * The board being managed.
      */
-    private Board board;
-
+    public Board board;
     /**
-     *
+     * the stack of all movements taken
      */
     private Stack<Integer> stackOfMovements;
-
+    /**
+     * The complexity of game managed
+     */
     private int complexity;
-
+    /**
+     * the undo times left
+     */
     private int undoTimes;
-
     /**
      * The counting of total steps moved.
      */
@@ -37,20 +38,35 @@ public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * Manage a new shuffled board.
+     * @param dim the dimension of board
+     * @param undoTimes the undo times initially
      */
     public BoardManager(int dim, int undoTimes) {
         this.complexity = dim;
         this.undoTimes = undoTimes;
         stackOfMovements = new Stack<>();
+        this.board = this.shuffledBoard(dim);
+    }
+
+    /**
+     * Create the board with shuffling
+     * @param dim the dimension(complexity) of the board
+     */
+    private Board shuffledBoard(int dim){
         if (dim == 3) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 81);
+            return (new SlidingTileGameShuffler()).shuffle(dim, 81);
         } else if (dim == 4) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 256);
-        } else if (dim == 5) {
-            this.board = (new SlidingTileGameShuffler()).shuffle(dim, 625);
+            return (new SlidingTileGameShuffler()).shuffle(dim, 256);
+        } else {
+            return (new SlidingTileGameShuffler()).shuffle(dim, 625);
         }
     }
 
+
+    /**
+     * The iterator.
+     * @return the iterator
+     */
     @NonNull
     @Override
     public Iterator<Tile> iterator() {
@@ -59,7 +75,6 @@ public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * Return whether the tiles are in row-major order.
-     *
      * @return whether the tiles are in row-major order
      */
     public boolean puzzleSolved() {
@@ -74,12 +89,10 @@ public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * Return whether any of the four surrounding tiles is the blank tile.
-     *
      * @param position the tile to check
      * @return whether the tile at position is surrounded by a blank tile
      */
     public boolean isValidTap(int position) {
-
         int row = position / board.NUM_COLS;
         int col = position % board.NUM_COLS;
         int blankId = board.numTiles();
@@ -96,7 +109,6 @@ public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * Process a touch at position in the board, swapping tiles as appropriate.
-     *
      * @param position the position
      */
     public void touchMove(int position) {
@@ -118,10 +130,9 @@ public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * Return the blank tile's position.
-     *
      * @return the blank tile's position
      */
-    private int findBlinkTilePosition() {
+    private int findBlankTilePosition() {
         int blankId = board.numTiles();
         Iterator<Tile> iterator = board.iterator();
         int blankPosition = 0;
@@ -136,7 +147,6 @@ public class BoardManager implements Serializable, Iterable<Tile>{
 
     /**
      * Process the undo movement by the given steps.
-     *
      * @param steps the steps you want to go back.
      */
     private void processUndoMovement(int steps) {
@@ -148,13 +158,15 @@ public class BoardManager implements Serializable, Iterable<Tile>{
         undoTimes--;
     }
 
+    /**
+     * Add last step into record
+     */
     public void pushLastStep(){
-        stackOfMovements.push(findBlinkTilePosition());
+        stackOfMovements.push(findBlankTilePosition());
     }
 
     /**
      * Return the total steps you did.
-     *
      * @return the total steps you did
      */
     public int getTotalMoveSteps() {
@@ -162,23 +174,34 @@ public class BoardManager implements Serializable, Iterable<Tile>{
     }
 
     /**
-     * Return the total steps you moved.
-     *
+     * Return the total steps you undo.
      * @return the total steps you moved
      */
     public int getTotalUndoSteps() {
         return totalUndoSteps;
     }
 
+    /**
+     * Get the complexity(dimension) of this board
+     * @return the complexity(dimension)
+     */
     public int getComplexity(){
         return complexity;
     }
 
-
+    /**
+     * Assign observer to board
+     * @param o the observer of the board
+     */
     public void subscribe(Observer o){
         board.addObserver(o);
     }
 
+    /**
+     * Undo the amount of steps if valid. Return whether undo is made
+     * @param step the amount of steps to undo
+     * @return whether undo is made
+     */
     public boolean undo(int step){
         if (undoTimes == 0 || step > stackOfMovements.size()){
             return false;

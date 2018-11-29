@@ -67,6 +67,10 @@ public class BoardGamePresenter implements GamePresenter {
         this.movementController = new MovementController();
     }
 
+    /**
+     * Makes toast showing no undo times left if step of undo is invalid
+     * @param step steps want to be undo
+     */
     @Override
     public void onUndoButtonClicked(int step){
         if(!boardManager.undo(step)) {
@@ -74,11 +78,19 @@ public class BoardGamePresenter implements GamePresenter {
         }
     }
 
+    /**
+     * Show pickering when user wants do edit undo steps
+     */
     @Override
     public void onUndoTextClicked(){
         view.showNumberPicker();
     }
 
+    /**
+     * Process movements when tile is clicked
+     * @param context the context of this app
+     * @param position the position of the Tile that the user tapped on
+     */
     @Override
     public void onTapOnTile(Context context, int position){
         if (movementController.processTapMovement(context, position)){
@@ -95,6 +107,11 @@ public class BoardGamePresenter implements GamePresenter {
             }
         }
     }
+
+    /**
+     * Set the board manager.
+     * @param boardManager the BoardManager that manages the Board
+     */
     @Override
     public void setBoardManager(BoardManager boardManager){
         this.boardManager = boardManager;
@@ -102,16 +119,22 @@ public class BoardGamePresenter implements GamePresenter {
         boardManager.subscribe(this);
     }
 
+    /**
+     * Update the list of buttons.
+     * @param o the observed board
+     * @param arg the int array which contains the two buttons to be swaped
+     */
     @Override
     public void update(Observable o, Object arg) {
         int[] arr = (int[]) arg;
-        // arr[0] = 0 means that it is a change of position of two tiles
-        // arr[0] = 1 means that it is a change of the last tile because of completion
-        if (arr[0] == 0) {
-            view.swapButtons(arr[1], arr[2]);
-        }
+        view.swapButtons(arr[0], arr[1]);
     }
 
+    /**
+     * Get the list of buttons(which are tiles)
+     * @param context the context of this app
+     * @return the list of buttons
+     */
     @SuppressLint("SetTextI18n")
     public List<Button> getButtonList(final Context context){
         int complexity = boardManager.getComplexity();
