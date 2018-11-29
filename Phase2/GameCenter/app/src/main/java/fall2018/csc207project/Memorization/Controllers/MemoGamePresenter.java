@@ -129,22 +129,6 @@ public class MemoGamePresenter implements GamePresenter {
         }, 2000, period);
     }
 
-    public void setVerifyIterator() {
-        verifyIterator = memoManager.iterator();
-    }
-
-    public void setNextToVerify(){
-        nextToVerify = getVerifyItems();
-    }
-
-    public int getSuccessTap() {
-        return successTap;
-    }
-
-    public int getLife() {
-        return life;
-    }
-
     /**
      * If the buttons tap are in wrong order, the game ends. Otherwise, flash the button to green.
      *
@@ -225,5 +209,36 @@ public class MemoGamePresenter implements GamePresenter {
     @Override
     public void setMemoManager(MemoManager memoManager) {
         this.memoManager = memoManager;
+    }
+
+
+    /**
+     * Set the iterator for verification
+     */
+    public void setVerifyIterator() {
+        verifyIterator = memoManager.iterator();
+    }
+
+    /**
+     * update next item to verify
+     */
+    public void setNextToVerify(){
+        nextToVerify = getVerifyItems();
+    }
+
+    /**
+     * number of total success taps of player
+     * @return total number of success taps
+     */
+    public int getSuccessTap() {
+        return successTap;
+    }
+
+    /**
+     * lives player has left
+     * @return total lives player has left
+     */
+    public int getLife() {
+        return life;
     }
 }
