@@ -48,17 +48,19 @@ public class ScoreManager <T extends Score>{
     }
 
     /**
-     * Get all scores in the database;
+     * Get all scores in the database.
+     *
      * @param context the context of the app.
      * @return the list of scores.
      */
-    public List<Score> getGameToScore(Context context){
+    private List<Score> getGameToScore(Context context){
         return (List<Score>)
                 dataStream.getScores(new ArrayList<Score>(), context);
     }
 
     /**
-     * Get all scores of the game;
+     * Get all scores of the game.
+     *
      * @param context the context of the app
      * @return the list of scores.
      */
@@ -74,7 +76,8 @@ public class ScoreManager <T extends Score>{
     }
 
     /**
-     * Get all scores of the game of the user;
+     * Get all scores of the game of the user.
+     *
      * @param context the context of the app
      * @return the list of scores.
      */
@@ -90,7 +93,8 @@ public class ScoreManager <T extends Score>{
     }
 
     /**
-     * Get all scores of the game of the user;
+     * Get all scores of the game of the user.
+     *
      * @param context the context of the app.
      * @param score the score that is saving.
      */

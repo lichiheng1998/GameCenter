@@ -7,37 +7,68 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The class UserManager to manage the users.
+ */
 @SuppressWarnings("unchecked")
 public class UserManager {
+
+    /**
+     * The UserDataStream helps to save.
+     */
     private UserDataStream dataStream;
+
+    /**
+     * The current user's name.
+     */
     private String currentUser;
 
-    public UserManager(UserDataStream dataStream, String user){
+    /**
+     * Construct a new UserManager by given a UserDataStream and a String.
+     *
+     * @param dataStream the UserDataStream helps to save
+     * @param user the user's name
+     */
+    UserManager(UserDataStream dataStream, String user){
         this(dataStream);
         this.currentUser = user;
     }
-
-    public UserManager(UserDataStream dataStream){
+    /**
+     * Construct a new UserManager by given a UserDataStream and a String.
+     *
+     * @param dataStream the UserDataStream helps to save
+     */
+    UserManager(UserDataStream dataStream){
         this.dataStream = dataStream;
     }
 
     /**
-     * Get the mapping of user to password
+     * Get the mapping of user to password.
+     *
+     * @param context the context of this app
      */
     private Map<String, String> getUserToPassword(Context context){
         return (Map<String, String>) dataStream.getAccountData(new HashMap<String, String>(), context);
     }
 
     /**
-     * Get the mapping of user to game list
+     * Get the mapping of user to game list.
+     *
+     * @param context the context of this app
      */
     private Map<String, List<String>> getUserToGames(Context context){
         return (Map<String, List<String>>) dataStream.getUserToGames(new HashMap<String, List<String>>(), context);
     }
 
-    /** Attempts to create a new account using the username and password provided.
+    /**
+     *  Attempts to create a new account using the username and password provided.
      *  Returns true upon a successfully created new account. Also, logs them in.
      *  Returns false otherwise.
+     *
+     *  @param username the current user's name
+     *  @param password the current user's password
+     *  @param context the context of this app
+     *  @return true upon a successfully created new account. Also, logs them in; false otherwise.
      */
     public boolean signUp(String username, String password, Context context){
         Map<String, String> userToPassword = getUserToPassword(context);
@@ -55,6 +86,7 @@ public class UserManager {
             return true;
         }
     }
+
     /** Attempts a login to the system using credentials username and password.
      *  Returns true upon a successful sign in. Returns false otherwise.
      *
@@ -69,31 +101,27 @@ public class UserManager {
 
     /** Add the game to the user's game list
      *
-     * @param game: String
-     * @return Boolean
+     * @param game : String
      */
-    public boolean addGame(String game, Context context){
+    public void addGame(String game, Context context){
         Map<String, List<String>> userToGames = getUserToGames(context);
         List<String> userGames = userToGames.get(currentUser);
         boolean result = !userGames.contains(game) && userGames.add(game);
         if(result){
             dataStream.saveUserToGames(userToGames, context);
         }
-        return result;
     }
 
     /** Remove the game from the user's game list
      *
-     * @param game: String
-     * @return Boolean
+     * @param game : String
      */
-    public boolean removeGame(String game, Context context){
+    public void removeGame(String game, Context context){
         Map<String, List<String>> userToGames = getUserToGames(context);
         boolean result = userToGames.get(currentUser).remove(game);
         if(result){
             dataStream.saveUserToGames(userToGames, context);
         }
-        return result;
     }
 
     /** Get the user's game list
