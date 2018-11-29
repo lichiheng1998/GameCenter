@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,9 @@ public class GameCenterListViewAdapter extends ArrayAdapter<String>{
         }
     }
 
+    @NonNull
     @Override
-    public View getView(int i, View view, ViewGroup parent) {
+    public View getView(int i, View view, @NonNull ViewGroup parent) {
         View row = view;
         MyViewHolder holder;
         if (row == null) {
@@ -61,7 +63,7 @@ public class GameCenterListViewAdapter extends ArrayAdapter<String>{
     }
 
     /**
-     * The view holder class is used for implement the view holder pattern of android.
+     * Cut the resource with the resId to the image with round corner.
      * @param resId The id of the resource.
      * @return imageRounded The bit with the round corner.
      * */

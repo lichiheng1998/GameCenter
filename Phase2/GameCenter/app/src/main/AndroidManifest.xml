@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="fall2018.csc207project.Controllers.GlobalActivity">
+        <activity android:name="fall2018.csc207project.Views.GlobalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="fall2018.csc207project.Controllers.SignInActivity" />
-        <activity android:name="fall2018.csc207project.Controllers.SignUpActivity" />
+        <activity android:name="fall2018.csc207project.Views.SignInActivity" />
+        <activity android:name="fall2018.csc207project.Views.SignUpActivity" />
         <activity android:name="fall2018.csc207project.Views.LocalGameCenterActivity" />
         <activity android:name="fall2018.csc207project.Controllers.GameListActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.StartingActivity" />
@@ -32,7 +32,7 @@
             android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity android:name=".Memorization.Controllers.MemoComplxActivity" />
         <activity android:name=".Memorization.Views.MemoGameActivity" />
-        <activity android:name="fall2018.csc207project.Controllers.ManageSaveActivity" />
+        <activity android:name="fall2018.csc207project.Views.ManageSaveActivity" />
         <activity android:name=".PushTheBox.Controllers.BoxScoreBoardActivity" />
     </application>
 

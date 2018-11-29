@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import fall2018.csc207project.Controllers.ManageSaveActivity;
+import fall2018.csc207project.Views.ManageSaveActivity;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 

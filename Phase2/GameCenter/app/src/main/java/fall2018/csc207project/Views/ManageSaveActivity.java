@@ -1,4 +1,4 @@
-package fall2018.csc207project.Controllers;
+package fall2018.csc207project.Views;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,24 +10,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import java.io.Serializable;
+
+import fall2018.csc207project.Controllers.ManageSavePresenter;
+import fall2018.csc207project.Controllers.ManageSavePresenterImpl;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.GlobalConfig;
-import fall2018.csc207project.Models.Save;
 import fall2018.csc207project.Models.SaveManager;
-import fall2018.csc207project.Models.SaveSlot;
+
 /**
  * The activity that represents the page for managing saves.
  */
 @SuppressWarnings("unchecked")
-public class ManageSaveActivity extends AppCompatActivity{
-    private SaveManager saveManager;
+public class ManageSaveActivity extends AppCompatActivity implements ManageSaveView{
+    private ManageSavePresenter presenter;
     private String user;
     private String game;
-    /**
-     * The save slot that stores all save of the user.
-     */
-    private SaveSlot saveSlot;
     /**
      * The entries of the game activities.
      */
@@ -44,12 +42,12 @@ public class ManageSaveActivity extends AppCompatActivity{
         SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         user = shared.getString("currentUser", null);
         game = shared.getString("currentGame", null);
-        saveManager = DatabaseUtil.getSaveManager(user, game);
-        saveSlot = saveManager.readFromFile(getApplicationContext());
+        SaveManager saveManager = DatabaseUtil.getSaveManager(user, game);
+        presenter = new ManageSavePresenterImpl(this, saveManager, getApplicationContext());
         entry = (Class<? extends Activity>)GlobalConfig.GAMEMAP.get(game);
         setupSaveButtons();
         setupLoadButtons();
-        setupInfos();
+        presenter.initView();
     }
 
     /**
@@ -61,15 +59,7 @@ public class ManageSaveActivity extends AppCompatActivity{
             findViewById(saveIds[i]).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Save save = saveSlot.readFromAutoSave();
-                    if (save == null){
-                        makeNotStartedText();
-                        return;
-                    }
-                    makeToastSavedText();
-                    saveSlot.saveToSlot(pos, save.data);
-                    saveManager.saveToFile(saveSlot, ManageSaveActivity.this.getApplicationContext());
-                    setupInfos();
+                    presenter.onSaveButtonClicked(pos, ManageSaveActivity.this.getApplicationContext());
                 }
             });
         }
@@ -83,51 +73,38 @@ public class ManageSaveActivity extends AppCompatActivity{
             findViewById(loadIds[i]).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Save save = pos == 3 ? saveSlot.readFromAutoSave():saveSlot.readFromSlot(pos);
-                    if (save == null) {
-                        makeNoSavedText();
-                        return;
-                    }
-                    Intent tmp = new Intent(ManageSaveActivity.this, entry);
-                    tmp.putExtra("save", (Serializable) save.data);
-                    startActivity(tmp);
-                    finish();
+                    presenter.onLoadButtonClicked(pos);
                 }
             });
         }
     }
 
-    public void setupInfos(){
-        for (int i = 0; i < 4; i++){
-            Button button = findViewById(fields[i]);
-            Save save = i == 3 ? saveSlot.readFromAutoSave() : saveSlot.readFromSlot(i);
-            if (save != null){
-                button.setText(save.date.toString());
-            }
-        }
+    @Override
+    public void launchGame(Serializable data){
+        Intent tmp = new Intent(ManageSaveActivity.this, entry);
+        tmp.putExtra("save", data);
+        startActivity(tmp);
+        finish();
     }
 
-
-    /**
-     * Display that a game was saved successfully.
-     */
-    private void makeToastSavedText() {
+    @Override
+    public void makeToastSavedText() {
         Toast.makeText(this, "Game Saved", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Display that a game that has no saves.
-     */
-    private void makeNoSavedText() {
+    @Override
+    public void makeNoSavedText() {
         Toast.makeText(this, "No Save!", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Display that the game hasn't started yet.
-     */
-    private void makeNotStartedText() {
+    @Override
+    public void makeNotStartedText() {
         Toast.makeText(this, "Game is not started!", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void showInfo(int pos, String info){
+        Button button = findViewById(fields[pos]);
+        button.setText(info);
+    }
 }
-
-
