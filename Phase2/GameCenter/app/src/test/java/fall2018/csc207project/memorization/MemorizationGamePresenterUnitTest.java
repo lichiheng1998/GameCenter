@@ -105,4 +105,24 @@ public class MemorizationGamePresenterUnitTest {
         flash.invoke(presenter, fakeTile);
         verify(view).flashButtonToColor(eq(3), anyInt(), eq(MemoTile.FAKECOLOR));
     }
+
+    @Test
+    public void tapTile() throws NoSuchMethodException, InvocationTargetException,
+            IllegalAccessException, NoSuchFieldException {
+        Class memoGamePresenter = presenter.getClass();
+        Method tap = memoGamePresenter.getDeclaredMethod("onTapOnTile",
+                Context.class, int.class);
+        Field display = memoGamePresenter.getDeclaredField("isDisplaying");
+        display.setAccessible(true);
+        tap.setAccessible(true);
+
+        //test that verify will not be invoke if displaying
+        display.set(presenter, true);
+        tap.invoke(presenter, context, 100);
+        assertEquals(3, presenter.getLife());
+        //test that verify will be invoke if not displaying
+        display.set(presenter, false);
+        tap.invoke(presenter, context, 100);
+        assertEquals(2, presenter.getLife());
+    }
 }
