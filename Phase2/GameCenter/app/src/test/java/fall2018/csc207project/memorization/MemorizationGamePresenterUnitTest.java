@@ -20,9 +20,6 @@ import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 @RunWith(MockitoJUnitRunner.class)
 public class MemorizationGamePresenterUnitTest {
     @InjectMocks
