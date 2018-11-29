@@ -17,6 +17,7 @@ import fall2018.csc207project.R;
 
 /**
  * The class LevelActivity that extends AppCompatActivity and implements LevelView.
+ * Excluded from tests because it's a view class.
  */
 public class LevelActivity extends AppCompatActivity implements LevelView {
 

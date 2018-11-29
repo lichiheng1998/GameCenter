@@ -6,11 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import fall2018.csc207project.Controllers.ManageSaveActivity;
-import fall2018.csc207project.PushTheBox.Controllers.BoxScoreBoardActivity;
 import fall2018.csc207project.R;
 
 /**
  * The class BoxStartingActivity that extends AppCompatActivity.
+ * Excluded from tests because it's a view class.
  */
 public class BoxStartingActivity extends AppCompatActivity {
 

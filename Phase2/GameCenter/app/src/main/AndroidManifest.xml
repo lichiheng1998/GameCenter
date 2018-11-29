@@ -33,7 +33,7 @@
         <activity android:name=".Memorization.Controllers.MemoComplexActivity" />
         <activity android:name=".Memorization.Views.MemoGameActivity" />
         <activity android:name="fall2018.csc207project.Controllers.ManageSaveActivity" />
-        <activity android:name=".PushTheBox.Controllers.BoxScoreBoardActivity" />
+        <activity android:name=".PushTheBox.View.BoxScoreBoardActivity" />
         <activity android:name=".Memorization.Controllers.MemoScoreBoardActivity" />
     </application>
 

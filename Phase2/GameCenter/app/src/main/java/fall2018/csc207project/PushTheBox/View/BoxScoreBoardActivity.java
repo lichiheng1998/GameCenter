@@ -1,4 +1,4 @@
-package fall2018.csc207project.PushTheBox.Controllers;
+package fall2018.csc207project.PushTheBox.View;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,6 +12,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
+
+import fall2018.csc207project.PushTheBox.Controllers.BoxScoreAdapter;
 import fall2018.csc207project.PushTheBox.Models.BoxGameScoreManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Models.DatabaseUtil;
@@ -22,6 +24,7 @@ import fall2018.csc207project.PushTheBox.Models.BoxScore;
 /**
  * The class BoxScoreBoardActivity that extends AppCompatActivity
  * and implements AdapterView.OnItemSelectedListener
+ * Excluded from tests because it's a view class.
  */
 public class BoxScoreBoardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 

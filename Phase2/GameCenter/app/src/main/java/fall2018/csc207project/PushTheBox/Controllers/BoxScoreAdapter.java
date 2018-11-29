@@ -33,10 +33,11 @@ public class BoxScoreAdapter extends BaseAdapter {
      * @param context the context for the app
      * @param scores List of BoxScore want to be show on the ListView
      */
-    BoxScoreAdapter(Context context, List<BoxScore> scores){
+    public BoxScoreAdapter(Context context, List<BoxScore> scores){
         this.context = context;
         this.scores = scores;
     }
+
     @Override
     public int getCount() {
         return scores.size();
