@@ -65,7 +65,6 @@ public class MemorizationModelUnitTest {
         assertEquals(2, managerT.getCurComplexity());
         assertTrue(managerT.isLevel());
         assertEquals(1, managerT.getSequenceOrder().size());
-        assertEquals(4, managerT.getHeightDifficulty());
         managerT.setScoreTotal(5);
         assertEquals(5, managerT.getScoreTotal());
         assertNotSame(managerT ,managerT.getNewInstance());
