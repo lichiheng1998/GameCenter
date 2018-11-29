@@ -137,12 +137,20 @@ public class MemoGamePresenter implements GamePresenter {
         nextToVerify = getVerifyItems();
     }
 
+    public int getSuccessTap() {
+        return successTap;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
     /**
      * If the buttons tap are in wrong order, the game ends. Otherwise, flash the button to green.
      *
      * @param pos the position that user taps.
      */
-    private void verify(int pos, Context context){
+    public void verify(int pos, Context context){
         if (!gameOver && nextToVerify.getId() == pos){
             success(pos);
         } else {
