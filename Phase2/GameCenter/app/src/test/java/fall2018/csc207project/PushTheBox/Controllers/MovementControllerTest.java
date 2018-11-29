@@ -43,11 +43,11 @@ public class MovementControllerTest {
         MapManager mapManager = new MapManager(0,0,levelInfo);
         mc.setMapManager(mapManager);
         mc.processTapMovement("left");
-        assertEquals("person didn't move to left",
-                mapManager.person.getPosition(), 0);
+        assertEquals("person didn't move to left", 0,
+                mapManager.person.getPosition());
         mc.processTapMovement("right");
-        assertEquals("person didn't move to right",
-                mapManager.person.getPosition(), 1);
+        assertEquals("person didn't move to right", 1,
+                mapManager.person.getPosition());
     }
 
     @Test
@@ -59,8 +59,8 @@ public class MovementControllerTest {
         MapManager mapManager = new MapManager(0,0,levelInfo);
         mc.setMapManager(mapManager);
         mc.processTapMovement("left");
-        assertEquals("person is unable to move left towards a wall",
-                mapManager.person.getPosition(), 1);
+        assertEquals("person is unable to move left towards a wall", 1,
+                mapManager.person.getPosition());
     }
 
     @Test
@@ -72,8 +72,8 @@ public class MovementControllerTest {
         MapManager mapManager = new MapManager(0,0,levelInfo);
         mc.setMapManager(mapManager);
         mc.processTapMovement("right");
-        assertEquals("person is unable to move right towards a wall",
-                mapManager.person.getPosition(), 0);
+        assertEquals("person is unable to move right towards a wall", 0,
+                mapManager.person.getPosition());
     }
 
     @Test
@@ -85,11 +85,11 @@ public class MovementControllerTest {
 
         mc.setMapManager(mapManager);
         mc.processTapMovement("up");
-        assertEquals("person didn't move up",
-                mapManager.person.getPosition(), 0);
+        assertEquals("person didn't move up", 0,
+                mapManager.person.getPosition());
         mc.processTapMovement("down");
-        assertEquals("person didn't move down",
-                mapManager.person.getPosition(), 1);
+        assertEquals("person didn't move down", 1,
+                mapManager.person.getPosition());
     }
 
     @Test
@@ -102,8 +102,8 @@ public class MovementControllerTest {
 
         mc.setMapManager(mapManager);
         mc.processTapMovement("up");
-        assertEquals("person is unable to move up towards a wall",
-                mapManager.person.getPosition(), 1);
+        assertEquals("person is unable to move up towards a wall", 1,
+                mapManager.person.getPosition());
     }
 
     @Test
@@ -116,8 +116,8 @@ public class MovementControllerTest {
 
         mc.setMapManager(mapManager);
         mc.processTapMovement("down");
-        assertEquals("person is unable to move down towards a wall",
-                mapManager.person.getPosition(), 0);
+        assertEquals("person is unable to move down towards a wall", 0,
+                mapManager.person.getPosition());
     }
 
     @Test
@@ -132,8 +132,8 @@ public class MovementControllerTest {
 
         mc.setMapManager(mapManager);
         mc.processTapMovement("right");
-        assertEquals("box should be pushed",
-                mapManager.getBoxList().get(0).getPosition(), 2);
+        assertEquals("box should be pushed", 2,
+                mapManager.getBoxList().get(0).getPosition());
     }
 
     @Test
@@ -148,8 +148,8 @@ public class MovementControllerTest {
 
         mc.setMapManager(mapManager);
         mc.processTapMovement("right");
-        assertEquals("box should be pushed",
-                mapManager.getBoxList().get(0).getPosition(), 2);
+        assertEquals("box should be pushed", 2,
+                mapManager.getBoxList().get(0).getPosition());
     }
 
     @Test
@@ -164,8 +164,8 @@ public class MovementControllerTest {
 
         mc.setMapManager(mapManager);
         mc.processTapMovement("right");
-        assertEquals("box shouldn't be pushed",
-                mapManager.getBoxList().get(0).getPosition(), 1);
+        assertEquals("box shouldn't be pushed", 1,
+                mapManager.getBoxList().get(0).getPosition());
     }
 
     @Test
@@ -182,9 +182,9 @@ public class MovementControllerTest {
 
         mc.setMapManager(mapManager);
         mc.processTapMovement("right");
-        assertEquals("first box shouldn't be pushed",
-                mapManager.getBoxList().get(0).getPosition(), 1);
-        assertEquals("second box shouldn't be pushed",
-                mapManager.getBoxList().get(1).getPosition(), 2);
+        assertEquals("first box shouldn't be pushed", 1,
+                mapManager.getBoxList().get(0).getPosition());
+        assertEquals("second box shouldn't be pushed", 2,
+                mapManager.getBoxList().get(1).getPosition());
     }
 }

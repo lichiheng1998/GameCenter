@@ -52,8 +52,8 @@ public class LevelFactoryTest {
 
     @Test
     public void testBoxArrayList(){
-        assertEquals("wrong box for level 1",
-                ((ArrayList<Box>)result.get("boxArrayList")).get(0).getPosition(), 7);
+        assertEquals("wrong box for level 1", 7,
+                ((ArrayList<Box>)result.get("boxArrayList")).get(0).getPosition());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class LevelFactoryTest {
 
     @Test
     public void testDimensions(){
-        assertEquals("wrong height", map.NUM_ROW, 3);
-        assertEquals("wrong width", map.NUM_COL, 5);
+        assertEquals("wrong height", 3, map.NUM_ROW);
+        assertEquals("wrong width", 5, map.NUM_COL);
     }
 }

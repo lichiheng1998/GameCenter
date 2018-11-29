@@ -48,9 +48,8 @@ public class MapManagerTest {
         MapManager mapManager = new MapManager(0, 3, levelInfo);
         assertTrue("wrong person created",
                 mapManager.person.equals(new Person(7)));
-        assertEquals("wrong level", mapManager.getLevel(), 0);
-        assertEquals("wrong number of columns", mapManager.getNumCol(),
-                6);
+        assertEquals("wrong level", 0, mapManager.getLevel());
+        assertEquals("wrong number of columns", 6, mapManager.getNumCol());
     }
 
     @Test
@@ -84,7 +83,7 @@ public class MapManagerTest {
         assertTrue("the person should have pushed the box",
                 mapManager.isBoxesMoved);
         assertEquals("the person didn't move or moved to wrong" +
-                        "place", mapManager.person.getPosition(), 8);
+                        "place", 8, mapManager.person.getPosition());
     }
 
     @Test
@@ -95,7 +94,7 @@ public class MapManagerTest {
         assertTrue("the box isn't pushed",
                 !mapManager.isBoxesMoved);
         assertEquals("the person didn't move or moved to wrong" +
-                "place", mapManager.person.getPosition(), 7);
+                "place", 7, mapManager.person.getPosition());
     }
 
     @Test
@@ -104,7 +103,7 @@ public class MapManagerTest {
         mapManager.processPersonMovement(1);
         mapManager.processPersonMovement(1);
         assertEquals("box should show that it is on a destination",
-                mapManager.getBoxList().get(0).getImage(), R.drawable.winbox);
+                R.drawable.winbox, mapManager.getBoxList().get(0).getImage());
     }
 
     @Test
@@ -128,17 +127,17 @@ public class MapManagerTest {
         mapManager.pushLastStep(1,9);
         mapManager.pushLastStep(1,10);
         mapManager.canProcessUndo(1);
-        assertEquals("failed to undo 1 step",
-                mapManager.person.getPosition(), 8);
-        assertEquals("box didn't undo with person",
-                mapManager.getBoxList().get(0).getPosition(), 9);
+        assertEquals("failed to undo 1 step", 8,
+                mapManager.person.getPosition());
+        assertEquals("box didn't undo with person", 9,
+                mapManager.getBoxList().get(0).getPosition());
         mapManager.processPersonMovement(1);
         mapManager.pushLastStep(1,10);
         mapManager.canProcessUndo(2);
-        assertEquals("undo 2 steps failed",
-                mapManager.person.getPosition(), 7);
-        assertEquals("box didn't undo with person",
-                mapManager.getBoxList().get(0).getPosition(), 8);
+        assertEquals("undo 2 steps failed", 7,
+                mapManager.person.getPosition());
+        assertEquals("box didn't undo with person", 8,
+                mapManager.getBoxList().get(0).getPosition());
     }
 
 
@@ -146,8 +145,8 @@ public class MapManagerTest {
     public void testGetTotalUndoTimes() {
         MapManager mapManager = new MapManager(0,3,levelInfo);
         mapManager.processPersonMovement(1);
-        assertEquals("Total undo times should never change",
-                mapManager.getTotalUndoTimes(), 3);
+        assertEquals("Total undo times should never change", 3,
+                mapManager.getTotalUndoTimes());
     }
 
     @Test
@@ -156,8 +155,8 @@ public class MapManagerTest {
         Integer[] tileBg = mapManager.getTilesBg();
         for (int i = 0; i < 18; i++){
             Integer bg = bgElements.get(i).getBackground();
-            assertEquals("Background on position " + i + "is incorrect",
-                    tileBg[i], bg);
+            assertEquals("Background on position " + i + "is incorrect", bg,
+                    tileBg[i]);
         }
     }
 

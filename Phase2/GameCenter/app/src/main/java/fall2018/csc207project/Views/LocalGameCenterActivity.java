@@ -26,7 +26,6 @@ import java.util.List;
 
 import fall2018.csc207project.Controllers.BasePresenter;
 import fall2018.csc207project.Controllers.GameCenterListViewAdapter;
-import fall2018.csc207project.Controllers.GameListActivity;
 import fall2018.csc207project.Controllers.NavPresenter;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.GlobalConfig;

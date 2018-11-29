@@ -42,7 +42,7 @@ public class GameListViewAdapter extends BaseAdapter{
      * @param userGames a List of user's added games
      * @param listener a new button picture represent the added game
      */
-    GameListViewAdapter(Context context, String[] globalList, List<String> userGames,
+    public GameListViewAdapter(Context context, String[] globalList, List<String> userGames,
                         CompoundButton.OnCheckedChangeListener listener){
         this.context = context;
         this.globalList = globalList;
