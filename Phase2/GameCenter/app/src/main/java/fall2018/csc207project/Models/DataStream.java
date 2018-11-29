@@ -2,17 +2,15 @@ package fall2018.csc207project.Models;
 
 import android.content.Context;
 import android.util.Log;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-@SuppressWarnings("unchecked")
 /**
  * The class that loads the data from internal storage into the memory.
  */
+@SuppressWarnings("unchecked")
 public class DataStream implements GlobalDataStream{
 
     private Object loadGlobalData(String path, Context context){
@@ -40,8 +38,6 @@ public class DataStream implements GlobalDataStream{
                     Context.MODE_PRIVATE));
             out.writeObject(data);
             out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

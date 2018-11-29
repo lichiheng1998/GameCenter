@@ -48,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Score:"
-        app:layout_constraintStart_toStartOf="@+id/scoreBoardUser"
-        app:layout_constraintTop_toBottomOf="@+id/scoreBoardUser" />
+        app:layout_constraintStart_toStartOf="@+id/memoScoreBoardUser"
+        app:layout_constraintTop_toBottomOf="@+id/memoScoreBoardUser" />
 
     <TextView
         android:id="@+id/score"
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/scoreBoardScoer"
-        app:layout_constraintEnd_toEndOf="@+id/scoreBoardUser"
+        app:layout_constraintEnd_toEndOf="@+id/memoScoreBoardUser"
         app:layout_constraintTop_toTopOf="@+id/scoreBoardScoer" />
 
 </android.support.constraint.ConstraintLayout>

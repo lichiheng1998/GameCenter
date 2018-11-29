@@ -1,8 +1,10 @@
 package fall2018.csc207project.Memorization.Models;
 
-
 import fall2018.csc207project.Models.ScoreCalculator;
 
+/**
+ * the class MemoGameCalculator that implements ScoreCalculator<MemoScore>
+ */
 public class MemoGameCalculator implements ScoreCalculator<MemoScore> {
 
     @Override

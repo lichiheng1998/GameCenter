@@ -1,30 +1,26 @@
-package fall2018.csc207project.PushTheBox.Controllers;
+package fall2018.csc207project.PushTheBox.View;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import fall2018.csc207project.Views.ManageSaveActivity;
-import fall2018.csc207project.PushTheBox.View.LevelActivity;
 import fall2018.csc207project.R;
 
-// excluded from tests because it's a view class
+/**
+ * The class BoxStartingActivity that extends AppCompatActivity.
+ * Excluded from tests because it's a view class.
+ */
 public class BoxStartingActivity extends AppCompatActivity {
-    private String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
-        this.currentUser = sharedData.getString("currentUser", null);
-
         setContentView(R.layout.box_starting);
         addNewGameButtonListener();
         addLoadButtonListener();
-        //addScoreButtonListener();
+        addScoreButtonListener();
     }
 
     /**
@@ -48,7 +44,8 @@ public class BoxStartingActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent tmp = new Intent(BoxStartingActivity.this, ManageSaveActivity.class);
+                Intent tmp = new Intent(BoxStartingActivity.this,
+                        ManageSaveActivity.class);
                 startActivity(tmp);
             }
         });
@@ -58,8 +55,14 @@ public class BoxStartingActivity extends AppCompatActivity {
      * Activate the myScore button.
      */
     private void addScoreButtonListener(){
-        Button myScoreButton = findViewById(R.id.boxScoreboard);
-        //TODO
+        Button scoreButton = findViewById(R.id.boxScoreboard);
+        scoreButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent tmp = new Intent(BoxStartingActivity.this,
+                        BoxScoreBoardActivity.class);
+                startActivity(tmp);
+            }
+        });
     }
 
     /**

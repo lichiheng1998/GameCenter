@@ -1,13 +1,15 @@
 package fall2018.csc207project.Memorization.Models;
 
 import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * The class MemoManager implements Iterable<MemoTile>, Serializable
+ */
 public class MemoManager implements Iterable<MemoTile>, Serializable{
 
     /**
@@ -91,10 +93,6 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
         return sequenceOrder;
     }
 
-    /**
-     * iterator of MemoTile
-     * @return MemoTile iterator
-     */
     @NonNull
     @Override
     public Iterator<MemoTile> iterator() {
@@ -162,14 +160,5 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
      */
     public int getScoreTotal() {
         return scoreTotal;
-    }
-
-    /**
-     * Get the current height for this MemoManager.
-     *
-     * @return the current height for this MemoManager
-     */
-    public int getHeightDifficulty() {
-        return height;
     }
 }

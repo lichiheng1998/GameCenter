@@ -2,8 +2,9 @@ package fall2018.csc207project.Memorization.Models;
 
 import java.io.Serializable;
 
-import fall2018.csc207project.R;
-
+/**
+ * The class MemoTile that implements Serializable.
+ */
 public class MemoTile implements Serializable{
     /**
      * unique id of a MemoTile

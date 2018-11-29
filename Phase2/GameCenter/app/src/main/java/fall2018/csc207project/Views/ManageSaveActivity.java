@@ -17,34 +17,34 @@ import fall2018.csc207project.R;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.GlobalConfig;
 import fall2018.csc207project.Models.SaveManager;
-
 /**
  * The activity that represents the page for managing saves.
  */
 @SuppressWarnings("unchecked")
 public class ManageSaveActivity extends AppCompatActivity implements ManageSaveView{
     private ManageSavePresenter presenter;
-    private String user;
-    private String game;
     /**
      * The entries of the game activities.
      */
     private Class<? extends Activity> entry;
+
     /**
      * The load and save button on the layout.
      */
     int[] saveIds = {R.id.save1, R.id.save2, R.id.save3};
     int[] fields = {R.id.field1, R.id.field2, R.id.field3, R.id.fieldAuto};
     int[] loadIds = {R.id.load1, R.id.load2, R.id.load3, R.id.loadAuto};
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.save_manage);
         SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
-        user = shared.getString("currentUser", null);
-        game = shared.getString("currentGame", null);
+        String user = shared.getString("currentUser", null);
+        String game = shared.getString("currentGame", null);
         SaveManager saveManager = DatabaseUtil.getSaveManager(user, game);
         presenter = new ManageSavePresenterImpl(this, saveManager, getApplicationContext());
-        entry = (Class<? extends Activity>)GlobalConfig.GAMEMAP.get(game);
+        entry = (Class<? extends Activity>)GlobalConfig.GAME_MAP.get(game);
         setupSaveButtons();
         setupLoadButtons();
         presenter.initView();
@@ -64,6 +64,7 @@ public class ManageSaveActivity extends AppCompatActivity implements ManageSaveV
             });
         }
     }
+
     /**
      * Setup the load button.
      */

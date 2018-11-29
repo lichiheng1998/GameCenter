@@ -2,7 +2,6 @@ package fall2018.csc207project.PushTheBox.Models;
 
 import java.io.Serializable;
 import java.util.Observable;
-
 import fall2018.csc207project.R;
 
 /**

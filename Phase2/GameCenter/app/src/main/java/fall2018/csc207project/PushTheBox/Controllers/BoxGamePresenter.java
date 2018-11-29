@@ -2,15 +2,19 @@ package fall2018.csc207project.PushTheBox.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import java.util.Observable;
-
+import fall2018.csc207project.Models.ScoreManager;
+import fall2018.csc207project.PushTheBox.Models.BoxGameCalculator;
+import fall2018.csc207project.PushTheBox.Models.BoxScore;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.PushTheBox.View.MapView;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.SaveManager;
 import fall2018.csc207project.Models.SaveSlot;
 
+/**
+ * The class BoxGamePresenter that implements GamePresenter
+ */
 public class BoxGamePresenter implements GamePresenter {
     /**
      * The map manager.
@@ -35,7 +39,7 @@ public class BoxGamePresenter implements GamePresenter {
     /**
      * The controller which controls the movements of person and boxes.
      */
-    MovementController movementController;
+    private MovementController movementController;
 
     /**
      * The save slot of the current user.
@@ -44,17 +48,26 @@ public class BoxGamePresenter implements GamePresenter {
 
     /**
      * A new box game presenter.
-     * @param view
-     * @param context
+     *
+     * @param view the view of this game
+     * @param context the context of this app
      */
     public BoxGamePresenter(MapView view, Context context){
         this.view = view;
+        setUpSaveManager(context);
+        movementController = new MovementController();
+    }
+
+    /**
+     * Set up save manager to save game.
+     * @param context context
+     */
+    private void setUpSaveManager(Context context){
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
         String currentGame = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
         saveSlot = saveManager.readFromFile(context);
-        movementController = new MovementController();
     }
 
     /**
@@ -72,7 +85,9 @@ public class BoxGamePresenter implements GamePresenter {
      * @param direction direction chosen
      */
     public void arrowButtonClicked(Context context, String direction){
-        if (movementController.processTapMovement(context, direction)){
+        if (!movementController.processTapMovement(direction)){
+            view.makeInvalidMovementText();
+        }else if(mapManager.boxSolved()){
             view.levelComplete();
         }
         saveSlot.saveToAutoSave(mapManager);
@@ -96,13 +111,27 @@ public class BoxGamePresenter implements GamePresenter {
         view.showNumberPicker();
     }
 
+    @Override
+    public void saveScores(Context context) {
+        if (mapManager.boxSolved()){
+            BoxGameCalculator calculator = new BoxGameCalculator();
+            ScoreManager<BoxScore> scoreManager
+                    = DatabaseUtil.getScoreManager("PushBox",currentUser,calculator);
+            BoxScore boxScore = new BoxScore(mapManager.getLevel(),
+                    mapManager.getTotalUndoTimes(), mapManager.getTotalMoveSteps());
+            scoreManager.saveScore(boxScore, context);
+        }
+    }
+
     /**
      * Updates notified to observer. Calls the View to update the map.
-     * @param o
-     * @param arg
+     *
+     * @param o updates to the Observable
+     * @param arg the Object to be update
      */
     @Override
     public void update(Observable o, Object arg) {
         view.updateMap(mapManager);
     }
+
 }

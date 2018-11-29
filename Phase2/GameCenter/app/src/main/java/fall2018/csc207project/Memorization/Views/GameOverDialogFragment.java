@@ -14,9 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.io.Serializable;
 
-import fall2018.csc207project.Memorization.Controllers.MemoStartingActivity;
 import fall2018.csc207project.Memorization.Models.MemoManager;
-import fall2018.csc207project.PushTheBox.Controllers.BoxStartingActivity;
 import fall2018.csc207project.R;
 
 /**
@@ -38,8 +36,15 @@ public class GameOverDialogFragment extends DialogFragment {
      * text view for displaying score
      */
     private TextView scoreField;
+
+    /**
+     * A GameOverDialogListener show on screen when game is over.
+     */
     GameOverDialogListener listener;
 
+    /**
+     * A dialog that will show on screen when game is over.
+     */
     public interface GameOverDialogListener {
         void onRefresh();
     }
@@ -80,6 +85,15 @@ public class GameOverDialogFragment extends DialogFragment {
         setupScore(getArguments().getInt("score"));
     }
 
+    /**
+     * Create a new GameOverDialogFragment
+     * be given an int and a MemoManager.
+     *
+     * @param score the score for the current user
+     * @param manager the MemoManager to manage MemoGame
+     *
+     * @return a new GameOverDialogFragment be given an int and a MemoManager
+     */
     public static GameOverDialogFragment newInstance(int score, MemoManager manager) {
         GameOverDialogFragment frag = new GameOverDialogFragment();
         Bundle args = new Bundle();
@@ -90,6 +104,11 @@ public class GameOverDialogFragment extends DialogFragment {
         return frag;
     }
 
+    /**
+     * Set up the restart button by given a final Serializable manager.
+     *
+     * @param manager a Serializable manager
+     */
     private void setupRestartButtonListener(final Serializable manager){
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +121,9 @@ public class GameOverDialogFragment extends DialogFragment {
         });
     }
 
+    /**
+     * Set up the Quit button for quiting the game.
+     */
     private void setupQuitButtonListener(){
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +133,11 @@ public class GameOverDialogFragment extends DialogFragment {
         });
     }
 
+    /**
+     * Set up the current user's score by given an int.
+     *
+     * @param score the current user's score
+     */
     private void setupScore(int score){
         scoreField.setText(String.valueOf(score));
     }

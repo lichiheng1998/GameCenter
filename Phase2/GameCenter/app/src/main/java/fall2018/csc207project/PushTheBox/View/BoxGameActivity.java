@@ -1,5 +1,6 @@
 package fall2018.csc207project.PushTheBox.View;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import fall2018.csc207project.PushTheBox.Controllers.BoxGamePresenter;
 import fall2018.csc207project.PushTheBox.Controllers.GamePresenter;
 import fall2018.csc207project.PushTheBox.Controllers.MapAdapter;
+import fall2018.csc207project.PushTheBox.Models.LevelFactory;
 import fall2018.csc207project.PushTheBox.Models.MapManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
@@ -25,8 +27,14 @@ import fall2018.csc207project.SlidingTile.Views.NumberPickerDialog;
  */
 public class BoxGameActivity extends AppCompatActivity implements MapView{
 
+    /**
+     * The column's dimension.
+     */
     private static int columnDim;
 
+    /**
+     * EditText for the undo.
+     */
     private EditText undoText;
 
     /**
@@ -83,7 +91,8 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         }else {
             level = (int) getIntent().getSerializableExtra("level");
             totalUndoTimes = (int) getIntent().getSerializableExtra("undoStep");
-            mapManager = new MapManager(level, totalUndoTimes, getApplicationContext());
+            LevelFactory levelFactory = new LevelFactory(getApplicationContext());
+            mapManager = new MapManager(level, totalUndoTimes, levelFactory.getGameElements(level));
         }
         setupGridView(mapManager);
     }
@@ -150,19 +159,22 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         });
     }
 
-    /**
-     * Display that a game has No Undo Times Left.
-     */
+    @Override
     public void makeToastNoUndoTimesLeftText() {
         Toast.makeText(this, "No times or undo out of limit!", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Show the number picker dialog.
-     */
+    @Override
+    public void makeInvalidMovementText() {
+        Toast.makeText(this, "Invalid Movement", Toast.LENGTH_SHORT).show();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
     public void showNumberPicker(){
         NumberPickerDialog newFragment = new NumberPickerDialog();
         newFragment.setValueChangeListener(new NumberPicker.OnValueChangeListener(){
+            @SuppressLint("SetTextI18n")
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
                 undoText.setText(Integer.toString(numberPicker.getValue()));
@@ -171,35 +183,26 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         newFragment.show(getSupportFragmentManager(), "time picker");
     }
 
-    /**
-     * Display the map on the grid view.
-     */
     @Override
     public void display() {
         gridView.setAdapter(mapAdapter);
     }
 
-    /**
-     * Update the map with information taken from mapManager.
-     * @param mapManager the mapManager with updated info
-     */
     @Override
     public void updateMap(MapManager mapManager) {
-        mapAdapter.setPerson(mapManager.getPersonPosToImage());
-        mapAdapter.setBoxesList(mapManager.getBoxPosToImage());
+        mapAdapter.setPerson(mapManager.person);
+        mapAdapter.setBoxesList(mapManager.getBoxList());
         display();
     }
 
-    /**
-     * Display the alert dialog when level is completed.
-     */
     @Override
     public void levelComplete() {
         AlertDialog.Builder completeBuilder = new AlertDialog.Builder(this);
+        @SuppressLint("InflateParams")
         View completeView = getLayoutInflater().inflate(R.layout.box_complete_popup, null);
         TextView levelText = completeView.findViewById(R.id.indicateLevel);
-        String levelDiplay = "Level " + String.valueOf(level);
-        levelText.setText(levelDiplay);
+        String levelDisplay = "Level " + String.valueOf(level);
+        levelText.setText(levelDisplay);
         createMenuButton(completeView);
         createReplayButton(completeView);
         createNextButton(completeView);
@@ -207,6 +210,7 @@ public class BoxGameActivity extends AppCompatActivity implements MapView{
         dialog = completeBuilder.create();
         dialog.setCancelable(false);
         dialog.show();
+        presenter.saveScores(this);
     }
 
     /**

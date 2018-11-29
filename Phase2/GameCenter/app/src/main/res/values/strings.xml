@@ -13,4 +13,22 @@
     <string name="clear">Reset Background</string>
     <string name="logout">Log out</string>
     <string name="avatar">Avatar</string>
+    <string-array name = "numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
+    <string name="accept">accept</string>
+    <string name="empty">empty</string>
+    <string name="playerscore1">playerscore1</string>
+    <string name="playerscore2">playerscore2</string>
+    <string name="playerscore3">playerscore3</string>
+    <string name="_3">3</string>
+    <string name="hard_mode">hard_mode</string>
 </resources>

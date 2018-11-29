@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import fall2018.csc207project.Controllers.UserPresenter;
 import fall2018.csc207project.Controllers.UserPresenterImpl;
 import fall2018.csc207project.Models.DatabaseUtil;
@@ -17,11 +16,11 @@ import fall2018.csc207project.Models.UserManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Views.LocalGameCenterActivity;
 import fall2018.csc207project.Views.SignUpView;
-
 public class SignUpActivity extends AppCompatActivity implements SignUpView{
 
     private UserPresenter presenter;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
@@ -56,8 +55,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView{
                 EditText Password = findViewById(R.id.signup_password);
                 String userName = User.getText().toString();
                 String password = Password.getText().toString();
-                presenter.signUpUser(userName, password, getApplicationContext());
-            }
+                presenter.signUpUser(userName, password, getApplicationContext()); }
         });
     }
 

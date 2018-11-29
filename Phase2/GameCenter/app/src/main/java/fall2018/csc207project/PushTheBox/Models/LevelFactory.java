@@ -15,14 +15,11 @@ import java.util.Map;
 
 public class LevelFactory implements Serializable {
 
-    /**
-     * The hash map that maps all the information of the game to its corresponding level
-     */
-    private Map<Integer, Integer[][]> allLevels = new HashMap<>();
-
     private Context context;
 
     private HashMap<String, Object> gameElements = new HashMap<>();
+
+    private BufferedReader reader;
 
     /**
      * Create a new LevelFactory to initialize a game.
@@ -46,11 +43,11 @@ public class LevelFactory implements Serializable {
         for(int i = 0; i < height * width; i++){
             if (i % width == 0 | i % width == (width - 1) | i < width | i >= ((height * width) - width)
                     | Arrays.asList(tmp[2]).contains(i)){
-                bgElements.add(new BgTile(BgTile.WALLTYPE));
+                bgElements.add(new BgTile("Wall"));
             } else if(Arrays.asList(tmp[4]).contains(i)){
-                bgElements.add(new BgTile(BgTile.DESTTYPE));
+                bgElements.add(new BgTile("Destination"));
             }else{
-                bgElements.add(new BgTile(BgTile.FLOORTYPE));
+                bgElements.add(new BgTile("Floor"));
             } if (Arrays.asList(tmp[3]).contains(i)){
                 Box tmpBox = new Box(i);
                 boxArrayList.add(tmpBox);
@@ -58,12 +55,11 @@ public class LevelFactory implements Serializable {
                     tmpBox.arriveDestination();
                 }
             }else if (Arrays.asList(tmp[5]).contains(i)){
-                   gameElements.put("Person", new Person(i));
+                gameElements.put("Person", new Person(i));
             }
         }
         gameElements.put("map", new GameMap(width, height, bgElements));
         gameElements.put("boxArrayList", boxArrayList);
-        gameElements.put("bgElements", bgElements);
         return gameElements;
     }
 
@@ -72,26 +68,35 @@ public class LevelFactory implements Serializable {
      * Initialize the hash map which stores all the elements for each level of game.
      * */
     private Integer[][] getInfoFromFile(int level) {
-        Integer[][] levelInfo = new Integer[6][];;
+        Integer[][] levelInfo = new Integer[6][];
         AssetManager assetManager = context.getAssets();
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    assetManager.open("box_levels.txt")));
-            String nextLine = reader.readLine();
-            int countLevel = 0;
-            while ((nextLine = reader.readLine()) != null && countLevel != level) {
-                countLevel++;
-                if (countLevel == level) {
-                    String[] nextLevel = nextLine.split("-");
-                    for (int i = 0; i < nextLevel.length; i++) {
-                        levelInfo[i] = strArrToIntArr(nextLevel[i].split(","));
-                    }
+        String nextLine = readLine(assetManager);
+        int countLevel = 0;
+        while ((nextLine = readLine(assetManager)) != null && countLevel != level) {
+            countLevel++;
+            if (countLevel == level) {
+                String[] nextLevel = nextLine.split("-");
+                for (int i = 0; i < nextLevel.length; i++) {
+                    levelInfo[i] = strArrToIntArr(nextLevel[i].split(","));
                 }
             }
+        }
+        return levelInfo;
+    }
+
+
+    public String readLine(AssetManager assetManager){
+        String result = "";
+        try {
+            if (reader == null) {
+                reader = new BufferedReader(new InputStreamReader(
+                        assetManager.open("box_levels.txt")));
+            }
+            result = reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return levelInfo;
+        return result;
     }
 
     /**

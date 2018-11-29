@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import fall2018.csc207project.Controllers.UserPresenter;
 import fall2018.csc207project.Controllers.UserPresenterImpl;
 import fall2018.csc207project.Models.DatabaseUtil;
@@ -17,7 +16,7 @@ import fall2018.csc207project.R;
 public class SignInActivity extends AppCompatActivity implements LoginView{
 
     private UserPresenter presenter;
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         UserManager userManager = DatabaseUtil.getUserManager();

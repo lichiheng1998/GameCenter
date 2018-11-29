@@ -2,22 +2,25 @@ package fall2018.csc207project.PushTheBox.Models;
 
 import fall2018.csc207project.Models.Score;
 
-// Excluded from tests because it's a model class
+
+/**
+ * The BoxScore that extends Score.
+ */
 public class BoxScore extends Score{
 
     /**
-     * level of current game
+     * level of current game.
      */
     public int level;
 
     /**
-     * number of undoSteps of the specific game for a specific player in a specific complexity
+     * number of undoSteps of the specific game for a specific player in a specific complexity.
      */
     public int undoSteps;
 
     /**
      * number of moveSteps executed for the specific game
-     * for a specific player in a specific complexity
+     * for a specific player in a specific complexity.
      */
     public int moveSteps;
 
@@ -33,5 +36,6 @@ public class BoxScore extends Score{
         this.level = level;
         this.undoSteps = undoSteps;
         this.moveSteps = moveSteps;
+        this.game = "PushBox";
     }
 }

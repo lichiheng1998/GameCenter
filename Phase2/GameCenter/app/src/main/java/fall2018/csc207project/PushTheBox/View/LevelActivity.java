@@ -1,5 +1,6 @@
 package fall2018.csc207project.PushTheBox.View;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import fall2018.csc207project.PushTheBox.Controllers.LevelAdapter;
 import fall2018.csc207project.PushTheBox.Controllers.LevelPresenter;
 import fall2018.csc207project.R;
 
-// excluded from tests because it's a view class
+/**
+ * The class LevelActivity that extends AppCompatActivity and implements LevelView.
+ * Excluded from tests because it's a view class.
+ */
 public class LevelActivity extends AppCompatActivity implements LevelView {
 
     /**
@@ -39,9 +41,10 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
      */
     private LevelPresenter presenter;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        this.presenter = new LevelPresenter(this, getApplicationContext());
+        this.presenter = new LevelPresenter(this);
         undoStep = 3;
         setContentView(R.layout.box_levels);
         gridView = findViewById(R.id.boxLevelGrid);
@@ -53,6 +56,7 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
     /**
      * Create all the buttons with numbers indicating levels.
      */
+    @SuppressLint("SetTextI18n")
     public void createLevelButtons(){
         int buttonColor = android.graphics.Color.argb(255, 168, 193,164);
         for (int i = 0; i < 9; i++){
@@ -89,23 +93,19 @@ public class LevelActivity extends AppCompatActivity implements LevelView {
     }
 
     /**
-     * Switch to game with given level
+     * Switch to game with given level.
+     *
      * @param level level of game to start
      */
     private void switchToGame(int level) {
         Intent tmp = new Intent(this, BoxGameActivity.class);
         tmp.putExtra("undoStep",undoStep);
         tmp.putExtra("level",level);
-        presenter.undoStepsSetted(undoStep);
+        presenter.setUndoSteps(undoStep);
         startActivity(tmp);
         finish();
     }
 
-
-    /**
-     * make Toast text on screen displaying given text
-     * @param text text to display
-     */
     @Override
     public void makeToastText(String text){
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();

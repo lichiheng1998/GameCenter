@@ -9,9 +9,11 @@ import fall2018.csc207project.R;
  * Excluded from tests because it's a model class
  */
 public class BgTile implements Serializable {
-    public static final String WALLTYPE =  "Wall";
-    public static final String FLOORTYPE =  "Floor";
-    public static final String DESTTYPE =  "Destination";
+    /**
+     * The strings which should be given to constructor to verify the type of bgTile.
+     */
+    private static final String WALL_TYPE =  "Wall";
+    private static final String FLOOR_TYPE =  "Floor";
 
     /**
      * The image id of this bgTile.
@@ -26,35 +28,46 @@ public class BgTile implements Serializable {
     /**
      * Whether if this tile is a wall.
      */
-    private final boolean STANDABLE;
+    private final boolean STAND_ABLE;
 
+    /**
+     * Construct a new BgTile by given a String.
+     *
+     * @param bgType the String tells the bg's type
+     */
     public BgTile(String bgType){
-        if(bgType.equals(WALLTYPE)){
-            BACKGROUND = R.drawable.wall;
-            WINNABLE = false;
-            STANDABLE = false;
-        }else if (bgType.equals(FLOORTYPE)){
-            BACKGROUND = R.drawable.floor;
-            WINNABLE = false;
-            STANDABLE = true;
-        }else{
-            BACKGROUND = R.drawable.destination;
-            WINNABLE = true;
-            STANDABLE = true;
+        switch (bgType) {
+            case WALL_TYPE:
+                BACKGROUND = R.drawable.wall;
+                WINNABLE = false;
+                STAND_ABLE = false;
+                break;
+            case FLOOR_TYPE:
+                BACKGROUND = R.drawable.floor;
+                WINNABLE = false;
+                STAND_ABLE = true;
+                break;
+            default:
+                BACKGROUND = R.drawable.destination;
+                WINNABLE = true;
+                STAND_ABLE = true;
+                break;
         }
     }
 
     /**
      * Return whether if the person or the boxes can stand on this tile.
-     * @return whether if this tile is standable
+     *
+     * @return whether if this tile that can be stand
      */
-    public boolean isStandable(){
-        return STANDABLE;
+    public boolean canBeStand(){
+        return STAND_ABLE;
     }
 
     /**
      * Return whether if this tile is a destination point of a box.
-     * @return whether if this tile is a destinaiton point
+     *
+     * @return whether if this tile is a destination point
      */
     public boolean isWinnable(){
         return WINNABLE;
@@ -62,6 +75,7 @@ public class BgTile implements Serializable {
 
     /**
      * Return the background image id of this tile.
+     *
      * @return the background image id
      */
     public int getBackground(){

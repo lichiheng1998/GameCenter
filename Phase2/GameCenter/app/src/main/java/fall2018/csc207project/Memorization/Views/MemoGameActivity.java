@@ -1,5 +1,6 @@
 package fall2018.csc207project.Memorization.Views;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,11 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import fall2018.csc207project.Memorization.Controllers.GamePresenter;
 import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
-import fall2018.csc207project.Memorization.Views.MemoGameView;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 
@@ -32,7 +31,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     /**
      * Represent the board view of the game.
      */
-    private GridView boardview;
+    private GridView boardView;
     /**
      * List of buttons on the board.
      */
@@ -46,8 +45,10 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
      */
     private int columnWidth;
     private int columnHeight;
-    private boolean isActive;
 
+    /**
+     * The TextView that show on screen.
+     */
     private TextView score, life, status;
 
     @Override
@@ -57,8 +58,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         score = findViewById(R.id.Score);
         life = findViewById(R.id.life);
         status = findViewById(R.id.status);
-        presenter = new MemoGamePresenter(this);
-        isActive = true;
+        presenter = new MemoGamePresenter(this, getApplicationContext());
         MemoManager memoManager = (MemoManager) getIntent().getSerializableExtra("save");
         presenter.setMemoManager(memoManager);
         setupButtons(memoManager.getSize());
@@ -81,7 +81,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
             button.setTextSize(40);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    presenter.onTapOnTile((int)button.getTag());
+                    presenter.onTapOnTile(getApplicationContext(), (int)button.getTag());
                 }
             });
             setButtonColor(button, android.R.color.white);
@@ -94,30 +94,30 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
      * @param memoManager the memoManager used to initialize the grid view.
      */
     private void setupGridView(final MemoManager memoManager) {
-        boardview = findViewById(R.id.mapGrid);
-        boardview.setNumColumns(memoManager.width);
-        boardview.getViewTreeObserver().addOnGlobalLayoutListener(
+        boardView = findViewById(R.id.mapGrid);
+        boardView.setNumColumns(memoManager.width);
+        boardView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @Override
                     public void onGlobalLayout() {
-                        boardview.getViewTreeObserver().removeOnGlobalLayoutListener(
+                        boardView.getViewTreeObserver().removeOnGlobalLayoutListener(
                                 this);
-                        int displayWidth = boardview.getMeasuredWidth();
-                        int displayHeight = boardview.getMeasuredHeight();
+                        int displayWidth = boardView.getMeasuredWidth();
+                        int displayHeight = boardView.getMeasuredHeight();
 
                         columnWidth = displayWidth / memoManager.width;
                         columnHeight = displayHeight / memoManager.height;
-                        boardview.setAdapter(new CustomAdapter(memoButtons, columnWidth, columnHeight));
+                        boardView.setAdapter(new CustomAdapter(memoButtons, columnWidth, columnHeight));
                     }
                 });
     }
 
     /**
-     * Flash the button to red and unflash it after the given delay.
+     * Flash the button to red and un-flash it after the given delay.
      * @param pos the position of the button to flash.
      * @param delay the time of the delay.
      */
-    private void unflashButton(final int pos, int delay){
+    private void unFlashButton(final int pos, int delay){
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() { restoreButtonColor(pos);
@@ -126,7 +126,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     }
 
     /**
-     * Flash the button to the given color unflash it after the given delay.
+     * Flash the button to the given color un-flash it after the given delay.
      * @param pos the position of the button to flash.
      * @param delay the time of the delay.
      * @param colorId the current color.
@@ -134,7 +134,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     public void flashButtonToColor(int pos, Integer delay, int colorId){
         setButtonColor(memoButtons.get(pos), colorId);
         if (delay != null){
-            unflashButton(pos, delay);
+            unFlashButton(pos, delay);
         }
     }
 
@@ -164,13 +164,24 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         score.setText(String.valueOf(newScore));
     }
 
+    /**
+     * Updating the life by given a new amount of life in int.
+     *
+     * @param newLife the new amount of life in int
+     */
     public void updateLife(int newLife){
         life.setText(String.valueOf(newLife));
     }
 
+    /**
+     * Updating the current status.
+     *
+     * @param isActive a final boolean tells weather the Tiles are flashing or not
+     */
     public void updateStatus(final boolean isActive){
         runOnUiThread(new Runnable() {
             @Override
+            @SuppressLint("SetTextI18n")
             public void run() {
                 if(isActive){
                     status.setText("Displaying");
@@ -186,6 +197,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
 
     /**
      * Display a dialog when game is over
+     *
      * @param score score of user
      * @param manager MemoManger that holds info of the game
      */

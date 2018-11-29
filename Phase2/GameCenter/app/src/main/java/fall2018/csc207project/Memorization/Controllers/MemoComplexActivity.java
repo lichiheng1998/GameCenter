@@ -1,5 +1,6 @@
 package fall2018.csc207project.Memorization.Controllers;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,17 +9,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Views.MemoGameActivity;
 import fall2018.csc207project.R;
+
 /**
  * Class represents the memorization master activity that user can select the complexity of the board.
  */
-public class MemoComplxActivity extends AppCompatActivity {
+public class MemoComplexActivity extends AppCompatActivity {
+
+    /**
+     * The width of the game can be 3, 4 or 5
+     */
     private int width;
+
+    /**
+     * The height of the game can be 4 or 5
+     */
     private int height;
-    private boolean level=false;
+
+    /**
+     * The level of the game mode which can be hard or crazy.
+     */
+    private boolean level = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,9 +90,13 @@ public class MemoComplxActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Active the hard mode Switch listener that set the game to hard or crazy mode.
+     */
     private void hardModeSwitchListener(){
         final Switch hardModeSwitch = findViewById(R.id.mode);
         hardModeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){

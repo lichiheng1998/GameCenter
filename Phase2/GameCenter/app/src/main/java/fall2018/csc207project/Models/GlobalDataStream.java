@@ -2,6 +2,9 @@ package fall2018.csc207project.Models;
 
 import android.content.Context;
 
+/**
+ * The interface GlobalDataStream for reading and writing files.
+ */
 public interface GlobalDataStream {
 
     /**
