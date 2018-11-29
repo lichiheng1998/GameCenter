@@ -10,19 +10,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import java.io.Serializable;
-
 import fall2018.csc207project.Controllers.ManageSavePresenter;
 import fall2018.csc207project.Controllers.ManageSavePresenterImpl;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.GlobalConfig;
 import fall2018.csc207project.Models.SaveManager;
+
 /**
  * The activity that represents the page for managing saves.
  */
 @SuppressWarnings("unchecked")
 public class ManageSaveActivity extends AppCompatActivity implements ManageSaveView{
+
+    /**
+     * the ManageSavePresenter interact with ManageSaveActivity
+     */
     private ManageSavePresenter presenter;
+
     /**
      * The entries of the game activities.
      */

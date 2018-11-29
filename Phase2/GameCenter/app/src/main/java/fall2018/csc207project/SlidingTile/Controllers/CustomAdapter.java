@@ -1,32 +1,39 @@
 package fall2018.csc207project.SlidingTile.Controllers;
 
-/*
-Taken from:
-https://github.com/DaveNOTDavid/sample-puzzle/blob/master/app/src/main/java/com/davenotdavid/samplepuzzle/CustomAdapter.java
-
-This Class is an overwrite of the Base Adapter class
-It is designed to aid setting the button sizes and positions in the GridView
- */
-
-
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The CustomAdapter that maps the buttons to the customized grid view.
+ * Taken from:
+ * https://github.com/DaveNOTDavid/sample-puzzle/blob/master/app/src/main/java/com/davenotdavid/samplepuzzle/CustomAdapter.java
+ *
+ * This Class is an overwrite of the Base Adapter class
+ * It is designed to aid setting the button sizes and positions in the GridView
  */
 public class CustomAdapter extends BaseAdapter {
+
+    /**
+     * The List of Buttons that will
+     * be use in the game for user to swipe.
+     */
     private List<Button> mButtons;
+
+    /**
+     * The Column's width and height.
+     */
     private int mColumnWidth, mColumnHeight;
 
+    /**
+     * Construct a new CustomAdapter by given a List<Button>, and two ints.
+     *
+     * @param buttons The List of Buttons that will
+     *                be use in the game for user to swipe
+     * @param columnWidth the Column's width
+     * @param columnHeight the Column's height
+     */
     public CustomAdapter(List<Button> buttons, int columnWidth, int columnHeight) {
         mButtons = buttons;
         mColumnWidth = columnWidth;

@@ -13,8 +13,14 @@ import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.UserManager;
 import fall2018.csc207project.R;
 
+/**
+ * The class SignInActivity that extends AppCompatActivity and implements LoginView.
+ */
 public class SignInActivity extends AppCompatActivity implements LoginView{
 
+    /**
+     * The UserPresenter that interact with SignInActivity
+     */
     private UserPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,6 @@ public class SignInActivity extends AppCompatActivity implements LoginView{
      */
     private void addLoginButtonListener() {
         Button loginButton = findViewById(R.id.signin_button);
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +62,13 @@ public class SignInActivity extends AppCompatActivity implements LoginView{
         });
     }
 
+    @Override
     public void makeLoginFailedText(){
         Toast.makeText(getApplicationContext(), "Login Failed",
                 Toast.LENGTH_SHORT).show();
     }
-    /**
-     * Switch to the LocalGameCenterActivity view for the current user that just logs in.
-     */
+
+    @Override
     public void localCenter(){
         Intent tmp = new Intent(this, LocalGameCenterActivity.class);
         startActivity(tmp);

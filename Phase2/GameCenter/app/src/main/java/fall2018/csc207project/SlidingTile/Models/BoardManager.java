@@ -16,6 +16,9 @@ public class BoardManager implements Serializable, Iterable<Tile>{
      */
     private Board board;
 
+    /**
+     *
+     */
     private Stack<Integer> stackOfMovements;
 
     private int complexity;
