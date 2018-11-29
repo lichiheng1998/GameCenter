@@ -45,19 +45,23 @@
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="80dp"
         android:text="Score:"
-        app:layout_constraintStart_toStartOf="@+id/memoScoreBoardUser"
-        app:layout_constraintTop_toBottomOf="@+id/memoScoreBoardUser" />
+        app:layout_constraintBottom_toBottomOf="@+id/score"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/score" />
 
     <TextView
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginTop="20dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/scoreBoardScoer"
-        app:layout_constraintEnd_toEndOf="@+id/memoScoreBoardUser"
-        app:layout_constraintTop_toTopOf="@+id/scoreBoardScoer" />
+        app:layout_constraintBottom_toTopOf="@+id/restart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
 </android.support.constraint.ConstraintLayout>
