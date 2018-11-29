@@ -8,8 +8,12 @@
     * Phone: 6478018499
 
 3. Nicole Xin Yue Wang
+    * Email: nicole0.0w@gmail.com
+    * Phone: 6475426661
 
-4. Zhipeng Qin
+4. Zhipeng Qin (Arthur)
+    * Email: arthurqin123@hotmail.com
+    * Phone: 4168865399
 
 5. Coco Lu
     * Email: wenjie.lu@mail.utronto.ca
