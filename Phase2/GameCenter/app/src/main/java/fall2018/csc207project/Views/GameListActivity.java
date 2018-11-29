@@ -1,4 +1,4 @@
-package fall2018.csc207project.Controllers;
+package fall2018.csc207project.Views;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+
+import fall2018.csc207project.Controllers.GameListViewAdapter;
 import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.GlobalConfig;
 import fall2018.csc207project.Models.UserManager;

@@ -45,7 +45,7 @@ public class MapAdapterTest {
         ArrayList<Box> boxes = new ArrayList<>();
         boxes.add(new Box(4));
         mapAdapter.setBoxesList(boxes);
-        assertEquals("element on positio 4 should be the box", R.drawable.box,
+        assertEquals("element on position 4 should be the box", R.drawable.box,
                 mapAdapter.getItem(4));
     }
 
