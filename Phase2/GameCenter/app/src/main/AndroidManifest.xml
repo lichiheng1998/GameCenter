@@ -19,7 +19,7 @@
         <activity android:name="fall2018.csc207project.Views.SignInActivity" />
         <activity android:name="fall2018.csc207project.Views.SignUpActivity" />
         <activity android:name="fall2018.csc207project.Views.LocalGameCenterActivity" />
-        <activity android:name="fall2018.csc207project.Controllers.GameListActivity" />
+        <activity android:name="fall2018.csc207project.Views.GameListActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.StartingActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ScoreBoardActivity" />
 
