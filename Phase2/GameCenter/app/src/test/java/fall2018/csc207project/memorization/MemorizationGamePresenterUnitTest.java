@@ -2,24 +2,20 @@ package fall2018.csc207project.Memorization;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.View;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import java.lang.reflect.*;
 import org.mockito.Mockito;
-import static org.mockito.Mockito.when;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.lang.reflect.Method;
 import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
+import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
 
 import static org.mockito.Matchers.anyInt;
@@ -40,28 +36,62 @@ public class MemorizationGamePresenterUnitTest {
 
     private MemoManager manager = new MemoManager(3, 4, false);
 
-    private List testSequence;
-
     @Before
     public void setUp(){
         Mockito.when(context.getSharedPreferences(anyString(), anyInt())).thenReturn(shared);
         Mockito.when(shared.getString("currentUser", null)).thenReturn("Admin");
         presenter = new MemoGamePresenter(view, context);
-        for(int i = 0; i < 10; i++){
-            manager.updateActiveTiles();
-        }
         presenter.setMemoManager(manager);
-        presenter.setVerifyIterator();
-        presenter.setNextToVerify();
-        testSequence = manager.getSequenceOrder();
+        presenter.startCycle();
     }
 
     @Test
-    public void MemoGamePresenterTest(){
-
+    public void VerifyItemsTest(){
         //test getVerifyItems are all active tiles
-        assertEquals(1, presenter.getVerifyItems().status);
-
+        MemoTile temp = presenter.getVerifyItems();
+        while(temp != null){
+            assertEquals(1, temp.status);
+            temp = presenter.getVerifyItems();
+        }
     }
+
+    @Test
+    public void VerifyTest() {
+        manager.updateActiveTiles();
+        presenter.setVerifyIterator();
+        MemoTile check = presenter.getVerifyItems();
+        int checkId = check.getId();
+
+        //Check if number of successTap increase when correct pos is verified
+        presenter.verify(checkId, context);
+        assertEquals(1, presenter.getSuccessTap());
+        //Check if life decrease when false pos is verified
+        presenter.verify(100, context);
+        assertEquals(2, presenter.getLife());
+
+
+//        Method method = targetClass.getDeclaredMethod(methodName, argClasses);
+//        method.setAccessible(true);
+//        return method.invoke(targetObject, argObjects);
+    }
+
+    @Test
+    public void successFailTest() throws NoSuchMethodException,
+            InvocationTargetException, IllegalAccessException {
+        Class memoPresenter = presenter.getClass();
+        Method presenterFailed = memoPresenter.getDeclaredMethod("fail",
+                int.class, Context.class);
+        Method presenterSuccess = memoPresenter.getDeclaredMethod("success",
+                int.class);
+        presenterSuccess.setAccessible(true);
+        presenterFailed.setAccessible(true);
+        //Check if success increase the count
+        presenterSuccess.invoke(presenter, 0);
+        assertEquals(1, presenter.getSuccessTap());
+        //Check if failed decrease life count
+        presenterFailed.invoke(presenter, 1, context);
+        assertEquals(2, presenter.getLife());
+    }
+
 
 }
