@@ -4,17 +4,18 @@ import android.content.Context;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fall2018.csc207project.PushTheBox.Models.BoxScore;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class BoxScoreAdapterTest {
-    private Context context  = mock(Context.class);
+    private Context context  = Mockito.mock(Context.class);
     private BoxScoreAdapter bsa;
 
     @Before

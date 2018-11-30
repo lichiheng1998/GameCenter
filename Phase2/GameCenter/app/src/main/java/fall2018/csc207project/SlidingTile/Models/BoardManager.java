@@ -54,11 +54,11 @@ public class BoardManager implements Serializable, Iterable<Tile>{
      */
     private Board shuffledBoard(int dim){
         if (dim == 3) {
-            return (new SlidingTileGameShuffler()).shuffle(dim, 81);
+            return (new SlidingTileGameShuffler()).shuffle(dim, 1);
         } else if (dim == 4) {
-            return (new SlidingTileGameShuffler()).shuffle(dim, 256);
+            return (new SlidingTileGameShuffler()).shuffle(dim, 1);
         } else {
-            return (new SlidingTileGameShuffler()).shuffle(dim, 625);
+            return (new SlidingTileGameShuffler()).shuffle(dim, 1);
         }
     }
 

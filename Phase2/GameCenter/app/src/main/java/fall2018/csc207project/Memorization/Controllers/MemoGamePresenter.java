@@ -2,15 +2,18 @@ package fall2018.csc207project.Memorization.Controllers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import java.util.Iterator;
 import java.util.Timer;
 import java.util.TimerTask;
-import fall2018.csc207project.Memorization.Models.MemoGameCalculator;
+
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoScore;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
+import fall2018.csc207project.Models.CalculatorFactory;
 import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.ScoreCalculator;
 import fall2018.csc207project.Models.ScoreManager;
 
 /**
@@ -163,6 +166,7 @@ public class MemoGamePresenter implements GamePresenter {
      *
      * @param pos the position that the user tapped
      */
+    @SuppressWarnings("unchecked")
     private void fail(int pos, Context context){
         view.flashButtonToColor(pos, flashDelay, MemoTile.WRONGCOLOR);
         life = life == 0 ? 0 : life-1;
@@ -173,7 +177,9 @@ public class MemoGamePresenter implements GamePresenter {
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
             MemoScore score = new MemoScore(memoManager.width,
                     memoManager.isLevel(), memoManager.getScoreTotal());
-            MemoGameCalculator calculator = new MemoGameCalculator();
+            CalculatorFactory calculatorFactory = new CalculatorFactory();
+            ScoreCalculator calculator =
+                    calculatorFactory.getCalculator("MemoCalculator");
             ScoreManager<MemoScore> scoreManager
                     = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
             scoreManager.saveScore(score, context);
@@ -217,7 +223,7 @@ public class MemoGamePresenter implements GamePresenter {
     /**
      * update next item to verify
      */
-    public void setNextToVerify(){
+    private void setNextToVerify(){
         nextToVerify = getVerifyItems();
     }
 

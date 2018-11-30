@@ -4,24 +4,25 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.Button;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import fall2018.csc207project.Models.CalculatorFactory;
+import fall2018.csc207project.Models.DatabaseUtil;
 import fall2018.csc207project.Models.ImageManager;
+import fall2018.csc207project.Models.SaveManager;
+import fall2018.csc207project.Models.SaveSlot;
+import fall2018.csc207project.Models.ScoreCalculator;
+import fall2018.csc207project.Models.ScoreManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Models.Tile;
-import fall2018.csc207project.SlidingTile.Models.TileGameCalculator;
 import fall2018.csc207project.SlidingTile.Models.TileScore;
 import fall2018.csc207project.SlidingTile.Views.BoardGameView;
-import fall2018.csc207project.Models.DatabaseUtil;
-import fall2018.csc207project.Models.SaveManager;
-import fall2018.csc207project.Models.SaveSlot;
-import fall2018.csc207project.Models.ScoreManager;
 
 /**
  * The class BoardGamePresenter that implements GamePresenter.
@@ -101,6 +102,7 @@ public class BoardGamePresenter implements GamePresenter {
      * @param position the position of the Tile that the user tapped on
      */
     @Override
+    @SuppressWarnings("unchecked")
     public void onTapOnTile(Context context, int position){
         if (movementController.processTapMovement(context, position)){
             saveSlot.saveToAutoSave(boardManager);
@@ -108,7 +110,9 @@ public class BoardGamePresenter implements GamePresenter {
             if (boardManager.puzzleSolved() && !isSolved){
                 TileScore score = new TileScore(boardManager.getComplexity()
                         , boardManager.getTotalUndoSteps(), boardManager.getTotalMoveSteps());
-                TileGameCalculator calculator = new TileGameCalculator();
+                CalculatorFactory calculatorFactory = new CalculatorFactory();
+                ScoreCalculator calculator = calculatorFactory
+                        .getCalculator("SlidingTileCalculator");
                 ScoreManager<TileScore> scoreManager
                         = DatabaseUtil.getScoreManager("SlidingTile", currentUser,calculator);
                 scoreManager.saveScore(score, context);
@@ -131,7 +135,7 @@ public class BoardGamePresenter implements GamePresenter {
     /**
      * Update the list of buttons.
      * @param o the observed board
-     * @param arg the int array which contains the two buttons to be swaped
+     * @param arg the int array which contains the two buttons to be swapped
      */
     @Override
     public void update(Observable o, Object arg) {

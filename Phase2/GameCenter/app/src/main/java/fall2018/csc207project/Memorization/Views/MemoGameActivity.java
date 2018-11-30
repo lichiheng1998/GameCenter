@@ -60,7 +60,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_main);
-        setBackGroud();
+        setBackGround();
         score = findViewById(R.id.Score);
         life = findViewById(R.id.life);
         status = findViewById(R.id.status);
@@ -215,7 +215,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         fragment.show(fm, "fragment_edit_name");
     }
 
-    private void setBackGroud(){
+    private void setBackGround(){
         SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         String currentUser = shared.getString("currentUser", null);
         ImageManager manager = DatabaseUtil.getImageManager(currentUser);
