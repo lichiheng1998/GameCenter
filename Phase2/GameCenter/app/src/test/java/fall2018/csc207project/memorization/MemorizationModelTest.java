@@ -87,4 +87,20 @@ public class MemorizationModelTest {
         }
     }
 
+    @Test
+    public void newInstanceTest(){
+        MemoManager manager = new MemoManager(5, 5, false);
+        manager.updateActiveTiles();
+        MemoManager managerT = manager.getNewInstance();
+        assertEquals(2, managerT.getCurComplexity());
+        assertEquals(3, manager.getCurComplexity());
+    }
+
+    @Test
+    public void setGetScoreTest(){
+        MemoManager manager = new MemoManager(3, 4, true);
+        manager.setScoreTotal(10);
+        assertEquals(10, manager.getScoreTotal());
+    }
+
 }

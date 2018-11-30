@@ -1,4 +1,4 @@
-package fall2018.csc207project.Memorization.Controllers;
+package fall2018.csc207project.Memorization.Views;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
