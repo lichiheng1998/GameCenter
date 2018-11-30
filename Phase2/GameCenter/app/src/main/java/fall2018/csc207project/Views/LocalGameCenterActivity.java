@@ -161,12 +161,22 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
                                 presenter.onResetClicked(getApplicationContext());
                                 break;
                             case R.id.nav_logout:
+                                logout();
                                 finish();
                                 break;
                         }
                         return true;
                     }
                 });
+    }
+
+
+    /**
+     * When user click logout, return the globle start page.
+     */
+    private void logout(){
+        Intent tmp = new Intent(this, GlobalActivity.class);
+        startActivity(tmp);
     }
 
     /**
