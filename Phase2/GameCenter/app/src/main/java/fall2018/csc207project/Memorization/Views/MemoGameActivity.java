@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         MemoManager memoManager = (MemoManager) getIntent().getSerializableExtra("save");
         presenter.setMemoManager(memoManager);
         setupButtons(memoManager.getSize());
+        setupHintButtonListner();
         setupGridView(memoManager);
         DialogFragment dialog = new GameStartDialogFragment();
         dialog.setCancelable(false);
@@ -215,6 +218,9 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         fragment.show(fm, "fragment_edit_name");
     }
 
+    /**
+     * Setup the background to the user's predefined background.
+     */
     private void setBackGroud(){
         SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         String currentUser = shared.getString("currentUser", null);
@@ -225,6 +231,18 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         }
     }
 
+    private void setupHintButtonListner(){
+        findViewById(R.id.hintButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onHintTap();
+            }
+        });
+    }
+
+    public void deActivateHint(){
+        ((ImageButton)findViewById(R.id.hintButton)).setImageResource(android.R.drawable.btn_star_big_off);
+    }
     /**
      * Finish when user choose to exit
      */

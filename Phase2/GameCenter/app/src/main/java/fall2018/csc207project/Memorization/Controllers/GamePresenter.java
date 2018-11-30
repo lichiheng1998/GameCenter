@@ -22,6 +22,11 @@ public interface GamePresenter {
     void setMemoManager(MemoManager memoManager);
 
     /**
+     * Process the logic when the hint button is tap.
+     */
+    void onHintTap();
+
+    /**
      * Start a new game cycle.
      */
     void startCycle();
