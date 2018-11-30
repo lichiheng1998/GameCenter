@@ -25,16 +25,16 @@
 
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ComplexityActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Views.GameActivity" />
-        <activity android:name=".Memorization.Controllers.MemoStartingActivity" />
+        <activity android:name=".Memorization.Views.MemoStartingActivity" />
         <activity android:name=".PushTheBox.View.BoxStartingActivity" />
         <activity android:name=".PushTheBox.View.BoxGameActivity"/>
         <activity android:name=".PushTheBox.View.LevelActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"/>
-        <activity android:name=".Memorization.Controllers.MemoComplexActivity" />
+        <activity android:name=".Memorization.Views.MemoComplexActivity" />
         <activity android:name=".Memorization.Views.MemoGameActivity" />
         <activity android:name="fall2018.csc207project.Views.ManageSaveActivity" />
         <activity android:name=".PushTheBox.View.BoxScoreBoardActivity" />
-        <activity android:name=".Memorization.Controllers.MemoScoreBoardActivity" />
+        <activity android:name=".Memorization.Views.MemoScoreBoardActivity" />
     </application>
 
 </manifest>
