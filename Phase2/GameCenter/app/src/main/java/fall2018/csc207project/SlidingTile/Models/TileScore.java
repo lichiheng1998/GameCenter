@@ -35,7 +35,6 @@ public class TileScore extends Score {
         this.complexity = complexity;
         this.undoSteps = undoSteps;
         this.moveSteps = moveSteps;
-        this.game = "SlidingTile";
     }
 
     @Override

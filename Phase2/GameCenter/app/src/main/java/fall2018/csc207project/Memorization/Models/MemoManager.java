@@ -106,14 +106,14 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
     private void shuffleSequence(int bound){
         sequenceOrder.clear();
         int randomID = ThreadLocalRandom.current().nextInt(bound);
-        sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEACTIVE));
+        sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPE_ACTIVE));
         for (int count = 1; count < curComplexity; count++) {
             randomID = ThreadLocalRandom.current().nextInt(bound);
             int fake = ThreadLocalRandom.current().nextInt(10);
             if(fake > 2){
-                sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEACTIVE));
+                sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPE_ACTIVE));
             } else {
-                sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEFAKE));
+                sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPE_FAKE));
             }
         }
     }
@@ -129,7 +129,7 @@ public class MemoManager implements Iterable<MemoTile>, Serializable{
             shuffleSequence(bound);
         } else {
             int randomID = ThreadLocalRandom.current().nextInt(bound);
-            sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPEACTIVE));
+            sequenceOrder.add(new MemoTile(randomID, MemoTile.TYPE_ACTIVE));
         }
 
         curComplexity += 1;

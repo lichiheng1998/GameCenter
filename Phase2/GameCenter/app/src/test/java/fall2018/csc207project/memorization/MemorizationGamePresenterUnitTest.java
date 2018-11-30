@@ -20,7 +20,6 @@ import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
-import fall2018.csc207project.SlidingTile.Models.Tile;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -105,15 +104,15 @@ public class MemorizationGamePresenterUnitTest {
     @Test
     public void shouldFlash()throws NoSuchMethodException, InvocationTargetException,
             IllegalAccessException{
-        MemoTile tile = new MemoTile(3, MemoTile.TYPEACTIVE);
-        MemoTile fakeTile = new MemoTile(3, MemoTile.TYPEFAKE);
+        MemoTile tile = new MemoTile(3, MemoTile.TYPE_ACTIVE);
+        MemoTile fakeTile = new MemoTile(3, MemoTile.TYPE_FAKE);
         Class memoPresenter = presenter.getClass();
         Method flash = memoPresenter.getDeclaredMethod("flashMemoTile", MemoTile.class);
         flash.setAccessible(true);
         flash.invoke(presenter, tile);
-        verify(view).flashButtonToColor(eq(3), anyInt(), eq(MemoTile.ACTIVECOLOR));
+        verify(view).flashButtonToColor(eq(3), anyInt(), eq(MemoTile.ACTIVE_COLOR));
         flash.invoke(presenter, fakeTile);
-        verify(view).flashButtonToColor(eq(3), anyInt(), eq(MemoTile.FAKECOLOR));
+        verify(view).flashButtonToColor(eq(3), anyInt(), eq(MemoTile.FAKE_COLOR));
     }
 
     @Test

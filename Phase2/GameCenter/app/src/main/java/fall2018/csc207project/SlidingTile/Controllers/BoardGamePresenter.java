@@ -59,6 +59,8 @@ public class BoardGamePresenter implements GamePresenter {
 
     private boolean isSolved = false;
 
+    private String currentGame;
+
     /**
      * Construct a new BoardGamePresenter
      * by given a BoardGameView, and a Context.
@@ -70,7 +72,7 @@ public class BoardGamePresenter implements GamePresenter {
         this.view = view;
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
-        String currentGame = shared.getString("currentGame", null);
+        currentGame = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
         imageManager = DatabaseUtil.getImageManager(currentUser);
         saveSlot = saveManager.readFromFile(context);
@@ -114,7 +116,7 @@ public class BoardGamePresenter implements GamePresenter {
                 ScoreCalculator calculator = calculatorFactory
                         .getCalculator("SlidingTileCalculator");
                 ScoreManager<TileScore> scoreManager
-                        = DatabaseUtil.getScoreManager("SlidingTile", currentUser,calculator);
+                        = DatabaseUtil.getScoreManager(currentGame, currentUser,calculator);
                 scoreManager.saveScore(score, context);
                 isSolved = true;
             }

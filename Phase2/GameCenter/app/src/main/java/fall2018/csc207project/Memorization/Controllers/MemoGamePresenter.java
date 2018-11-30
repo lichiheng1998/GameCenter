@@ -105,7 +105,7 @@ public class MemoGamePresenter implements GamePresenter {
         MemoTile verifyItem = null;
         while (verifyIterator.hasNext()){
             MemoTile item = verifyIterator.next();
-            if(item.status == MemoTile.TYPEACTIVE){
+            if(item.status == MemoTile.TYPE_ACTIVE){
                 verifyItem = item;
                 break;
             }
@@ -157,7 +157,7 @@ public class MemoGamePresenter implements GamePresenter {
      * @param pos the position that the user tapped
      */
     private void success(int pos){
-        view.flashButtonToColor(pos, flashDelay, MemoTile.PRESSCOLOR);
+        view.flashButtonToColor(pos, flashDelay, MemoTile.PRESS_COLOR);
         successTap += 1;
         view.updateScore(successTap);
         nextToVerify = getVerifyItems();
@@ -174,7 +174,7 @@ public class MemoGamePresenter implements GamePresenter {
      */
     @SuppressWarnings("unchecked")
     private void fail(int pos, Context context){
-        view.flashButtonToColor(pos, flashDelay, MemoTile.WRONGCOLOR);
+        view.flashButtonToColor(pos, flashDelay, MemoTile.WRONG_COLOR);
         life = life == 0 ? 0 : life-1;
         view.updateLife(life);
         gameOver = life == 0;
@@ -199,10 +199,10 @@ public class MemoGamePresenter implements GamePresenter {
      * @param tile the MemoTile that need to flash.
      */
     private void flashMemoTile(MemoTile tile){
-        if(tile.status == MemoTile.TYPEACTIVE){
-            view.flashButtonToColor(tile.getId(), flashDelay, MemoTile.ACTIVECOLOR);
-        } else if (tile.status == MemoTile.TYPEFAKE) {
-            view.flashButtonToColor(tile.getId(), flashDelay, MemoTile.FAKECOLOR);
+        if(tile.status == MemoTile.TYPE_ACTIVE){
+            view.flashButtonToColor(tile.getId(), flashDelay, MemoTile.ACTIVE_COLOR);
+        } else if (tile.status == MemoTile.TYPE_FAKE) {
+            view.flashButtonToColor(tile.getId(), flashDelay, MemoTile.FAKE_COLOR);
         }
     }
 
@@ -252,7 +252,7 @@ public class MemoGamePresenter implements GamePresenter {
     @Override
     public void onHintTap() {
         if(!isDisplaying && isAvailableHint){
-            view.flashButtonToColor(nextToVerify.getId(), flashDelay, MemoTile.PRESSCOLOR);
+            view.flashButtonToColor(nextToVerify.getId(), flashDelay, MemoTile.PRESS_COLOR);
             view.deActivateHint();
             isAvailableHint = false;
         }

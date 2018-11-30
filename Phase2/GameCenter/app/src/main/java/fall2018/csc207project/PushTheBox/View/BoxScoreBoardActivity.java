@@ -62,10 +62,11 @@ public class BoxScoreBoardActivity extends AppCompatActivity implements AdapterV
         setContentView(R.layout.box_score_board);
         SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
+        String currentGame = shared.getString("currentGame", null);
         CalculatorFactory calculatorFactory = new CalculatorFactory();
         ScoreCalculator calculator = calculatorFactory.getCalculator("BoxCalculator");
         ScoreManager<BoxScore> globalScoreManager;
-        globalScoreManager = DatabaseUtil.getScoreManager("PushBox", currentUser, calculator);
+        globalScoreManager = DatabaseUtil.getScoreManager(currentGame, currentUser, calculator);
         scoreManager = new BoxGameScoreManager(globalScoreManager);
         scoreManager.setLevel(1);
         listView = this.findViewById(R.id.boxScoreBoard);

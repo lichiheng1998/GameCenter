@@ -49,6 +49,8 @@ public class BoxGamePresenter implements GamePresenter {
      */
     private SaveSlot saveSlot;
 
+    private String currentGame;
+
     /**
      * A new box game presenter.
      *
@@ -68,7 +70,7 @@ public class BoxGamePresenter implements GamePresenter {
     private void setUpSaveManager(Context context){
         SharedPreferences shared = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
-        String currentGame = shared.getString("currentGame", null);
+        currentGame = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
         saveSlot = saveManager.readFromFile(context);
     }
@@ -121,7 +123,7 @@ public class BoxGamePresenter implements GamePresenter {
             CalculatorFactory calculatorFactory = new CalculatorFactory();
             ScoreCalculator calculator = calculatorFactory.getCalculator("BoxCalculator");
             ScoreManager<BoxScore> scoreManager
-                    = DatabaseUtil.getScoreManager("PushBox",currentUser,calculator);
+                    = DatabaseUtil.getScoreManager(currentGame, currentUser,calculator);
             BoxScore boxScore = new BoxScore(mapManager.getLevel(),
                     mapManager.getTotalUndoTimes(), mapManager.getTotalMoveSteps());
             scoreManager.saveScore(boxScore, context);
