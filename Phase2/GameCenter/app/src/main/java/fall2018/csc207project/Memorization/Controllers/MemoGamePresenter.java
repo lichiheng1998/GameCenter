@@ -69,8 +69,6 @@ public class MemoGamePresenter implements GamePresenter {
      */
     private boolean gameOver;
 
-    private boolean isFinish = true;
-
     /**
      * Construct a new MemoGamePresenter
      * by given a final MemoGameView and a Context.
