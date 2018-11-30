@@ -118,7 +118,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Tap tp choose Level:"
+        android:text="Tap to choose Level:"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/boxPlayerName"
         app:layout_constraintEnd_toEndOf="parent"
