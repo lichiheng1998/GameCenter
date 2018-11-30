@@ -20,14 +20,22 @@ import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
 import fall2018.csc207project.Memorization.Models.MemoTile;
 import fall2018.csc207project.Memorization.Views.MemoGameView;
+import fall2018.csc207project.Models.DataStream;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.Score;
+import fall2018.csc207project.Models.ScoreCalculator;
+import fall2018.csc207project.Models.ScoreDataStream;
+import fall2018.csc207project.Models.ScoreManager;
 import fall2018.csc207project.SlidingTile.Models.Tile;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -144,5 +152,31 @@ public class MemorizationGamePresenterUnitTest {
         Field gameOver = memoGamePresenter.getDeclaredField("gameOver");
         gameOver.setAccessible(true);
         assertFalse(gameOver.getBoolean(presenter));
+    }
+
+    @Test
+    public void shouldGameOver() throws Exception{
+        ScoreManager manager = mock(ScoreManager.class);
+        Class memoGamePresenter = presenter.getClass();
+        Field life = memoGamePresenter.getDeclaredField("life");
+        Field myManager = memoGamePresenter.getDeclaredField("scoreManager");
+        myManager.setAccessible(true);
+        myManager.set(presenter, manager);
+        life.setAccessible(true);
+        life.set(presenter, 0);
+        Method failMethod = memoGamePresenter.getDeclaredMethod("fail", int.class, Context.class);
+        failMethod.setAccessible(true);
+        failMethod.invoke(presenter, 2, context);
+        verify(view).showGameOverDialog(anyInt(),any(MemoManager.class));
+    }
+
+    @Test
+    public void shouldShowHint() throws Exception{
+        Field f1 = presenter.getClass().getDeclaredField("isDisplaying");
+        f1.setAccessible(true);
+        f1.set(presenter, false);
+        presenter.onHintTap();
+        verify(view).flashButtonToColor(anyInt(), anyInt(), anyInt());
+        verify(view).deActivateHint();
     }
 }
