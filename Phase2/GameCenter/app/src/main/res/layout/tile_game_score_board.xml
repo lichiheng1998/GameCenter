@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scoreboard_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/global"
+    >
+
 
     <Button
         android:id="@+id/button3x3"

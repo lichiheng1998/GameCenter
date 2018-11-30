@@ -58,11 +58,12 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
         SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
 
         String currentUser = shared.getString("currentUser", null);
+        String currentGame = shared.getString("currentGame", null);
         CalculatorFactory calculatorFactory = new CalculatorFactory();
         ScoreCalculator calculator =
                 calculatorFactory.getCalculator("MemoCalculator");
         ScoreManager<MemoScore> globalScoreManager;
-        globalScoreManager = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
+        globalScoreManager = DatabaseUtil.getScoreManager(currentGame, currentUser, calculator);
         scoreManager = new MemoScoreManager(globalScoreManager);
 
         setContentView(R.layout.memo_score_board);

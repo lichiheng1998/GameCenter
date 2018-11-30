@@ -57,12 +57,13 @@ public class ScoreBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstance);
         SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
+        String currentGame = shared.getString("currentGame", null);
         CalculatorFactory calculatorFactory = new CalculatorFactory();
         ScoreCalculator calculator = calculatorFactory
                 .getCalculator("SlidingTileCalculator");
         ScoreManager <TileScore> globalScoreManager;
         globalScoreManager = DatabaseUtil
-                .getScoreManager("SlidingTile", currentUser, calculator);
+                .getScoreManager(currentGame, currentUser, calculator);
         scoreManager = new SlidingTileScoreManager(globalScoreManager);
         setContentView(R.layout.tile_game_score_board);
         scoreList = findViewById(R.id.scoreBoard);

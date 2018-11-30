@@ -6,23 +6,29 @@ import java.io.Serializable;
  * The class MemoTile that implements Serializable.
  */
 public class MemoTile implements Serializable{
+
     /**
      * unique id of a MemoTile
      */
     private int id;
+
     /**
      * type active of MemoTile
      */
-    public static final int TYPEACTIVE = 1;
+    public static final int TYPE_ACTIVE = 1;
+
     /**
      * type fake of MemoTile
      */
-    public static final int TYPEFAKE = 0;
+    public static final int TYPE_FAKE = 0;
 
-    public static final int FAKECOLOR = android.R.color.holo_orange_dark;
-    public static final int ACTIVECOLOR = android.R.color.holo_green_dark;
-    public static final int PRESSCOLOR = android.R.color.holo_blue_dark;
-    public static final int WRONGCOLOR = android.R.color.holo_red_dark;
+    /**
+     * The color of the flashing Tiles.
+     */
+    public static final int FAKE_COLOR = android.R.color.holo_orange_dark;
+    public static final int ACTIVE_COLOR = android.R.color.holo_green_dark;
+    public static final int PRESS_COLOR = android.R.color.holo_blue_dark;
+    public static final int WRONG_COLOR = android.R.color.holo_red_dark;
 
     /**
      * status type of this MemoTile
