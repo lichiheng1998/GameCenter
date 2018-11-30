@@ -2,7 +2,6 @@ package fall2018.csc207project.PushTheBox.Models;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,14 +10,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * the class LevelFactory that implements Serializable
+ */
 public class LevelFactory implements Serializable {
 
+    /**
+     * THe context of this app.
+     */
     private Context context;
 
+    /**
+     * The Game Elements stores in the HashMap.
+     */
     private HashMap<String, Object> gameElements = new HashMap<>();
 
+    /**
+     * The BufferedReader that reads the files.
+     */
     private BufferedReader reader;
 
     /**
@@ -66,7 +76,7 @@ public class LevelFactory implements Serializable {
 
     /**
      * Initialize the hash map which stores all the elements for each level of game.
-     * */
+     */
     private Integer[][] getInfoFromFile(int level) {
         Integer[][] levelInfo = new Integer[6][];
         AssetManager assetManager = context.getAssets();

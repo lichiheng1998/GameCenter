@@ -2,18 +2,12 @@ package fall2018.csc207project.PushTheBox.Controllers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import fall2018.csc207project.PushTheBox.Models.Box;
 import fall2018.csc207project.PushTheBox.Models.Person;
 

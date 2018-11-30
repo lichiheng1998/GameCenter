@@ -26,7 +26,10 @@ public class MemoGamePresenter implements GamePresenter {
      */
     private String currentUser;
 
-    private boolean isScoreRecoreded;
+    /**
+     * Tells weather the score is recorded.
+     */
+    private boolean isScoreRecorded;
     /**
      *
      */
@@ -89,6 +92,7 @@ public class MemoGamePresenter implements GamePresenter {
      * @param view the MemoGame's view
      * @param context the context of the app
      */
+    @SuppressWarnings("unused")
     public MemoGamePresenter(final MemoGameView view, Context context) {
         this.view = view;
         SharedPreferences shared
@@ -110,7 +114,7 @@ public class MemoGamePresenter implements GamePresenter {
         isAvailableHint = true;
         isDisplaying = false;
         gameOver = false;
-        isScoreRecoreded = false;
+        isScoreRecorded = false;
         successTap = 0;
         life = 3;
     }
@@ -194,13 +198,13 @@ public class MemoGamePresenter implements GamePresenter {
         life = life == 0 ? 0 : life-1;
         view.updateLife(life);
         gameOver = life == 0;
-        if(gameOver && !isScoreRecoreded){
+        if(gameOver && !isScoreRecorded){
             memoManager.setScoreTotal(successTap);
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
             MemoScore score = new MemoScore(memoManager.width,
                     memoManager.isLevel(), memoManager.getScoreTotal());
             scoreManager.saveScore(score, context);
-            isScoreRecoreded = true;
+            isScoreRecorded = true;
         }
     }
 
@@ -249,6 +253,7 @@ public class MemoGamePresenter implements GamePresenter {
      * number of total success taps of player
      * @return total number of success taps
      */
+    @SuppressWarnings("unused")
     public int getSuccessTap() {
         return successTap;
     }
