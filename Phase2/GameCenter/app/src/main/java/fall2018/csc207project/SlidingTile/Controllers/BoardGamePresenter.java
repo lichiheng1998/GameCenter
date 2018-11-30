@@ -3,11 +3,15 @@ package fall2018.csc207project.SlidingTile.Controllers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+
+import fall2018.csc207project.Models.ImageManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.BoardManager;
 import fall2018.csc207project.SlidingTile.Models.Tile;
@@ -27,6 +31,10 @@ public class BoardGamePresenter implements GamePresenter {
      * The movement processing logic
      */
     private MovementController movementController;
+    /**
+     * The image manager.
+     */
+    private ImageManager imageManager;
     /**
      * The board manager.
      */
@@ -63,6 +71,7 @@ public class BoardGamePresenter implements GamePresenter {
         currentUser = shared.getString("currentUser", null);
         String currentGame = shared.getString("currentGame", null);
         saveManager = DatabaseUtil.getSaveManager(currentUser, currentGame);
+        imageManager = DatabaseUtil.getImageManager(currentUser);
         saveSlot = saveManager.readFromFile(context);
         this.movementController = new MovementController();
     }
@@ -152,10 +161,19 @@ public class BoardGamePresenter implements GamePresenter {
                     onTapOnTile(context, pos);
                 }
             });
-            tmp.setBackgroundResource(R.drawable.tile);
+            Bitmap bg = imageManager.getBackgroundBitmap(context);
+            setBackground(tmp, tmpTile, bg, context);
             tileButtons.add(tmp);
             count++;
         }
         return tileButtons;
+    }
+
+    private void setBackground(Button button, Tile tile, Bitmap bg, Context context){
+        if(bg == null){
+            button.setBackgroundResource(R.drawable.tile);
+        } else {
+            button.setBackground(tile.getBackground(context, bg, boardManager.getComplexity()));
+        }
     }
 }

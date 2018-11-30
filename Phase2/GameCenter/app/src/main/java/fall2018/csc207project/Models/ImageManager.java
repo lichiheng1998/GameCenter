@@ -3,6 +3,8 @@ package fall2018.csc207project.Models;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -84,6 +86,14 @@ public class ImageManager {
             return null;
         }
         return Drawable.createFromPath(file.getAbsolutePath());
+    }
+
+    public Bitmap getBackgroundBitmap(Context context){
+        File file = new File(context.getFilesDir() + "/" + user + BG_EXT);
+        if(!file.exists()){
+            return null;
+        }
+        return BitmapFactory.decodeFile(file.getAbsolutePath());
     }
 
     /**

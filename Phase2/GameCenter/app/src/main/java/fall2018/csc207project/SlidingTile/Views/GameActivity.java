@@ -1,6 +1,7 @@
 package fall2018.csc207project.SlidingTile.Views;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -131,9 +132,14 @@ public class GameActivity extends AppCompatActivity implements BoardGameView{
      * Swap the buttons of position pos1 and pos2.
      */
     public void swapButtons(int pos1, int pos2){
-        String text = tileButtons.get(pos1).getText().toString();
-        tileButtons.get(pos1).setText(tileButtons.get(pos2).getText());
-        tileButtons.get(pos2).setText(text);
+        Button button1= tileButtons.get(pos1);
+        Button button2 = tileButtons.get(pos2);
+        String text = button1.getText().toString();
+        button1.setText(button2.getText());
+        button2.setText(text);
+        Drawable drawable = button1.getBackground();
+        button1.setBackground(button2.getBackground());
+        button2.setBackground(drawable);
     }
 
     /**

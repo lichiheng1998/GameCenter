@@ -57,16 +57,16 @@ public class BoxGamePresenterTest {
     }
 
 
-//    @Test
-//    public void testArrowButtonClicked(){
-//        doNothing().when(view).makeInvalidMovementText();
-//
-//        MapManager mapManager = mock(MapManager.class);
-//        when(mapManager.isValidMovement(1)).thenReturn(false);
-//        presenter.setMapManager(mapManager);
-//        presenter.arrowButtonClicked(context, "right");
-//        verify(view, times(1)).makeInvalidMovementText();
-//    }
+////    @Test
+////    public void testArrowButtonClicked(){
+////        doNothing().when(view).makeInvalidMovementText();
+////
+////        MapManager mapManager = mock(MapManager.class);
+////        when(mapManager.isValidMovement(1)).thenReturn(false);
+////        presenter.setMapManager(mapManager);
+////        presenter.arrowButtonClicked(context, "right");
+////        verify(view, times(1)).makeInvalidMovementText();
+////    }
 
     @Test
     public void testOnUndoTextClicked() {
