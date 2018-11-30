@@ -62,7 +62,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_main);
-        setBackGroud();
+        setBackGround();
         score = findViewById(R.id.Score);
         life = findViewById(R.id.life);
         status = findViewById(R.id.status);
@@ -70,7 +70,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         MemoManager memoManager = (MemoManager) getIntent().getSerializableExtra("save");
         presenter.setMemoManager(memoManager);
         setupButtons(memoManager.getSize());
-        setupHintButtonListner();
+        setupHintButtonListener();
         setupGridView(memoManager);
         DialogFragment dialog = new GameStartDialogFragment();
         dialog.setCancelable(false);
@@ -221,7 +221,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     /**
      * Setup the background to the user's predefined background.
      */
-    private void setBackGroud(){
+    private void setBackGround(){
         SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         String currentUser = shared.getString("currentUser", null);
         ImageManager manager = DatabaseUtil.getImageManager(currentUser);
@@ -231,7 +231,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         }
     }
 
-    private void setupHintButtonListner(){
+    private void setupHintButtonListener(){
         findViewById(R.id.hintButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

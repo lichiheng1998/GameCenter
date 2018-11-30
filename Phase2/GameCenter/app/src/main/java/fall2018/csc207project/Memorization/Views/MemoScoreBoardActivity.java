@@ -18,10 +18,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import fall2018.csc207project.Memorization.Controllers.MemoScoreBoardAdapter;
-import fall2018.csc207project.Memorization.Models.MemoGameCalculator;
 import fall2018.csc207project.Memorization.Models.MemoScore;
 import fall2018.csc207project.Memorization.Models.MemoScoreManager;
+import fall2018.csc207project.Models.CalculatorFactory;
 import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.ScoreCalculator;
 import fall2018.csc207project.Models.ScoreManager;
 import fall2018.csc207project.R;
 
@@ -51,12 +52,15 @@ public class MemoScoreBoardActivity extends AppCompatActivity {
     private ListView scoreList;
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
 
         String currentUser = shared.getString("currentUser", null);
-        MemoGameCalculator calculator = new MemoGameCalculator();
+        CalculatorFactory calculatorFactory = new CalculatorFactory();
+        ScoreCalculator calculator =
+                calculatorFactory.getCalculator("MemoCalculator");
         ScoreManager<MemoScore> globalScoreManager;
         globalScoreManager = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
         scoreManager = new MemoScoreManager(globalScoreManager);

@@ -11,15 +11,17 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
+import fall2018.csc207project.Models.CalculatorFactory;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.ScoreCalculator;
+import fall2018.csc207project.Models.ScoreManager;
 import fall2018.csc207project.PushTheBox.Controllers.BoxScoreAdapter;
 import fall2018.csc207project.PushTheBox.Models.BoxGameScoreManager;
-import fall2018.csc207project.R;
-import fall2018.csc207project.Models.DatabaseUtil;
-import fall2018.csc207project.Models.ScoreManager;
-import fall2018.csc207project.PushTheBox.Models.BoxGameCalculator;
 import fall2018.csc207project.PushTheBox.Models.BoxScore;
+import fall2018.csc207project.R;
 
 /**
  * The class BoxScoreBoardActivity that extends AppCompatActivity
@@ -54,12 +56,14 @@ public class BoxScoreBoardActivity extends AppCompatActivity implements AdapterV
     private String level = "1";
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         setContentView(R.layout.box_score_board);
         SharedPreferences shared = this.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
-        BoxGameCalculator calculator = new BoxGameCalculator();
+        CalculatorFactory calculatorFactory = new CalculatorFactory();
+        ScoreCalculator calculator = calculatorFactory.getCalculator("BoxCalculator");
         ScoreManager<BoxScore> globalScoreManager;
         globalScoreManager = DatabaseUtil.getScoreManager("PushBox", currentUser, calculator);
         scoreManager = new BoxGameScoreManager(globalScoreManager);

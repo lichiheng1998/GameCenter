@@ -1,5 +1,6 @@
 package fall2018.csc207project.Memorization.Views;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import fall2018.csc207project.R;
 /**
  * Class represent the StartingActivity of the memorization master game.
  */
+@SuppressLint("Registered")
 public class MemoStartingActivity extends AppCompatActivity {
 
     @Override

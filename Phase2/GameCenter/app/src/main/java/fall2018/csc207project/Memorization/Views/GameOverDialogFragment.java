@@ -81,6 +81,7 @@ public class GameOverDialogFragment extends DialogFragment {
         restartButton = view.findViewById(R.id.restart);
         scoreField = view.findViewById(R.id.score);
         setupQuitButtonListener();
+        assert getArguments() != null;
         setupRestartButtonListener(getArguments().getSerializable("manager"));
         setupScore(getArguments().getInt("score"));
     }

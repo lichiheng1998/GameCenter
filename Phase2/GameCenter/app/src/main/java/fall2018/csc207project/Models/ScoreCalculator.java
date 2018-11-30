@@ -5,7 +5,7 @@ package fall2018.csc207project.Models;
  *
  * @param <T> class that extends Score
  */
-public interface ScoreCalculator<T extends Score>{
+public interface ScoreCalculator<T extends Score> {
 
     /**
      *@param scoreInfo the method will calculate the numeric value of the given record.

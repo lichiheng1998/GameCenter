@@ -9,13 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
+
+import fall2018.csc207project.Models.CalculatorFactory;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.ScoreCalculator;
+import fall2018.csc207project.Models.ScoreManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Models.SlidingTileScoreManager;
-import fall2018.csc207project.SlidingTile.Models.TileGameCalculator;
 import fall2018.csc207project.SlidingTile.Models.TileScore;
-import fall2018.csc207project.Models.DatabaseUtil;
-import fall2018.csc207project.Models.ScoreManager;
 
 /**
  * A class called ScoreBoardActivity extends AppCompatActivity.
@@ -49,11 +52,14 @@ public class ScoreBoardActivity extends AppCompatActivity {
     private ListView scoreList;
 
     @Override
+    @SuppressWarnings("unchecked")
     protected void onCreate(Bundle savedInstance){
         super.onCreate(savedInstance);
         SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
-        TileGameCalculator calculator = new TileGameCalculator();
+        CalculatorFactory calculatorFactory = new CalculatorFactory();
+        ScoreCalculator calculator = calculatorFactory
+                .getCalculator("SlidingTileCalculator");
         ScoreManager <TileScore> globalScoreManager;
         globalScoreManager = DatabaseUtil
                 .getScoreManager("SlidingTile", currentUser, calculator);
