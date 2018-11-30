@@ -11,26 +11,28 @@
         android:id="@+id/signin_username"
         android:layout_width="245dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="200dp"
+        android:layout_alignParentTop="true"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="38dp"
+        android:layout_marginTop="200dp"
         android:ems="10"
+        android:hint="Input your username"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/signin_password"
         android:layout_width="245dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="359dp"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="38dp"
-        android:layout_marginBottom="359dp"
         android:ems="10"
+        android:hint="Input your password"
         android:inputType="textPassword" />
 
     <TextView

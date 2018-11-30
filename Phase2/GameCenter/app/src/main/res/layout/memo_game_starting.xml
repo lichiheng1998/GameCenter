@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@drawable/memo_starting">
+    android:background="@drawable/memo_staring">
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="158dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:gravity="center"
-        android:layout_marginTop="65dp"
-        android:textSize="6pt"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:text="@string/memoStarting" />
+        android:text="@string/memoStarting"
+        android:textColor="@android:color/black"
+        android:textSize="45sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/newMemogame"
@@ -22,8 +24,8 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="240dp"
-        android:background="#fab359"
+        android:layout_marginTop="300dp"
+        android:background="#a2907c"
         android:backgroundTintMode="src_over"
         android:text="New Game"
         android:textStyle="bold" />
@@ -35,7 +37,7 @@
         android:layout_below="@+id/newMemogame"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="#fab359"
+        android:background="#a2907c"
         android:backgroundTintMode="multiply"
         android:text="my top scores"
         android:textStyle="bold" />
