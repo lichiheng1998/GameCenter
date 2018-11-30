@@ -5,7 +5,7 @@ import fall2018.csc207project.SlidingTile.Models.Board;
 /**
  * A interface Shuffler
  */
-interface Shuffler {
+public interface Shuffler {
 
     /**
      * process multiple shuffles on a given board
