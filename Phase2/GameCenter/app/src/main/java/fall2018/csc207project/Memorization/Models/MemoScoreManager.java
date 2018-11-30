@@ -82,8 +82,7 @@ public class MemoScoreManager {
      * @param level the mode level for hard or easy
      * @return the sorted MemoScores by giving a List of MemoScore, a difficulty and a level mode
      */
-    private ArrayList<MemoScore> getSortedScores(List<MemoScore> memoScores, int difficulty,
-                                                 boolean level) {
+    private ArrayList<MemoScore> getSortedScores(List<MemoScore> memoScores, int difficulty, boolean level) {
         ArrayList<MemoScore> scoreBoardScores = new ArrayList<>();
         for (MemoScore memoScore : memoScores) {
             if (memoScore.difficulty == difficulty && memoScore.level == level) {
