@@ -27,6 +27,14 @@ public class MemoGamePresenter implements GamePresenter {
     private String currentUser;
 
     /**
+     * Tells weather the score is recorded.
+     */
+    private boolean isScoreRecorded;
+    /**
+     *
+     */
+    private ScoreManager<MemoScore> scoreManager;
+    /**
      * The number of taps that to click correct.
      */
     private int successTap;
@@ -84,20 +92,32 @@ public class MemoGamePresenter implements GamePresenter {
      * @param view the MemoGame's view
      * @param context the context of the app
      */
+    @SuppressWarnings("unused")
     public MemoGamePresenter(final MemoGameView view, Context context) {
         this.view = view;
         SharedPreferences shared
                 = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
+        ScoreCalculator<MemoScore> calculator =
+                new CalculatorFactory().getCalculator("MemoCalculator");
         currentUser = shared.getString("currentUser", null);
-        isAvailableHint = true;
-        isDisplaying = false;
-        gameOver = false;
-        successTap = 0;
-        life = 3;
+        String game = shared.getString("currentGame", null);
+        scoreManager = DatabaseUtil.getScoreManager(game, currentUser, calculator);
+        setupStates();
         view.updateScore(successTap);
         view.updateLife(life);
     }
 
+    /**
+     * Setup the game states.
+     */
+    private void setupStates(){
+        isAvailableHint = true;
+        isDisplaying = false;
+        gameOver = false;
+        isScoreRecorded = false;
+        successTap = 0;
+        life = 3;
+    }
     /**
      * Get the next MemoTile to be verified.
      */
@@ -178,17 +198,13 @@ public class MemoGamePresenter implements GamePresenter {
         life = life == 0 ? 0 : life-1;
         view.updateLife(life);
         gameOver = life == 0;
-        if(gameOver){
+        if(gameOver && !isScoreRecorded){
             memoManager.setScoreTotal(successTap);
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
             MemoScore score = new MemoScore(memoManager.width,
                     memoManager.isLevel(), memoManager.getScoreTotal());
-            CalculatorFactory calculatorFactory = new CalculatorFactory();
-            ScoreCalculator calculator =
-                    calculatorFactory.getCalculator("MemoCalculator");
-            ScoreManager<MemoScore> scoreManager
-                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
             scoreManager.saveScore(score, context);
+            isScoreRecorded = true;
         }
     }
 
@@ -237,6 +253,7 @@ public class MemoGamePresenter implements GamePresenter {
      * number of total success taps of player
      * @return total number of success taps
      */
+    @SuppressWarnings("unused")
     public int getSuccessTap() {
         return successTap;
     }
