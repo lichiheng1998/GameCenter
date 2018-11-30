@@ -173,15 +173,12 @@ public class MemoGamePresenter implements GamePresenter {
         if(gameOver){
             memoManager.setScoreTotal(successTap);
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
-            if (isFinish) {
-                MemoScore score = new MemoScore(memoManager.width,
-                        memoManager.isLevel(), memoManager.getScoreTotal());
-                MemoGameCalculator calculator = new MemoGameCalculator();
-                ScoreManager<MemoScore> scoreManager
-                        = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
-                scoreManager.saveScore(score, context);
-                isFinish = false;
-            }
+            MemoScore score = new MemoScore(memoManager.width,
+                    memoManager.isLevel(), memoManager.getScoreTotal());
+            MemoGameCalculator calculator = new MemoGameCalculator();
+            ScoreManager<MemoScore> scoreManager
+                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
+            scoreManager.saveScore(score, context);
         }
     }
 

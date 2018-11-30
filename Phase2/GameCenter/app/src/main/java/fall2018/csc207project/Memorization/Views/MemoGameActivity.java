@@ -1,7 +1,10 @@
 package fall2018.csc207project.Memorization.Views;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -21,6 +24,8 @@ import java.util.TimerTask;
 import fall2018.csc207project.Memorization.Controllers.GamePresenter;
 import fall2018.csc207project.Memorization.Controllers.MemoGamePresenter;
 import fall2018.csc207project.Memorization.Models.MemoManager;
+import fall2018.csc207project.Models.DatabaseUtil;
+import fall2018.csc207project.Models.ImageManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.SlidingTile.Controllers.CustomAdapter;
 
@@ -55,6 +60,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memo_main);
+        setBackGroud();
         score = findViewById(R.id.Score);
         life = findViewById(R.id.life);
         status = findViewById(R.id.status);
@@ -85,6 +91,7 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
                 }
             });
             setButtonColor(button, android.R.color.white);
+            button.getBackground().setAlpha(150);
             memoButtons.add(button);
         }
     }
@@ -206,6 +213,16 @@ public class MemoGameActivity extends AppCompatActivity implements MemoGameView,
         FragmentManager fm = getSupportFragmentManager();
         GameOverDialogFragment fragment = GameOverDialogFragment.newInstance(score, manager);
         fragment.show(fm, "fragment_edit_name");
+    }
+
+    private void setBackGroud(){
+        SharedPreferences shared = getSharedPreferences("GameData", Context.MODE_PRIVATE);
+        String currentUser = shared.getString("currentUser", null);
+        ImageManager manager = DatabaseUtil.getImageManager(currentUser);
+        Drawable bg = manager.getBackground(getApplicationContext());
+        if (bg != null){
+            findViewById(R.id.memoGame).setBackground(bg);
+        }
     }
 
     /**
