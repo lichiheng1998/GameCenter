@@ -69,6 +69,8 @@ public class MemoGamePresenter implements GamePresenter {
      */
     private boolean gameOver;
 
+    private boolean isFinish = true;
+
     /**
      * Construct a new MemoGamePresenter
      * by given a final MemoGameView and a Context.
@@ -157,8 +159,6 @@ public class MemoGamePresenter implements GamePresenter {
             startCycle();
         }
     }
-
-    private boolean isFinish = true;
 
     /**
      * End the the game after a tap the user tapped is incorrect.
