@@ -52,7 +52,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="Current User Name" />
+        android:text="Current User Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
     <TextView
