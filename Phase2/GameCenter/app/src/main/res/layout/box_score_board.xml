@@ -25,11 +25,11 @@
     <TextView
         android:id="@+id/boxHighestText"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="15dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="8dp"
-        android:text="Highest Three Score:"
+        android:text="My top 3 scores:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxPlayerName" />
@@ -88,11 +88,11 @@
     <TextView
         android:id="@+id/boxGlobalDisplay"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="15dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Overall player scores"
+        android:text="Top player scores:"
         app:layout_constraintBottom_toTopOf="@+id/boxScoreBoard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
