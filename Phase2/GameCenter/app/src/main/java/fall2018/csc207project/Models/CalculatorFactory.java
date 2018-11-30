@@ -5,16 +5,16 @@ import fall2018.csc207project.PushTheBox.Models.BoxGameCalculator;
 import fall2018.csc207project.SlidingTile.Models.TileGameCalculator;
 
 /**
- *
+ * The class CalculatorFactory get all different Calculators for different games.
  */
 @SuppressWarnings("unchecked")
 public class CalculatorFactory {
 
     /**
+     * Get the different Calculators for different games.
      *
-     *
-     * @param calculatorType
-     * @return
+     * @param calculatorType A String representation of the different game calculators
+     * @return the different Calculators for different games
      */
     public <T extends Score> ScoreCalculator<T> getCalculator(String calculatorType) {
         if (calculatorType == null) {
