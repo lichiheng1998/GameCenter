@@ -25,7 +25,7 @@ public class GlobalConfig {
      * Ids of the background resources of the games.
      */
     private static final Integer[] GAME_BG
-            = {R.drawable.sliding_tile_background, R.drawable.memopick, R.drawable.push_box_background};
+            = {R.drawable.puzzle, R.drawable.memo, R.drawable.push_box};
 
     /**
      * The entries of the each games.

@@ -58,7 +58,7 @@ public class ManageSaveActivity extends AppCompatActivity implements ManageSaveV
     /**
      * Setup the save button.
      */
-    public void setupSaveButtons(){
+    private void setupSaveButtons(){
         for (int i = 0; i < 3; i++){
             final int pos = i;
             findViewById(saveIds[i]).setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class ManageSaveActivity extends AppCompatActivity implements ManageSaveV
     /**
      * Setup the load button.
      */
-    public void setupLoadButtons(){
+    private void setupLoadButtons(){
         for (int i = 0; i < 4; i++){
             final int pos = i;
             findViewById(loadIds[i]).setOnClickListener(new View.OnClickListener() {
