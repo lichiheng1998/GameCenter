@@ -95,7 +95,7 @@
         android:layout_above="@+id/memoScoreBoard"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-245dp"
-        android:text="Top 10 Scores for Choisen Difficulty and Mode" />
+        android:text="Top 10 Scores for Chosen Difficulty and Mode" />
 
     <TextView
         android:id="@+id/textView20"
@@ -104,7 +104,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="113dp"
-        android:text="Player's Top 3 for Choisen Difficulty and Mode" />
+        android:text="Player's Top 3 for Chosen Difficulty and Mode" />
 
     <TextView
         android:id="@+id/textView21"
