@@ -68,6 +68,7 @@ public class SwipeDetectGridView extends GridView {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @SuppressWarnings("unused")
     public SwipeDetectGridView(Context context, AttributeSet attrs, int defStyleAttr,
                                  int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);

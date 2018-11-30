@@ -22,7 +22,7 @@
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="196dp"
+        android:layout_marginTop="240dp"
         android:background="#fab359"
         android:backgroundTintMode="src_over"
         android:text="New Game"

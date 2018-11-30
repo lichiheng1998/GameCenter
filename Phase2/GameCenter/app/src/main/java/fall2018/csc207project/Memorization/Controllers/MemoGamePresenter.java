@@ -27,10 +27,6 @@ public class MemoGamePresenter implements GamePresenter {
     private String currentUser;
 
     /**
-     *
-     */
-    ScoreManager<MemoScore> scoreManager;
-    /**
      * The number of taps that to click correct.
      */
     private int successTap;
@@ -92,11 +88,7 @@ public class MemoGamePresenter implements GamePresenter {
         this.view = view;
         SharedPreferences shared
                 = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
-        ScoreCalculator<MemoScore> calculator =
-                new CalculatorFactory().getCalculator("MemoCalculator");
         currentUser = shared.getString("currentUser", null);
-        String game = shared.getString("currentGame", null);
-        scoreManager = DatabaseUtil.getScoreManager(game, currentUser, calculator);
         isAvailableHint = true;
         isDisplaying = false;
         gameOver = false;
@@ -191,6 +183,11 @@ public class MemoGamePresenter implements GamePresenter {
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
             MemoScore score = new MemoScore(memoManager.width,
                     memoManager.isLevel(), memoManager.getScoreTotal());
+            CalculatorFactory calculatorFactory = new CalculatorFactory();
+            ScoreCalculator calculator =
+                    calculatorFactory.getCalculator("MemoCalculator");
+            ScoreManager<MemoScore> scoreManager
+                    = DatabaseUtil.getScoreManager("MemoGame", currentUser, calculator);
             scoreManager.saveScore(score, context);
         }
     }
