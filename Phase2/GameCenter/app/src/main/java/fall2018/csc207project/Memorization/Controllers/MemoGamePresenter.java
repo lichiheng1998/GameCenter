@@ -26,10 +26,11 @@ public class MemoGamePresenter implements GamePresenter {
      */
     private String currentUser;
 
+    private boolean isScoreRecoreded;
     /**
      *
      */
-    ScoreManager<MemoScore> scoreManager;
+    private ScoreManager<MemoScore> scoreManager;
     /**
      * The number of taps that to click correct.
      */
@@ -97,15 +98,22 @@ public class MemoGamePresenter implements GamePresenter {
         currentUser = shared.getString("currentUser", null);
         String game = shared.getString("currentGame", null);
         scoreManager = DatabaseUtil.getScoreManager(game, currentUser, calculator);
-        isAvailableHint = true;
-        isDisplaying = false;
-        gameOver = false;
-        successTap = 0;
-        life = 3;
+        setupStates();
         view.updateScore(successTap);
         view.updateLife(life);
     }
 
+    /**
+     * Setup the game states.
+     */
+    private void setupStates(){
+        isAvailableHint = true;
+        isDisplaying = false;
+        gameOver = false;
+        isScoreRecoreded = false;
+        successTap = 0;
+        life = 3;
+    }
     /**
      * Get the next MemoTile to be verified.
      */
@@ -186,12 +194,13 @@ public class MemoGamePresenter implements GamePresenter {
         life = life == 0 ? 0 : life-1;
         view.updateLife(life);
         gameOver = life == 0;
-        if(gameOver){
+        if(gameOver && !isScoreRecoreded){
             memoManager.setScoreTotal(successTap);
             view.showGameOverDialog(successTap, memoManager.getNewInstance());
             MemoScore score = new MemoScore(memoManager.width,
                     memoManager.isLevel(), memoManager.getScoreTotal());
             scoreManager.saveScore(score, context);
+            isScoreRecoreded = true;
         }
     }
 
