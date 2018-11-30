@@ -50,7 +50,7 @@ public class MovementController {
     /**
      * Get the value that represents the change in position.
      *
-     * @param direction the string representing direciton(eg."up", "down", "right", "left")
+     * @param direction the string representing direction(eg."up", "down", "right", "left")
      * @return the value that represents the change in position
      */
     private int getPosChange(String direction){
