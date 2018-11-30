@@ -5,10 +5,12 @@ import java.util.Random;
 import java.util.Iterator;
 import java.util.List;
 
+import fall2018.csc207project.Models.Shuffler;
+
 /**
  * A final class SlidingTileGameShuffler with implements Shuffler.
  */
-public final class SlidingTileGameShuffler implements Shuffler{
+public final class SlidingTileGameShuffler implements Shuffler {
 
     /**
      * process multiple shuffles on a given board
