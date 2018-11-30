@@ -37,6 +37,11 @@ public class MemoGamePresenter implements GamePresenter {
     private MemoManager memoManager;
 
     /**
+     * Whether the hint is available.
+     */
+    private boolean isAvailableHint;
+
+    /**
      * The View of the Memo Game.
      */
     private MemoGameView view;
@@ -84,6 +89,7 @@ public class MemoGamePresenter implements GamePresenter {
         SharedPreferences shared
                 = context.getSharedPreferences("GameData", Context.MODE_PRIVATE);
         currentUser = shared.getString("currentUser", null);
+        isAvailableHint = true;
         isDisplaying = false;
         gameOver = false;
         successTap = 0;
@@ -241,5 +247,14 @@ public class MemoGamePresenter implements GamePresenter {
      */
     public int getLife() {
         return life;
+    }
+
+    @Override
+    public void onHintTap() {
+        if(!isDisplaying && isAvailableHint){
+            view.flashButtonToColor(nextToVerify.getId(), flashDelay, MemoTile.PRESSCOLOR);
+            view.deActivateHint();
+            isAvailableHint = false;
+        }
     }
 }

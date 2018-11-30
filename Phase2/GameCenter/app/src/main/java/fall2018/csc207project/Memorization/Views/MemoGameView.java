@@ -51,4 +51,9 @@ public interface MemoGameView {
      * @param manager MemoManger that holds info of the game
      */
     void showGameOverDialog(int score, MemoManager manager);
+
+    /**
+     * Change the image of the button to indicate the hint is no more active.
+     */
+    void deActivateHint();
 }

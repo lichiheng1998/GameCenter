@@ -12,8 +12,8 @@
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="53dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="62dp"
         android:text="@string/accept" />
 
     <ListView
@@ -28,11 +28,11 @@
 
     <TextView
         android:id="@+id/memoCurrentPlayer"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="18dp"
         android:text="Current User Name" />
 
 
@@ -65,23 +65,25 @@
 
     <EditText
         android:id="@+id/acceptText"
-        android:layout_width="100dp"
+        android:layout_width="25dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/buttonAccept"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
+        android:layout_alignTop="@+id/buttonAccept"
+        android:layout_marginStart="122dp"
         android:ems="10"
         android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
         android:text="@string/_3"
         tools:ignore="LabelFor" />
 
     <Switch
         android:id="@+id/memoMode"
-        android:layout_width="100dp"
+        android:layout_width="91dp"
         android:layout_height="40dp"
-        android:layout_alignBottom="@+id/buttonAccept"
-        android:layout_centerHorizontal="true"
-        android:text="@string/hard_mode" />
+        android:layout_alignEnd="@+id/memoCurrentPlayer"
+        android:layout_alignTop="@+id/buttonAccept"
+        android:text="Hard Mode" />
 
     <TextView
         android:id="@+id/textView19"
@@ -123,6 +125,16 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/acceptText"
         android:layout_alignTop="@+id/memoPlayerTop3x3"
+        android:layout_marginTop="0dp"
         android:text="Third" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="85dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/buttonAccept"
+        android:layout_marginStart="25dp"
+        android:text="Complexities and Modes" />
 
 </RelativeLayout>
