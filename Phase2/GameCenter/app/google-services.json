@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "781066476003",
+    "firebase_url": "https://gamecenter-8a7fe.firebaseio.com",
+    "project_id": "gamecenter-8a7fe",
+    "storage_bucket": "gamecenter-8a7fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781066476003:android:9c62a078742cd8a5",
+        "android_client_info": {
+          "package_name": "fall2018.csc207project.slidingtilegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781066476003-ifc73sh5g50hgbmepf4r7efabqtnokrc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAPmuTX7yOEveyIr-smF5GW7x6EG6ev24"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
