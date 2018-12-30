@@ -2,7 +2,9 @@ package fall2018.csc207project.SlidingTile.Models;
 
 import android.support.annotation.NonNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Observer;
 import java.util.Stack;
 

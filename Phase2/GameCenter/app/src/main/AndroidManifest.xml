@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity android:name="fall2018.csc207project.Views.GlobalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,13 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="fall2018.csc207project.Views.SignInActivity" />
-        <activity android:name="fall2018.csc207project.Views.SignUpActivity" />
         <activity android:name="fall2018.csc207project.Views.LocalGameCenterActivity" />
         <activity android:name="fall2018.csc207project.Views.GameListActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.StartingActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ScoreBoardActivity" />
-
+        <activity android:name="fall2018.csc207project.Views.GlobalSignInActivity" />
+        <activity android:name="fall2018.csc207project.Views.GlobalSignUpActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Controllers.ComplexityActivity" />
         <activity android:name="fall2018.csc207project.SlidingTile.Views.GameActivity" />
         <activity android:name=".Memorization.Views.MemoStartingActivity" />

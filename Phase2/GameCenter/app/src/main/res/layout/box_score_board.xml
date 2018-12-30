@@ -105,7 +105,6 @@
         android:id="@+id/boxSpinner"
         android:layout_width="410dp"
         android:layout_height="27dp"
-        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.153"
         app:layout_constraintStart_toStartOf="parent"

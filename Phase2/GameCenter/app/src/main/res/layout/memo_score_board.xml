@@ -66,19 +66,19 @@
 
     <EditText
         android:id="@+id/acceptText"
-        android:layout_width="25dp"
-        android:layout_height="40dp"
-        android:layout_alignTop="@+id/buttonAccept"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="122dp"
+        android:layout_alignTop="@+id/buttonAccept"
         android:layout_marginEnd="15dp"
+        android:layout_marginStart="55dp"
         android:layout_toStartOf="@+id/memoMode"
         android:ems="10"
         android:inputType="number"
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:text="@string/_3"
-        tools:ignore="LabelFor" />
+        android:visibility="visible" />
 
     <Switch
         android:id="@+id/memoMode"
@@ -130,14 +130,5 @@
         android:layout_alignTop="@+id/memoPlayerTop3x3"
         android:layout_marginTop="0dp"
         android:text="Third" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="85dp"
-        android:layout_height="40dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/buttonAccept"
-        android:layout_marginStart="25dp"
-        android:text="Complexities and Modes" />
 
 </RelativeLayout>
