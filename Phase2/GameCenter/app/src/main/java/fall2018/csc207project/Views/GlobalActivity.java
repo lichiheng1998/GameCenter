@@ -14,6 +14,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.pranavpandey.android.dynamic.toasts.DynamicToast;
+
 import fall2018.csc207project.Controllers.GlobalPresenter;
 import fall2018.csc207project.Controllers.GlobalPresenterImpl;
 import fall2018.csc207project.R;
@@ -102,11 +104,14 @@ public class GlobalActivity extends AppCompatActivity implements GlobalView{
 
     @Override
     public void loginWithGoogleFailed() {
-        Toast.makeText(this, R.string.login_failed, Toast.LENGTH_SHORT).show();
+
+        DynamicToast.makeError(this, getResources().getString(R.string.login_failed)).show();
     }
 
     @Override
     public void switchToGameCenter(){
-        Toast.makeText(this, "GameStarted!", Toast.LENGTH_SHORT).show();
+        DynamicToast.make(this, "Game Started!").show();
+        Intent tmp = new Intent(this, LocalGameCenterActivity.class);
+        startActivity(tmp);
     }
 }
