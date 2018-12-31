@@ -34,6 +34,8 @@
         <activity android:name="fall2018.csc207project.Views.ManageSaveActivity" />
         <activity android:name=".PushTheBox.View.BoxScoreBoardActivity" />
         <activity android:name=".Memorization.Views.MemoScoreBoardActivity" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>

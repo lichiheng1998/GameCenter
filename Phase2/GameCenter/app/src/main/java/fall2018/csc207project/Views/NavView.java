@@ -1,6 +1,9 @@
 package fall2018.csc207project.Views;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+
+import com.google.firebase.storage.StorageReference;
 
 /**
  * The Nav that display on screen.
@@ -14,10 +17,7 @@ public interface NavView {
      */
     void showBackground(Drawable drawable);
 
-    /**
-     * Display the avatar by pass in a Drawable.
-     *
-     * @param drawable a drawable tells the info of display
-     */
-    void showAvatar(Drawable drawable);
+    void showAvatar(StorageReference imgRef);
+
+    void showAvatar(Uri imgRef);
 }
