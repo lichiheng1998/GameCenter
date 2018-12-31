@@ -1,11 +1,13 @@
 package fall2018.csc207project.Views;
 
+import android.content.ContentResolver;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,8 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.storage.FirebaseStorage;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
+import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
 
 public class GlobalSignUpActivity extends AppCompatActivity{
@@ -70,17 +74,26 @@ public class GlobalSignUpActivity extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(nickName).build();
-
-                            user.updateProfile(profileUpdates);
+                            FirebaseStorage storage = FirebaseStorage.getInstance();
+                            UserManager manager = new UserManager(mAuth);
+                            manager.updateNickName(nickName);
+                            manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar), storage);
                             finish();
                         } else {
                             DynamicToast.makeError(GlobalSignUpActivity.this, "Sign Up Failed!").show();
                         }
                     }
                 });
+    }
+
+    public Uri getUriFromResourceId(int resId){
+        Resources resources = GlobalSignUpActivity.this.getApplicationContext().getResources();
+        Uri uri = new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                .authority(resources.getResourcePackageName(resId))
+                .appendPath(resources.getResourceTypeName(resId))
+                .appendPath(resources.getResourceEntryName(resId))
+                .build();
+        return uri;
     }
 }
