@@ -44,6 +44,10 @@ public class UserManager {
         return storageRef.child("images/" + currentUser.getUid() + "/profilePicture");
     }
 
+    public String getUserNickName(){
+        return currentUser.getDisplayName();
+    }
+
     public void logOut(){
         auth.signOut();
     }

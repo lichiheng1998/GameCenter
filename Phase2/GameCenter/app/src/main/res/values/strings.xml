@@ -31,4 +31,5 @@
     <string name="copyright">© 2018, Team, 0621, All Rights Reserved</string>
     <string name="_3">3</string>
     <string name="hard_mode">hard_mode</string>
+    <string name="action_settings">Settings</string>
 </resources>

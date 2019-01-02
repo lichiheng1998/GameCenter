@@ -12,12 +12,15 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.SuccessContinuation;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import fall2018.csc207project.NewModels.UserManager;
@@ -74,11 +77,19 @@ public class GlobalSignUpActivity extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseStorage storage = FirebaseStorage.getInstance();
-                            UserManager manager = new UserManager(mAuth);
-                            manager.updateNickName(nickName);
-                            manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar), storage);
-                            finish();
+                            final FirebaseStorage storage = FirebaseStorage.getInstance();
+                            final UserManager manager = new UserManager(mAuth);
+                            manager.updateNickName(nickName).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar), storage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            finish();
+                                        }
+                                    });
+                                }
+                            });
                         } else {
                             DynamicToast.makeError(GlobalSignUpActivity.this, "Sign Up Failed!").show();
                         }
