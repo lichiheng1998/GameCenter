@@ -11,28 +11,31 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import fall2018.csc207project.Controllers.GameCenterListViewAdapter;
@@ -51,15 +54,15 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
 
     private Uri mCropImageUri;
     private FirebaseStorage storage;
+    private CollapsingToolbarLayout collapsingToolbar;
+    private AppBarLayout appBarLayout;
+    private RecyclerView recyclerView;
+    private ImageView avatar;
+    private boolean visibility;
+    private boolean avatarIsDisplayed;
 
-    /**
-     * The BaseAdapter to interact with the ListView.
-     */
-    private BaseAdapter adapter;
-
-    /**
-     * The List of String represent all games.
-     */
+    private Menu collapsedMenu;
+    private boolean appBarExpanded = true;
     private List<String> gameList;
 
     /**
@@ -76,7 +79,21 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.local_game_center);
+
+        visibility = false;
+        avatarIsDisplayed = true;
+        final Toolbar toolbar = findViewById(R.id.anim_toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        appBarLayout = findViewById(R.id.appbar);
+
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+
         navigationView = findViewById(R.id.nav_view);
+        avatar = findViewById(R.id.avatar);
+        prepareGameList();
 //        SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
 //        String currentUser = sharedData.getString("currentUser", null);
 //        showUserName(currentUser);
@@ -89,8 +106,35 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
 //        prepareGameList();
 //        addAddGameButtonListener();
         setupNavListener();
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                //  Vertical offset == 0 indicates appBar is fully expanded.
+                if (Math.abs(verticalOffset) > 200) {
+                    appBarExpanded = false;
+                    invalidateOptionsMenu();
+                } else {
+                    appBarExpanded = true;
+                    invalidateOptionsMenu();
+                }
+                updateAvatar(appBarExpanded);
+            }
+        });
     }
 
+    private void updateAvatar(boolean isExpanded){
+        if(isExpanded && !avatarIsDisplayed){
+            avatar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_up_fast));
+            avatar.setVisibility(View.VISIBLE);
+            avatarIsDisplayed = !avatarIsDisplayed;
+        }
+        else if(!isExpanded && avatarIsDisplayed){
+            avatar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_down_fast));
+            avatar.setVisibility(View.INVISIBLE);
+            avatarIsDisplayed = !avatarIsDisplayed;
+        }
+    }
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
@@ -102,15 +146,15 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     /**
      * Activate the add button.
      */
-    private void addAddGameButtonListener() {
-        Button addGameButton = findViewById(R.id.add_game);
-        addGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchGameList();
-            }
-        });
-    }
+//    private void addAddGameButtonListener() {
+//        Button addGameButton = findViewById(R.id.add_game);
+//        addGameButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                switchGameList();
+//            }
+//        });
+//    }
 
     /**
      * Switch to the GameListActivity view to add or remove.
@@ -124,16 +168,26 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
      * Prepare the game list.
      */
     private void prepareGameList(){
-        ListView listView = findViewById(R.id.gameList);
-        this.adapter = new GameCenterListViewAdapter(this, gameList,
+        recyclerView = findViewById(R.id.scrollableview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final GameCenterListViewAdapter adapter = new GameCenterListViewAdapter(
+                new ArrayList<>(Arrays.asList("SlidingTile", "Memorization Master", "Push The Box")),
                 GlobalConfig.BG_MAP);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                String game = ((TextView)v.findViewById(R.id.gameName)).getText().toString();
-                launchGame(game);
+        adapter.setOnLongPressListener(new RecyclerViewOnLongPressListener() {
+            @Override
+            public void onLongPress(View view, int position) {
+                visibility = !visibility;
+                adapter.updateVisibility(visibility);
             }
         });
+        adapter.setFabListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.remove((String)view.getTag());
+            }
+        });
+        recyclerView.setAdapter(adapter);
     }
 
     /**
@@ -172,8 +226,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
                                 presenter.onResetClicked(getApplicationContext());
                                 break;
                             case R.id.nav_logout:
-                                logout();
-                                finish();
+                                presenter.onLogOutClicked();
                                 break;
                         }
                         return true;
@@ -234,7 +287,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     public void showAvatar(StorageReference imgRef) {
         Glide.with(this /* context */)
                 .load(imgRef)
-                .into((ImageView)navigationView.getHeaderView(0).findViewById(R.id.avatar));
+                .into((ImageView)findViewById(R.id.avatar));
     }
 
     @Override
@@ -242,14 +295,16 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         Log.e("test", "showAvatar: it's shown");
         GlideApp.with(this /* context */)
                 .load(imgRef)
-                .into((ImageView)navigationView.getHeaderView(0).findViewById(R.id.avatar));
+                .into((ImageView)findViewById(R.id.avatar));
     }
+
     /**
      * Display the user's name.
      *
      * @param userName the given user's name
      */
-    private void showUserName(String userName){
+    @Override
+    public void showUserName(String userName){
         ((TextView)navigationView.getHeaderView(0).findViewById(R.id.username)).setText(userName);
     }
 
@@ -284,5 +339,41 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
                 .setCropShape(CropImageView.CropShape.OVAL)
                 .start(this);
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (collapsedMenu != null
+                && (!appBarExpanded || collapsedMenu.size() != 1)) {
+            //collapsed
+            collapsedMenu.add("Add")
+                    .setIcon(R.drawable .ic_action_add)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+        return super.onPrepareOptionsMenu(collapsedMenu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        collapsedMenu = menu;
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+        if (item.getTitle() == "Add") {
+            Toast.makeText(this, "clicked add", Toast.LENGTH_SHORT).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
 

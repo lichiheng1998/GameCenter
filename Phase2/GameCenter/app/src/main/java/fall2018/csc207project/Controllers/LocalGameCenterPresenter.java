@@ -30,6 +30,8 @@ public interface LocalGameCenterPresenter {
      */
     void onResetClicked(Context context);
 
+    void onLogOutClicked();
+
     void initializeView(FirebaseStorage storage);
 
 }

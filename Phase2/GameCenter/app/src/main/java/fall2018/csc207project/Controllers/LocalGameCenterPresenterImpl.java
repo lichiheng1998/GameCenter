@@ -61,6 +61,13 @@ public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter{
     @Override
     public void initializeView(FirebaseStorage storage) {
         view.showAvatar(manager.getUserProfileImage(storage));
+        view.showUserName(manager.getUserNickName());
+    }
+
+    @Override
+    public void onLogOutClicked() {
+        manager.logOut();
+        view.finish();
     }
 
     /**

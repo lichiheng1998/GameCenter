@@ -1,108 +1,115 @@
 package fall2018.csc207project.Controllers;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.List;
 import java.util.Map;
 import fall2018.csc207project.R;
+import fall2018.csc207project.Views.RecyclerViewOnLongPressListener;
 
 /**
  * The class GameCenterListViewAdapter that extends ArrayAdapter<String>
  */
-public class GameCenterListViewAdapter extends ArrayAdapter<String> {
+public class GameCenterListViewAdapter extends RecyclerView.Adapter<GameCenterListViewAdapter.ViewHolder> {
 
+    private RecyclerViewOnLongPressListener listener;
+    private View.OnClickListener fabListener;
     /**
      * The Map of String and Integer which are the info
      * for the games you added in the GameCenter.
      */
     private Map<String, Integer> bgMap;
+    private List<String> gameList;
+    private boolean isVisible = false;
 
     /**
      * Construct a new GameCenterListViewAdapter
      * by given a Context, a List<String>, a Map<String, Integer>
      *
-     * @param context the context of the app
      * @param gameList the list of String representing the games' name
      * @param bgMap the Map of each games' info
      */
-    public GameCenterListViewAdapter(Context context, List<String> gameList, Map<String, Integer> bgMap){
-        super(context,0, gameList);
+    public GameCenterListViewAdapter(List<String> gameList, Map<String, Integer> bgMap){
+        this.gameList = gameList;
         this.bgMap = bgMap;
     }
 
-    /**
-     * The view holder class is used for implement the view holder pattern of android.
-     */
-    class MyViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
+        public RecyclerViewOnLongPressListener listener;
+        public ImageView image;
+        public TextView text;
+        FloatingActionButton fab;
 
-        /**
-         * The TextView of each game.
-         */
-        TextView textView;
+        ViewHolder(View itemView, RecyclerViewOnLongPressListener listener, View.OnClickListener
+                fabListener) {
+            super(itemView);
+            image = itemView.findViewById(R.id.background);
+            text = itemView.findViewById(R.id.gameName);
+            this.listener = listener;
+            fab = itemView.findViewById(R.id.delete);
+            fab.setOnClickListener(fabListener);
+            itemView.setOnLongClickListener(this);
+        }
 
-        /**
-         * The ImageView of each game.
-         */
-        ImageView imageView;
-
-        /**
-         * Construct a new MyViewHolder by given a View.
-         *
-         * @param v the current view
-         */
-        private MyViewHolder(View v){
-            this.textView = v.findViewById(R.id.gameName);
-            this.imageView = v.findViewById(R.id.background);
+        @Override
+        public boolean onLongClick(View view) {
+            listener.onLongPress(view, 0);
+            return true;
         }
     }
 
     @NonNull
     @Override
-    public View getView(int i, View view, @NonNull ViewGroup parent) {
-        View row = view;
-        MyViewHolder holder;
-        if (row == null) {
-            row = LayoutInflater.from(getContext()).
-                    inflate(R.layout.local_game_center_row, parent, false);
-            holder = new MyViewHolder(row);
-            row.setTag(holder);
-        } else {
-            holder = (MyViewHolder)row.getTag();
-        }
-
-        holder.textView.setText(getItem(i));
-        holder.imageView.setImageBitmap(createRoundedImage(bgMap.get(getItem(i))));
-        return row;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.local_game_center_row, parent, false);
+        return new ViewHolder(v, listener, fabListener);
     }
 
-    /**
-     * Cut the resource with the resId to the image with round corner.
-     * @param resId The id of the resource.
-     * @return imageRounded The bit with the round corner.
-     * */
-    private Bitmap createRoundedImage(int resId){
-        Bitmap mBitMap = BitmapFactory.decodeResource(getContext().getResources(), resId);
-        Bitmap imageRounded = Bitmap.createBitmap(mBitMap.getWidth(), mBitMap.getHeight(),
-                mBitMap.getConfig());
-        Canvas canvas = new Canvas(imageRounded);
-        Paint mPaint = new Paint();
-        mPaint.setAntiAlias(true);
-        mPaint.setShader(new BitmapShader(mBitMap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
-        canvas.drawRoundRect((new RectF(0, 0, mBitMap.getWidth(), mBitMap.getHeight())),
-                100, 100, mPaint);
-        return imageRounded;
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
+        String game = gameList.get(i);
+        holder.text.setText(game);
+        holder.image.setImageResource(bgMap.get(game));
+        holder.itemView.setTag(game);
+        holder.fab.setTag(game);
+        if (isVisible){
+            holder.fab.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.scale_up));
+            holder.fab.show();
+        } else {
+            holder.fab.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.scale_down));
+            holder.fab.hide();
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return gameList.size();
+    }
+
+    public void updateVisibility(boolean newValue){
+        isVisible= newValue;
+        this.notifyDataSetChanged();
+    }
+
+    public void setOnLongPressListener(RecyclerViewOnLongPressListener listener){
+        this.listener = listener;
+    }
+
+    public void setFabListener(View.OnClickListener listener){
+        this.fabListener = listener;
+    }
+
+    public void remove(String game) {
+        int position = gameList.indexOf(game);
+        gameList.remove(position);
+        notifyItemRemoved(position);
     }
 }
