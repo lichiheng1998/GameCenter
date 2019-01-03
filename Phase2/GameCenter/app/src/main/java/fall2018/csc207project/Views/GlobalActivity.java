@@ -4,9 +4,11 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -14,6 +16,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import fall2018.csc207project.Controllers.GlobalPresenter;
@@ -25,6 +29,7 @@ import fall2018.csc207project.R;
  */
 public class GlobalActivity extends AppCompatActivity implements GlobalView{
 
+    ProgressBar progressBar;
     GoogleSignInClient mGoogleSignInClient;
     private static int RC_SIGN_IN = 100;
     private GlobalPresenter presenter;
@@ -39,6 +44,9 @@ public class GlobalActivity extends AppCompatActivity implements GlobalView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.global);
+
+        progressBar = findViewById(R.id.loading_spinner);
+
         presenter = new GlobalPresenterImpl(this);
         // Initialize Firebase Auth
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -113,5 +121,11 @@ public class GlobalActivity extends AppCompatActivity implements GlobalView{
         DynamicToast.make(this, "Game Started!").show();
         Intent tmp = new Intent(this, LocalGameCenterActivity.class);
         startActivity(tmp);
+    }
+
+    @Override
+    public void updateProgressBar(boolean visibility) {
+        int code = visibility ? View.VISIBLE : View.INVISIBLE;
+        progressBar.setVisibility(code);
     }
 }

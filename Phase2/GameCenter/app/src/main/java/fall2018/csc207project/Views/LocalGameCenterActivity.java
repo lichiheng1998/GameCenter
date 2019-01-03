@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
@@ -27,8 +28,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -37,12 +48,14 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import fall2018.csc207project.Controllers.GameCenterListViewAdapter;
 import fall2018.csc207project.Controllers.LocalGameCenterPresenter;
 import fall2018.csc207project.Controllers.LocalGameCenterPresenterImpl;
 import fall2018.csc207project.Models.GlideApp;
 import fall2018.csc207project.Models.GlobalConfig;
+import fall2018.csc207project.NewModels.GlobalGameManager;
 import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
 
@@ -50,7 +63,7 @@ import fall2018.csc207project.R;
  * The activity that allows the user choose the game to play and choose whether they want to add
  * or remove game.
  */
-public class LocalGameCenterActivity extends AppCompatActivity implements NavView{
+public class LocalGameCenterActivity extends AppCompatActivity implements NavView, GlobalGameManager.GameReceiver{
 
     private Uri mCropImageUri;
     private FirebaseStorage storage;
@@ -93,18 +106,15 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
 
         navigationView = findViewById(R.id.nav_view);
         avatar = findViewById(R.id.avatar);
-        prepareGameList();
-//        SharedPreferences sharedData = getSharedPreferences("GameData", Context.MODE_PRIVATE);
-//        String currentUser = sharedData.getString("currentUser", null);
-//        showUserName(currentUser);
-//        this.userManager = DatabaseUtil.getUserManager(currentUser);
+
         storage = FirebaseStorage.getInstance();
+        GlobalGameManager gameManager =  new GlobalGameManager(this, FirebaseFirestore.getInstance());
+        gameManager.getGameCollection(storage);
+
         presenter = new LocalGameCenterPresenterImpl(this,
                 new UserManager(FirebaseAuth.getInstance()));
         presenter.initializeView(storage);
-//        gameList = userManager.getGames(getApplicationContext());
-//        prepareGameList();
-//        addAddGameButtonListener();
+
         setupNavListener();
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -130,6 +140,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
             avatarIsDisplayed = !avatarIsDisplayed;
         }
         else if(!isExpanded && avatarIsDisplayed){
+            Log.e("blah", "updateAvatar: hide");
             avatar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_down_fast));
             avatar.setVisibility(View.INVISIBLE);
             avatarIsDisplayed = !avatarIsDisplayed;
@@ -167,13 +178,13 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     /**
      * Prepare the game list.
      */
-    private void prepareGameList(){
+    private void prepareGameList(Map<String, StorageReference> gameCollection){
         recyclerView = findViewById(R.id.scrollableview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final GameCenterListViewAdapter adapter = new GameCenterListViewAdapter(
                 new ArrayList<>(Arrays.asList("SlidingTile", "Memorization Master", "Push The Box")),
-                GlobalConfig.BG_MAP);
+                gameCollection);
         adapter.setOnLongPressListener(new RecyclerViewOnLongPressListener() {
             @Override
             public void onLongPress(View view, int position) {
@@ -284,19 +295,15 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     }
 
     @Override
-    public void showAvatar(StorageReference imgRef) {
-        Glide.with(this /* context */)
+    public void showAvatar(final StorageReference imgRef) {
+        GlideApp.with(this)
                 .load(imgRef)
-                .into((ImageView)findViewById(R.id.avatar));
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .transition(GenericTransitionOptions.with(R.anim.scale_up))
+                .into(avatar);
     }
 
-    @Override
-    public void showAvatar(Uri imgRef) {
-        Log.e("test", "showAvatar: it's shown");
-        GlideApp.with(this /* context */)
-                .load(imgRef)
-                .into((ImageView)findViewById(R.id.avatar));
-    }
 
     /**
      * Display the user's name.
@@ -375,5 +382,9 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onGameCollectionReady(Map<String, StorageReference> gameCollection) {
+        prepareGameList(gameCollection);
+    }
 }
 
