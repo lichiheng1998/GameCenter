@@ -7,9 +7,11 @@ import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import fall2018.csc207project.NewModels.UserManager;
@@ -18,7 +20,7 @@ import fall2018.csc207project.Views.NavView;
 /**
  * The class NavPresenter implements BasePresenter
  */
-public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter{
+public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter, UserManager.OnUserProfileImageUpdated{
 
     /**
      * The NavView for the current user.
@@ -54,8 +56,7 @@ public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter{
 
     @Override
     public void onAvatarSelected(Uri imageUri, FirebaseStorage storage) {
-        view.showAvatar(imageUri);
-        manager.updateUserProfileImage(imageUri, storage);
+        manager.updateUserProfileImage(imageUri, this, storage);
     }
 
     @Override
@@ -87,6 +88,16 @@ public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter{
             cursor.moveToFirst();
             int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
             return cursor.getString(idx);
+        }
+    }
+
+    @Override
+    public void onUserProfileImageUpdated(StorageReference imageUri) {
+        if(imageUri != null){
+            Log.e("try", "onUserProfileImageUpdated: show avatar");
+            view.showAvatar(imageUri);
+        }else{
+            Log.e("ddd", "onUserProfileImageUpdated: not ready");
         }
     }
 }

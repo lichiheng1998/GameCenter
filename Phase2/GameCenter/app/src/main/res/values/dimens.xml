@@ -12,6 +12,7 @@
     <dimen name="statusbar_size">24dp</dimen>
 
     <dimen name="cardview_toolbar_spacer">16dp</dimen>
+    <dimen name="first_itemview_top">10dp</dimen>
 
     <dimen name="toolbar_double_height">112dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>

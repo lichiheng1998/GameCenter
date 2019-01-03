@@ -26,6 +26,7 @@ public class GlobalPresenterImpl implements GlobalPresenter{
 
     @Override
     public void firebaseAuthWithGoogle(GoogleSignInAccount acct, Activity activity) {
+        view.updateProgressBar(true);
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
@@ -36,6 +37,7 @@ public class GlobalPresenterImpl implements GlobalPresenter{
                         } else {
                             view.loginWithGoogleFailed();
                         }
+                        view.updateProgressBar(false);
                     }
                 });
     }

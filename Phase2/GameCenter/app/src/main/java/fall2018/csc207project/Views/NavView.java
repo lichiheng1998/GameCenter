@@ -19,8 +19,6 @@ public interface NavView {
 
     void showAvatar(StorageReference imgRef);
 
-    void showAvatar(Uri imgRef);
-
     void showUserName(String userName);
 
     void finish();

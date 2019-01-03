@@ -1,17 +1,31 @@
 package fall2018.csc207project.Controllers;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.CircularProgressDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.GenericTransitionOptions;
+import com.bumptech.glide.TransitionOptions;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.google.firebase.storage.StorageException;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.List;
 import java.util.Map;
+
+import fall2018.csc207project.Models.GlideApp;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Views.RecyclerViewOnLongPressListener;
 
@@ -26,18 +40,11 @@ public class GameCenterListViewAdapter extends RecyclerView.Adapter<GameCenterLi
      * The Map of String and Integer which are the info
      * for the games you added in the GameCenter.
      */
-    private Map<String, Integer> bgMap;
+    private Map<String, StorageReference> bgMap;
     private List<String> gameList;
     private boolean isVisible = false;
 
-    /**
-     * Construct a new GameCenterListViewAdapter
-     * by given a Context, a List<String>, a Map<String, Integer>
-     *
-     * @param gameList the list of String representing the games' name
-     * @param bgMap the Map of each games' info
-     */
-    public GameCenterListViewAdapter(List<String> gameList, Map<String, Integer> bgMap){
+    public GameCenterListViewAdapter(List<String> gameList, Map<String, StorageReference> bgMap){
         this.gameList = gameList;
         this.bgMap = bgMap;
     }
@@ -77,7 +84,10 @@ public class GameCenterListViewAdapter extends RecyclerView.Adapter<GameCenterLi
     public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
         String game = gameList.get(i);
         holder.text.setText(game);
-        holder.image.setImageResource(bgMap.get(game));
+        GlideApp.with(holder.itemView.getContext())
+                .load(bgMap.get(game))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(holder.image);
         holder.itemView.setTag(game);
         holder.fab.setTag(game);
         if (isVisible){
