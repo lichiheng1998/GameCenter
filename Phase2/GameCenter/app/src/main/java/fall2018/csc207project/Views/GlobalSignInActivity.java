@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +23,7 @@ public class GlobalSignInActivity extends AppCompatActivity{
     private FirebaseAuth mAuth;
     private EditText email;
     private EditText password;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class GlobalSignInActivity extends AppCompatActivity{
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        progressBar = findViewById(R.id.loading_spinner);
+
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         myToolbar.setTitle("Sign In");
         setSupportActionBar(myToolbar);
@@ -61,10 +65,12 @@ public class GlobalSignInActivity extends AppCompatActivity{
             DynamicToast.makeError(GlobalSignInActivity.this, "Please Input Correct Info!").show();
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressBar.setVisibility(View.INVISIBLE);
                         if (task.isSuccessful()) {
                             finish();
                         } else {

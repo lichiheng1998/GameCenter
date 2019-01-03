@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,17 +21,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
 
-public class GlobalSignUpActivity extends AppCompatActivity{
+public class GlobalSignUpActivity extends AppCompatActivity implements UserManager.OnUserProfileImageUpdated,
+        UserManager.OnUserNickNameChanged{
     private FirebaseAuth mAuth;
     private EditText email;
     private EditText password;
     private EditText nickName;
+    private ProgressBar progressBar;
+    private UserManager manager;
+    private FirebaseStorage storage;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +45,12 @@ public class GlobalSignUpActivity extends AppCompatActivity{
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         nickName = findViewById(R.id.nickname);
+        progressBar = findViewById(R.id.loading_spinner);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         myToolbar.setTitle("Sign Up");
         setSupportActionBar(myToolbar);
 
+        storage = FirebaseStorage.getInstance();
         mAuth = FirebaseAuth.getInstance();
         setBackButtonListener();
         setSignUpButtonListener();
@@ -72,25 +80,17 @@ public class GlobalSignUpActivity extends AppCompatActivity{
             DynamicToast.makeError(GlobalSignUpActivity.this, "Please Input Correct Info!").show();
             return;
         }
+
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            final FirebaseStorage storage = FirebaseStorage.getInstance();
-                            final UserManager manager = new UserManager(mAuth);
-                            manager.updateNickName(nickName).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar), storage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                            finish();
-                                        }
-                                    });
-                                }
-                            });
+                            manager = new UserManager(mAuth);
+                            manager.updateNickName(nickName, GlobalSignUpActivity.this);
                         } else {
+                            progressBar.setVisibility(View.INVISIBLE);
                             DynamicToast.makeError(GlobalSignUpActivity.this, "Sign Up Failed!").show();
                         }
                     }
@@ -106,5 +106,25 @@ public class GlobalSignUpActivity extends AppCompatActivity{
                 .appendPath(resources.getResourceEntryName(resId))
                 .build();
         return uri;
+    }
+
+    @Override
+    public void onUserNickNameChanged(String name) {
+        if(name != null){
+            manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar),this, storage);
+        } else {
+            progressBar.setVisibility(View.INVISIBLE);
+            DynamicToast.makeError(this, "Can't set nick name!");
+            finish();
+        }
+    }
+
+    @Override
+    public void onUserProfileImageUpdated(StorageReference imgRef) {
+        if(imgRef == null){
+            progressBar.setVisibility(View.INVISIBLE);
+            DynamicToast.makeError(this, "Can't set profile picture!");
+        }
+        finish();
     }
 }
