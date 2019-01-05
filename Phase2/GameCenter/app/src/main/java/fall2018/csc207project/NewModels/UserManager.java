@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -18,6 +19,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +74,23 @@ public class UserManager{
         return storageRef.child("images/" + currentUser.getUid() + "/profilePicture");
     }
 
-    public void addGame(final List<String> game, final OnAddGameReady receiver, final FirebaseFirestore database){
+    public void removeGame(final String game, final OnGameReady receiver, final FirebaseFirestore database){
+        database.collection("users")
+                .document(currentUser.getUid())
+                .update("gameList", FieldValue.arrayRemove(game))
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    receiver.onGameReady(new ArrayList<>(Collections.singletonList(game)),
+                            false);
+                }
+                receiver.onGameReady(null, false);
+            }
+        });
+    }
+    public void addGame(final List<String> game, final OnGameReady receiver,
+                           final FirebaseFirestore database){
         final DocumentReference doc = database.collection("users").document(currentUser.getUid());
         doc.get().continueWithTask(new Continuation<DocumentSnapshot, Task<Void>>() {
             @Override
@@ -86,17 +105,17 @@ public class UserManager{
                     }
                     return doc.set(field, SetOptions.merge());
                 }
-                receiver.onAddGameReady(null);
+                receiver.onGameReady(null, true);
                 return null;
             }
         }).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    receiver.onAddGameReady(game);
+                    receiver.onGameReady(game, true);
                     return;
                 }
-                receiver.onAddGameReady(null);
+                receiver.onGameReady(null, true);
             }
         });
     }
@@ -128,8 +147,8 @@ public class UserManager{
         auth.signOut();
     }
 
-    public interface OnAddGameReady{
-        void onAddGameReady(List<String> game);
+    public interface OnGameReady{
+        void onGameReady(List<String> game, boolean isAdded);
     }
 
     public interface OnGameListReady{

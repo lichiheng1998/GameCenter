@@ -31,7 +31,7 @@ import fall2018.csc207project.Views.GlobalSignUpActivity;
 import fall2018.csc207project.Views.GlobalView;
 
 public class GlobalPresenterImpl implements GlobalPresenter, UserManager.OnUserProfileImageUpdated,
-        UserManager.OnAddGameReady{
+        UserManager.OnGameReady{
 
     private FirebaseAuth mAuth;
     private GlobalView view;
@@ -87,7 +87,7 @@ public class GlobalPresenterImpl implements GlobalPresenter, UserManager.OnUserP
     }
 
     @Override
-    public void onAddGameReady(List<String> game) {
+    public void onGameReady(List<String> game, boolean isAdded) {
         view.switchToGameCenter();
     }
 }

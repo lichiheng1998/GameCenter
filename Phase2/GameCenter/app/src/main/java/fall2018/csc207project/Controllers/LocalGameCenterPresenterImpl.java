@@ -27,7 +27,7 @@ import fall2018.csc207project.Views.NavView;
  */
 public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter,
         UserManager.OnUserProfileImageUpdated,  GlobalGameManager.GameReceiver,
-        UserManager.OnGameListReady{
+        UserManager.OnGameListReady, UserManager.OnGameReady{
 
     /**
      * The NavView for the current user.
@@ -120,5 +120,15 @@ public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter,
     @Override
     public void onGameListReady(List<String> gameList) {
         view.prepareGameList(gameCollection, gameList);
+    }
+
+    @Override
+    public void onFabClicked(String game, FirebaseFirestore database) {
+        manager.removeGame(game, this, database);
+    }
+
+    @Override
+    public void onGameReady(List<String> game, boolean isAdded) {
+
     }
 }
