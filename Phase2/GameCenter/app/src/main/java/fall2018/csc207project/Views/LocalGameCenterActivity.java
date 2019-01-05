@@ -173,6 +173,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         adapter.setFabListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                presenter.onFabClicked((String)view.getTag(), FirebaseFirestore.getInstance());
                 adapter.remove((String)view.getTag());
             }
         });
