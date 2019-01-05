@@ -5,6 +5,9 @@ import android.net.Uri;
 
 import com.google.firebase.storage.StorageReference;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * The Nav that display on screen.
  */
@@ -20,6 +23,8 @@ public interface NavView {
     void showAvatar(StorageReference imgRef);
 
     void showUserName(String userName);
+
+    void prepareGameList(Map<String, StorageReference> gameCollection, List<String> gameList);
 
     void finish();
 }

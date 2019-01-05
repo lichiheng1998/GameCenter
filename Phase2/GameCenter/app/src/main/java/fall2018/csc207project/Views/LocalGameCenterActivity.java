@@ -63,7 +63,7 @@ import fall2018.csc207project.R;
  * The activity that allows the user choose the game to play and choose whether they want to add
  * or remove game.
  */
-public class LocalGameCenterActivity extends AppCompatActivity implements NavView, GlobalGameManager.GameReceiver{
+public class LocalGameCenterActivity extends AppCompatActivity implements NavView{
 
     private Uri mCropImageUri;
     private FirebaseStorage storage;
@@ -108,11 +108,11 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         avatar = findViewById(R.id.avatar);
 
         storage = FirebaseStorage.getInstance();
-        GlobalGameManager gameManager =  new GlobalGameManager(this, FirebaseFirestore.getInstance());
-        gameManager.getGameCollection(storage);
 
+        GlobalGameManager gameManager =  new GlobalGameManager(FirebaseFirestore.getInstance());
         presenter = new LocalGameCenterPresenterImpl(this,
-                new UserManager(FirebaseAuth.getInstance()));
+                new UserManager(FirebaseAuth.getInstance()), gameManager);
+
         presenter.initializeView(storage);
 
         setupNavListener();
@@ -146,26 +146,6 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
             avatarIsDisplayed = !avatarIsDisplayed;
         }
     }
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        gameList.clear();
-//        gameList.addAll(userManager.getGames(getApplicationContext()));
-//        this.adapter.notifyDataSetChanged();
-//    }
-
-    /**
-     * Activate the add button.
-     */
-//    private void addAddGameButtonListener() {
-//        Button addGameButton = findViewById(R.id.add_game);
-//        addGameButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                switchGameList();
-//            }
-//        });
-//    }
 
     /**
      * Switch to the GameListActivity view to add or remove.
@@ -178,13 +158,11 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     /**
      * Prepare the game list.
      */
-    private void prepareGameList(Map<String, StorageReference> gameCollection){
+    public void prepareGameList(Map<String, StorageReference> gameCollection, List<String> gameList){
         recyclerView = findViewById(R.id.scrollableview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        final GameCenterListViewAdapter adapter = new GameCenterListViewAdapter(
-                new ArrayList<>(Arrays.asList("SlidingTile", "Memorization Master", "Push The Box")),
-                gameCollection);
+        final GameCenterListViewAdapter adapter = new GameCenterListViewAdapter(gameList, gameCollection);
         adapter.setOnLongPressListener(new RecyclerViewOnLongPressListener() {
             @Override
             public void onLongPress(View view, int position) {
@@ -378,13 +356,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         if (item.getTitle() == "Add") {
             Toast.makeText(this, "clicked add", Toast.LENGTH_SHORT).show();
         }
-
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onGameCollectionReady(Map<String, StorageReference> gameCollection) {
-        prepareGameList(gameCollection);
     }
 }
 
