@@ -10,17 +10,24 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.List;
+import java.util.Map;
+
+import fall2018.csc207project.NewModels.GlobalGameManager;
 import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.Views.NavView;
 
 /**
  * The class NavPresenter implements BasePresenter
  */
-public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter, UserManager.OnUserProfileImageUpdated{
+public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter,
+        UserManager.OnUserProfileImageUpdated,  GlobalGameManager.GameReceiver,
+        UserManager.OnGameListReady{
 
     /**
      * The NavView for the current user.
@@ -32,15 +39,20 @@ public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter, U
      */
     private UserManager manager;
 
+    private Map<String, StorageReference> gameCollection;
+    private GlobalGameManager gameManager;
+
     /**
      * Construct a new NavPresenter by given a NavView and an ImageManager.
      *
      * @param view the NavView for the current user
      * @param manager the ImageManager to manage images
      */
-    public LocalGameCenterPresenterImpl(NavView view, UserManager manager){
+    public LocalGameCenterPresenterImpl(NavView view, UserManager manager,
+                                        GlobalGameManager gameManager){
         this.manager = manager;
         this.view = view;
+        this.gameManager = gameManager;
     }
 
 
@@ -63,6 +75,7 @@ public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter, U
     public void initializeView(FirebaseStorage storage) {
         view.showAvatar(manager.getUserProfileImage(storage));
         view.showUserName(manager.getUserNickName());
+        gameManager.getGameCollection(this, storage);
     }
 
     @Override
@@ -94,10 +107,18 @@ public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter, U
     @Override
     public void onUserProfileImageUpdated(StorageReference imageUri) {
         if(imageUri != null){
-            Log.e("try", "onUserProfileImageUpdated: show avatar");
             view.showAvatar(imageUri);
-        }else{
-            Log.e("ddd", "onUserProfileImageUpdated: not ready");
         }
+    }
+
+    @Override
+    public void onGameCollectionReady(Map<String, StorageReference> gameCollection) {
+        this.gameCollection = gameCollection;
+        manager.getGameList(this, FirebaseFirestore.getInstance());
+    }
+
+    @Override
+    public void onGameListReady(List<String> gameList) {
+        view.prepareGameList(gameCollection, gameList);
     }
 }
