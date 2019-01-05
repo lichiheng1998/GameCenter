@@ -84,11 +84,10 @@ public class GlobalPresenterImpl implements GlobalPresenter, UserManager.OnUserP
     @Override
     public void onUserProfileImageUpdated(StorageReference name) {
         manager.addGame(Arrays.asList(GlobalConfig.GAME_LIST), this, database);
-        view.switchToGameCenter();
     }
 
     @Override
     public void onAddGameReady(List<String> game) {
-
+        view.switchToGameCenter();
     }
 }
