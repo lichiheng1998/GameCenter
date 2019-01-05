@@ -3,18 +3,24 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class UserManager{
@@ -65,16 +71,32 @@ public class UserManager{
         return storageRef.child("images/" + currentUser.getUid() + "/profilePicture");
     }
 
-    public void addGame(final List<String> game, final OnAddGameReady receiver, FirebaseFirestore database){
-        database.collection("users").document(currentUser.getUid())
-                .update("gameList", FieldValue.arrayUnion(game)).addOnCompleteListener(new OnCompleteListener<Void>() {
+    public void addGame(final List<String> game, final OnAddGameReady receiver, final FirebaseFirestore database){
+        final DocumentReference doc = database.collection("users").document(currentUser.getUid());
+        doc.get().continueWithTask(new Continuation<DocumentSnapshot, Task<Void>>() {
+            @Override
+            public Task<Void> then(@NonNull Task<DocumentSnapshot> task) throws Exception {
+                if (task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Map<String, List<String>> field = new HashMap<>();
+                    field.put("gameList", game);
+                    if (document.exists()) {
+                        game.addAll((ArrayList<String>)document.get("gameList"));
+                        field.put("gameList", game);
+                    }
+                    return doc.set(field, SetOptions.merge());
+                }
+                receiver.onAddGameReady(null);
+                return null;
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
+                if(task.isSuccessful()){
                     receiver.onAddGameReady(game);
-                } else {
-                    receiver.onAddGameReady(null);
+                    return;
                 }
+                receiver.onAddGameReady(null);
             }
         });
     }

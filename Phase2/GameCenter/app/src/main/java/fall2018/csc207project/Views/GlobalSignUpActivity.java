@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -20,16 +21,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
+import java.util.Arrays;
+import java.util.List;
+
+import fall2018.csc207project.NewModels.GlobalGameManager;
 import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
 
 public class GlobalSignUpActivity extends AppCompatActivity implements UserManager.OnUserProfileImageUpdated,
-        UserManager.OnUserNickNameChanged{
+        UserManager.OnUserNickNameChanged, UserManager.OnAddGameReady{
     private FirebaseAuth mAuth;
     private EditText email;
     private EditText password;
@@ -110,21 +116,27 @@ public class GlobalSignUpActivity extends AppCompatActivity implements UserManag
 
     @Override
     public void onUserNickNameChanged(String name) {
-        if(name != null){
-            manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar),this, storage);
-        } else {
-            progressBar.setVisibility(View.INVISIBLE);
+        if(name == null){
             DynamicToast.makeError(this, "Can't set nick name!");
-            finish();
         }
+        manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar),this, storage);
     }
 
     @Override
     public void onUserProfileImageUpdated(StorageReference imgRef) {
         if(imgRef == null){
-            progressBar.setVisibility(View.INVISIBLE);
             DynamicToast.makeError(this, "Can't set profile picture!");
         }
+        manager.addGame(Arrays.asList("Memorization Master", "Push The Box"),
+                GlobalSignUpActivity.this, FirebaseFirestore.getInstance());
+    }
+
+    @Override
+    public void onAddGameReady(List<String> game) {
+        if (game == null){
+            DynamicToast.makeError(this, "Can't set default games!");
+        }
+        progressBar.setVisibility(View.INVISIBLE);
         finish();
     }
 }

@@ -16,12 +16,10 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class GlobalGameManager {
     private FirebaseFirestore database;
-    public GameReceiver receiver;
-    public GlobalGameManager(GameReceiver receiver, FirebaseFirestore database){
+    public GlobalGameManager(FirebaseFirestore database){
         this.database = database;
-        this.receiver = receiver;
     }
-    public void getGameCollection(final FirebaseStorage storage){
+    public void getGameCollection(final GameReceiver receiver, final FirebaseStorage storage){
         database.collection("games").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

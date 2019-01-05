@@ -18,6 +18,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.storage.FirebaseStorage;
 import com.pranavpandey.android.dynamic.toasts.DynamicToast;
 
 import fall2018.csc207project.Controllers.GlobalPresenter;
@@ -47,7 +48,7 @@ public class GlobalActivity extends AppCompatActivity implements GlobalView{
 
         progressBar = findViewById(R.id.loading_spinner);
 
-        presenter = new GlobalPresenterImpl(this);
+        presenter = new GlobalPresenterImpl(this, FirebaseFirestore.getInstance());
         // Initialize Firebase Auth
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -102,7 +103,7 @@ public class GlobalActivity extends AppCompatActivity implements GlobalView{
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                presenter.firebaseAuthWithGoogle(account, this);
+                presenter.firebaseAuthWithGoogle(account, FirebaseStorage.getInstance(), this);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 loginWithGoogleFailed();
