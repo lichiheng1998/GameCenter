@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 
@@ -34,4 +35,5 @@ public interface LocalGameCenterPresenter {
 
     void initializeView(FirebaseStorage storage);
 
+    void onFabClicked(String game, FirebaseFirestore database);
 }

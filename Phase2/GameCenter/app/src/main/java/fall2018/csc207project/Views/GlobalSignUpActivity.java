@@ -35,7 +35,7 @@ import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
 
 public class GlobalSignUpActivity extends AppCompatActivity implements UserManager.OnUserProfileImageUpdated,
-        UserManager.OnUserNickNameChanged, UserManager.OnAddGameReady{
+        UserManager.OnUserNickNameChanged, UserManager.OnGameReady{
     private FirebaseAuth mAuth;
     private EditText email;
     private EditText password;
@@ -132,7 +132,7 @@ public class GlobalSignUpActivity extends AppCompatActivity implements UserManag
     }
 
     @Override
-    public void onAddGameReady(List<String> game) {
+    public void onGameReady(List<String> game, boolean isAdded) {
         if (game == null){
             DynamicToast.makeError(this, "Can't set default games!");
         }
