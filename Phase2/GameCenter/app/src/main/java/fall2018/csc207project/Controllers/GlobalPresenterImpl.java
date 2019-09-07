@@ -5,9 +5,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,14 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import fall2018.csc207project.Models.GlobalConfig;
 import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
-import fall2018.csc207project.Views.GlobalSignUpActivity;
 import fall2018.csc207project.Views.GlobalView;
 
 public class GlobalPresenterImpl implements GlobalPresenter, UserManager.OnUserProfileImageUpdated,

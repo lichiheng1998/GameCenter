@@ -1,6 +1,6 @@
 package fall2018.csc207project.SlidingTile.Models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.Arrays;

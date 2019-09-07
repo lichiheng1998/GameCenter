@@ -3,14 +3,13 @@ package fall2018.csc207project.Memorization.Views;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import fall2018.csc207project.Memorization.Models.MemoManager;
-import fall2018.csc207project.Memorization.Views.MemoGameActivity;
 import fall2018.csc207project.R;
 
 /**

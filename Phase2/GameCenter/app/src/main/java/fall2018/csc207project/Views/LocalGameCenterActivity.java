@@ -10,15 +10,15 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.navigation.NavigationView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,15 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.GenericTransitionOptions;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,8 +37,6 @@ import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -78,6 +68,8 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     private boolean appBarExpanded = true;
     private List<String> gameList;
 
+    private Toolbar toolbar;
+
     /**
      * The BasePresenter to interact with the GameActivities.
      */
@@ -95,7 +87,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
 
         visibility = false;
         avatarIsDisplayed = true;
-        final Toolbar toolbar = findViewById(R.id.anim_toolbar);
+        toolbar = findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -116,6 +108,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         presenter.initializeView(storage);
 
         setupNavListener();
+        setupBackButtonListner();
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -222,6 +215,15 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
                         return true;
                     }
                 });
+    }
+
+    private void setupBackButtonListner(){
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                presenter.onLogOutClicked();
+            }
+        });
     }
 
 
@@ -349,7 +351,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                presenter.onLogOutClicked();
                 return true;
             case R.id.action_settings:
                 return true;
