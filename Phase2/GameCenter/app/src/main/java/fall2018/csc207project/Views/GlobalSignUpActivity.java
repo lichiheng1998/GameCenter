@@ -28,7 +28,7 @@ import java.util.List;
 import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
 
-public class GlobalSignUpActivity extends AppCompatActivity implements UserManager.OnUserProfileImageUpdated,
+public class GlobalSignUpActivity extends AppCompatActivity implements UserManager.OnUserImageUpdated,
         UserManager.OnUserNickNameChanged, UserManager.OnGameReady{
     private FirebaseAuth mAuth;
     private EditText email;

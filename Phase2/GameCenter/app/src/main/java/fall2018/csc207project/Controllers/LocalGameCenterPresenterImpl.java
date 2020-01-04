@@ -26,7 +26,7 @@ import fall2018.csc207project.Views.NavView;
  * The class NavPresenter implements BasePresenter
  */
 public class LocalGameCenterPresenterImpl implements LocalGameCenterPresenter,
-        UserManager.OnUserProfileImageUpdated,  GlobalGameManager.GameReceiver,
+        UserManager.OnUserImageUpdated,  GlobalGameManager.GameReceiver,
         UserManager.OnGameListReady, UserManager.OnGameReady{
 
     /**

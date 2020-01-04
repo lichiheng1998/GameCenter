@@ -18,7 +18,7 @@ public interface NavView {
      *
      * @param drawable a drawable tells the info of display
      */
-    void showBackground(Drawable drawable);
+    void showBackground(StorageReference imgRef);
 
     void showAvatar(StorageReference imgRef);
 

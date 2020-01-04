@@ -52,7 +52,27 @@ public class UserManager{
         }
     }
 
-    public void updateUserProfileImage(Uri imageUri, final OnUserProfileImageUpdated receiver, FirebaseStorage storage){
+//    public StorageReference getUserBackgroudImage(FirebaseStorage storage){
+//        StorageReference storageRef = storage.getReference();
+//        return storageRef.child("images/" + currentUser.getUid() + "/background");
+//    }
+//
+//    public void updateUserBackgroundImage(Uri imageUri, final OnUserImageUpdated receiver, FirebaseStorage storage){
+//        final StorageReference storageRef = storage.getReference();
+//        final StorageReference imgRef = storageRef.child("images/" + currentUser.getUid() + "/bgImage");
+//        imgRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+//                if (task.isSuccessful()){
+//                    receiver.onUserBackgroundImageUpdated(storageRef.child("images/" + currentUser.getUid() + "/bgImage"));
+//                } else {
+//                    receiver.onUserBackgroundImageUpdated(null);
+//                }
+//            }
+//        });
+//    }
+
+    public void updateUserProfileImage(Uri imageUri, final OnUserImageUpdated receiver, FirebaseStorage storage){
         final StorageReference storageRef = storage.getReference();
         final StorageReference imgRef = storageRef.child("images/" + currentUser.getUid() + "/profilePicture");
         imgRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -98,6 +118,12 @@ public class UserManager{
                     Map<String, List<String>> field = new HashMap<>();
                     field.put("gameList", game);
                     if (document.exists()) {
+                        List had_games = (ArrayList<String>)document.get("gameList");
+                        for(String g : game) {
+                            if(had_games.contains(g)){
+                                game.remove(g);
+                            }
+                        }
                         game.addAll((ArrayList<String>)document.get("gameList"));
                         field.put("gameList", game);
                     }
@@ -157,7 +183,7 @@ public class UserManager{
         void onUserNickNameChanged(String name);
     }
 
-    public interface OnUserProfileImageUpdated {
+    public interface OnUserImageUpdated {
         void onUserProfileImageUpdated(StorageReference name);
     }
 

@@ -67,7 +67,6 @@ public class GameListViewAdapter extends BaseAdapter{
          */
         MyViewHolder(View v){
             this.aSwitch = v.findViewById(R.id.GameSwitch);
-            this.aSwitch.setOnCheckedChangeListener(listener);
         }
     }
 
@@ -101,6 +100,7 @@ public class GameListViewAdapter extends BaseAdapter{
         String game = globalList[i];
         holder.aSwitch.setText(game);
         holder.aSwitch.setChecked(userGames.contains(game));
+        holder.aSwitch.setOnCheckedChangeListener(listener);
         return row;
     }
 }

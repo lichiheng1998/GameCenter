@@ -28,7 +28,7 @@ import fall2018.csc207project.NewModels.UserManager;
 import fall2018.csc207project.R;
 import fall2018.csc207project.Views.GlobalView;
 
-public class GlobalPresenterImpl implements GlobalPresenter, UserManager.OnUserProfileImageUpdated,
+public class GlobalPresenterImpl implements GlobalPresenter, UserManager.OnUserImageUpdated,
         UserManager.OnGameReady{
 
     private FirebaseAuth mAuth;
@@ -81,8 +81,15 @@ public class GlobalPresenterImpl implements GlobalPresenter, UserManager.OnUserP
 
     @Override
     public void onUserProfileImageUpdated(StorageReference name) {
+//        manager.updateUserProfileImage(getUriFromResourceId(R.drawable.default_avatar, activity),
+//                GlobalPresenterImpl.this, storage);
         manager.addGame(Arrays.asList(GlobalConfig.GAME_LIST), this, database);
     }
+
+//    @Override
+//    public void onUserBackgroundImageUpdated(StorageReference name) {
+//
+//    }
 
     @Override
     public void onGameReady(List<String> game, boolean isAdded) {

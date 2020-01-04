@@ -14,8 +14,10 @@ import androidx.annotation.NonNull;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -61,8 +63,11 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     private AppBarLayout appBarLayout;
     private RecyclerView recyclerView;
     private ImageView avatar;
+    private ImageView header;
     private boolean visibility;
     private boolean avatarIsDisplayed;
+    private AvatarHandler avatarHandler;
+    private FloatingActionButton fab;
 
     private Menu collapsedMenu;
     private boolean appBarExpanded = true;
@@ -85,6 +90,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.local_game_center);
 
+        avatarHandler = new AvatarHandler(this);
         visibility = false;
         avatarIsDisplayed = true;
         toolbar = findViewById(R.id.anim_toolbar);
@@ -93,12 +99,13 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         appBarLayout = findViewById(R.id.appbar);
+        fab = findViewById(R.id.fab);
 
         collapsingToolbar = findViewById(R.id.collapsing_toolbar);
 
         navigationView = findViewById(R.id.nav_view);
         avatar = findViewById(R.id.avatar);
-
+        header = findViewById(R.id.header);
         storage = FirebaseStorage.getInstance();
 
         GlobalGameManager gameManager =  new GlobalGameManager(FirebaseFirestore.getInstance());
@@ -108,7 +115,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         presenter.initializeView(storage);
 
         setupNavListener();
-        setupBackButtonListner();
+        setupAppbarListener();
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -133,7 +140,6 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
             avatarIsDisplayed = !avatarIsDisplayed;
         }
         else if(!isExpanded && avatarIsDisplayed){
-            Log.e("blah", "updateAvatar: hide");
             avatar.startAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_down_fast));
             avatar.setVisibility(View.INVISIBLE);
             avatarIsDisplayed = !avatarIsDisplayed;
@@ -188,7 +194,14 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
         Intent tmp = new Intent(this, gameActivity);
         startActivity(tmp);
     }
-
+    private void setupAppbarListener(){
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchGameList();
+            }
+        });
+    }
     /**
      * Set the Nav.
      */
@@ -202,9 +215,9 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
                             case R.id.nav_avatar:
                                 CropImage.startPickImageActivity(LocalGameCenterActivity.this);
                                 break;
-//                            case R.id.nav_gallery:
-//                                openGallery(1);
-//                                break;
+                            case R.id.nav_gallery:
+                                avatarHandler.openGallery();
+                                break;
                             case R.id.nav_clear:
                                 presenter.onResetClicked(getApplicationContext());
                                 break;
@@ -217,24 +230,6 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
                 });
     }
 
-    private void setupBackButtonListner(){
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                presenter.onLogOutClicked();
-            }
-        });
-    }
-
-
-    /**
-     * When user click logout, return the globle start page.
-     */
-    private void logout(){
-        Intent tmp = new Intent(this, GlobalActivity.class);
-        startActivity(tmp);
-    }
-
     /**
      * Set the background after user selecting the picture from gallery.
      * @param data returned data
@@ -245,34 +240,32 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // handle result of pick image chooser
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Uri imageUri = CropImage.getPickImageResultUri(this, data);
-
-            // For API >= 23 we need to check specifically that we have permissions to read external storage.
-            if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
-                // request permissions and handle the result in onRequestPermissionsResult()
-                mCropImageUri = imageUri;
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},   CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
-            } else {
-                // no permissions required or already granted, can start crop image activity
-                startCropImageActivity(imageUri);
-            }
+        if (resultCode != Activity.RESULT_OK){
+            return;
         }
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                Uri resultUri = result.getUri();
-                presenter.onAvatarSelected(resultUri, storage);
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
+        avatarHandler.handleAvatarRequest(requestCode, resultCode, data);
+        if (requestCode == AvatarHandler.PICK_BGIMAGE_REQUEST_CODE){
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},  AvatarHandler.PICK_BGIMAGE_PERMISSION_REQUEST_CODE);
+            } else {
+                Log.d("hi", "Everything is good.");
             }
+        } else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            Uri resultUri = result.getUri();
+            presenter.onAvatarSelected(resultUri, storage);
         }
     }
 
     @Override
-    public void showBackground(Drawable drawable) {
-
+    public void showBackground(final StorageReference imgRef) {
+        GlideApp.with(this)
+                .load(imgRef)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(header);
     }
 
     @Override
@@ -303,29 +296,7 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
     {
-        if (requestCode == CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                CropImage.startPickImageActivity(this);
-            } else {
-                Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
-            }
-        }
-        if (requestCode == CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE) {
-            if (mCropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // required permissions granted, start crop image activity
-                startCropImageActivity(mCropImageUri);
-            } else {
-                Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    private void startCropImageActivity(Uri imageUri) {
-        CropImage.activity(imageUri)
-                .setAspectRatio(1,1)
-                .setFixAspectRatio(true)
-                .setCropShape(CropImageView.CropShape.OVAL)
-                .start(this);
+        avatarHandler.handleAvatarPermission(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -360,6 +331,12 @@ public class LocalGameCenterActivity extends AppCompatActivity implements NavVie
             Toast.makeText(this, "clicked add", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        presenter.initializeView(storage);
     }
 }
 
